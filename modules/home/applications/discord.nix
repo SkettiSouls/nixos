@@ -23,14 +23,8 @@ in
       })
       vesktop
       easyeffects
-      soundux
     ];
 
-    home.file = {
-      ".config/VencordDesktop/VencordDesktop/themes/midnight.css".source = ../../shit/vesktop/themes/midnight.css;
-      ".config/VencordDesktop/VencordDesktop/themes/catppuccin-mocha.css".source = ../../shit/vesktop/themes/catppuccin-mocha.css;
-      ".config/VencordDesktop/VencordDesktop/themes/ClearVision_v6.css".source = ../../shit/vesktop/themes/ClearVision_v6.css;
-    };
     shit.easyeffects = {
       enable = true;
       bypass = false;

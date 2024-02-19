@@ -48,4 +48,8 @@ in
     udiskie.enable = true;
     xdg.portal.enable = true;
   };
+
+  kalyx = {
+    neofetch.enable = true;
+  };
 }
