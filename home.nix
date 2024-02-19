@@ -40,7 +40,6 @@ in
     bluetooth.enable = true;
     brave.enable = true;
     discord.enable = true;
-    easyeffects.enable = true;
     git.enable = true;
     hyprland.enable = true;
     kitty.enable = true;

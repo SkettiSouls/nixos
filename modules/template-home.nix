@@ -19,7 +19,7 @@ in
     enable = mkEnableOption "DESCRIPTION";
   };
 
-  config = mkIf cfg.enable { 
+  config = mkIf cfg.enable {
     # List of packages to included in the module. See https://search.nixos.org/packages.
     home.packages = with pkgs; [ ];
 

@@ -16,7 +16,7 @@ in
     bypass = mkEnableOption "Noise Cancelling Bypass";
   };
 
-  config = mkIf cfg.enable { 
+  config = mkIf cfg.enable {
     dconf.settings = {
       "com/gitgub/wwmm/easyeffects/rnnoise" = {
         input-gain = 0; # -36 Db to 36 Db

@@ -22,7 +22,7 @@ in
     };
   };
 
-  config = mkIf cfg.enable { 
+  config = mkIf cfg.enable {
     programs.qutebrowser = {
       enable = true;
       enableDefaultBindings = true;
@@ -79,6 +79,7 @@ in
 	
       };
       greasemonkey = [
+	/*
 	(pkgs.writeText "yewtube.js" ''
 // ==UserScript==
 // @name         Youtube to Yewtube
@@ -91,6 +92,7 @@ in
 
 document.location.href=document.location.href.replace("youtube.com","yewtu.be");
 	'')
+	*/
 	(pkgs.writeText "yt-forward.js" ''
 // ==UserScript==
 // u/name 	  Fast Forward YouTube Ads

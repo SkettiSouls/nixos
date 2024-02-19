@@ -15,7 +15,7 @@ in
     enable = mkEnableOption "Pipewire system-wide configuration.";
   };
 
-  config = mkIf cfg.enable { 
+  config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [ ];
 
     security.rtkit.enable = true;

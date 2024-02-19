@@ -12,10 +12,10 @@ let
 in
 {
   options.shit.name = {
-    enable = mkEnableOption "name";
+    enable = mkEnableOption "desc";
   };
 
-  config = mkIf cfg.enable { 
+  config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [ ];
 
     prefix.name = {

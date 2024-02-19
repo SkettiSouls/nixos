@@ -14,7 +14,7 @@ in
     enable = mkEnableOption "Vesktop, noise cancelling, and soundboard.";
   };
 
-  config = mkIf cfg.enable { 
+  config = mkIf cfg.enable {
     home.packages = with pkgs; [
       (discord.override {
         withOpenASAR = true;

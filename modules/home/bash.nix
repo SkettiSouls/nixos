@@ -12,7 +12,7 @@ in
     enable = mkEnableOption "bash";
   };
 
-  config = mkIf cfg.enable { 
+  config = mkIf cfg.enable {
     programs.bash = {
       enable = true;
       enableCompletion = true;

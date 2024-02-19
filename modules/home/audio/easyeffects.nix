@@ -15,13 +15,14 @@ in
     bypass = mkEnableOption "Global Bypass";
   };
 
-  config = mkIf cfg.enable { 
+  config = mkIf cfg.enable {
     services.easyeffects = {
       enable = true;
-      # preset = "anoise";
+      preset = "anoise";
     };
 
-    shit.anoise.enable = true;
+    xdg.configFile."easyeffects/input".source = ../../../shit/easyeffects/input;
+    #xdg.configFile."easyeffects".source = ../../../shit/easyeffects;
 
     dconf.settings = {
       "com/github/wwmm/easyeffects" = {

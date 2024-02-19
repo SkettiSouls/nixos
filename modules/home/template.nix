@@ -8,19 +8,17 @@ let
     types
     ;
 
-  cfg = config.shit.NAME;
+  cfg = config.shit.name;
 in
 {
-  options.shit.NAME = {
-    enable = mkEnableOption "DESCRIPTION";
+  options.shit.name = {
+    enable = mkEnableOption "desc";
   };
 
-  config = mkIf cfg.enable { 
-    home.packages = with pkgs; [
-      PACKAGE
-    ];
+  config = mkIf cfg.enable {
+    home.packages = with pkgs; [ ];
 
-    PREFIX.NAME = {
+    prefix.name = {
       enable = true;
     };
   };

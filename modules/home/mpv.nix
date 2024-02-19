@@ -12,7 +12,7 @@ in
     enable = mkEnableOption "mpv";
   };
 
-  config = mkIf cfg.enable { 
+  config = mkIf cfg.enable {
     home.packages = with pkgs; [
       mpv
       yt-dlp

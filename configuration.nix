@@ -65,6 +65,7 @@
       easyeffects
       prismlauncher
       soundux
+      wineWowPackages.staging
     ];
   };
 
@@ -117,9 +118,11 @@
     polkit.enable = true;
   };
 
+  /*
   hardware = {
     bluetooth.enable = true;
   };
+  */
 
   programs = {
     dconf.enable = true;
@@ -132,6 +135,7 @@
 
   shit = {
     pipewire.enable = true;
+    steam.enable = true;
   };
 
   # Enable the OpenSSH daemon.
