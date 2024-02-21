@@ -43,7 +43,8 @@ in
 	  "hyprpaper &"
 	  "dunst &"
 	  "polkit &"
-	  "[workspace 10 silent] easyeffects"
+	  "[workspace 10 silent] carla /etc/nixos/shit/carla/noise-suppression.carxp"
+	  "[workspace 10 silent] qpwgraph"
 	  "[workspace 1 silent] qutebrowser"
 	  "[workspace 2 silent] vencorddesktop"
 	];
@@ -242,6 +243,7 @@ in
 	  disable_hyprland_logo = true;
 	  enable_swallow = true;
 	  swallow_regex = "^(kitty)$";
+	  swallow_exception_regex = "^(spit)";
 	};
       };
 

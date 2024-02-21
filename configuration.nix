@@ -62,10 +62,10 @@
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
       gnome.nautilus
-      easyeffects
       prismlauncher
-      soundux
+      lutris
       wineWowPackages.staging
+      winetricks
     ];
   };
 
@@ -97,8 +97,6 @@
   # };
 
   # List services that you want to enable:
-  #shit = {
-  #};
 
   services = {
     udisks2 = {
@@ -136,7 +134,15 @@
   shit = {
     pipewire.enable = true;
     steam.enable = true;
+    ladspa.enable = true;
   };
+
+
+  /*
+  # mtwk's weird mouse fix or w/e
+  MatchUdevType=mouse
+  ModelBouncingKeys=1
+  */
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;

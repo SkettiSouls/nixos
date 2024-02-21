@@ -8,10 +8,10 @@ let
     types
     ;
 
-  cfg = config.shit.bluetooth;
+  cfg = config.shit.audio.bluetooth;
 in
 {
-  options.shit.bluetooth = {
+  options.shit.audio.bluetooth = {
     enable = mkEnableOption "User bluetooth config.";
   };
 

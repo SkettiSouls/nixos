@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 
 /* Eldritch Horror
 let
@@ -10,13 +10,19 @@ in
   imports = [
     ./modules/home
   ];
+
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
-  home.username = "skettisouls";
-  home.homeDirectory = "/home/skettisouls";
+  #home.username = "skettisouls";
+  #home.homeDirectory = "/home/skettisouls";
+  home = {
+    username = "skettisouls";
+    homeDirectory = "/home/skettisouls";
+    packages = with pkgs; [
+      lazygit
+    ];
+  };
 
-  # Packages that should be installed to the user profile.
-  home.packages = [];
 
   # Funny Hyprland brrrr
   home.file = {
@@ -37,7 +43,6 @@ in
 
   shit = {
     bash.enable = true;
-    bluetooth.enable = true;
     brave.enable = true;
     discord.enable = true;
     git.enable = true;
@@ -47,6 +52,10 @@ in
     qutebrowser.enable = true;
     udiskie.enable = true;
     xdg.portal.enable = true;
+    audio = {
+      bluetooth.enable = true;
+      patchbay.enable = true;
+    };
   };
 
   kalyx = {

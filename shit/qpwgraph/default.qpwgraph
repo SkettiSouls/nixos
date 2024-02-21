@@ -1,0 +1,42 @@
+<!DOCTYPE patchbay>
+<patchbay name="default" version="0.6.1">
+ <items>
+  <item node-type="pipewire" port-type="pipewire-audio">
+   <output node="Chromium" port="Chromium:output_FL"/>
+   <input node="soundcore Space Q45" port="soundcore Space Q45:playback_FL"/>
+  </item>
+  <item node-type="pipewire" port-type="pipewire-audio">
+   <output node="USB Condenser Microphone Mono" port="USB Condenser Microphone:capture_MONO"/>
+   <input node="Carla" port="Carla:input_MONO"/>
+  </item>
+  <item node-type="pipewire" port-type="pipewire-audio">
+   <output node="Chromium-2" port="Chromium:output_FL"/>
+   <input node="soundcore Space Q45" port="soundcore Space Q45:playback_FL"/>
+  </item>
+  <item node-type="pipewire" port-type="pipewire-audio">
+   <output node="Carla" port="Carla:output_FR"/>
+   <input node="Chromium input" port="Chromium input:input_MONO"/>
+  </item>
+  <item node-type="pipewire" port-type="pipewire-audio">
+   <output node="Carla" port="Carla:output_FR"/>
+   <input node="Chromium input-1" port="Chromium input:input_MONO"/>
+  </item>
+  <item node-type="pipewire" port-type="pipewire-audio">
+   <output node="mpv" port="mpv:output_FL"/>
+   <input node="soundcore Space Q45" port="soundcore Space Q45:playback_FL"/>
+  </item>
+  <item node-type="pipewire" port-type="pipewire-audio">
+   <output node="Carla" port="Carla:output_FL"/>
+   <input node="Chromium input" port="Chromium input:input_MONO"/>
+  </item>
+  <item node-type="pipewire" port-type="pipewire-audio">
+   <output node="Carla" port="Carla:output_FL"/>
+   <input node="Chromium input-1" port="Chromium input:input_MONO"/>
+  </item>
+  <item node-type="pipewire" port-type="pipewire-audio">
+   <output node="Chromium-1" port="Chromium:output_FL"/>
+   <input node="soundcore Space Q45" port="soundcore Space Q45:playback_FL"/>
+  </item>
+ </items>
+</patchbay>
+

@@ -7,15 +7,19 @@ let
     types
     ;
 
-  cfg = config.shit.easyeffects;
+  cfg = config.shit.audio.easyeffects;
 in
 {
-  options.shit.easyeffects = {
+  options.shit.audio.easyeffects = {
     enable = mkEnableOption "EasyEffects";
     bypass = mkEnableOption "Global Bypass";
   };
 
   config = mkIf cfg.enable {
+    home.file = with pkgs; [
+      easyeffects
+    ];
+
     services.easyeffects = {
       enable = true;
       preset = "anoise";

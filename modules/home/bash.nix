@@ -31,6 +31,11 @@ in
         vesktop = "vencorddesktop";
 	rebuild = "sudo nixos-rebuild switch; hyprctl reload";
       };
+      /*
+      bashrcExtra = ''function spit {
+        PROMPT_COMMAND="echo -ne \"\033]0;$1 \077""
+      }\n'';
+      */
     };
   };
 }

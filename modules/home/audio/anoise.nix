@@ -8,10 +8,10 @@ let
     types
     ;
 
-  cfg = config.shit.anoise;
+  cfg = config.shit.audio.easyeffects.anoise;
 in
 {
-  options.shit.anoise = {
+  options.shit.audio.easyeffects.anoise = {
     enable = mkEnableOption "Noise Cancelling Preset";
     bypass = mkEnableOption "Noise Cancelling Bypass";
   };
