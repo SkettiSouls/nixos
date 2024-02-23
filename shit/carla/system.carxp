@@ -1,0 +1,150 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE CARLA-PROJECT>
+<CARLA-PROJECT VERSION='2.5'>
+ <EngineSettings>
+  <ForceStereo>false</ForceStereo>
+  <PreferPluginBridges>false</PreferPluginBridges>
+  <PreferUiBridges>true</PreferUiBridges>
+  <UIsAlwaysOnTop>false</UIsAlwaysOnTop>
+  <MaxParameters>200</MaxParameters>
+  <UIBridgesTimeout>4000</UIBridgesTimeout>
+ </EngineSettings>
+
+ <Transport>
+  <BeatsPerMinute>120</BeatsPerMinute>
+ </Transport>
+
+ <!-- Noise Suppressor for Voice (Mono) -->
+ <Plugin>
+  <Info>
+   <Type>LADSPA</Type>
+   <Name>Noise Suppressor for Voice (Mono)</Name>
+   <Binary>/nix/store/1w5p5qkx4h8fjm3vvcp9fn78mx21claw-rnnoise-plugin-1.03/lib/ladspa/librnnoise_ladspa.so</Binary>
+   <Label>noise_suppressor_mono</Label>
+   <UniqueID>9354877</UniqueID>
+  </Info>
+
+  <Data>
+   <Active>Yes</Active>
+   <ControlChannel>1</ControlChannel>
+   <Options>0x0</Options>
+
+   <Parameter>
+    <Index>0</Index>
+    <Name>VAD Threshold</Name>
+    <Value>50</Value>
+   </Parameter>
+
+   <Parameter>
+    <Index>1</Index>
+    <Name>VAD Grace Period</Name>
+    <Value>500</Value>
+   </Parameter>
+
+   <Parameter>
+    <Index>2</Index>
+    <Name>Retroactive VAD Grace</Name>
+    <Value>100</Value>
+   </Parameter>
+
+   <Parameter>
+    <Index>3</Index>
+    <Name>Placeholder</Name>
+    <Value>0</Value>
+   </Parameter>
+
+   <Parameter>
+    <Index>4</Index>
+    <Name>Placeholder</Name>
+    <Value>0</Value>
+   </Parameter>
+  </Data>
+ </Plugin>
+
+ <ExternalPatchbay>
+  <Connection>
+   <Source>USB Condenser Microphone Mono:capture_MONO</Source>
+   <Target>Carla:Noise Suppressor for Voice (Mono):Input</Target>
+  </Connection>
+  <Connection>
+   <Source>Carla:Noise Suppressor for Voice (Mono):Output</Source>
+   <Target>Navi 21/23 HDMI/DP Audio Controller Digital Stereo (HDMI):playback_FL</Target>
+  </Connection>
+  <Connection>
+   <Source>Carla:Noise Suppressor for Voice (Mono):Output</Source>
+   <Target>Navi 21/23 HDMI/DP Audio Controller Digital Stereo (HDMI):playback_FR</Target>
+  </Connection>
+  <Connection>
+   <Source>Carla:Noise Suppressor for Voice (Mono):Output</Source>
+   <Target>Chromium input:input_MONO</Target>
+  </Connection>
+  <Connection>
+   <Source>mpv:output_FL</Source>
+   <Target>soundcore Space Q45:playback_FL</Target>
+  </Connection>
+  <Connection>
+   <Source>mpv:output_FL</Source>
+   <Target>vencord-screen-share:input_FL</Target>
+  </Connection>
+  <Connection>
+   <Source>mpv:output_FR</Source>
+   <Target>soundcore Space Q45:playback_FR</Target>
+  </Connection>
+  <Connection>
+   <Source>mpv:output_FR</Source>
+   <Target>vencord-screen-share:input_FR</Target>
+  </Connection>
+  <Connection>
+   <Source>Chromium:output_FL</Source>
+   <Target>soundcore Space Q45:playback_FL</Target>
+  </Connection>
+  <Connection>
+   <Source>Chromium:output_FR</Source>
+   <Target>soundcore Space Q45:playback_FR</Target>
+  </Connection>
+  <Positions>
+   <Position x1="1272" y1="537">
+    <Name>Carla</Name>
+   </Position>
+   <Position x1="1028" y1="535" x2="1919" y2="1105">
+    <Name>USB Condenser Microphone Mono</Name>
+   </Position>
+   <Position x1="1028" y1="578" x2="1847" y2="1179">
+    <Name>USB 2.0 Camera Mono</Name>
+   </Position>
+   <Position x1="1319" y1="919">
+    <Name>mpv</Name>
+   </Position>
+   <Position x1="1580" y1="935">
+    <Name>soundcore Space Q45</Name>
+   </Position>
+   <Position x1="1785" y1="471">
+    <Name>Navi 21/23 HDMI/DP Audio Controller Digital Stereo (HDMI)</Name>
+   </Position>
+   <Position x1="1152" y1="1709" x2="1443" y2="1710">
+    <Name>Midi-Bridge</Name>
+   </Position>
+   <Position x1="1031" y1="632">
+    <Name>.xdg-desktop-portal-hyprland-wrapped</Name>
+   </Position>
+   <Position x1="1034" y1="656">
+    <Name>Chromium</Name>
+   </Position>
+   <Position x1="1580" y1="709">
+    <Name>vencord-screen-share</Name>
+   </Position>
+   <Position x1="1351" y1="1061">
+    <Name>Chromium-150</Name>
+   </Position>
+   <Position x1="1351" y1="1000">
+    <Name>qutebrowser</Name>
+   </Position>
+   <Position x1="1303" y1="632">
+    <Name>electron</Name>
+   </Position>
+   <Position x1="1034" y1="714">
+    <Name>Chromium-94</Name>
+   </Position>
+  </Positions>
+ </ExternalPatchbay>
+</CARLA-PROJECT>

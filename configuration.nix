@@ -10,6 +10,7 @@
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./modules/system
+      ./overlays.nix
     ];
 
   # Kernel
@@ -139,10 +140,10 @@
     };
   };
 
-  /*
+  /* Doesn't work
   # mtwk's weird mouse fix or w/e
-  MatchUdevType=mouse
-  ModelBouncingKeys=1
+  MatchUdevType=mouse;
+  ModelBouncingKeys=1;
   */
 
   # Enable the OpenSSH daemon.

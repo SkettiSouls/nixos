@@ -17,9 +17,17 @@ in
     home.packages = with pkgs; [
       grim
       slurp
-      grimblast
+      (grimblast.override { # Change hyprpicker dependency version to v0.1.1 to prevent core dumps.
+        hyprpicker = pkgs.hyprpicker.overrideAttrs (oldAttrs: {
+          version = "0.1.1";
+
+          src = oldAttrs.src.overrideAttrs {
+            outputHash = "sha256-k+rG5AZjz47Q6bpVcTK7r4s7Avg3O+1iw+skK+cn0rk";
+          };
+        });
+      })
       wl-clipboard
-      hyprpaper
+      unstable.hyprpaper
       dunst
     ];
 
@@ -43,8 +51,9 @@ in
 	  "hyprpaper &"
 	  "dunst &"
 	  "polkit &"
-	  "[workspace 10 silent] carla /etc/nixos/shit/carla/noise-suppression.carxp"
-	  "[workspace 10 silent] qpwgraph"
+	  "bluetoothctl connect E8:EE:CC:4B:FA:2A"
+	  "[workspace 10 silent] carla /etc/nixos/shit/carla/system.carxp"
+	  #"[workspace 10 silent] qpwgraph"
 	  "[workspace 1 silent] qutebrowser"
 	  "[workspace 2 silent] vencorddesktop"
 	];
@@ -151,7 +160,7 @@ in
 	  "$mainMod SHIFT, B, exec, qutebrowser"
 	  #"$mainMod SHIFT, B, exec, brave"
 	  #"$mainMod SHIFT, B, exec, firefox"
-	  "$mainMod SHIFT, D, exec, [workspace 2 silent] vesktop"
+	  "$mainMod SHIFT, D, exec, [workspace 2 silent] vencorddesktop"
 	  #"$mainMod SHIFT, D, exec, [workspace 2 silent] discord"
 	  "$mainMod SHIFT, S, exec, [workspace 3 silent] steam"
 

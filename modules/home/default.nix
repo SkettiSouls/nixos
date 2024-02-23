@@ -5,7 +5,6 @@
     ./bash.nix
     ./hyprland.nix
     ./udiskie.nix
-    ./mangohud.nix
     ./applications
     ./temp
     ./audio

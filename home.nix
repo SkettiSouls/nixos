@@ -9,6 +9,7 @@ in
 {
   imports = [
     ./modules/home
+    ./overlays.nix
   ];
 
   # Home Manager needs a bit of information about you and the

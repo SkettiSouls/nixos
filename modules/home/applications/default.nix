@@ -5,5 +5,6 @@
     ./qutebrowser.nix
     ./discord.nix
     ./neofetch.nix
+    ./mangohud.nix
   ];
 }
