@@ -8,18 +8,24 @@ let
     types
     ;
 
-  cfg = config.shit.name;
+  cfg = config.shit.hardware.bluetooth;
 in
 {
-  options.shit.name = {
+  options.shit.hardware.bluetooth = {
     enable = mkEnableOption "desc";
   };
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [];
 
-    prefix.name = {
-      enable = true;
+    hardware = {
+      bluetooth = {
+        enable = true;
+	powerOnBoot = true;
+	#input = { };
+	#settings = { };
+	#disabledPlugins = [ ];
+      };
     };
   };
 }

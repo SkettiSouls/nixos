@@ -16,7 +16,7 @@ in
   };
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [ ];
+    home.packages = with pkgs; [];
 
     prefix.name = {
       enable = true;

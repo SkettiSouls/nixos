@@ -1,7 +1,7 @@
 {
   imports = [
-    ./pipewire.nix
-    ./steam.nix
-    ./ladspa.nix
+    ./hardware
+    ./applications
+    ./audio
   ];
 }

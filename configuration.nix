@@ -116,12 +116,6 @@
     polkit.enable = true;
   };
 
-  /*
-  hardware = {
-    bluetooth.enable = true;
-  };
-  */
-
   programs = {
     dconf.enable = true;
   };
@@ -133,10 +127,17 @@
 
   shit = {
     pipewire.enable = true;
-    steam.enable = true;
-    ladspa.enable = true;
+    #ladspa.enable = true;
+    hardware = {
+      cpu.enable = true;
+      gpu.enable = true;
+      fstab.enable = true;
+      bluetooth.enable = true;
+    };
+    applications = {
+      steam.enable = true;
+    };
   };
-
 
   /*
   # mtwk's weird mouse fix or w/e

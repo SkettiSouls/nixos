@@ -18,9 +18,7 @@ in
   home = {
     username = "skettisouls";
     homeDirectory = "/home/skettisouls";
-    packages = with pkgs; [
-      lazygit
-    ];
+    packages = with pkgs; [];
   };
 
 
@@ -48,6 +46,7 @@ in
     git.enable = true;
     hyprland.enable = true;
     kitty.enable = true;
+    mangohud.enable = true;
     mpv.enable = true;
     qutebrowser.enable = true;
     udiskie.enable = true;

@@ -22,6 +22,6 @@ in
       rnnoise-plugin
     ];
     
-    home.file.".config/rncbc.org/qpwgraph.conf".source = ../../../shit/qpwgraph/qpwgraph.conf;
+    #home.file.".config/rncbc.org/qpwgraph.conf".source = ../../../shit/qpwgraph/qpwgraph.conf;
   };
 }

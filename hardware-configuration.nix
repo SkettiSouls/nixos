@@ -13,7 +13,7 @@
 
     initrd = {
       availableKernelModules = [ "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" ];
-      kernelModules = [ ];
+      kernelModules = [ "amdgpu" ];
     };
 
     kernelModules = [ "kvm-amd" ];
@@ -29,19 +29,9 @@
   */
 
   hardware = {
-
-    bluetooth = {
-      enable = true;
-    };
-
-    opengl = {
-      driSupport32Bit = true; # Enable 32-Bit Support
-    };
-
     cpu.amd = {
       updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
     };
-
   };
 
   fileSystems."/" =

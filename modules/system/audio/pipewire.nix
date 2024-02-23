@@ -16,7 +16,7 @@ in
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [ ];
+    environment.systemPackages = with pkgs; [];
 
     security.rtkit.enable = true;
     services.pipewire = {

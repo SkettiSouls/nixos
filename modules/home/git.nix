@@ -13,9 +13,13 @@ in
   };
 
   config = mkIf cfg.enable {
+    home.packages = with pkgs; [
+      git
+      lazygit
+    ];
+
     programs.git = rec {
       enable = true;
-
       userName = "SkettiSouls";
       userEmail = "skettisouls@gmail.com";
 
