@@ -40,6 +40,14 @@ in
       config.common.default = "*";
     };
 
+    home.file.".config/hypr/hyprpaper.conf".text = ''
+      preload = ${config.home.homeDirectory}/Pictures/Wallpapers/oswp.png
+      preload = ${config.home.homeDirectory}/Pictures/Wallpapers/suncat.jpg
+
+      # wallpaper = HDMI-A-1,contain:${config.home.homeDirectory}/Wallpapers/suncat.jpg
+      wallpaper = HDMI-A-1,contain:${config.home.homeDirectory}/Wallpapers/suncat.jpg
+    '';
+
     wayland.windowManager.hyprland = {
       enable = true;
       xwayland.enable = true;
@@ -53,9 +61,9 @@ in
 	  "polkit &"
 	  "bluetoothctl connect E8:EE:CC:4B:FA:2A"
 	  "[workspace 10 silent] carla /etc/nixos/shit/carla/system.carxp"
-	  #"[workspace 10 silent] qpwgraph"
 	  "[workspace 1 silent] qutebrowser"
 	  "[workspace 2 silent] vencorddesktop"
+	  "[workspace 3 silent] steam"
 	];
 	
 	"env" = "XCURSOR_SIZE,24";
@@ -135,8 +143,6 @@ in
 
 	# Custom Variables
 	"$mainMod" = "SUPER";
-	"$w1" = ''hyprctl hyprpaper wallpaper "HDMI-A-1,contain:~/Picutres/Wallpapers/oswp.png"'';
-	"$w2" = ''hyprctl hyprpaper wallpaper "HDMI-A-1,contain:~/Pictures/Wallpapers/suncat.jpg"'';
 	"$TERM" = "kitty";
 	
 	bind = [
@@ -252,7 +258,7 @@ in
 	  disable_hyprland_logo = true;
 	  enable_swallow = true;
 	  swallow_regex = "^(kitty)$";
-	  swallow_exception_regex = "^(spit)";
+	  #swallow_exception_regex = "^(spit)"; # anti-swallow bash script planned
 	};
       };
 

@@ -23,10 +23,6 @@ in
   };
 
 
-  # Funny Hyprland brrrr
-  home.file = {
-    ".config/hypr/hyprpaper.conf".source = ./shit/hypr/hyprpaper.conf;
-  };
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
   # when a new Home Manager release introduces backwards
@@ -54,7 +50,7 @@ in
     xdg.portal.enable = true;
     audio = {
       bluetooth.enable = true;
-      patchbay.enable = true;
+      carla.enable = true;
     };
   };
 

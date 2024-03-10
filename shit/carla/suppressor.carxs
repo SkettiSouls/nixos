@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE CARLA-PRESET>
+<CARLA-PRESET VERSION='2.0'>
+  <Info>
+   <Type>LADSPA</Type>
+   <Name>Noise Suppressor for Voice (Mono)</Name>
+   <Binary>/nix/store/1w5p5qkx4h8fjm3vvcp9fn78mx21claw-rnnoise-plugin-1.03/lib/ladspa/librnnoise_ladspa.so</Binary>
+   <Label>noise_suppressor_mono</Label>
+   <UniqueID>9354877</UniqueID>
+  </Info>
+
+  <Data>
+   <Active>Yes</Active>
+   <Volume>1.27</Volume>
+   <ControlChannel>1</ControlChannel>
+   <Options>0x0</Options>
+
+   <Parameter>
+    <Index>0</Index>
+    <Name>VAD Threshold</Name>
+    <Value>85</Value>
+   </Parameter>
+
+   <Parameter>
+    <Index>1</Index>
+    <Name>VAD Grace Period</Name>
+    <Value>500</Value>
+   </Parameter>
+
+   <Parameter>
+    <Index>2</Index>
+    <Name>Retroactive VAD Grace</Name>
+    <Value>100</Value>
+   </Parameter>
+
+   <Parameter>
+    <Index>3</Index>
+    <Name>Placeholder</Name>
+    <Value>0</Value>
+   </Parameter>
+
+   <Parameter>
+    <Index>4</Index>
+    <Name>Placeholder</Name>
+    <Value>0</Value>
+   </Parameter>
+  </Data>
+</CARLA-PRESET>

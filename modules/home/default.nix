@@ -6,7 +6,8 @@
     ./hyprland.nix
     ./udiskie.nix
     ./applications
-    ./temp
     ./audio
+    ./custom
+    ./temp
   ];
 }

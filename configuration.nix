@@ -128,7 +128,6 @@
 
   shit = {
     pipewire.enable = true;
-    #ladspa.enable = true;
     hardware = {
       cpu.enable = true;
       gpu.enable = true;
