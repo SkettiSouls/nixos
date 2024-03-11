@@ -11,9 +11,14 @@ let
     };
   };
 
+  overlay-sketti = final: prev: {
+    sketti = self.packages.${system};
+  };
+
 in
 {
   nixpkgs.overlays = [
     overlay-unstable
+    overlay-sketti
   ];
 }

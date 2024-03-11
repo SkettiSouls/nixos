@@ -3,15 +3,24 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager/release-23.11";
-    # hyprland.url = "github:hyprwm/hyprland";
+    hm-unstable.url = "github:nix-community/home-manager/master";
   };
 
   outputs = inputs:
     with inputs;
     let
+      system = "x86_64-linux";
+
+      pkgs = import nixpkgs {
+        inherit system;
+        config.allowUnfree = true;
+      };
+
       specialArgs = { inherit inputs self; };
+      moduleArgs = specialArgs // { nixpkgs = pkgs; };
     in
     {
+      inherit (import ./packages moduleArgs) packages;
       nixosConfigurations = {
         goatware = nixpkgs.lib.nixosSystem {
           inherit specialArgs;

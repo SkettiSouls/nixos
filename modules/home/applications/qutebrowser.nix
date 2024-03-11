@@ -7,18 +7,17 @@ let
     types
     ;
 
-  cfg = config.shit.qutebrowser;
+  cfg = config.shit.browsers.qutebrowser;
 in
 {
-  options.programs.qutebrowser.unbind = mkOption {
-    type = types.attrs;
-    default = {};
-  };
-  options.shit.qutebrowser = {
+  options.shit.browsers.qutebrowser = {
     enable = mkEnableOption "qutebrowser";
     default = mkOption {
       type = types.bool;
-      default = true;
+      default = false;
+      description = ''
+        Whether or not the program will be set as the default browser.
+      '';
     };
   };
 
@@ -27,6 +26,7 @@ in
       enable = true;
       enableDefaultBindings = true;
       loadAutoconfig = true;
+
       keyBindings = {
 	insert = {
 	  "<Escape>" = "mode-leave ;; jseval -q document.activeElement.blur()";
@@ -37,17 +37,25 @@ in
 	  "<" = "back";
 	  ">" = "forward";
 	  "<Ctrl+F>" = "hint links spawn mpv {hint-url}";
-	  #"d" = null;
 	  "dd" = "tab-close";
 	};
       };
-      unbind = {
-        normal = [
-	  "d"
-	];
-      };
       extraConfig = "config.unbind('d', mode='normal')";
+
+      searchEngines = {
+        DEFAULT = "https://search.brave.com/search?q={}";
+	g = "https://www.google.com/search?hl=en&q={}";
+        aw = "https://wiki.archlinux.org/?search={}";
+	np = "https://search.nixos.org/packages?channel=23.11&query={}";
+	npu = "https://search.nixos.org/packages?channel=unstable&query={}";
+	no = "https://search.nixos.org/options?channel=23.11&query={}";
+	nou = "https://search.nixos.org/options?channel=unstable&query={}";
+	nw = "https://nixos.wiki/index.php?search={}";
+	hm = "https://mipmip.github.io/home-manager-option-search/?query={}";
+      };
+
       settings = {
+	"url.auto_search" = "naive";
         "auto_save.session" = true;
 	"colors.webpage.preferred_color_scheme" = "dark";
 	"colors.webpage.darkmode.enabled" = true;
@@ -78,6 +86,7 @@ in
 	];
 	
       };
+
       greasemonkey = [
 	/*
 	(pkgs.writeText "yewtube.js" ''

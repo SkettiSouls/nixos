@@ -22,13 +22,12 @@ in
       shellAliases = {
         ":q" = " exit";
         cp="rsync";
-        play = ''mpv "$(fzf)" '';
+        #play = ''mpv "$(fzf)" '';
         yt = "ytfzf -l -s";
         compile = "./compile";
         run = "./run";
         icat = "kitten icat";
         ls="eza --icons=always --group-directories-first";
-        vesktop = "vencorddesktop";
 	rebuild = "sudo nixos-rebuild switch; hyprctl reload";
       };
       /*

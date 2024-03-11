@@ -7,15 +7,17 @@ let
     types
     ;
 
-  cfg = config.shit.brave;
+  cfg = config.shit.browsers.brave;
 in
 {
-  options.shit.brave= {
+  options.shit.browsers.brave= {
     enable = mkEnableOption "brave";
-
     default = mkOption {
       type= types.bool;
       default = false;
+      description = ''
+        Whether or not the program will be set as the default browser.
+      '';
     };
   };
 

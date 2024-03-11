@@ -16,6 +16,7 @@ in
     home.packages = with pkgs; [
       mpv
       yt-dlp
+      sketti.play
     ];
     programs.mpv = {
       enable = true;

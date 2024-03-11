@@ -21,7 +21,7 @@ in
         withVencord = true;
         withTTS = true;
       })
-      vesktop
+      unstable.vesktop
     ];
 
     # Midnight Theme

@@ -38,19 +38,36 @@ in
 
   shit = {
     bash.enable = true;
-    brave.enable = true;
     discord.enable = true;
     git.enable = true;
     hyprland.enable = true;
     kitty.enable = true;
     mangohud.enable = true;
     mpv.enable = true;
-    qutebrowser.enable = true;
     udiskie.enable = true;
     xdg.portal.enable = true;
+
     audio = {
       bluetooth.enable = true;
       carla.enable = true;
+    };
+
+    browsers = {
+      brave = {
+        enable = true;
+	default = false;
+      };
+
+      /*firefox = {
+        enable = true;
+	default = false;
+	tridactyl = true;
+      };*/
+
+      qutebrowser = {
+        enable = true;
+	default = true;
+      };
     };
   };
 
