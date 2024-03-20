@@ -16,11 +16,12 @@ in
   };
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [];
-    home.file =  {
+    home.packages = with pkgs; [ ];
+    home.file = {
       ".config/wireplumber/policy.lua.d/11-bluetooth-policy.lua".text = ''
-      -- Disable bluetooth codec switching
-      bluetooth_policy.policy["media-role.use-headset-profile"] = false '';
+        -- Disable bluetooth codec switching
+        bluetooth_policy.policy["media-role.use-headset-profile"] = false
+      '';
     };
   };
 }

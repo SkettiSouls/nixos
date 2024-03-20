@@ -1,13 +1,14 @@
 {
   imports = [
-    ./git.nix
-    ./mpv.nix
-    ./bash.nix
-    ./hyprland.nix
-    ./udiskie.nix
     ./applications
     ./audio
     ./custom
     ./temp
+    ./bash.nix
+    ./browsers.nix
+    ./git.nix
+    ./hyprland.nix
+    ./mpv.nix
+    ./udiskie.nix
   ];
 }

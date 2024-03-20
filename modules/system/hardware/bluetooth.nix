@@ -16,16 +16,16 @@ in
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [];
+    environment.systemPackages = with pkgs; [ ];
 
     hardware = {
       bluetooth = {
-	package = pkgs.unstable.bluez;
+        package = pkgs.unstable.bluez;
         enable = true;
-	powerOnBoot = true;
-	#input = { };
-	#settings = { };
-	#disabledPlugins = [ ];
+        powerOnBoot = true;
+        #input = { };
+        #settings = { };
+        #disabledPlugins = [ ];
       };
     };
   };

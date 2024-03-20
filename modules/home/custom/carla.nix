@@ -8,83 +8,85 @@ let
     types
     ;
 
-  makeConfig = lib.generators.toINI {};
+  makeConfig = lib.generators.toINI { };
 
   cfg = config.programs.carla;
 in
 {
   options.programs.carla = {
     enable = mkEnableOption "Carla audio plugin host";
-    settings = mkOption { # Eventually needs QuantumCoded/patchwork for values Carla sets imperatively.
+    settings = mkOption {
+      # Eventually needs QuantumCoded/patchwork for values Carla sets imperatively.
       type = types.attrs;
-      default = {};
+      default = { };
       description = ''
         INI Settings for ~/.config/falkTX/Carla2.conf.
         INI headers are written as attrs.
       '';
       example = ''
         carla.settings = {
-	  General = {
-	    ShowKeyboard = false;
-	    ShowToolbar = true;
-	  };
-	  Canvas = {
-	    AutoHideGroups = false;
-	  };
-	};
+          General = {
+            ShowKeyboard = false;
+            ShowToolbar = true;
+          };
+          Canvas = {
+            AutoHideGroups = false;
+          };
+        };
       '';
     };
 
     /* Imperatively set by carla
-    [General]
-    Geometry
-    HorizontalScrollBarValue
-    LastBPM
-    VerticalScrollBarValue
+      [General]
+      Geometry
+      HorizontalScrollBarValue
+      LastBPM
+      VerticalScrollBarValue
 
-    Maybe the [OSC] settings? I'm not sure what they are.
+      Maybe the [OSC] settings? I'm not sure what they are.
     */
 
-    paths = { # MIDI, VST2, and VST3 support planned.
+    paths = {
+      # MIDI, VST2, and VST3 support planned.
       description = ''
         Set path settings for Carla. Carla has a bug in which paths are ignored if a directory under
         home is omitted. This option automatically adds sane home directories before user defined paths.
       '';
       example = ''
         programs.carla.paths.folders = [
-	  /etc/nixos/configs/carla
+          /etc/nixos/configs/carla
           "''${pkgs.rnnoise-plugin}/lib"
-	  "''${config.home.homeDirectory}/Carla"
-	  "/etc/nixos/configs/carla"
-	];
+          "''${config.home.homeDirectory}/Carla"
+          "/etc/nixos/configs/carla"
+        ];
       '';
       folders = mkOption {
         type = with types; listOf (either str path);
-	default = [];
+        default = [ ];
       };
       dssi = mkOption {
         type = with types; listOf (either str path);
-	default = [];
+        default = [ ];
       };
       ladspa = mkOption {
         type = with types; listOf (either str path);
-	default = [];
+        default = [ ];
       };
       lv2 = mkOption {
         type = with types; listOf (either str path);
-	default = [];
+        default = [ ];
       };
       sf2 = mkOption {
         type = with types; listOf (either str path);
-	default = [];
+        default = [ ];
       };
       sfz = mkOption {
         type = with types; listOf (either str path);
-	default = [];
+        default = [ ];
       };
       projectFolder = mkOption {
-	type = types.str;
-	default = "";
+        type = types.str;
+        default = "";
       };
     };
   };
@@ -94,20 +96,21 @@ in
     home.file = {
       ".config/falkTX/Carla2.conf".text = makeConfig (lib.recursiveUpdate
         cfg.settings
-        { # Carla only reads paths if a path under home is set. I'm not sure how to avoid this workaround, or if it's even possible.
+        {
+          # Carla only reads paths if a path under home is set. I'm not sure how to avoid this workaround, or if it's even possible.
           General = {
-            DiskFolders = lib.concatStringsSep ", " ([config.home.homeDirectory]++cfg.paths.folders);
+            DiskFolders = lib.concatStringsSep ", " ([ config.home.homeDirectory ] ++ cfg.paths.folders);
           };
-	  Paths = {
-	    DSSI = lib.concatStringsSep ", " (["${config.home.homeDirectory}/.dssi"]++cfg.paths.dssi);
-	    LADSPA = lib.concatStringsSep ", " (["${config.home.homeDirectory}/.ladspa"]++cfg.paths.ladspa);
-	    lv2 = lib.concatStringsSep ", " (["${config.home.homeDirectory}/.lv2"]++cfg.paths.lv2);
-	    sf2 = lib.concatStringsSep ", " (["${config.home.homeDirectory}/.sounds/sf2"]++cfg.paths.sf2);
-	    sfz = lib.concatStringsSep ", " (["${config.home.homeDirectory}/.sounds/sfz"]++cfg.paths.sfz);
-	  };
-	  Main = {
-	    ProjectFolder = cfg.paths.projectFolder;
-	  };
+          Paths = {
+            DSSI = lib.concatStringsSep ", " ([ "${config.home.homeDirectory}/.dssi" ] ++ cfg.paths.dssi);
+            LADSPA = lib.concatStringsSep ", " ([ "${config.home.homeDirectory}/.ladspa" ] ++ cfg.paths.ladspa);
+            lv2 = lib.concatStringsSep ", " ([ "${config.home.homeDirectory}/.lv2" ] ++ cfg.paths.lv2);
+            sf2 = lib.concatStringsSep ", " ([ "${config.home.homeDirectory}/.sounds/sf2" ] ++ cfg.paths.sf2);
+            sfz = lib.concatStringsSep ", " ([ "${config.home.homeDirectory}/.sounds/sfz" ] ++ cfg.paths.sfz);
+          };
+          Main = {
+            ProjectFolder = cfg.paths.projectFolder;
+          };
         }
       );
     };

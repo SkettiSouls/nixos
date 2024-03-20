@@ -10,7 +10,7 @@ let
     types
     ;
 
-# "base" can be changed to whatever EXCEPT for ones already present (i.e. programs, services, etc)
+  # "base" can be changed to whatever EXCEPT for ones already present (i.e. programs, services, etc)
 
   cfg = config.base.NAME;
 in

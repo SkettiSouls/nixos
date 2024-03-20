@@ -16,12 +16,12 @@ in
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [];
+    environment.systemPackages = with pkgs; [ ];
 
     hardware.cpu.amd = {
       updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
     };
-    
+
     boot = {
       kernelModules = [ "kvm-amd" ];
     };

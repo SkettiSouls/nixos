@@ -31,9 +31,9 @@ in
     dconf.settings = {
       "com/github/wwmm/easyeffects" = {
         process-all-outputs = false; # Disable easyeffects sink stealing all audio
-	process-all-inputs = true;
-	use-dark-theme = true;
-	bypass = cfg.bypass;
+        process-all-inputs = true;
+        use-dark-theme = true;
+        bypass = cfg.bypass;
       };
     };
   };

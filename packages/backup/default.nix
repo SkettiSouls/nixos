@@ -1,13 +1,13 @@
-{ mpv, fzf, stdenvNoCC }:
+{ rsync, stdenvNoCC }:
 
 stdenvNoCC.mkDerivation {
-  pname = "play";
+  pname = "backup";
   version = "1.0";
   nobuild = true;
   src = ./.;
-  nativeBuildInputs = [ mpv fzf ];
+  nativeBuildInputs = [ rsync ];
   installPhase = ''
     mkdir -p $out/bin
-    cp $src/play.sh $out/bin/play
+    cp $src/backup.sh $out/bin/backup
   '';
-}
+};

@@ -4,6 +4,7 @@
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager/release-23.11";
     hm-unstable.url = "github:nix-community/home-manager/master";
+    hyprland-flake.url = "github:hyprwm/Hyprland";
   };
 
   outputs = inputs:

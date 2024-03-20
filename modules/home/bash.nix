@@ -21,14 +21,14 @@ in
       profileExtra = "bluetoothctl power on && bluetoothctl connect E8:EE:CC:4B:FA:2A\n";
       shellAliases = {
         ":q" = " exit";
-        cp="rsync";
+        cp = "rsync";
         #play = ''mpv "$(fzf)" '';
         yt = "ytfzf -l -s";
         compile = "./compile";
         run = "./run";
         icat = "kitten icat";
-        ls="eza --icons=always --group-directories-first";
-	rebuild = "sudo nixos-rebuild switch; hyprctl reload";
+        ls = "eza --icons=always --group-directories-first";
+        rebuild = "sudo nixos-rebuild switch; hyprctl reload";
       };
       /*
       bashrcExtra = ''function spit {

@@ -3,7 +3,6 @@ with inputs;
 let
   system = pkgs.stdenv.hostPlatform.system;
 
-
   overlay-unstable = final: prev: {
     unstable = import nixpkgs-unstable {
       inherit system;
@@ -15,10 +14,15 @@ let
     sketti = self.packages.${system};
   };
 
+  overlay-hyprland = final: prev: {
+    hyprland-src = inputs.hyprland-flake.packages.${system}.hyprland;
+  };
+
 in
 {
   nixpkgs.overlays = [
     overlay-unstable
     overlay-sketti
+    overlay-hyprland
   ];
 }

@@ -16,7 +16,7 @@ in
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [];
+    environment.systemPackages = with pkgs; [ ];
 
     fileSystems."/" =
       {
@@ -38,7 +38,7 @@ in
         fsType = "btrfs";
       };
 
-    swapDevices = [ 
+    swapDevices = [
       {
         # 48G Swap Partition
         device = "/dev/disk/by-uuid/a7a24807-1f25-4d1e-a70d-b518d24a1e3f";

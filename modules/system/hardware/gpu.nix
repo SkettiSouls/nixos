@@ -30,10 +30,10 @@ in
     hardware = {
       opengl = {
         enable = true;
-	driSupport = true;
-	driSupport32Bit = true; # Enable 32-Bit Support
-	extraPackages = [ pkgs.mesa pkgs.libva ];
-	extraPackages32 = [ pkgs.driversi686Linux.mesa ];
+        driSupport = true;
+        driSupport32Bit = true; # Enable 32-Bit Support
+        extraPackages = [ pkgs.mesa pkgs.libva ];
+        extraPackages32 = [ pkgs.driversi686Linux.mesa ];
       };
     };
   };

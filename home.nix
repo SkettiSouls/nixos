@@ -1,9 +1,9 @@
 { pkgs, ... }:
 
 /* Eldritch Horror
-let
+  let
   shitConfig = builtins.mapAttrs (_: v: { enable = true; } // v);
-in
+  in
 */
 
 {
@@ -19,7 +19,7 @@ in
   home = {
     username = "skettisouls";
     homeDirectory = "/home/skettisouls";
-    packages = with pkgs; [];
+    packages = with pkgs; [ ];
   };
 
 
@@ -38,13 +38,14 @@ in
 
   shit = {
     bash.enable = true;
-    discord.enable = true;
+    #discord.enable = true;
     git.enable = true;
     hyprland.enable = true;
     kitty.enable = true;
     mangohud.enable = true;
     mpv.enable = true;
     udiskie.enable = true;
+    vesktop.enable = true;
     xdg.portal.enable = true;
 
     audio = {
@@ -53,21 +54,13 @@ in
     };
 
     browsers = {
-      brave = {
-        enable = true;
-	default = false;
-      };
-
+      default = "qutebrowser";
+      brave.enable = true;
+      qutebrowser.enable = true;
       /*firefox = {
         enable = true;
-	default = false;
-	tridactyl = true;
+        tridactyl = true;
       };*/
-
-      qutebrowser = {
-        enable = true;
-	default = true;
-      };
     };
   };
 

@@ -140,9 +140,9 @@
   };
 
   /* Doesn't work
-  # mtwk's weird mouse fix or w/e
-  MatchUdevType=mouse;
-  ModelBouncingKeys=1;
+    # mtwk's weird mouse fix or w/e
+    MatchUdevType=mouse;
+    ModelBouncingKeys=1;
   */
 
   # Enable the OpenSSH daemon.

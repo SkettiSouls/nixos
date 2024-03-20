@@ -12,7 +12,7 @@ let
   cfg = config.shit.mangohud;
 in
 {
-  options.shit.mangohud= {
+  options.shit.mangohud = {
     enable = mkEnableOption "MangoHud User Configuration";
   };
 
@@ -23,39 +23,39 @@ in
 
     programs.mangohud = {
       enable = true;
-      };
+    };
 
     home.file.".config/MangoHud/MangoHud.conf".text = ''
-      /* PERFORMANCE */
-      fps_limit=0
-      #vsync=1
+       /* PERFORMANCE */
+       fps_limit=0
+       #vsync=1
 
-      /* ELEMENTS */
-      cpu_stats
-      cpu_temp
-      gpu_stats
-      gpu_temp
-      ram
-      vram
-      fps
-      frametime
-      frame_timing
-      gamemode
+       /* ELEMENTS */
+       cpu_stats
+       cpu_temp
+       gpu_stats
+       gpu_temp
+       ram
+       vram
+       fps
+       frametime
+       frame_timing
+       gamemode
 
-      /* WINDOW */
-      legacy_layout=0
-      #horizontal_stretch
-      position=top-left
-      round_corners=10
-      #offset_x=0
-      #offset_y=0
-      #width=0
-      #height=140
-      alpha=1.000000
-      background_alpha=0.500000
+       /* WINDOW */
+       legacy_layout=0
+       #horizontal_stretch
+       position=top-left
+       round_corners=10
+       #offset_x=0
+       #offset_y=0
+       #width=0
+       #height=140
+       alpha=1.000000
+       background_alpha=0.500000
 
-     /* KEYBINDS */
-     toggle_hud=F12
-     '';
+      /* KEYBINDS */
+      toggle_hud=F12
+    '';
   };
 }

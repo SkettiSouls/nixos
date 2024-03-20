@@ -27,7 +27,7 @@ in
       signing.signByDefault = true;
 
       extraConfig = {
-	gpg.format = "ssh";
+        gpg.format = "ssh";
         pull.rebase = false;
       };
     };

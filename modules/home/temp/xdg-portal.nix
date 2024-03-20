@@ -8,9 +8,11 @@ let
 
   associationOptions = with types;
     attrsOf (coercedTo (either (listOf str) str)
-      (x: lib.concatStringsSep ";" (lib.toList x)) str);
+      (x: lib.concatStringsSep ";" (lib.toList x))
+      str);
 
-in {
+in
+{
   meta.maintainers = [ lib.maintainers.misterio77 ];
 
   options.shit.xdg.portal = {
@@ -80,78 +82,80 @@ in {
     };
   };
 
-  config = let
-    cfg = config.shit.xdg.portal;
+  config =
+    let
+      cfg = config.shit.xdg.portal;
 
-    joinedPortals = pkgs.buildEnv {
-      name = "xdg-portals";
-      paths = cfg.extraPortals;
-      pathsToLink =
-        [ "/share/xdg-desktop-portal/portals" "/share/applications" ];
-    };
+      joinedPortals = pkgs.buildEnv {
+        name = "xdg-portals";
+        paths = cfg.extraPortals;
+        pathsToLink =
+          [ "/share/xdg-desktop-portal/portals" "/share/applications" ];
+      };
 
-    portalConfigPath = n:
-      "share/xdg-desktop-portal/${
+      portalConfigPath = n:
+        "share/xdg-desktop-portal/${
         optionalString (n != "common") "${n}-"
       }portals.conf";
-    mkPortalConfig = desktop: conf:
-      pkgs.writeTextDir (portalConfigPath desktop)
-      (lib.generators.toINI { } { preferred = conf; });
+      mkPortalConfig = desktop: conf:
+        pkgs.writeTextDir (portalConfigPath desktop)
+          (lib.generators.toINI { } { preferred = conf; });
 
-    joinedPortalConfigs = pkgs.buildEnv {
-      name = "xdg-portal-configs";
-      ignoreCollisions = true; # Let config override configPackages cfgs
-      paths = (mapAttrsToList mkPortalConfig cfg.config) ++ cfg.configPackages;
-      pathsToLink = [ "/share/xdg-desktop-portal" ];
-    };
-  in mkIf cfg.enable {
-    warnings = optional (cfg.configPackages == [ ] && cfg.config == { }) ''
-      xdg-desktop-portal 1.17 reworked how portal implementations are loaded, you
-      should either set `xdg.portal.config` or `xdg.portal.configPackages`
-      to specify which portal backend to use for the requested interface.
+      joinedPortalConfigs = pkgs.buildEnv {
+        name = "xdg-portal-configs";
+        ignoreCollisions = true; # Let config override configPackages cfgs
+        paths = (mapAttrsToList mkPortalConfig cfg.config) ++ cfg.configPackages;
+        pathsToLink = [ "/share/xdg-desktop-portal" ];
+      };
+    in
+    mkIf cfg.enable {
+      warnings = optional (cfg.configPackages == [ ] && cfg.config == { }) ''
+        xdg-desktop-portal 1.17 reworked how portal implementations are loaded, you
+        should either set `xdg.portal.config` or `xdg.portal.configPackages`
+        to specify which portal backend to use for the requested interface.
 
-      https://github.com/flatpak/xdg-desktop-portal/blob/1.18.1/doc/portals.conf.rst.in
+        https://github.com/flatpak/xdg-desktop-portal/blob/1.18.1/doc/portals.conf.rst.in
 
-      If you simply want to keep the behaviour in < 1.17, which uses the first
-      portal implementation found in lexicographical order, use the following:
+        If you simply want to keep the behaviour in < 1.17, which uses the first
+        portal implementation found in lexicographical order, use the following:
 
-      xdg.portal.config.common.default = "*";
-    '';
+        xdg.portal.config.common.default = "*";
+      '';
 
-    assertions = [
-      (lib.hm.assertions.assertPlatform "xdg.portal" pkgs lib.platforms.linux)
+      assertions = [
+        (lib.hm.assertions.assertPlatform "xdg.portal" pkgs lib.platforms.linux)
 
-      {
-        assertion = cfg.extraPortals != [ ];
-        message =
-          "Setting xdg.portal.enable to true requires a portal implementation in xdg.portal.extraPortals such as xdg-desktop-portal-gtk or xdg-desktop-portal-kde.";
-      }
-    ];
+        {
+          assertion = cfg.extraPortals != [ ];
+          message =
+            "Setting xdg.portal.enable to true requires a portal implementation in xdg.portal.extraPortals such as xdg-desktop-portal-gtk or xdg-desktop-portal-kde.";
+        }
+      ];
 
-    home = {
-      sessionVariables =
-        mkIf cfg.xdgOpenUsePortal { NIXOS_XDG_OPEN_USE_PORTAL = "1"; };
+      home = {
+        sessionVariables =
+          mkIf cfg.xdgOpenUsePortal { NIXOS_XDG_OPEN_USE_PORTAL = "1"; };
 
-      # Make extraPortals systemd units available to the user
-      packages = [ pkgs.xdg-desktop-portal ] ++ cfg.extraPortals;
-    };
-
-    systemd.user.services.xdg-desktop-portal = {
-      Unit = {
-        Description = "Portal service";
-        PartOf = "graphical-session.target";
+        # Make extraPortals systemd units available to the user
+        packages = [ pkgs.xdg-desktop-portal ] ++ cfg.extraPortals;
       };
 
-      Service = {
-        Environment = [
-          "XDG_DESKTOP_PORTAL_DIR=${joinedPortals}/share/xdg-desktop-portal/portals"
-        ] ++ (optional (cfg.configPackages != [ ])
-          "NIXOS_XDG_DESKTOP_PORTAL_CONFIG_DIR=${joinedPortalConfigs}/share/xdg-desktop-portal");
-        Type = "dbus";
-        BusName = "org.freedesktop.portal.Desktop";
-        ExecStart = "${pkgs.xdg-desktop-portal}/libexec/xdg-desktop-portal";
-        Slice = "session.slice";
+      systemd.user.services.xdg-desktop-portal = {
+        Unit = {
+          Description = "Portal service";
+          PartOf = "graphical-session.target";
+        };
+
+        Service = {
+          Environment = [
+            "XDG_DESKTOP_PORTAL_DIR=${joinedPortals}/share/xdg-desktop-portal/portals"
+          ] ++ (optional (cfg.configPackages != [ ])
+            "NIXOS_XDG_DESKTOP_PORTAL_CONFIG_DIR=${joinedPortalConfigs}/share/xdg-desktop-portal");
+          Type = "dbus";
+          BusName = "org.freedesktop.portal.Desktop";
+          ExecStart = "${pkgs.xdg-desktop-portal}/libexec/xdg-desktop-portal";
+          Slice = "session.slice";
+        };
       };
     };
-  };
 }

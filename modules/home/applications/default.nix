@@ -1,10 +1,11 @@
 {
   imports = [
-    ./kitty.nix
     ./brave.nix
-    ./qutebrowser.nix
     ./discord.nix
-    ./neofetch.nix
+    ./kitty.nix
     ./mangohud.nix
+    ./neofetch.nix
+    ./qutebrowser.nix
+    ./vesktop.nix
   ];
 }

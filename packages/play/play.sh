@@ -4,16 +4,31 @@
 
 mode="fuzzy"
 multi_select=""
+loop=""
 playlist_extension="m3u"
-help_msg='echo -e Usage: play [ -d -h -m -p -pe ] [args] [/media/directory]\n-h: Display this message.\n-d: Searches by directories.\n-m: Enables multiple selections using Tab.\n-p: Searches by playlist using m3u files.\n-e: Overrides the file extension used by -p.'
 
-while getopts "hdmpe:" opt; do
+show_help() {
+  echo -e "Usage: play [-h -d -l -m -p -pe ] [args] [/media/directory]\n"
+  echo -e "Flags:"
+  echo "  -h:     Display this message."
+  echo "  -d:     Searches by directories."
+  echo "  -l:     Enables looping (-lm is funky)."
+  echo "  -m:     Enables multiple selections using Tab."
+  echo "  -p:     Searches by playlist using m3u files."
+  echo "  -pe:    Overrides the file extension used by -p."
+}
+
+while getopts "hdlmpe:" opt; do
   case ${opt} in
     h)
-      mode="help"
+      show_help
+      exit 1
       ;;
     d)
       mode="dirs"
+      ;;
+    l)
+      loop="--loop-playlist"
       ;;
     m)
       multi_select="-m"
@@ -22,29 +37,31 @@ while getopts "hdmpe:" opt; do
       mode="playlist"
       ;;
     e)
-      playlist_extension="$OPTARG"
+      if [ "$mode" == "playlist" ]; then
+	playlist_extension="$OPTARG"
+      else 
+	show_help
+        exit 1
+      fi
       ;;
     \?)
-      mode="help"
+      show_help
+      exit 1
       ;;
-     esac
+  esac
 done
 shift $((OPTIND -1))
 
 mode_select () {
   case $mode in
-    help)
-      $help_msg
-      exit 1
-      ;;
     dirs)
-      find * . -type d -print | fzf $multi_select | while read -r line; do mpv "$line"; done
+      find * -type d -print | fzf $multi_select | while read -r line; do mpv "$line" $loop; done
       ;;
     playlist)
-      find * . -name "*.$playlist_extension" | fzf $multi_select | while read -r line; do mpv "$line"; done
+      find * -name "*.$playlist_extension" | fzf $multi_select | while read -r line; do mpv "$line" $loop; done
       ;;
     fuzzy)
-      fzf $multi_select | while read -r line; do mpv "$line"; done
+      fzf $multi_select | while read -r line; do mpv "$line" $loop; done
       ;;
   esac
 }
