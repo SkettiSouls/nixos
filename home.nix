@@ -38,7 +38,7 @@
 
   shit = {
     bash.enable = true;
-    #discord.enable = true;
+    discord.enable = true;
     git.enable = true;
     hyprland.enable = true;
     kitty.enable = true;
