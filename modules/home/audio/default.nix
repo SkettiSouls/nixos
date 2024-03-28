@@ -1,6 +1,8 @@
 {
   imports = [
     ./bluetooth.nix
-    ./carla.nix
+    ### Carla Modules ###
+    ./carla/carla.nix
+    ./carla/default.nix
   ];
 }

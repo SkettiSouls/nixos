@@ -20,7 +20,7 @@ in
 
     programs.steam = {
       enable = true;
-      package = pkgs.unstable.steam.override {
+      package = pkgs.steam-small.override {
         extraEnv = {
           MANGOHUD = true;
           OBS_VKCAPTURE = true;
@@ -33,20 +33,5 @@ in
         enable = true;
       };
     };
-
-    # Home Manager fixes.
-    home-manager.sharedModules = [{
-
-      /* Been having issues with hyprland freezing, will see if this is the issue
-      # Hyprland steam dropdown menu fix.
-      wayland.windowManager.hyprland.settings = {
-        windowrulev2 = [
-          "stayfocused, title:^()$,class:^(steam)$"
-          "minsize 1 1, title:^()$,class:^(steam)$"
-        ];
-      };
-      */
-
-    }];
   };
 }

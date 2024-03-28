@@ -52,8 +52,9 @@ in
       settings = {
         "url.auto_search" = "naive";
         "auto_save.session" = true;
-        "colors.webpage.darkmode.enabled" = true;
-        "colors.webpage.preferred_color_scheme" = "auto";
+        "colors.webpage.darkmode.enabled" = false;
+        "colors.webpage.darkmode.algorithm" = "lightness-cielab";
+        "colors.webpage.preferred_color_scheme" = "dark";
         "colors.webpage.bg" = "";
         "content.autoplay" = false;
         "content.blocking.enabled" = true;

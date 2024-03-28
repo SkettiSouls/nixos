@@ -74,7 +74,7 @@ in
       example = ''
         programs.vesktop.plugins = {
           GifPaste.enable = true;
-          iLoveSpam = false;
+          iLoveSpam.enable = false;
           ImageZoom = {
             enable = true;
             settings = {
@@ -128,12 +128,13 @@ in
       default = { };
       type = with types; attrsOf (submodule {
         options.css = mkOption {
-          type = types.lines;
+          type = with types; (either lines path);
         };
       });
       example = ''
         programs.vesktop.themes = {
           mytheme.css = "custom css";
+	  mytheme2.css = ./path/to/css;
           };
         };
       '';
@@ -150,7 +151,10 @@ in
       (mapAttrs'
         (name: themes: nameValuePair
           ".config/vesktop/themes/${name}.css"
-          { text = themes.css; })
+          {
+	    text = mkIf (builtins.isString themes.css) themes.css;
+	    source = mkIf (builtins.isPath themes.css) themes.css;
+	  })
         cfg.themes)
 
       {

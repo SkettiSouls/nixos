@@ -1,3 +1,4 @@
+### Yoinked from nixpkgs to add options.xdg.portal to HM ###
 { config, pkgs, lib, ... }:
 
 let

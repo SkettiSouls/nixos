@@ -18,7 +18,6 @@ in
     };
   };
 
-  #config = mkIf cfg.enable {
   config = mkIf (cfg.default != null) {
     xdg.mimeApps = mkIf (cfg.default == "qutebrowser") {
       enable = true;
