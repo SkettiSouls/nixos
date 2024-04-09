@@ -40,7 +40,7 @@ in
         ];
         enableReactDevtools = false;
         frameless = false;
-        transparent = true;
+        transparent = false;
       };
 
       cloud = {
@@ -426,9 +426,11 @@ in
         PinDMs = {
           enable = true;
           settings = {
-            pinOrder = 0; # 0 = Latest 1 = Custom
-            # Needs ViewRaw to find DM channel ID's
+            sortDmsByNewestMessage = true;
+            dmSectioncollapsed = false;
+            /* Outdated, Gotta Find What Black Magic PinDMs Uses Now
             pinnedDMs = "1160838589890961419,1201774443832295475,940715402294607902,1012431223861285025,917622324491087922,952361563912806451";
+            */
           };
         };
         PlainFolderIcon.enable = false;

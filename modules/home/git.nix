@@ -28,7 +28,7 @@ in
 
       extraConfig = {
         gpg.format = "ssh";
-        pull.rebase = false;
+        pull.rebase = true;
       };
     };
   };

@@ -29,7 +29,7 @@ in
         });
       })
       wl-clipboard
-      unstable.hyprpaper
+      hyprpaper
       dunst
     ];
 
@@ -43,10 +43,10 @@ in
     };
 
     home.file.".config/hypr/hyprpaper.conf".text = ''
-      preload = ${config.home.homeDirectory}/Pictures/Wallpapers/oswp.png
-      preload = ${config.home.homeDirectory}/Pictures/Wallpapers/suncat.jpg
-      # wallpaper = HDMI-A-1,contain:${config.home.homeDirectory}/Pictures/Wallpapers/oswp.jpg
-      wallpaper = HDMI-A-1,contain:${config.home.homeDirectory}/Pictures/Wallpapers/suncat.jpg
+      preload = ${config.home.homeDirectory}/Pictures/wallpapers/oswp.png
+      preload = ${config.home.homeDirectory}/Pictures/wallpapers/suncat.jpg
+      # wallpaper = HDMI-A-1,contain:${config.home.homeDirectory}/Pictures/wallpapers/oswp.jpg
+      wallpaper = HDMI-A-1,contain:${config.home.homeDirectory}/Pictures/wallpapers/suncat.jpg
       splash = false
     '';
 
@@ -86,7 +86,7 @@ in
 
         general = {
           # See https://wiki.hyprland.org/Configuring/Variables/
-          gaps_in = 5;
+          gaps_in = 0;
           gaps_out = 10;
           border_size = 2;
           "col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
@@ -97,7 +97,7 @@ in
 
         decoration = {
           # See https://wiki.hyprland.org/Configuring/Variables/
-          rounding = 10;
+          rounding = 0;
 
           blur = {
             enabled = true;
@@ -179,9 +179,9 @@ in
           " CTRL, PRINT, exec, grimblast -f copy screen"
 
           # Grimblast Screenshot && CopySave
-          "$mainMod, PRINT, exec, grimblast -f copy output && wl-paste > ~/Pictures/Screenshots/Screenshot-$(date +%F_%T).png"
-          "$mainMod SHIFT, PRINT, exec, grimblast -f copy area && wl-paste > ~/Pictures/Screenshots/Screenshot-$(date +%F_%T).png"
-          "$mainMod CTRL, PRINT, exec, grimblast -f copy screen && wl-paste > ~/Pictures/Screenshots/Screenshot-$(date +%F_%T).png"
+          "$mainMod, PRINT, exec, grimblast -f copy output && wl-paste > ~/Pictures/screenshots/Screenshot-$(date +%F_%T).png"
+          "$mainMod SHIFT, PRINT, exec, grimblast -f copy area && wl-paste > ~/Pictures/screenshots/Screenshot-$(date +%F_%T).png"
+          "$mainMod CTRL, PRINT, exec, grimblast -f copy screen && wl-paste > ~/Pictures/screenshots/Screenshot-$(date +%F_%T).png"
 
           # Navigation
           "$mainMod, left, movefocus, l"

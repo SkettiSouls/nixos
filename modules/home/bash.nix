@@ -22,15 +22,13 @@ in
       shellAliases = {
         ":q" = " exit";
         cp = "rsync";
-        #play = ''mpv "$(fzf)" '';
-        yt = "ytfzf -l -s";
         compile = "./compile";
         run = "./run";
         icat = "kitten icat";
         ls = "eza --icons=always --group-directories-first";
         rebuild = "sudo nixos-rebuild switch; hyprctl reload";
       };
-      /*
+      /* Eventually will make it so the `spit` command overrides Hyprland window swallowing.
       bashrcExtra = ''function spit {
         PROMPT_COMMAND="echo -ne \"\033]0;$1 \077""
       }\n'';

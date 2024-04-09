@@ -9,10 +9,13 @@
     ./vesktop/default.nix
     ./vesktop/vesktop.nix
 
+    ### Fetch Modules ###
+    ./fetch/default.nix
+    ./fetch/neofetch.nix
+
     ### Loose Modules ###
     ./discord.nix
     ./kitty.nix
     ./mangohud.nix
-    ./neofetch.nix
   ];
 }

@@ -19,7 +19,7 @@
   home = {
     username = "skettisouls";
     homeDirectory = "/home/skettisouls";
-    packages = with pkgs; [ ];
+    packages = with pkgs; [ unstable.scarab ];
   };
 
 
@@ -62,9 +62,12 @@
         tridactyl = true;
       };*/
     };
-  };
 
-  kalyx = {
-    neofetch.enable = true;
+    fetch = {
+      active = with pkgs; [
+        neofetch
+	fastfetch
+      ];
+    };
   };
 }

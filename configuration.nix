@@ -14,7 +14,7 @@
     ];
 
   # Kernel
-  boot.kernelPackages = pkgs.linuxPackages_6_7;
+  boot.kernelPackages = pkgs.linuxPackages_6_8;
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -86,7 +86,9 @@
     zip
     unzip
     appimage-run
-    linuxKernel.kernels.linux_6_7
+    linuxKernel.kernels.linux_6_8
+    btop
+    pavucontrol
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -122,6 +124,9 @@
     xwayland.enable = true;
   };
 
+  hardware = {
+    enableRedistributableFirmware = true;
+  };
   nix = {
     package = pkgs.nix;
     settings.experimental-features = [ "nix-command" "flakes" ];
