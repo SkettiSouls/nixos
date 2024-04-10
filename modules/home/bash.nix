@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, ... }:
 let
   inherit (lib)
     mkEnableOption
@@ -27,6 +27,7 @@ in
         icat = "kitten icat";
         ls = "eza --icons=always --group-directories-first";
         rebuild = "sudo nixos-rebuild switch; hyprctl reload";
+        vim = "nvim";
       };
       /* Eventually will make it so the `spit` command overrides Hyprland window swallowing.
       bashrcExtra = ''function spit {

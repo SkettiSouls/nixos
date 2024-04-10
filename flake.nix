@@ -5,6 +5,7 @@
     home-manager.url = "github:nix-community/home-manager/release-23.11";
     hm-unstable.url = "github:nix-community/home-manager/master";
     hyprland-flake.url = "github:hyprwm/Hyprland";
+    neovim.url = "github:skettisouls/neovim";
   };
 
   outputs = inputs:

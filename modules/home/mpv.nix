@@ -20,6 +20,25 @@ in
     ];
     programs.mpv = {
       enable = true;
+      profiles = {
+        "extension.mp3" = {
+          video = "no";
+        };
+        "extension.opus" = {
+          video = "no";
+        };
+        "extension.flac" = {
+          "video" = "no";
+        };
+        "extension.fnv" = {
+          video = "no";
+          volume = 170;
+        };
+        "extension.gif" = {
+          osc = "no";
+          loop-file = true;
+        };
+      };
     };
   };
 }

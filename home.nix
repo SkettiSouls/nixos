@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ inputs, pkgs, ... }:
 
 /* Eldritch Horror
   let
@@ -19,7 +19,7 @@
   home = {
     username = "skettisouls";
     homeDirectory = "/home/skettisouls";
-    packages = with pkgs; [ unstable.scarab ];
+    packages = with pkgs; [ unstable.scarab inputs.neovim.packages.${system}.default ];
   };
 
 
