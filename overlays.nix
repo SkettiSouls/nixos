@@ -15,7 +15,7 @@ let
   };
 
   overlay-hyprland = final: prev: {
-    hyprland-src = inputs.hyprland-flake.packages.${system}.hyprland;
+    hyprland-src = inputs.hyprland.packages.${system}.hyprland;
   };
 
 in
