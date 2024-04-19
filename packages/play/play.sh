@@ -3,6 +3,8 @@
 # Based CLI """Music Player""" (can also be used for videos)
 # Requires mpv and fzf.
 
+# TODO: Shuffle
+
 mode="fuzzy"
 multi_select=""
 loop=""
@@ -50,39 +52,21 @@ done
 shift $((OPTIND -1))
 
 dirs_mode () {
-  if [ -n "$multi_select" ]; then
-    # Create a temporary playlist file.
-    playlist=$(mktemp "$defaultDir"/.temp_playlist_XXXXXX.m3u)
+  # Create a temporary playlist file.
+  playlist=$(mktemp "$defaultDir"/.temp_playlist_XXXXXX.m3u)
 
-    # Select directories and echo all non-playlist files to temp playlist.
-    find $(fzf $multi_select) -type f ! -name "*.$playlist_extension" > "$playlist"
+  # Select directories and echo all non-playlist files to temp playlist.
+  find $(fzf $multi_select) -type f ! -name "*.$playlist_extension" > "$playlist"
 
-    # Ensure playlist is non-empty.
-    if [ -s "$playlist" ]; then
-      mpv "$playlist" $loop
-    else
-      echo "Error: File(s) not found. How did this even happen?"
-      exit 1
-    fi
-
-    rm "$playlist"
+  # Ensure playlist is non-empty.
+  if [ -s "$playlist" ]; then
+    mpv "$playlist" $loop
   else
-    # Create a temporary playlist file.
-    playlist=$(mktemp "$defaultDir"/.temp_playlist_XXXXXX.m3u)
-
-    # Select directory and echo all non-playlist files to temp playlist.
-    find $(fzf) -type f ! -name "*.$playlist_extension" > "$playlist"
-
-    # Ensure playlist is non-empty.
-    if [ -s "$playlist" ]; then
-      mpv "$playlist" $loop
-    else
-      echo "Error: File not found. How did this even happen?"
-      exit 1
-    fi
-
-    rm "$playlist"
+    echo "Error: File(s) not found. How did this even happen?"
+    exit 1
   fi
+
+  rm "$playlist"
 }
 
 multi_select () {
@@ -103,7 +87,7 @@ multi_select () {
     rm "$playlist"
   else
     if [ "$mode" == "fuzzy" ]; then
-      mpv $(fzf) $loop
+      mpv "$(fzf)" $loop
     else
       fzf | while read -r line; do mpv "$line" $loop; done
     fi

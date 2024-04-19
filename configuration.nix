@@ -30,6 +30,16 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
+  systemd.services.NetworkManager-wait-online.enable = false;
+  networking.hosts = {
+    "172.16.2.3" = [
+      "cypress.local"
+      "sesh.cypress.local"
+      "tape.cypress.local"
+      "codex.cypress.local"
+      "pgadmin.cypress.local"
+    ];
+  };
 
   # Set your time zone.
   time.timeZone = "America/Chicago";
