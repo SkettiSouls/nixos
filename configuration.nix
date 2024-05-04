@@ -38,6 +38,7 @@
       "tape.cypress.local"
       "codex.cypress.local"
       "pgadmin.cypress.local"
+      "chat.cypress.local"
     ];
   };
 
@@ -118,9 +119,11 @@
 
     xserver = {
       enable = true;
-      layout = "us";
-      xkbVariant = "";
       displayManager.lightdm.enable = lib.mkForce false;
+      xkb = {
+        layout = "us";
+        variant = "";
+      };
     };
 
   };

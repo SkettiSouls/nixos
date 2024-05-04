@@ -15,7 +15,8 @@ let
   };
 
   overlay-hyprland = final: prev: {
-    hyprland-src = inputs.hyprland-flake.packages.${system}.hyprland;
+    hyprland-git = inputs.hyprland.packages.${system}.hyprland;
+    hyprpicker-git = inputs.hyprpicker.packages.${system}.default;
   };
 
 in

@@ -59,30 +59,30 @@ in
 
       enabledPlugins = [
         ### Required (Always Enabled?) ###
-	"NoTrack"
-	"SupportHelper"
-	### User Plugins ###
-	"AlwaysAnimate"
-	"FriendsSince"
+        "NoTrack"
+        "SupportHelper"
+        ### User Plugins ###
+        "AlwaysAnimate"
+        "FriendsSince"
       ];
 
       plugins = {
-	### Required (Always Enabled?) ###
-	Settings = {
-	  enable = true;
-	  settings = {
-	    settingsLocation = "aboveNitro";
-	  };
-	};
-	WebContextMenus = {
-	  enable = true;
-	  settings = {
-	    addBack = true;
-	  };
-	};
+        ### Required (Always Enabled?) ###
+        Settings = {
+          enable = true;
+          settings = {
+            settingsLocation = "aboveNitro";
+          };
+        };
+        WebContextMenus = {
+          enable = true;
+          settings = {
+            addBack = true;
+          };
+        };
         ### User Plugins ###
-	AlwaysAnimate.enable = true;
-	AlwaysTrust.enable = false;
+        AlwaysAnimate.enable = true;
+        AlwaysTrust.enable = false;
         AnonymiseFileNames.enable = false;
         BANger = {
           enable = false;
@@ -113,7 +113,7 @@ in
             noSpellCheck = false;
           };
         };
-	BetterRoleContext.enable = false;
+        BetterRoleContext.enable = false;
         BetterRoleDot = {
           enable = false;
           settings = {
@@ -202,7 +202,7 @@ in
         FixYoutubeEmbeds.enable = true;
         ForceOwnerCrown.enable = true;
         FriendInvites.enable = true;
-	FriendsSince.enable = true;
+        FriendsSince.enable = true;
         GameActivityToggle = {
           enable = false;
           settings = {
@@ -341,7 +341,7 @@ in
             guild = true;
             everyone = false;
             role = false;
-	    showAllChannels = true;
+            showAllChannels = true;
           };
         };
         MutualGroupDMs.enable = true;
@@ -472,12 +472,12 @@ in
             groups = true;
           };
         };
-	ResurrectHome = {
-	  enable = false;
-	  settings = {
-	    forceServerHome = false;
-	  };
-	};
+        ResurrectHome = {
+          enable = false;
+          settings = {
+            forceServerHome = false;
+          };
+        };
         RevealAllSpoilers.enable = false;
         ReverseImageSearch.enable = true;
         ReviewDB = {

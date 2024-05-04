@@ -19,7 +19,17 @@
   home = {
     username = "skettisouls";
     homeDirectory = "/home/skettisouls";
-    packages = with pkgs; [ unstable.scarab inputs.neovim.packages.${system}.default ];
+    pointerCursor = {
+      name = "phinger-cursors-dark";
+      package = pkgs.phinger-cursors;
+      size = 24;
+      gtk.enable = true;
+    };
+    packages = with pkgs; [
+      unstable.scarab
+      inputs.neovim.packages.${system}.default
+      unstable.heroic
+    ];
   };
 
 
@@ -66,7 +76,7 @@
     fetch = {
       active = with pkgs; [
         neofetch
-	fastfetch
+        fastfetch
       ];
     };
   };
