@@ -20,7 +20,7 @@ in
 
     hardware = {
       bluetooth = {
-        package = pkgs.unstable.bluez;
+        package = pkgs.bluez;
         enable = true;
         powerOnBoot = true;
         #input = { };

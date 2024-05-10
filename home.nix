@@ -26,9 +26,10 @@
       gtk.enable = true;
     };
     packages = with pkgs; [
-      unstable.scarab
+      scarab
       inputs.neovim.packages.${system}.default
-      unstable.heroic
+      heroic
+      minetest
     ];
   };
 

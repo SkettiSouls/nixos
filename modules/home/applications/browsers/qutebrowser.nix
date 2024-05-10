@@ -46,7 +46,8 @@ in
         nou = "https://search.nixos.org/options?channel=unstable&query={}";
         nw = "https://nixos.wiki/index.php?search={}";
         hm = "https://mipmip.github.io/home-manager-option-search/?query={}";
-        yt = "https://yewtu.be/watch?v={}";
+        yt = "https://www.youtube.com/results?search_query={}";
+        yew = "https://yewtu.be/search?q={}";
       };
 
       settings = {
