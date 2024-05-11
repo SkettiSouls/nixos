@@ -8,7 +8,10 @@ let
       inherit system;
       config.allowUnfree = true;
     };
+
+    vesktop-unstable = inputs.vesktop.legacyPackages.${system}.vesktop;
   };
+
 
   overlay-sketti = final: prev: {
     sketti = self.packages.${system};

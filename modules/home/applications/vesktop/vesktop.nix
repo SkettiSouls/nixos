@@ -4,8 +4,6 @@ let
   inherit (lib)
     mkEnableOption
     mkIf
-    mkOption
-    types
     ;
 
   cfg = config.shit.vesktop;
@@ -18,6 +16,7 @@ in
   config = mkIf cfg.enable {
     programs.vesktop = {
       enable = true;
+      package = pkgs.vesktop-unstable;
       state = {
         discordBranch = "stable";
         firstLaunch = false;

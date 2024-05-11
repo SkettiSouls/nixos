@@ -3,16 +3,18 @@
 let
   inherit (lib)
     mapAttrs'
-    mkDefault
     mkEnableOption
     mkIf
     mkMerge
     mkOption
+    mkPackageOption
     nameValuePair
     recursiveUpdate
     types
     ;
   inherit (builtins)
+    isPath
+    isString
     listToAttrs
     ;
 
@@ -22,6 +24,7 @@ in
 {
   options.programs.vesktop = {
     enable = mkEnableOption "Vesktop discord client";
+    package = mkPackageOption pkgs "vesktop" {};
     settings = mkOption {
       description = ''Vencord settings.'';
       default = { };
@@ -134,7 +137,7 @@ in
       example = ''
         programs.vesktop.themes = {
           mytheme.css = "custom css";
-	  mytheme2.css = ./path/to/css;
+          mytheme2.css = ./path/to/css;
           };
         };
       '';
@@ -143,18 +146,16 @@ in
 
   config = mkIf cfg.enable {
     # Temporarily requires an overlay for nixpkgs unstable, as Vesktop v1.5.0 rebranded from vencorddesktop, changing file structures and directory names. Will be removed after the first 2024 release of nixpkgs.
-    home.packages = with pkgs; [
-      unstable.vesktop
-    ];
+    home.packages = [ cfg.package ];
 
     home.file = mkMerge ([
       (mapAttrs'
         (name: themes: nameValuePair
           ".config/vesktop/themes/${name}.css"
           {
-	    text = mkIf (builtins.isString themes.css) themes.css;
-	    source = mkIf (builtins.isPath themes.css) themes.css;
-	  })
+            text = mkIf (isString themes.css) themes.css;
+            source = mkIf (isPath themes.css) themes.css;
+          })
         cfg.themes)
 
       {
