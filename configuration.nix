@@ -9,7 +9,7 @@
     [
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ./modules/system
+      ./modules/nixos
       ./overlays.nix
     ];
 
@@ -125,7 +125,6 @@
         variant = "";
       };
     };
-
   };
 
   security = {
@@ -140,6 +139,7 @@
   hardware = {
     enableRedistributableFirmware = true;
   };
+
   nix = {
     package = pkgs.nix;
     settings.experimental-features = [ "nix-command" "flakes" ];
@@ -148,11 +148,11 @@
   shit = {
     pipewire.enable = true;
     hardware = {
-      cpu.enable = true;
       gpu.enable = true;
       fstab.enable = true;
       bluetooth.enable = true;
     };
+
     applications = {
       steam.enable = true;
     };

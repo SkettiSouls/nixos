@@ -4,8 +4,6 @@ let
   inherit (lib)
     mkEnableOption
     mkIf
-    mkOption
-    types
     ;
 
   cfg = config.shit.hardware.bluetooth;
@@ -16,8 +14,6 @@ in
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [ ];
-
     hardware = {
       bluetooth = {
         package = pkgs.bluez;

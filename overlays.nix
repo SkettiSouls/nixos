@@ -15,6 +15,7 @@ let
 
   overlay-sketti = final: prev: {
     sketti = self.packages.${system};
+    neovim = inputs.neovim.packages.${system}.default;
   };
 
   overlay-hyprland = final: prev: {

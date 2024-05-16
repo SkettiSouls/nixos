@@ -9,44 +9,24 @@
       (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot = {
-
-    initrd = {
-      availableKernelModules = [ "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" ];
-      kernelModules = [ "amdgpu" ];
-    };
-
-    kernelModules = [ "kvm-amd" ];
-    extraModulePackages = [ ];
-
-  };
-
-  /*
-    boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" ];
-    boot.initrd.kernelModules = [ ];
-    boot.kernelModules = [ "kvm-amd" ];
-    boot.extraModulePackages = [ ];
-  */
-
-  hardware = {
-    cpu.amd = {
-      updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
-    };
-  };
+  boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" ];
+  boot.initrd.kernelModules = [ ];
+  boot.kernelModules = [ "kvm-amd" ];
+  boot.extraModulePackages = [ ];
 
   fileSystems."/" =
     {
-      # Nix Store
       device = "/dev/disk/by-uuid/51fce10e-1c6a-4352-bfce-ca6f89b0403c";
       fsType = "ext4";
     };
 
   fileSystems."/boot" =
     {
-      # Boot Partition
       device = "/dev/disk/by-uuid/1C54-88CC";
       fsType = "vfat";
     };
+
+  swapDevices = [ ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
@@ -56,5 +36,5 @@
   # networking.interfaces.enp37s0.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  #hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }

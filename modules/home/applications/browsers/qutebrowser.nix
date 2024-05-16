@@ -3,8 +3,6 @@ let
   inherit (lib)
     mkEnableOption
     mkIf
-    mkOption
-    types
     ;
 
   cfg = config.shit.browsers.qutebrowser;
@@ -44,8 +42,8 @@ in
         npu = "https://search.nixos.org/packages?channel=unstable&query={}";
         no = "https://search.nixos.org/options?channel=23.11&query={}";
         nou = "https://search.nixos.org/options?channel=unstable&query={}";
-        nw = "https://nixos.wiki/index.php?search={}";
-        hm = "https://mipmip.github.io/home-manager-option-search/?query={}";
+        nw = "https://wiki.nixos.org/w/index.php?search={}";
+        hm = "https://home-manager-options.extranix.com/?query={}&release=master";
         yt = "https://www.youtube.com/results?search_query={}";
         yew = "https://yewtu.be/search?q={}";
       };

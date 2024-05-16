@@ -1,11 +1,5 @@
 { inputs, pkgs, ... }:
 
-/* Eldritch Horror
-  let
-  shitConfig = builtins.mapAttrs (_: v: { enable = true; } // v);
-  in
-*/
-
 {
   imports = [
     ./modules/home
@@ -14,8 +8,6 @@
 
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
-  #home.username = "skettisouls";
-  #home.homeDirectory = "/home/skettisouls";
   home = {
     username = "skettisouls";
     homeDirectory = "/home/skettisouls";
@@ -27,9 +19,9 @@
     };
     packages = with pkgs; [
       scarab
-      inputs.neovim.packages.${system}.default
       heroic
       minetest
+      element-desktop
     ];
   };
 
