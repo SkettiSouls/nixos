@@ -113,6 +113,8 @@
   # List services that you want to enable:
 
   services = {
+    flatpak.enable = true;
+
     udisks2 = {
       enable = true;
     };
@@ -143,6 +145,14 @@
   nix = {
     package = pkgs.nix;
     settings.experimental-features = [ "nix-command" "flakes" ];
+  };
+
+  xdg.portal = {
+    enable = true;
+    config.common.default = "*";
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-hyprland
+    ];
   };
 
   shit = {

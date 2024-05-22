@@ -49,7 +49,6 @@
     mpv.enable = true;
     udiskie.enable = true;
     vesktop.enable = true;
-    xdg.portal.enable = true;
 
     audio = {
       bluetooth.enable = true;

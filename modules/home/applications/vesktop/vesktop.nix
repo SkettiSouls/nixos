@@ -62,7 +62,9 @@ in
         "SupportHelper"
         ### User Plugins ###
         "AlwaysAnimate"
+        "AutomodContext"
         "FriendsSince"
+        "ValidReply"
       ];
 
       plugins = {
@@ -399,7 +401,7 @@ in
             epic = false;
           };
         };
-        "Party mode 🎉" = {
+        PartyMode = {
           enable = false;
           settings = { superIntensePartyMode = 0; }; # 0-2
         };
@@ -469,6 +471,13 @@ in
             friendRequestCancels = true;
             servers = true;
             groups = true;
+          };
+        };
+        ReplaceGoogleSearch = {
+          enable = true;
+          settings = {
+            customEngineName = "Brave";
+            customEngineURL = "https://search.brave.com/search?q=";
           };
         };
         ResurrectHome = {
