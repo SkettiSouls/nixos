@@ -18,6 +18,7 @@
       gtk.enable = true;
     };
     packages = with pkgs; [
+      rofi
       scarab
       heroic
       minetest
@@ -43,6 +44,7 @@
     bash.enable = true;
     discord.enable = true;
     git.enable = true;
+    gpg.enable = true;
     hyprland.enable = true;
     kitty.enable = true;
     mangohud.enable = true;

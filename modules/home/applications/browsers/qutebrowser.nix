@@ -21,6 +21,7 @@ in
       keyBindings = {
         insert = {
           "<Escape>" = "mode-leave ;; jseval -q document.activeElement.blur()";
+          "<Ctrl+P>" = "spawn --userscript qute-keepassxc --key 682D163ED56008C1A787BCEA6E9A2F35535BE87F";
         };
         normal = {
           "," = "tab-prev";
@@ -29,15 +30,23 @@ in
           ">" = "forward";
           "<Ctrl+F>" = "hint links spawn mpv {hint-url}";
           "dd" = "tab-close";
+          "uu" = "undo";
+          "pw" = "spawn --userscript qute-keepassxc --key 682D163ED56008C1A787BCEA6E9A2F35535BE87F";
         };
       };
-      extraConfig = "config.unbind('d', mode='normal')";
+      extraConfig = ''
+        config.unbind('d', mode='normal')
+        config.unbind('u', mode='normal')
+        c.content.headers.custom = {"accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"}
+      '';
 
       searchEngines = {
         DEFAULT = "https://search.brave.com/search?q={}";
         aw = "https://wiki.archlinux.org/?search={}";
         g = "https://www.google.com/search?hl=en&q={}";
         gh = "https://github.com/search?q={}&type=repositories";
+        ghu = "https://github.com/search?q={}&type=users";
+        # Test '/packages?query={}' when 24.05 releases to see if it searches latest release.
         np = "https://search.nixos.org/packages?channel=23.11&query={}";
         npu = "https://search.nixos.org/packages?channel=unstable&query={}";
         no = "https://search.nixos.org/options?channel=23.11&query={}";
@@ -51,6 +60,7 @@ in
       settings = {
         "url.auto_search" = "naive";
         "auto_save.session" = true;
+        "downloads.prevent_mixed_content" = true;
         "colors.webpage.darkmode.enabled" = false;
         "colors.webpage.darkmode.algorithm" = "lightness-cielab";
         "colors.webpage.preferred_color_scheme" = "dark";
@@ -58,6 +68,8 @@ in
         "content.autoplay" = false;
         "content.blocking.enabled" = true;
         "content.blocking.method" = "both";
+        "content.headers.user_agent" = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36";
+        "content.headers.accept_language" = "en-US,en;q=0.5";
         "content.blocking.hosts.lists" = [
           "https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts"
         ];
