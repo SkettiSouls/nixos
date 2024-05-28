@@ -54,6 +54,7 @@
                 home-manager.useGlobalPkgs = true;
                 home-manager.useUserPackages = true;
                 home-manager.users.skettisouls = import ./home.nix;
+                home-manager.backupFileExtension = "bak";
                 home-manager.extraSpecialArgs = specialArgs;
               }
             ];

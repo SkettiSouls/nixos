@@ -61,10 +61,6 @@
       default = "qutebrowser";
       brave.enable = true;
       qutebrowser.enable = true;
-      /*firefox = {
-        enable = true;
-        tridactyl = true;
-      };*/
     };
 
     fetch = {

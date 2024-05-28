@@ -2,11 +2,8 @@
   imports = [
     ./applications
     ./audio
-    ./bash.nix
-    ./git.nix
-    ./gpg.nix
+    ./cli
     ./hyprland.nix
-    ./mpv.nix
     ./udiskie.nix
   ];
 }

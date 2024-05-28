@@ -5,6 +5,10 @@ let
     mkIf
     ;
 
+  soundcoreSpaceQ45 = "E8:EE:CC:4B:FA:2A";
+  sennheiserMomentum4 = "80:C3:BA:3F:EB:B9";
+  headphones = sennheiserMomentum4;
+  connectHeadphones = "bluetoothctl power on && bluetoothctl connect ${headphones}";
   cfg = config.shit.hyprland;
 in
 {
@@ -58,7 +62,7 @@ in
           "hyprpaper &"
           "dunst &"
           "polkit &"
-          "bluetoothctl connect E8:EE:CC:4B:FA:2A"
+          connectHeadphones
           "[workspace 10 silent] carla /etc/nixos/shit/carla/system.carxp"
           "[workspace 1 silent] qutebrowser"
           "[workspace 2 silent] vesktop"
@@ -159,7 +163,7 @@ in
           "$mainMod, F, fullscreen"
           "$mainMod, RETURN, exec, $TERM"
           ''$mainMod, ESCAPE, exec, $TERM sh -c "sudo nixos-rebuild switch; hyprctl reload; echo; echo 'Press enter to exit'; read"''
-          "$mainMod, B, exec, bluetoothctl power on && bluetoothctl connect E8:EE:CC:4B:FA:2A"
+          "$mainMod, B, exec, ${connectHeadphones}"
           "$mainMod ALT, B, exec, bluetoothctl disconnect"
           "$mainMod, C, exec, $TERM -e nvim /etc/nixos/modules/home/hyprland.nix"
 
