@@ -10,7 +10,7 @@ let
 in
 {
   options.shit.hardware.gpu = {
-    enable = mkEnableOption "AMDGPU Configuration";
+    enable = mkEnableOption "AMDGPU";
   };
 
   config = mkIf cfg.enable {

@@ -10,7 +10,7 @@ let
 in
 {
   options.shit.audio.bluetooth = {
-    enable = mkEnableOption "User bluetooth config.";
+    enable = mkEnableOption "BlueTooth user configuration";
   };
 
   config = mkIf cfg.enable {

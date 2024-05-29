@@ -10,7 +10,7 @@ let
 in
 {
   options.shit.hardware.fstab = {
-    enable = mkEnableOption "Drive Mounting Configuration";
+    enable = mkEnableOption "fstab";
   };
 
   config = mkIf cfg.enable {

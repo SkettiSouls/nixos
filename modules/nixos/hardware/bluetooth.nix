@@ -10,14 +10,14 @@ let
 in
 {
   options.shit.hardware.bluetooth = {
-    enable = mkEnableOption "desc";
+    enable = mkEnableOption "BlueTooth";
   };
 
   config = mkIf cfg.enable {
     hardware = {
       bluetooth = {
-        package = pkgs.bluez;
         enable = true;
+        package = pkgs.bluez;
         powerOnBoot = true;
         #input = { };
         #settings = { };

@@ -1,30 +1,24 @@
-/* Archived nix code for mangohud config, as I don't know how to set the order in which options are generated in MangoHud.conf */
-{ config, lib, pkgs, ... }:
+{ config, lib, ... }:
 
 let
   inherit (lib)
     mkEnableOption
     mkIf
-    mkOption
-    types
     ;
 
   cfg = config.shit.mangohud;
 in
 {
   options.shit.mangohud = {
-    enable = mkEnableOption "MangoHud User Configuration";
+    enable = mkEnableOption "MangoHud user configuration";
   };
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [
-      mangohud
-    ];
-
     programs.mangohud = {
       enable = true;
     };
 
+    # Unsure how to set the order in which options are generated in MangoHud.conf using 'programs.mangohud'.
     home.file.".config/MangoHud/MangoHud.conf".text = ''
        /* PERFORMANCE */
        fps_limit=0

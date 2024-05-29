@@ -34,9 +34,7 @@ in
         autoUpdateNotification = true;
         useQuickCss = false;
         themeLinks = [ ];
-        enabledThemes = [
-          "midnight.css"
-        ];
+        enabledThemes = [ "midnight.css" ];
         enableReactDevtools = false;
         frameless = false;
         transparent = false;
@@ -46,7 +44,6 @@ in
         authenticated = true;
         url = "https://api.vencord.dev";
         settingsSync = false;
-        settingsSyncVersion = 1710600232824;
       };
 
       notifications = {
@@ -57,7 +54,7 @@ in
       };
 
       enabledPlugins = [
-        ### Required (Always Enabled?) ###
+        ### Required (Always Enabled) ###
         "NoTrack"
         "SupportHelper"
         ### User Plugins ###
@@ -68,19 +65,17 @@ in
       ];
 
       plugins = {
-        ### Required (Always Enabled?) ###
+        ### Required (Always Enabled) ###
         Settings = {
           enable = true;
-          settings = {
-            settingsLocation = "aboveNitro";
-          };
+          settings = { settingsLocation = "aboveNitro"; };
         };
+
         WebContextMenus = {
           enable = true;
-          settings = {
-            addBack = true;
-          };
+          settings = { addBack = true; };
         };
+
         ### User Plugins ###
         AlwaysAnimate.enable = true;
         AlwaysTrust.enable = false;

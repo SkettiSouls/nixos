@@ -60,7 +60,6 @@ in
             "x-scheme-handler/discord" = ["Vesktop.desktop"];
           };
         }
-
         {
           defaultApplications = mkIf isQutebrowser {
             "browser/internal" = qutebrowser;
@@ -77,7 +76,6 @@ in
             "application/xhtml+xml" = qutebrowser;
           };
         }
-
         {
           defaultApplications = mkIf isBrave {
             "browser/internal" = brave;

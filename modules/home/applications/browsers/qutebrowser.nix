@@ -1,4 +1,5 @@
 { config, lib, pkgs, ... }:
+
 let
   inherit (lib)
     mkEnableOption
@@ -9,7 +10,7 @@ let
 in
 {
   options.shit.browsers.qutebrowser = {
-    enable = mkEnableOption "qutebrowser";
+    enable = mkEnableOption "QuteBrowser user configuration";
   };
 
   config = mkIf cfg.enable {
@@ -19,10 +20,6 @@ in
       loadAutoconfig = true;
 
       keyBindings = {
-        insert = {
-          "<Escape>" = "mode-leave ;; jseval -q document.activeElement.blur()";
-          "<Ctrl+P>" = "spawn --userscript qute-keepassxc --key 682D163ED56008C1A787BCEA6E9A2F35535BE87F";
-        };
         normal = {
           "," = "tab-prev";
           "." = "tab-next";
@@ -33,7 +30,13 @@ in
           "uu" = "undo";
           "pw" = "spawn --userscript qute-keepassxc --key 682D163ED56008C1A787BCEA6E9A2F35535BE87F";
         };
+
+        insert = {
+          "<Escape>" = "mode-leave ;; jseval -q document.activeElement.blur()";
+          "<Ctrl+P>" = "spawn --userscript qute-keepassxc --key 682D163ED56008C1A787BCEA6E9A2F35535BE87F";
+        };
       };
+
       extraConfig = ''
         config.unbind('d', mode='normal')
         config.unbind('u', mode='normal')
@@ -42,8 +45,8 @@ in
 
       searchEngines = {
         DEFAULT = "https://search.brave.com/search?q={}";
-        aw = "https://wiki.archlinux.org/?search={}";
         g = "https://www.google.com/search?hl=en&q={}";
+        aw = "https://wiki.archlinux.org/?search={}";
         gh = "https://github.com/search?q={}&type=repositories";
         ghu = "https://github.com/search?q={}&type=users";
         # Test '/packages?query={}' when 24.05 releases to see if it searches latest release.
@@ -70,9 +73,9 @@ in
         "content.blocking.method" = "both";
         "content.headers.user_agent" = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36";
         "content.headers.accept_language" = "en-US,en;q=0.5";
-        "content.blocking.hosts.lists" = [
-          "https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts"
-        ];
+
+        "content.blocking.hosts.lists" = [ "https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts" ];
+
         "content.blocking.adblock.lists" = [
           "https://github.com/uBlockOrigin/uAssets/raw/master/filters/legacy.txt"
           "https://github.com/uBlockOrigin/uAssets/raw/master/filters/filters.txt"
@@ -91,7 +94,6 @@ in
           "https://github.com/uBlockOrigin/uAssets/raw/master/filters/resource-abuse.txt"
           "https://github.com/uBlockOrigin/uAssets/raw/master/filters/unbreak.txt"
         ];
-
       };
 
       greasemonkey = [
@@ -109,6 +111,7 @@ in
           document.location.href=document.location.href.replace("youtube.com","yewtu.be");
         '')
         */
+
         (pkgs.writeText "yt-forward.js" ''
           // ==UserScript==
           // u/name 	  Fast Forward YouTube Ads

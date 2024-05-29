@@ -1,31 +1,27 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, ... }:
 
 let
   inherit (lib)
     mkEnableOption
     mkIf
-    mkOption
-    types
     ;
 
   cfg = config.shit.kitty;
 in
 {
   options.shit.kitty = {
-    enable = mkEnableOption "Kitty configuration";
+    enable = mkEnableOption "Kitty user configuration";
   };
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [
-      kitty
-    ];
-
     programs.kitty = {
       enable = true;
+      font.name = "DejaVu Sans Mono";
+
       shellIntegration = {
         enableBashIntegration = true;
       };
-      font.name = "DejaVu Sans Mono";
+
       settings = {
         scrollback_lines = 10000;
         background_opacity = "0.8";

@@ -4,15 +4,13 @@ let
   inherit (lib)
     mkEnableOption
     mkIf
-    mkOption
-    types
     ;
 
   cfg = config.shit.audio.carla;
 in
 {
   options.shit.audio.carla = {
-    enable = mkEnableOption "Carla User Configuration";
+    enable = mkEnableOption "Carla user configuration";
   };
 
   config = mkIf cfg.enable {

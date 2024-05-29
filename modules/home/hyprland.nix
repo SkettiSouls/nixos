@@ -1,4 +1,5 @@
 { config, lib, pkgs, ... }:
+
 let
   inherit (lib)
     mkEnableOption
@@ -13,7 +14,7 @@ let
 in
 {
   options.shit.hyprland = {
-    enable = mkEnableOption "Hyprland user config";
+    enable = mkEnableOption "Hyprland user configuration";
   };
 
   config = mkIf cfg.enable {

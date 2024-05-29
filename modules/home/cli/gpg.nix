@@ -11,7 +11,7 @@ let
 in
 {
   options.shit.gpg = {
-    enable = mkEnableOption "GPG configurations";
+    enable = mkEnableOption "GPG";
   };
 
   config = mkIf cfg.enable {

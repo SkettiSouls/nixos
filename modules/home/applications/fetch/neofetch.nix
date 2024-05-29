@@ -1,9 +1,8 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, ... }:
+
 let
   inherit (lib)
     mkEnableOption
-    mkOption
-    types
     mkIf
     ;
 
@@ -11,7 +10,7 @@ let
 in
 {
   options.kalyx.neofetch = {
-    enable = mkEnableOption "Neofetch";
+    enable = mkEnableOption "neofetch";
   };
 
   config = mkIf cfg.enable {
