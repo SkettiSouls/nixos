@@ -8,10 +8,11 @@ let
     types
     ;
 
+  cfg = config.shit.browsers;
+
   qutebrowser = ["org.qutebrowser.qutebrowser.desktop"];
   brave = ["brave-browser.desktop"];
 
-  cfg = config.shit.browsers;
   isDefaultSet = cfg.default != "";
   isQutebrowser = isDefaultSet && cfg.default == "qutebrowser";
   isBrave = isDefaultSet && cfg.default == "brave";

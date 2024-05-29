@@ -14,12 +14,15 @@ in
   };
 
   config = mkIf cfg.enable {
+    services.mpris-proxy.enable = true;
+
     home.file = {
       # Fever dream, not sure if I should remove it.
       ".config/wireplumber/policy.lua.d/11-bluetooth-policy.lua".text = ''
         -- Disable bluetooth codec switching
         bluetooth_policy.policy["media-role.use-headset-profile"] = false
       '';
+
       # SHOULD disable PipeWire's HSP/HFP profile.
       ".config/wireplumber/wireplumber.conf.d/50-bluez.conf".text = ''
         monitor.bluez.rules = [

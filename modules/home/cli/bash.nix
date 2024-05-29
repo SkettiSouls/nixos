@@ -6,11 +6,8 @@ let
     mkIf
     ;
 
-  soundcoreSpaceQ45 = "E8:EE:CC:4B:FA:2A";
-  sennheiserMomentum4 = "80:C3:BA:3F:EB:B9";
-  headphones = sennheiserMomentum4;
-  connectHeadphones = "bluetoothctl power on && bluetoothctl connect ${headphones}";
   cfg = config.shit.bash;
+  connectHeadphones = config.peripherals.bluetooth.connectHeadphones;
 in
 {
   options.shit.bash = {
