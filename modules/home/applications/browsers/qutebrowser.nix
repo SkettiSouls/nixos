@@ -1,17 +1,16 @@
 { config, lib, pkgs, ... }:
+
 let
   inherit (lib)
     mkEnableOption
     mkIf
-    mkOption
-    types
     ;
 
   cfg = config.shit.browsers.qutebrowser;
 in
 {
   options.shit.browsers.qutebrowser = {
-    enable = mkEnableOption "qutebrowser";
+    enable = mkEnableOption "QuteBrowser user configuration";
   };
 
   config = mkIf cfg.enable {
@@ -21,9 +20,6 @@ in
       loadAutoconfig = true;
 
       keyBindings = {
-        insert = {
-          "<Escape>" = "mode-leave ;; jseval -q document.activeElement.blur()";
-        };
         normal = {
           "," = "tab-prev";
           "." = "tab-next";
@@ -31,27 +27,43 @@ in
           ">" = "forward";
           "<Ctrl+F>" = "hint links spawn mpv {hint-url}";
           "dd" = "tab-close";
+          "uu" = "undo";
+          "pw" = "spawn --userscript qute-keepassxc --key 682D163ED56008C1A787BCEA6E9A2F35535BE87F";
+        };
+
+        insert = {
+          "<Escape>" = "mode-leave ;; jseval -q document.activeElement.blur()";
+          "<Ctrl+P>" = "spawn --userscript qute-keepassxc --key 682D163ED56008C1A787BCEA6E9A2F35535BE87F";
         };
       };
-      extraConfig = "config.unbind('d', mode='normal')";
+
+      extraConfig = ''
+        config.unbind('d', mode='normal')
+        config.unbind('u', mode='normal')
+        c.content.headers.custom = {"accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"}
+      '';
 
       searchEngines = {
         DEFAULT = "https://search.brave.com/search?q={}";
-        aw = "https://wiki.archlinux.org/?search={}";
         g = "https://www.google.com/search?hl=en&q={}";
+        aw = "https://wiki.archlinux.org/?search={}";
         gh = "https://github.com/search?q={}&type=repositories";
+        ghu = "https://github.com/search?q={}&type=users";
+        # Test '/packages?query={}' when 24.05 releases to see if it searches latest release.
         np = "https://search.nixos.org/packages?channel=23.11&query={}";
         npu = "https://search.nixos.org/packages?channel=unstable&query={}";
         no = "https://search.nixos.org/options?channel=23.11&query={}";
         nou = "https://search.nixos.org/options?channel=unstable&query={}";
-        nw = "https://nixos.wiki/index.php?search={}";
-        hm = "https://mipmip.github.io/home-manager-option-search/?query={}";
-        yt = "https://yewtu.be/search?q={}";
+        nw = "https://wiki.nixos.org/w/index.php?search={}";
+        hm = "https://home-manager-options.extranix.com/?query={}&release=master";
+        yt = "https://www.youtube.com/results?search_query={}";
+        yew = "https://yewtu.be/search?q={}";
       };
 
       settings = {
         "url.auto_search" = "naive";
         "auto_save.session" = true;
+        "downloads.prevent_mixed_content" = true;
         "colors.webpage.darkmode.enabled" = false;
         "colors.webpage.darkmode.algorithm" = "lightness-cielab";
         "colors.webpage.preferred_color_scheme" = "dark";
@@ -59,28 +71,29 @@ in
         "content.autoplay" = false;
         "content.blocking.enabled" = true;
         "content.blocking.method" = "both";
-        "content.blocking.hosts.lists" = [
-          https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
-        ];
-        "content.blocking.adblock.lists" = [
-          https://github.com/uBlockOrigin/uAssets/raw/master/filters/legacy.txt
-          https://github.com/uBlockOrigin/uAssets/raw/master/filters/filters.txt
-          https://github.com/uBlockOrigin/uAssets/raw/master/filters/filters-2020.txt
-          https://github.com/uBlockOrigin/uAssets/raw/master/filters/filters-2021.txt
-          https://github.com/uBlockOrigin/uAssets/raw/master/filters/filters-2022.txt
-          https://github.com/uBlockOrigin/uAssets/raw/master/filters/filters-2023.txt
-          https://github.com/uBlockOrigin/uAssets/raw/master/filters/badware.txt
-          https://github.com/uBlockOrigin/uAssets/raw/master/filters/privacy.txt
-          https://github.com/uBlockOrigin/uAssets/raw/master/filters/badlists.txt
-          https://github.com/uBlockOrigin/uAssets/raw/master/filters/annoyances.txt
-          https://github.com/uBlockOrigin/uAssets/raw/master/filters/annoyances-cookies.txt
-          https://github.com/uBlockOrigin/uAssets/raw/master/filters/annoyances-others.txt
-          https://github.com/uBlockOrigin/uAssets/raw/master/filters/badlists.txt
-          https://github.com/uBlockOrigin/uAssets/raw/master/filters/quick-fixes.txt
-          https://github.com/uBlockOrigin/uAssets/raw/master/filters/resource-abuse.txt
-          https://github.com/uBlockOrigin/uAssets/raw/master/filters/unbreak.txt
-        ];
+        "content.headers.user_agent" = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36";
+        "content.headers.accept_language" = "en-US,en;q=0.5";
 
+        "content.blocking.hosts.lists" = [ "https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts" ];
+
+        "content.blocking.adblock.lists" = [
+          "https://github.com/uBlockOrigin/uAssets/raw/master/filters/legacy.txt"
+          "https://github.com/uBlockOrigin/uAssets/raw/master/filters/filters.txt"
+          "https://github.com/uBlockOrigin/uAssets/raw/master/filters/filters-2020.txt"
+          "https://github.com/uBlockOrigin/uAssets/raw/master/filters/filters-2021.txt"
+          "https://github.com/uBlockOrigin/uAssets/raw/master/filters/filters-2022.txt"
+          "https://github.com/uBlockOrigin/uAssets/raw/master/filters/filters-2023.txt"
+          "https://github.com/uBlockOrigin/uAssets/raw/master/filters/badware.txt"
+          "https://github.com/uBlockOrigin/uAssets/raw/master/filters/privacy.txt"
+          "https://github.com/uBlockOrigin/uAssets/raw/master/filters/badlists.txt"
+          "https://github.com/uBlockOrigin/uAssets/raw/master/filters/annoyances.txt"
+          "https://github.com/uBlockOrigin/uAssets/raw/master/filters/annoyances-cookies.txt"
+          "https://github.com/uBlockOrigin/uAssets/raw/master/filters/annoyances-others.txt"
+          "https://github.com/uBlockOrigin/uAssets/raw/master/filters/badlists.txt"
+          "https://github.com/uBlockOrigin/uAssets/raw/master/filters/quick-fixes.txt"
+          "https://github.com/uBlockOrigin/uAssets/raw/master/filters/resource-abuse.txt"
+          "https://github.com/uBlockOrigin/uAssets/raw/master/filters/unbreak.txt"
+        ];
       };
 
       greasemonkey = [
@@ -98,6 +111,7 @@ in
           document.location.href=document.location.href.replace("youtube.com","yewtu.be");
         '')
         */
+
         (pkgs.writeText "yt-forward.js" ''
           // ==UserScript==
           // u/name 	  Fast Forward YouTube Ads

@@ -8,14 +8,19 @@ let
       inherit system;
       config.allowUnfree = true;
     };
+
+    vesktop-unstable = inputs.vesktop.legacyPackages.${system}.vesktop;
   };
+
 
   overlay-sketti = final: prev: {
     sketti = self.packages.${system};
+    neovim = inputs.neovim.packages.${system}.default;
   };
 
   overlay-hyprland = final: prev: {
-    hyprland-src = inputs.hyprland-flake.packages.${system}.hyprland;
+    hyprland-git = inputs.hyprland.packages.${system}.hyprland;
+    hyprpicker-git = inputs.hyprpicker.packages.${system}.default;
   };
 
 in

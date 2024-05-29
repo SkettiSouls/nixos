@@ -4,8 +4,6 @@ let
   inherit (lib)
     mkEnableOption
     mkIf
-    mkOption
-    types
     ;
 
   cfg = config.shit.vesktop;
@@ -18,6 +16,7 @@ in
   config = mkIf cfg.enable {
     programs.vesktop = {
       enable = true;
+      package = pkgs.vesktop-unstable;
       state = {
         discordBranch = "stable";
         firstLaunch = false;
@@ -35,9 +34,7 @@ in
         autoUpdateNotification = true;
         useQuickCss = false;
         themeLinks = [ ];
-        enabledThemes = [
-          "midnight.css"
-        ];
+        enabledThemes = [ "midnight.css" ];
         enableReactDevtools = false;
         frameless = false;
         transparent = false;
@@ -47,7 +44,6 @@ in
         authenticated = true;
         url = "https://api.vencord.dev";
         settingsSync = false;
-        settingsSyncVersion = 1710600232824;
       };
 
       notifications = {
@@ -58,31 +54,31 @@ in
       };
 
       enabledPlugins = [
-        ### Required (Always Enabled?) ###
-	"NoTrack"
-	"SupportHelper"
-	### User Plugins ###
-	"AlwaysAnimate"
-	"FriendsSince"
+        ### Required (Always Enabled) ###
+        "NoTrack"
+        "SupportHelper"
+        ### User Plugins ###
+        "AlwaysAnimate"
+        "AutomodContext"
+        "FriendsSince"
+        "ValidReply"
       ];
 
       plugins = {
-	### Required (Always Enabled?) ###
-	Settings = {
-	  enable = true;
-	  settings = {
-	    settingsLocation = "aboveNitro";
-	  };
-	};
-	WebContextMenus = {
-	  enable = true;
-	  settings = {
-	    addBack = true;
-	  };
-	};
+        ### Required (Always Enabled) ###
+        Settings = {
+          enable = true;
+          settings = { settingsLocation = "aboveNitro"; };
+        };
+
+        WebContextMenus = {
+          enable = true;
+          settings = { addBack = true; };
+        };
+
         ### User Plugins ###
-	AlwaysAnimate.enable = true;
-	AlwaysTrust.enable = false;
+        AlwaysAnimate.enable = true;
+        AlwaysTrust.enable = false;
         AnonymiseFileNames.enable = false;
         BANger = {
           enable = false;
@@ -113,7 +109,7 @@ in
             noSpellCheck = false;
           };
         };
-	BetterRoleContext.enable = false;
+        BetterRoleContext.enable = false;
         BetterRoleDot = {
           enable = false;
           settings = {
@@ -202,7 +198,7 @@ in
         FixYoutubeEmbeds.enable = true;
         ForceOwnerCrown.enable = true;
         FriendInvites.enable = true;
-	FriendsSince.enable = true;
+        FriendsSince.enable = true;
         GameActivityToggle = {
           enable = false;
           settings = {
@@ -341,7 +337,7 @@ in
             guild = true;
             everyone = false;
             role = false;
-	    showAllChannels = true;
+            showAllChannels = true;
           };
         };
         MutualGroupDMs.enable = true;
@@ -400,7 +396,7 @@ in
             epic = false;
           };
         };
-        "Party mode 🎉" = {
+        PartyMode = {
           enable = false;
           settings = { superIntensePartyMode = 0; }; # 0-2
         };
@@ -472,12 +468,19 @@ in
             groups = true;
           };
         };
-	ResurrectHome = {
-	  enable = false;
-	  settings = {
-	    forceServerHome = false;
-	  };
-	};
+        ReplaceGoogleSearch = {
+          enable = true;
+          settings = {
+            customEngineName = "Brave";
+            customEngineURL = "https://search.brave.com/search?q=";
+          };
+        };
+        ResurrectHome = {
+          enable = false;
+          settings = {
+            forceServerHome = false;
+          };
+        };
         RevealAllSpoilers.enable = false;
         ReverseImageSearch.enable = true;
         ReviewDB = {

@@ -1,4 +1,5 @@
 { config, lib, pkgs, ... }:
+
 let
   inherit (lib)
     mkEnableOption
@@ -14,12 +15,13 @@ in
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
-      mpv
-      yt-dlp
       sketti.play
+      yt-dlp
     ];
+
     programs.mpv = {
       enable = true;
+
       profiles = {
         "extension.mp3" = {
           video = "no";
@@ -39,6 +41,10 @@ in
           loop-file = true;
         };
       };
+
+      scripts = with pkgs.mpvScripts; [
+        mpris
+      ];
     };
   };
 }

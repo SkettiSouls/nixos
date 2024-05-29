@@ -1,4 +1,5 @@
 { config, lib, ... }:
+
 let
   inherit (lib)
     mkEnableOption
@@ -6,6 +7,7 @@ let
     ;
 
   cfg = config.shit.bash;
+  connectHeadphones = config.peripherals.bluetooth.connectHeadphones;
 in
 {
   options.shit.bash = {
@@ -18,7 +20,7 @@ in
       enableCompletion = true;
       enableVteIntegration = true;
       historyControl = [ "ignoredups" ];
-      profileExtra = "bluetoothctl power on && bluetoothctl connect E8:EE:CC:4B:FA:2A\n";
+      profileExtra = connectHeadphones;
       shellAliases = {
         ":q" = " exit";
         cp = "rsync";

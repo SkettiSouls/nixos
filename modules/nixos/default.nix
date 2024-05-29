@@ -1,7 +1,7 @@
 {
   imports = [
-    ./hardware
     ./applications
     ./audio
+    ./hardware
   ];
 }

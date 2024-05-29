@@ -9,7 +9,7 @@
     [
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ./modules/system
+      ./modules/nixos
       ./overlays.nix
     ];
 
@@ -30,6 +30,17 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
+  systemd.services.NetworkManager-wait-online.enable = false;
+  networking.hosts = {
+    "172.16.2.3" = [
+      "cypress.local"
+      "sesh.cypress.local"
+      "tape.cypress.local"
+      "codex.cypress.local"
+      "pgadmin.cypress.local"
+      "chat.cypress.local"
+    ];
+  };
 
   # Set your time zone.
   time.timeZone = "America/Chicago";
@@ -102,17 +113,20 @@
   # List services that you want to enable:
 
   services = {
+    flatpak.enable = true;
+
     udisks2 = {
       enable = true;
     };
 
     xserver = {
       enable = true;
-      layout = "us";
-      xkbVariant = "";
       displayManager.lightdm.enable = lib.mkForce false;
+      xkb = {
+        layout = "us";
+        variant = "";
+      };
     };
-
   };
 
   security = {
@@ -127,19 +141,28 @@
   hardware = {
     enableRedistributableFirmware = true;
   };
+
   nix = {
     package = pkgs.nix;
     settings.experimental-features = [ "nix-command" "flakes" ];
   };
 
+  xdg.portal = {
+    enable = true;
+    config.common.default = "*";
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-hyprland
+    ];
+  };
+
   shit = {
     pipewire.enable = true;
     hardware = {
-      cpu.enable = true;
       gpu.enable = true;
       fstab.enable = true;
       bluetooth.enable = true;
     };
+
     applications = {
       steam.enable = true;
     };

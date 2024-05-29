@@ -4,24 +4,20 @@ let
   inherit (lib)
     mkEnableOption
     mkIf
-    mkOption
-    types
     ;
 
   cfg = config.shit.hardware.bluetooth;
 in
 {
   options.shit.hardware.bluetooth = {
-    enable = mkEnableOption "desc";
+    enable = mkEnableOption "BlueTooth";
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [ ];
-
     hardware = {
       bluetooth = {
-        package = pkgs.unstable.bluez;
         enable = true;
+        package = pkgs.bluez;
         powerOnBoot = true;
         #input = { };
         #settings = { };

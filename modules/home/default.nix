@@ -2,11 +2,9 @@
   imports = [
     ./applications
     ./audio
-    ./temp
-    ./bash.nix
-    ./git.nix
+    ./cli
     ./hyprland.nix
-    ./mpv.nix
+    ./peripherals.nix
     ./udiskie.nix
   ];
 }

@@ -1,51 +1,79 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
+    # nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
-    home-manager.url = "github:nix-community/home-manager/release-23.11";
-    hm-unstable.url = "github:nix-community/home-manager/master";
-    hyprland-flake.url = "github:hyprwm/Hyprland";
+    vesktop.url = "github:NixOS/nixpkgs/nixos-unstable";
+    # home-manager.url = "github:nix-community/home-manager/release-23.11";
+    home-manager.url = "github:nix-community/home-manager/master";
     neovim.url = "github:skettisouls/neovim";
+    flake-parts.url = "github:hercules-ci/flake-parts";
+    lynx.url = "github:the-computer-club/lynx";
+    asluni.url = "github:the-computer-club/automous-zones";
+    hyprland.url = "github:hyprwm/hyprland/v0.40.0";
+    hyprpicker.url = "github:hyprwm/hyprpicker";
   };
 
-  outputs = inputs:
-    with inputs;
-    let
-      system = "x86_64-linux";
+  outputs = inputs @ { self, nixpkgs, home-manager, flake-parts, lynx, asluni, ... }:
+    flake-parts.lib.mkFlake { inherit inputs; }
+    {
+      imports = [
+        lynx.flakeModules.flake-guard
+        asluni.flakeModules.asluni
+      ];
 
-      pkgs = import nixpkgs {
-        inherit system;
-        config.allowUnfree = true;
+      wireguard.enable = true;
+      wireguard.networks.asluni.peers.by-name.goatware = {
+        privateKeyFile = "/var/lib/wireguard/privatekey";
       };
 
-      specialArgs = { inherit inputs self; };
-      moduleArgs = specialArgs // { nixpkgs = pkgs; };
-    in
-    {
-      inherit (import ./packages moduleArgs) packages;
-      nixosConfigurations = {
-        goatware = nixpkgs.lib.nixosSystem {
-          inherit specialArgs;
-          modules = [
-            ./configuration.nix
-            home-manager.nixosModules.home-manager
+      systems = [
+        "x86_64-linux"
+      ];
 
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.skettisouls = import ./home.nix;
-              home-manager.extraSpecialArgs = specialArgs;
-            }
-          ];
+      flake = {
+        nixosConfigurations = {
+          goatware = nixpkgs.lib.nixosSystem rec {
+            specialArgs = { inherit inputs self; };
+            modules = [
+              ./configuration.nix
+              home-manager.nixosModules.home-manager
+              {
+                imports = [self.nixosModules.flake-guard-host];
+                networking.wireguard = {
+                  networks.asluni.autoConfig = {
+                    interface = true;
+                    peers = true;
+                  };
+
+                  interfaces.asluni.generatePrivateKeyFile = true;
+                };
+              }
+
+              {
+                home-manager.useGlobalPkgs = true;
+                home-manager.useUserPackages = true;
+                home-manager.users.skettisouls = import ./home.nix;
+                home-manager.backupFileExtension = "bak";
+                home-manager.extraSpecialArgs = specialArgs;
+              }
+            ];
+          };
+        };
+
+        homeConfigurations = {
+          "skettisouls@goatware" = home-manager.lib.homeManagerConfiguration {
+            pkgs = nixpkgs.legacyPackages.x86_64-linux;
+            modules = [
+              ./home.nix
+            ];
+          };
         };
       };
 
-      homeConfigurations = {
-        "skettisouls@goatware" = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.x86_64-linux;
-          modules = [
-            ./home.nix
-          ];
+      perSystem = { config, lib, pkgs, ... }: {
+        packages = {
+          play = pkgs.callPackage ./packages/play { };
         };
       };
     };

@@ -8,9 +8,8 @@ let
     types
     ;
 
-  makeConfig = lib.generators.toINI { };
-
   cfg = config.programs.carla;
+  makeConfig = lib.generators.toINI { };
 in
 {
   options.programs.carla = {

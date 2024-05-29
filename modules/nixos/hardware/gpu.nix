@@ -4,15 +4,13 @@ let
   inherit (lib)
     mkEnableOption
     mkIf
-    mkOption
-    types
     ;
 
   cfg = config.shit.hardware.gpu;
 in
 {
   options.shit.hardware.gpu = {
-    enable = mkEnableOption "AMDGPU Configuration";
+    enable = mkEnableOption "AMDGPU";
   };
 
   config = mkIf cfg.enable {
@@ -21,11 +19,7 @@ in
       libva
     ];
 
-    boot = {
-      initrd.kernelModules = [
-        "amdgpu"
-      ];
-    };
+    boot.initrd.kernelModules = [ "amdgpu" ];
 
     hardware = {
       opengl = {

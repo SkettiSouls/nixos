@@ -1,39 +1,37 @@
-{ inputs, config, lib, pkgs, ... }:
+{ config, lib, pkgs, ... }:
+
 let
   inherit (lib)
     mkEnableOption
     mkIf
-    specialArgs
     ;
 
   cfg = config.shit.hyprland;
+
+  bluetooth = config.peripherals.bluetooth;
+  headphones = bluetooth.headphones;
+  connectHeadphones = bluetooth.connectHeadphones;
 in
 {
   options.shit.hyprland = {
-    enable = mkEnableOption "Hyprland user config";
+    enable = mkEnableOption "Hyprland user configuration";
   };
-
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
       grim
       slurp
+      hyprpicker-git
       (grimblast.override {
-        # Change hyprpicker dependency version to v0.1.1 to prevent core dumps.
-        hyprpicker = pkgs.hyprpicker.overrideAttrs (oldAttrs: {
-          version = "0.1.1";
-
-          src = oldAttrs.src.overrideAttrs {
-            outputHash = "sha256-k+rG5AZjz47Q6bpVcTK7r4s7Avg3O+1iw+skK+cn0rk";
-          };
-        });
+        # Change hyprpicker dependency version to flake to prevent core dumps.
+        hyprpicker = pkgs.hyprpicker-git;
       })
       wl-clipboard
       hyprpaper
       dunst
     ];
 
-    shit.xdg.portal = {
+    xdg.portal = {
       enable = true;
       extraPortals = with pkgs; [
         xdg-desktop-portal-hyprland
@@ -42,18 +40,20 @@ in
       config.common.default = "*";
     };
 
-    home.file.".config/hypr/hyprpaper.conf".text = ''
-      preload = ${config.home.homeDirectory}/Pictures/wallpapers/oswp.png
-      preload = ${config.home.homeDirectory}/Pictures/wallpapers/suncat.jpg
-      # wallpaper = HDMI-A-1,contain:${config.home.homeDirectory}/Pictures/wallpapers/oswp.jpg
-      wallpaper = HDMI-A-1,contain:${config.home.homeDirectory}/Pictures/wallpapers/suncat.jpg
-      splash = false
-    '';
+    home.file = {
+      # Configure wallpaper.
+      ".config/hypr/hyprpaper.conf".text = ''
+          preload = ${config.home.homeDirectory}/Pictures/wallpapers/oswp.png
+          preload = ${config.home.homeDirectory}/Pictures/wallpapers/suncat.jpg
+          # wallpaper = HDMI-A-1,contain:${config.home.homeDirectory}/Pictures/wallpapers/oswp.jpg
+          wallpaper = HDMI-A-1,contain:${config.home.homeDirectory}/Pictures/wallpapers/suncat.jpg
+          splash = false
+      '';
+    };
 
     wayland.windowManager.hyprland = {
       enable = true;
-      #package = pkgs.hyprland-src;
-      #package = pkgs.unstable.hyprland;
+      package = pkgs.hyprland-git;
       xwayland.enable = true;
       settings = {
         # Monitor layouts, see https://wiki.hyprland.org/Configuring/Monitors/
@@ -63,14 +63,17 @@ in
           "hyprpaper &"
           "dunst &"
           "polkit &"
-          "bluetoothctl connect E8:EE:CC:4B:FA:2A"
-          "[workspace 10 silent] carla /etc/nixos/shit/carla/system.carxp"
+          connectHeadphones
+          "[workspace 10 silent] carla /etc/nixos/shit/carla/system-${headphones}.carxp"
           "[workspace 1 silent] qutebrowser"
           "[workspace 2 silent] vesktop"
           "[workspace 3 silent] steam"
         ];
 
-        "env" = "XCURSOR_SIZE,24";
+        "env" = [
+          "XCURSOR_THEME,phinger-cursors-dark"
+          "XCURSOR_SIZE,24"
+        ];
 
         input = {
           kb_layout = "us";
@@ -161,7 +164,7 @@ in
           "$mainMod, F, fullscreen"
           "$mainMod, RETURN, exec, $TERM"
           ''$mainMod, ESCAPE, exec, $TERM sh -c "sudo nixos-rebuild switch; hyprctl reload; echo; echo 'Press enter to exit'; read"''
-          "$mainMod, B, exec, bluetoothctl power on && bluetoothctl connect E8:EE:CC:4B:FA:2A"
+          "$mainMod, B, exec, ${connectHeadphones}"
           "$mainMod ALT, B, exec, bluetoothctl disconnect"
           "$mainMod, C, exec, $TERM -e nvim /etc/nixos/modules/home/hyprland.nix"
 

@@ -1,11 +1,5 @@
 { inputs, pkgs, ... }:
 
-/* Eldritch Horror
-  let
-  shitConfig = builtins.mapAttrs (_: v: { enable = true; } // v);
-  in
-*/
-
 {
   imports = [
     ./modules/home
@@ -14,12 +8,22 @@
 
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
-  #home.username = "skettisouls";
-  #home.homeDirectory = "/home/skettisouls";
   home = {
     username = "skettisouls";
     homeDirectory = "/home/skettisouls";
-    packages = with pkgs; [ unstable.scarab inputs.neovim.packages.${system}.default ];
+    pointerCursor = {
+      name = "phinger-cursors-dark";
+      package = pkgs.phinger-cursors;
+      size = 24;
+      gtk.enable = true;
+    };
+    packages = with pkgs; [
+      rofi
+      scarab
+      heroic
+      minetest
+      element-desktop
+    ];
   };
 
 
@@ -40,13 +44,13 @@
     bash.enable = true;
     discord.enable = true;
     git.enable = true;
+    gpg.enable = true;
     hyprland.enable = true;
     kitty.enable = true;
     mangohud.enable = true;
     mpv.enable = true;
     udiskie.enable = true;
     vesktop.enable = true;
-    xdg.portal.enable = true;
 
     audio = {
       bluetooth.enable = true;
@@ -57,16 +61,12 @@
       default = "qutebrowser";
       brave.enable = true;
       qutebrowser.enable = true;
-      /*firefox = {
-        enable = true;
-        tridactyl = true;
-      };*/
     };
 
     fetch = {
       active = with pkgs; [
         neofetch
-	fastfetch
+        fastfetch
       ];
     };
   };
