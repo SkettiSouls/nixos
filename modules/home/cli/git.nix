@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, ... }:
 
 let
   inherit (lib)
@@ -14,12 +14,7 @@ in
   };
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [
-      git
-      lazygit
-    ];
-
-    programs.git = rec {
+    programs.git = {
       enable = true;
       userName = "SkettiSouls";
       userEmail = "skettisouls@gmail.com";
@@ -29,7 +24,22 @@ in
 
       extraConfig = {
         gpg.format = "ssh";
-        pull.rebase = true;
+        pull.rebase = false;
+      };
+    };
+
+    programs.lazygit = {
+      enable = true;
+      settings = {
+        git = {
+          commit.autoWrapCommitMessage = false;
+
+          mainBranches = [
+            "master"
+            "main"
+            "shit"
+          ];
+        };
       };
     };
   };

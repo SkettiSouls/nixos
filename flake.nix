@@ -73,7 +73,9 @@
 
       perSystem = { config, lib, pkgs, ... }: {
         packages = {
-          play = pkgs.callPackage ./packages/play { };
+          connect-headphones = pkgs.callPackage ./packages/connect-headphones {};
+          eat = pkgs.callPackage ./packages/eat {};
+          play = pkgs.callPackage ./packages/play {};
         };
       };
     };

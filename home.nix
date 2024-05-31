@@ -23,6 +23,7 @@
       heroic
       minetest
       element-desktop
+      sketti.eat
     ];
   };
 

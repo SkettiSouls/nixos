@@ -7,10 +7,10 @@ let
     ;
 
   cfg = config.shit.hyprland;
+  home = config.home.homeDirectory;
 
   bluetooth = config.peripherals.bluetooth;
   headphones = bluetooth.headphones;
-  connectHeadphones = bluetooth.connectHeadphones;
 in
 {
   options.shit.hyprland = {
@@ -29,6 +29,7 @@ in
       wl-clipboard
       hyprpaper
       dunst
+      sketti.connect-headphones
     ];
 
     xdg.portal = {
@@ -43,10 +44,8 @@ in
     home.file = {
       # Configure wallpaper.
       ".config/hypr/hyprpaper.conf".text = ''
-          preload = ${config.home.homeDirectory}/Pictures/wallpapers/oswp.png
-          preload = ${config.home.homeDirectory}/Pictures/wallpapers/suncat.jpg
-          # wallpaper = HDMI-A-1,contain:${config.home.homeDirectory}/Pictures/wallpapers/oswp.jpg
-          wallpaper = HDMI-A-1,contain:${config.home.homeDirectory}/Pictures/wallpapers/suncat.jpg
+          preload = ${home}/Pictures/wallpapers/suncat.jpg
+          wallpaper = HDMI-A-1,contain:${home}/Pictures/wallpapers/suncat.jpg
           splash = false
       '';
     };
@@ -63,8 +62,8 @@ in
           "hyprpaper &"
           "dunst &"
           "polkit &"
-          connectHeadphones
-          "[workspace 10 silent] carla /etc/nixos/shit/carla/system-${headphones}.carxp"
+          "connect-headphones ${headphones}"
+          "[workspace 10 silent] carla /etc/nixos/shit/carla/system.carxp"
           "[workspace 1 silent] qutebrowser"
           "[workspace 2 silent] vesktop"
           "[workspace 3 silent] steam"
@@ -93,7 +92,7 @@ in
           gaps_out = 10;
           border_size = 2;
           "col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
-          "col.inactive_border" = "rgba(595959aa)";
+          # "col.inactive_border" = "rgba(595959aa)";
 
           layout = "dwindle";
         };
@@ -156,6 +155,7 @@ in
           # System Binds
           "$mainMod, Q, killactive"
           #"$mainMod, E, wlogout -p layer-shell"
+          "$mainMod ALT, E, exit"
           "$mainMod, S, togglefloating"
           #"$mainMod, R, exec, wofi --show drun"
           #"$mainMod ALT, R, exec, update-desktop-database"
@@ -163,16 +163,14 @@ in
           "$mainMod, V, togglesplit"
           "$mainMod, F, fullscreen"
           "$mainMod, RETURN, exec, $TERM"
-          ''$mainMod, ESCAPE, exec, $TERM sh -c "sudo nixos-rebuild switch; hyprctl reload; echo; echo 'Press enter to exit'; read"''
-          "$mainMod, B, exec, ${connectHeadphones}"
-          "$mainMod ALT, B, exec, bluetoothctl disconnect"
-          "$mainMod, C, exec, $TERM -e nvim /etc/nixos/modules/home/hyprland.nix"
+          "$mainMod, B, exec, connect-headphones ${headphones}"
+          "$mainMod ALT, B, exec, bluetoothctl disconnect ${headphones}"
+          "$mainMod, C, exec, $TERM -e nvim /etc/nixos"
+          "$mainMod ALT, C, exec, $TERM -e nvim /etc/nixos/modules/home/hyprland.nix"
 
           # App Binds (SUPER_SHIFT)
-          "$mainMod SHIFT, E, exec, nemo"
           "$mainMod SHIFT, B, exec, ${config.shit.browsers.default}"
-          #"$mainMod SHIFT, B, exec, brave"
-          #"$mainMod SHIFT, B, exec, firefox"
+          "$mainMod SHIFT ALT, B, exec, brave"
           "$mainMod SHIFT, D, exec, [workspace 2 silent] vesktop"
           "$mainMod SHIFT, S, exec, [workspace 3 silent] steam"
 
@@ -182,9 +180,9 @@ in
           " CTRL, PRINT, exec, grimblast -f copy screen"
 
           # Grimblast Screenshot && CopySave
-          "$mainMod, PRINT, exec, grimblast -f copy output && wl-paste > ~/Pictures/screenshots/Screenshot-$(date +%F_%T).png"
-          "$mainMod SHIFT, PRINT, exec, grimblast -f copy area && wl-paste > ~/Pictures/screenshots/Screenshot-$(date +%F_%T).png"
-          "$mainMod CTRL, PRINT, exec, grimblast -f copy screen && wl-paste > ~/Pictures/screenshots/Screenshot-$(date +%F_%T).png"
+          "$mainMod, PRINT, exec, grimblast -f copy output && wl-paste > ${home}/Pictures/screenshots/Screenshot-$(date +%F_%T).png"
+          "$mainMod SHIFT, PRINT, exec, grimblast -f copy area && wl-paste > ${home}/Pictures/screenshots/Screenshot-$(date +%F_%T).png"
+          "$mainMod CTRL, PRINT, exec, grimblast -f copy screen && wl-paste > ${home}/Pictures/screenshots/Screenshot-$(date +%F_%T).png"
 
           # Navigation
           "$mainMod, left, movefocus, l"

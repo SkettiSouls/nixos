@@ -7,7 +7,8 @@ let
     ;
 
   cfg = config.shit.bash;
-  connectHeadphones = config.peripherals.bluetooth.connectHeadphones;
+
+  headphones = config.peripherals.bluetooth.headphones;
 in
 {
   options.shit.bash = {
@@ -20,7 +21,7 @@ in
       enableCompletion = true;
       enableVteIntegration = true;
       historyControl = [ "ignoredups" ];
-      profileExtra = connectHeadphones;
+      profileExtra = "connect-headphones ${headphones}";
       shellAliases = {
         ":q" = " exit";
         cp = "rsync";

@@ -22,11 +22,6 @@ in
         type = types.str;
         default = "";
       };
-
-      connectHeadphones = mkOption {
-        type = types.str;
-        default = "";
-      };
     };
   };
 
@@ -35,7 +30,6 @@ in
       bluetooth = {
         # mkForce is used for idiot proofing.
         headphones = mkForce sennheiserMomentum4;
-        connectHeadphones = mkForce "bluetoothctl power on && bluetoothctl connect ${bluetooth.headphones}";
       };
     };
   };

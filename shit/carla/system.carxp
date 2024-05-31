@@ -81,19 +81,27 @@
   </Connection>
   <Connection>
    <Source>mpv:output_FL</Source>
-   <Target>MOMENTUM 4-163:playback_FL</Target>
+   <Target>MOMENTUM 4:playback_FL</Target>
   </Connection>
   <Connection>
    <Source>mpv:output_FR</Source>
-   <Target>MOMENTUM 4-163:playback_FR</Target>
+   <Target>MOMENTUM 4:playback_FR</Target>
   </Connection>
   <Connection>
-   <Source>Chromium-185:output_FL</Source>
-   <Target>MOMENTUM 4-163:playback_FL</Target>
+   <Source>Chromium-238:output_FL</Source>
+   <Target>MOMENTUM 4:playback_FL</Target>
   </Connection>
   <Connection>
-   <Source>Chromium-185:output_FR</Source>
-   <Target>MOMENTUM 4-163:playback_FR</Target>
+   <Source>Chromium-238:output_FR</Source>
+   <Target>MOMENTUM 4:playback_FR</Target>
+  </Connection>
+  <Connection>
+   <Source>Chromium-252:output_FL</Source>
+   <Target>MOMENTUM 4:playback_FL</Target>
+  </Connection>
+  <Connection>
+   <Source>Chromium-252:output_FR</Source>
+   <Target>MOMENTUM 4:playback_FR</Target>
   </Connection>
   <Positions>
    <Position x1="1448" y1="897">
@@ -102,17 +110,17 @@
    <Position x1="1208" y1="899" x2="1208" y2="941">
     <Name>USB Condenser Microphone Mono</Name>
    </Position>
-   <Position x1="1207" y1="985">
-    <Name>MOMENTUM 4</Name>
+   <Position x1="1720" y1="1397">
+    <Name>MOMENTUM 4-91</Name>
    </Position>
-   <Position x1="1209" y1="1093" x2="2195" y2="902">
+   <Position x1="1208" y1="985" x2="2195" y2="902">
     <Name>Starship/Matisse HD Audio Controller Analog Stereo</Name>
    </Position>
    <Position x1="1208" y1="942" x2="2017" y2="1274">
     <Name>USB 2.0 Camera Mono</Name>
    </Position>
-   <Position x1="1207" y1="1030" x2="2401" y2="966">
-    <Name>MOMENTUM 4-163</Name>
+   <Position x1="2356" y1="1241">
+    <Name>MOMENTUM 4</Name>
    </Position>
    <Position x1="1953" y1="830">
     <Name>Navi 21/23 HDMI/DP Audio Controller Digital Stereo (HDMI)</Name>
@@ -126,13 +134,7 @@
    <Position x1="1281" y1="1911" x2="1848" y2="1948">
     <Name>BLE MIDI 1</Name>
    </Position>
-   <Position x1="1736" y1="1239">
-    <Name>mpv</Name>
-   </Position>
-   <Position x1="1735" y1="1306">
-    <Name>Chromium-185</Name>
-   </Position>
-   <Position x1="1961" y1="902">
+   <Position x1="1974" y1="897">
     <Name>Chromium input</Name>
    </Position>
   </Positions>
