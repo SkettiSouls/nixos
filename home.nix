@@ -51,7 +51,6 @@
     mangohud.enable = true;
     mpv.enable = true;
     udiskie.enable = true;
-    vesktop.enable = true;
 
     audio = {
       bluetooth.enable = true;

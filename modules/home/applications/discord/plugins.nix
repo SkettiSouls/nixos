@@ -1,58 +1,15 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, ... }:
 
 let
   inherit (lib)
-    mkEnableOption
     mkIf
     ;
 
-  cfg = config.shit.vesktop;
+  vesktop = config.programs.vesktop;
 in
 {
-  options.shit.vesktop = {
-    enable = mkEnableOption "Vesktop user configuration";
-  };
-
-  config = mkIf cfg.enable {
+  config = mkIf vesktop.enable {
     programs.vesktop = {
-      enable = true;
-      package = pkgs.vesktop-unstable;
-      state = {
-        discordBranch = "stable";
-        firstLaunch = false;
-        arRPC = "off";
-        splashColor = "rgb(138, 148, 168)";
-        splashBackground = "rgb(22, 24, 29)";
-        minimizeToTray = false;
-        splashTheming = true;
-        customTitleBar = false;
-      };
-
-      settings = {
-        notifyAboutUpdates = true;
-        autoUpdate = true;
-        autoUpdateNotification = true;
-        useQuickCss = false;
-        themeLinks = [ ];
-        enabledThemes = [ "midnight.css" ];
-        enableReactDevtools = false;
-        frameless = false;
-        transparent = false;
-      };
-
-      cloud = {
-        authenticated = true;
-        url = "https://api.vencord.dev";
-        settingsSync = false;
-      };
-
-      notifications = {
-        timeout = 5000;
-        position = "bottom-right";
-        useNative = "not-focused";
-        logLimit = 75;
-      };
-
       enabledPlugins = [
         ### Required (Always Enabled) ###
         "NoTrack"
@@ -666,10 +623,6 @@ in
             volume = 0.2;
           };
         };
-      };
-
-      themes = {
-        midnight.css = ./midnight.css;
       };
     };
   };

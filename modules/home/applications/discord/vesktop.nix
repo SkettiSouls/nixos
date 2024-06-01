@@ -145,7 +145,7 @@ in
   };
 
   config = mkIf cfg.enable {
-    # Temporarily requires an overlay for nixpkgs unstable, as Vesktop v1.5.0 rebranded from vencorddesktop, changing file structures and directory names. Will be removed after the first 2024 release of nixpkgs.
+    # Requires Vesktop v1.5.0 or newer, as vesktop was rebranded from vencorddesktop, changing file structures and directory names.
     home.packages = [ cfg.package ];
 
     home.file = mkMerge ([
