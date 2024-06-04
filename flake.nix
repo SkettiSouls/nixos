@@ -15,67 +15,83 @@
 
   outputs = inputs @ { self, nixpkgs, home-manager, flake-parts, lynx, asluni, ... }:
     flake-parts.lib.mkFlake { inherit inputs; }
-    {
-      imports = [
-        lynx.flakeModules.flake-guard
-        asluni.flakeModules.asluni
-      ];
+      (args @ { config, flake-parts-lib, ... }:
+        let
+          inherit (flake-parts-lib) importApply;
 
-      wireguard.enable = true;
-      wireguard.networks.asluni.peers.by-name.argon = {
-        privateKeyFile = "/var/lib/wireguard/privatekey";
-      };
+          flakeModules = {
+            features = importApply ./flake-sharts/features args;
+            hardware = importApply ./flake-sharts/hardware args;
+            home-manager = importApply ./flake-sharts/home-manager args;
+            hosts = importApply ./flake-sharts/hosts args;
+            libs = importApply ./flake-sharts/libs args;
+            nixos = importApply ./flake-sharts/nixos args;
+            packages = importApply ./flake-sharts/packages args;
+            roles = importApply ./flake-sharts/roles args;
+            users = importApply ./flake-sharts/users args;
+          };
+        in
+        {
+          imports = [
+            lynx.flakeModules.flake-guard
+            asluni.flakeModules.asluni
+            flakeModules.libs
+          ];
 
-      systems = [
-        "x86_64-linux"
-      ];
+          wireguard.enable = true;
+          wireguard.networks.asluni.peers.by-name.argon = {
+            privateKeyFile = "/var/lib/wireguard/privatekey";
+          };
 
-      flake = {
-        nixosConfigurations = {
-          argon = nixpkgs.lib.nixosSystem rec {
-            specialArgs = { inherit inputs self; };
-            modules = [
-              ./configuration.nix
-              home-manager.nixosModules.home-manager
-              {
-                imports = [self.nixosModules.flake-guard-host];
-                networking.wireguard = {
-                  networks.asluni.autoConfig = {
-                    interface = true;
-                    peers = true;
-                  };
+          systems = [
+            "x86_64-linux"
+          ];
 
-                  interfaces.asluni.generatePrivateKeyFile = true;
+          flake = {
+            nixosConfigurations = {
+              argon = nixpkgs.lib.nixosSystem rec {
+                specialArgs = { inherit inputs self; };
+                modules = [
+                  ./configuration.nix
+                  home-manager.nixosModules.home-manager
+                  {
+                    imports = [self.nixosModules.flake-guard-host];
+                    networking.wireguard = {
+                      networks.asluni.autoConfig = {
+                        interface = true;
+                        peers = true;
+                      };
+
+                      interfaces.asluni.generatePrivateKeyFile = true;
+                    };
+                  }
+
+                  {
+                    home-manager.useGlobalPkgs = true;
+                    home-manager.useUserPackages = true;
+                    home-manager.users.skettisouls = import ./home.nix;
+                    home-manager.backupFileExtension = "bak";
+                    home-manager.extraSpecialArgs = specialArgs;
+                  }
+                ];
+              };
+            };
+            homeConfigurations = {
+              "skettisouls@argon" = home-manager.lib.homeManagerConfiguration {
+                pkgs = nixpkgs.legacyPackages.x86_64-linux;
+                modules = [
+                  ./home.nix
+                ];
+              };
+            };
+
+              perSystem = { config, lib, pkgs, ... }: {
+                packages = {
+                  connect-headphones = pkgs.callPackage ./packages/connect-headphones {};
+                  eat = pkgs.callPackage ./packages/eat {};
+                  play = pkgs.callPackage ./packages/play {};
                 };
-              }
-
-              {
-                home-manager.useGlobalPkgs = true;
-                home-manager.useUserPackages = true;
-                home-manager.users.skettisouls = import ./home.nix;
-                home-manager.backupFileExtension = "bak";
-                home-manager.extraSpecialArgs = specialArgs;
-              }
-            ];
-          };
-        };
-
-        homeConfigurations = {
-          "skettisouls@argon" = home-manager.lib.homeManagerConfiguration {
-            pkgs = nixpkgs.legacyPackages.x86_64-linux;
-            modules = [
-              ./home.nix
-            ];
-          };
-        };
-      };
-
-      perSystem = { config, lib, pkgs, ... }: {
-        packages = {
-          connect-headphones = pkgs.callPackage ./packages/connect-headphones {};
-          eat = pkgs.callPackage ./packages/eat {};
-          play = pkgs.callPackage ./packages/play {};
-        };
-      };
-    };
+              };
+            };
+          });
 }
