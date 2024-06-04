@@ -22,7 +22,7 @@
       ];
 
       wireguard.enable = true;
-      wireguard.networks.asluni.peers.by-name.goatware = {
+      wireguard.networks.asluni.peers.by-name.argon = {
         privateKeyFile = "/var/lib/wireguard/privatekey";
       };
 
@@ -32,7 +32,7 @@
 
       flake = {
         nixosConfigurations = {
-          goatware = nixpkgs.lib.nixosSystem rec {
+          argon = nixpkgs.lib.nixosSystem rec {
             specialArgs = { inherit inputs self; };
             modules = [
               ./configuration.nix
@@ -61,7 +61,7 @@
         };
 
         homeConfigurations = {
-          "skettisouls@goatware" = home-manager.lib.homeManagerConfiguration {
+          "skettisouls@argon" = home-manager.lib.homeManagerConfiguration {
             pkgs = nixpkgs.legacyPackages.x86_64-linux;
             modules = [
               ./home.nix

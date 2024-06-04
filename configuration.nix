@@ -20,7 +20,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "goatware"; # Define your hostname.
+  networking.hostName = "argon"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -32,7 +32,7 @@
   networking.networkmanager.enable = true;
   systemd.services.NetworkManager-wait-online.enable = false;
   networking.hosts = {
-    "172.16.2.3" = [
+    "172.16.2.1" = [
       "cypress.local"
       "sesh.cypress.local"
       "tape.cypress.local"

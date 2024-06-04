@@ -2,11 +2,11 @@
   "nodes": {
     "asluni": {
       "locked": {
-        "lastModified": 1713704168,
-        "narHash": "sha256-QEvHayQucRgYCnTpQw2W3Goe5sUUmUI4DypnPGnbLoo=",
+        "lastModified": 1717516697,
+        "narHash": "sha256-DaNKoiqJqtciTTJEAKduOB54mDJi4nEUEqU5bDWIOkA=",
         "owner": "the-computer-club",
         "repo": "automous-zones",
-        "rev": "ca343c2e7f9f97070bcc9a678feb2ec88a9545e7",
+        "rev": "a23bedf612f5640c5c88a087488f37335cbcf283",
         "type": "github"
       },
       "original": {
@@ -327,11 +327,11 @@
     },
     "lynx": {
       "locked": {
-        "lastModified": 1713290550,
-        "narHash": "sha256-j2LQfQYVJNhG+QYj4FjUTg7JP7/He1S/oGbS7NzClGM=",
+        "lastModified": 1717250171,
+        "narHash": "sha256-TJ3MWZ1R5YuAhvBvpJAdAvTIVAymn40SVLgGS+p8KEA=",
         "owner": "the-computer-club",
         "repo": "lynx",
-        "rev": "8e0d33c6d4f62d0c54723805eb56fbc1ff30ad4b",
+        "rev": "3a5acf87b3fefa904bd3b40a9b1033e0c2ce9848",
         "type": "github"
       },
       "original": {
