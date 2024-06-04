@@ -1,15 +1,13 @@
 {
   inputs = {
-    # nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     vesktop.url = "github:NixOS/nixpkgs/nixos-unstable";
-    # home-manager.url = "github:nix-community/home-manager/release-23.11";
-    home-manager.url = "github:nix-community/home-manager/master";
-    neovim.url = "github:skettisouls/neovim";
+    home-manager.url = "github:nix-community/home-manager/release-24.05";
     flake-parts.url = "github:hercules-ci/flake-parts";
     lynx.url = "github:the-computer-club/lynx";
     asluni.url = "github:the-computer-club/automous-zones";
+    neovim.url = "github:skettisouls/neovim";
     hyprland.url = "github:hyprwm/hyprland/v0.40.0";
     hyprpicker.url = "github:hyprwm/hyprpicker";
   };
