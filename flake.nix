@@ -10,6 +10,7 @@
     neovim.url = "github:skettisouls/neovim";
     hyprland.url = "github:hyprwm/hyprland/v0.40.0";
     hyprpicker.url = "github:hyprwm/hyprpicker";
+    schizofox.url = "github:schizofox/schizofox";
   };
 
   outputs = inputs @ { self, nixpkgs, home-manager, flake-parts, lynx, asluni, ... }:

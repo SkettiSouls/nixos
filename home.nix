@@ -4,6 +4,7 @@
   imports = [
     ./modules/home
     ./overlays.nix
+    inputs.schizofox.homeManagerModule
   ];
 
   # Home Manager needs a bit of information about you and the
@@ -61,6 +62,7 @@
       default = "qutebrowser";
       brave.enable = true;
       qutebrowser.enable = true;
+      schizofox.enable = true;
     };
 
     fetch = {

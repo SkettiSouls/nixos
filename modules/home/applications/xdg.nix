@@ -13,13 +13,16 @@ let
 
   brave = "brave-browser.desktop";
   qutebrowser = "org.qutebrowser.qutebrowser.desktop";
+  schizofox = "Schizofox.desktop";
 
   isDefaultSet = cfg.default != "";
   isBrave = isDefaultSet && cfg.default == "brave";
   isQutebrowser = isDefaultSet && cfg.default == "qutebrowser";
+  isSchizofox = isDefaultSet && cfg.default == "schizofox";
 
   browser = optional isQutebrowser qutebrowser
     ++ optional isBrave brave
+    ++ optional isSchizofox schizofox
     ;
 
   browserMimelist = {

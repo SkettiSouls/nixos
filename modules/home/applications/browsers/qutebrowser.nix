@@ -16,6 +16,7 @@ in
   config = mkIf cfg.enable {
     programs.qutebrowser = {
       enable = true;
+      package = pkgs.unstable.qutebrowser;
       enableDefaultBindings = true;
       loadAutoconfig = true;
 
@@ -28,6 +29,7 @@ in
           "<Ctrl+F>" = "hint links spawn mpv {hint-url}";
           "dd" = "tab-close";
           "uu" = "undo";
+          "rr" = "reload";
           "pw" = "spawn --userscript qute-keepassxc --key 682D163ED56008C1A787BCEA6E9A2F35535BE87F";
         };
 
@@ -40,6 +42,7 @@ in
       extraConfig = ''
         config.unbind('d', mode='normal')
         config.unbind('u', mode='normal')
+        config.unbind('r', mode='normal')
         c.content.headers.custom = {"accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"}
       '';
 
@@ -47,12 +50,11 @@ in
         DEFAULT = "https://search.brave.com/search?q={}";
         g = "https://www.google.com/search?hl=en&q={}";
         aw = "https://wiki.archlinux.org/?search={}";
-        gh = "https://github.com/search?q={}&type=repositories";
-        ghu = "https://github.com/search?q={}&type=users";
-        # Test '/packages?query={}' when 24.05 releases to see if it searches latest release.
-        np = "https://search.nixos.org/packages?channel=23.11&query={}";
+        gh = "https://github.com/{}";
+        ghr = "https://github.com/search?q={}&type=repositories";
+        np = "https://search.nixos.org/packages?query={}";
         npu = "https://search.nixos.org/packages?channel=unstable&query={}";
-        no = "https://search.nixos.org/options?channel=23.11&query={}";
+        no = "https://search.nixos.org/options?query={}";
         nou = "https://search.nixos.org/options?channel=unstable&query={}";
         nw = "https://wiki.nixos.org/w/index.php?search={}";
         hm = "https://home-manager-options.extranix.com/?query={}&release=master";
@@ -78,18 +80,20 @@ in
 
         "content.blocking.adblock.lists" = [
           "https://github.com/uBlockOrigin/uAssets/raw/master/filters/legacy.txt"
-          "https://github.com/uBlockOrigin/uAssets/raw/master/filters/filters.txt"
+          "https://github.com/uBlockOrigin/uAssets/raw/master/filters/annoyances-cookies.txt"
+          "https://github.com/uBlockOrigin/uAssets/raw/master/filters/annoyances-others.txt"
+          "https://github.com/uBlockOrigin/uAssets/raw/master/filters/annoyances.txt"
+          "https://github.com/uBlockOrigin/uAssets/raw/master/filters/badlists.txt"
+          "https://github.com/uBlockOrigin/uAssets/raw/master/filters/badlists.txt"
+          "https://github.com/uBlockOrigin/uAssets/raw/master/filters/badware.txt"
           "https://github.com/uBlockOrigin/uAssets/raw/master/filters/filters-2020.txt"
           "https://github.com/uBlockOrigin/uAssets/raw/master/filters/filters-2021.txt"
           "https://github.com/uBlockOrigin/uAssets/raw/master/filters/filters-2022.txt"
           "https://github.com/uBlockOrigin/uAssets/raw/master/filters/filters-2023.txt"
-          "https://github.com/uBlockOrigin/uAssets/raw/master/filters/badware.txt"
+          "https://github.com/uBlockOrigin/uAssets/raw/master/filters/filters-2024.txt"
+          "https://github.com/uBlockOrigin/uAssets/raw/master/filters/filters.txt"
+          "https://github.com/uBlockOrigin/uAssets/raw/master/filters/lan-block.txt"
           "https://github.com/uBlockOrigin/uAssets/raw/master/filters/privacy.txt"
-          "https://github.com/uBlockOrigin/uAssets/raw/master/filters/badlists.txt"
-          "https://github.com/uBlockOrigin/uAssets/raw/master/filters/annoyances.txt"
-          "https://github.com/uBlockOrigin/uAssets/raw/master/filters/annoyances-cookies.txt"
-          "https://github.com/uBlockOrigin/uAssets/raw/master/filters/annoyances-others.txt"
-          "https://github.com/uBlockOrigin/uAssets/raw/master/filters/badlists.txt"
           "https://github.com/uBlockOrigin/uAssets/raw/master/filters/quick-fixes.txt"
           "https://github.com/uBlockOrigin/uAssets/raw/master/filters/resource-abuse.txt"
           "https://github.com/uBlockOrigin/uAssets/raw/master/filters/unbreak.txt"
