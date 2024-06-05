@@ -19,79 +19,83 @@
         let
           inherit (flake-parts-lib) importApply;
 
+          inherit (nixpkgs.lib)
+            mapAttrs
+            mkOption
+            nixosSystem
+            types
+            ;
+
           flakeModules = {
-            features = importApply ./flake-sharts/features args;
-            hardware = importApply ./flake-sharts/hardware args;
-            home-manager = importApply ./flake-sharts/home-manager args;
-            hosts = importApply ./flake-sharts/hosts args;
+            # features = importApply ./flake-sharts/features args;
+            # hardware = importApply ./flake-sharts/hardware args;
+            # home-manager = importApply ./flake-sharts/home-manager args;
+            # hosts = importApply ./flake-sharts/hosts args;
             libs = importApply ./flake-sharts/libs args;
-            nixos = importApply ./flake-sharts/nixos args;
-            packages = importApply ./flake-sharts/packages args;
-            roles = importApply ./flake-sharts/roles args;
-            users = importApply ./flake-sharts/users args;
+            # nixos = importApply ./flake-sharts/nixos args;
+            # packages = importApply ./flake-sharts/packages args;
+            # roles = importApply ./flake-sharts/roles args;
+            # users = importApply ./flake-sharts/users args;
+            wireguard = importApply ./flake-sharts/wireguard args;
           };
         in
         {
-          imports = [
-            lynx.flakeModules.flake-guard
-            asluni.flakeModules.asluni
-            flakeModules.libs
+          imports = with flakeModules; [
+            libs
+            wireguard
           ];
 
-          wireguard.enable = true;
-          wireguard.networks.asluni.peers.by-name.argon = {
-            privateKeyFile = "/var/lib/wireguard/privatekey";
+          options = {
+            nixos = mkOption {
+              type = with types; attrsOf unspecified;
+              default = {};
+            };
+
+            home = mkOption {
+              type = with types; attrsOf unspecified;
+              default = {};
+            };
           };
 
-          systems = [
-            "x86_64-linux"
-          ];
+          config = {
+            systems = [
+              "x86_64-linux"
+            ];
 
-          flake = {
-            nixosConfigurations = {
-              argon = nixpkgs.lib.nixosSystem rec {
+            nixos = {
+              argon = ./hosts/argon/configuration.nix; 
+              fluorine = ./hosts/fluorine/configuration.nix;
+            };
+
+            home = {
+              "skettisouls@argon" = ./home;
+            };
+
+            flake = {
+              inherit flakeModules;
+
+              nixosConfigurations = mapAttrs (name: value: nixosSystem {
                 specialArgs = { inherit inputs self; };
                 modules = [
-                  ./configuration.nix
-                  home-manager.nixosModules.home-manager
-                  {
-                    imports = [self.nixosModules.flake-guard-host];
-                    networking.wireguard = {
-                      networks.asluni.autoConfig = {
-                        interface = true;
-                        peers = true;
-                      };
-
-                      interfaces.asluni.generatePrivateKeyFile = true;
-                    };
-                  }
-
-                  {
-                    home-manager.useGlobalPkgs = true;
-                    home-manager.useUserPackages = true;
-                    home-manager.users.skettisouls = import ./home.nix;
-                    home-manager.backupFileExtension = "bak";
-                    home-manager.extraSpecialArgs = specialArgs;
-                  }
+                  value
+                  ./flake-sharts/wireguard/luni-net.nix
                 ];
-              };
-            };
-            homeConfigurations = {
-              "skettisouls@argon" = home-manager.lib.homeManagerConfiguration {
+              }) config.nixos;
+
+              homeConfigurations = mapAttrs (name: value: home-manager.lib.homeManagerConfiguration {
                 pkgs = nixpkgs.legacyPackages.x86_64-linux;
-                modules = [
-                  ./home.nix
-                ];
-              };
+                modules = [ value ];
+              }) config.home;
             };
 
-              perSystem = { config, lib, pkgs, ... }: {
-                packages = {
-                  connect-headphones = pkgs.callPackage ./packages/connect-headphones {};
-                  eat = pkgs.callPackage ./packages/eat {};
-                  play = pkgs.callPackage ./packages/play {};
-                };
+            perSystem = { config, lib, pkgs, ... }: {
+              packages = {
+                connect-headphones = pkgs.callPackage ./packages/connect-headphones {};
+                eat = pkgs.callPackage ./packages/eat {};
+                play = pkgs.callPackage ./packages/play {};
               };
             };
-          });
+          };
+        });
+
 }

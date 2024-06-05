@@ -2,15 +2,16 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib, ... }:
+{ inputs, config, pkgs, lib, ... }:
 
 {
   imports =
     [
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ./modules/nixos
-      ./overlays.nix
+      ./home-manager.nix
+      ../../modules/nixos
+      ../../overlays.nix
     ];
 
   # Kernel
@@ -31,16 +32,6 @@
   # Enable networking
   networking.networkmanager.enable = true;
   systemd.services.NetworkManager-wait-online.enable = false;
-  networking.hosts = {
-    "172.16.2.1" = [
-      "cypress.local"
-      "sesh.cypress.local"
-      "tape.cypress.local"
-      "codex.cypress.local"
-      "pgadmin.cypress.local"
-      "chat.cypress.local"
-    ];
-  };
 
   # Set your time zone.
   time.timeZone = "America/Chicago";
@@ -156,6 +147,7 @@
   };
 
   shit = {
+    home.enable = true;
     pipewire.enable = true;
     hardware = {
       gpu.enable = true;
