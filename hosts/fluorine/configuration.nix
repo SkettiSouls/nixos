@@ -66,7 +66,6 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    comma
     neovim
     fzf
     zip
@@ -94,7 +93,7 @@
     home-manager = {
       enable = true;
       users = {
-        skettisouls = import ../../homes/skettisouls/fluorine.nix;
+        skettisouls = import ./home.nix;
       };
     };
   };

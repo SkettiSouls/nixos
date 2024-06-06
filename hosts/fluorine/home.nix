@@ -31,7 +31,6 @@
   shit = {
     bash.enable = true;
     git.enable = true;
-    gpg.enable = true;
     udiskie.enable = true;
 
     fetch = {

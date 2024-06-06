@@ -155,10 +155,11 @@
       fstab.enable = true;
       bluetooth.enable = true;
     };
+
     home-manager = {
       enable = true;
       users = {
-        skettisouls = import ../../homes/skettisouls/argon.nix;
+        skettisouls = import ./home.nix;
       };
     };
   };

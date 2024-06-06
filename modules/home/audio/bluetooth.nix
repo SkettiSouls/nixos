@@ -7,6 +7,7 @@ let
     ;
 
   cfg = config.shit.audio.bluetooth;
+  headphones = config.peripherals.bluetooth.headphones;
 in
 {
   options.shit.audio.bluetooth = {
@@ -14,6 +15,8 @@ in
   };
 
   config = mkIf cfg.enable {
+    # FIXME: Fails on first login after reboot.
+    programs.bash.profileExtra = "connect-headphones ${headphones}"; # Connect headphones automatically on login/ ensure connection on rebuild.
     services.mpris-proxy.enable = true;
 
     home.file = {

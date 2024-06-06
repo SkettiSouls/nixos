@@ -68,8 +68,8 @@
             };
 
             home = {
-              "skettisouls@argon" = ./homes/skettisouls/argon.nix;
-              "skettisouls@fluorine" = ./homes/skettisouls/fluorine.nix;
+              "skettisouls@argon" = ./hosts/argon/home.nix;
+              "skettisouls@fluorine" = ./hosts/fluorine/home.nix;
             };
 
             flake = {
