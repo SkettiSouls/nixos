@@ -68,7 +68,8 @@
             };
 
             home = {
-              "skettisouls@argon" = ./home;
+              "skettisouls@argon" = ./homes/skettisouls/argon.nix;
+              "skettisouls@fluorine" = ./homes/skettisouls/fluorine.nix;
             };
 
             flake = {
@@ -76,15 +77,12 @@
 
               nixosConfigurations = mapAttrs (name: value: nixosSystem {
                 specialArgs = { inherit inputs self; };
-                modules = [
-                  value
-                  ./flake-sharts/wireguard/luni-net.nix
-                ];
+                modules = [ value ./overlays.nix ./flake-sharts/wireguard/luni-net.nix ];
               }) config.nixos;
 
               homeConfigurations = mapAttrs (name: value: home-manager.lib.homeManagerConfiguration {
                 pkgs = nixpkgs.legacyPackages.x86_64-linux;
-                modules = [ value ];
+                modules = [ value ./overlays.nix ];
               }) config.home;
             };
 

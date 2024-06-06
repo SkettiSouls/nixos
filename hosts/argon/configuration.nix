@@ -9,9 +9,7 @@
     [
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ./home-manager.nix
       ../../modules/nixos
-      ../../overlays.nix
     ];
 
   # Kernel
@@ -83,8 +81,6 @@
     home-manager
     neovim
     fzf
-    eza
-    rsync
     zip
     unzip
     appimage-run
@@ -147,16 +143,23 @@
   };
 
   shit = {
-    home.enable = true;
     pipewire.enable = true;
+    wireguard.enable = true;
+
+    applications = {
+      steam.enable = true;
+    };
+
     hardware = {
       gpu.enable = true;
       fstab.enable = true;
       bluetooth.enable = true;
     };
-
-    applications = {
-      steam.enable = true;
+    home-manager = {
+      enable = true;
+      users = {
+        skettisouls = import ../../homes/skettisouls/argon.nix;
+      };
     };
   };
 

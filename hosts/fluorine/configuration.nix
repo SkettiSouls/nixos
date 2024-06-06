@@ -7,13 +7,9 @@
 {
   imports =
     [
-      # Include the results of the hardware scan.
+      ./hardware-configuration.nix
       ../../modules/nixos
-      ../../overlays.nix
     ];
-
-  # Kernel
-  boot.kernelPackages = pkgs.linuxPackages_6_8;
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -73,8 +69,6 @@
     comma
     neovim
     fzf
-    eza
-    rsync
     zip
     unzip
     btop
@@ -93,6 +87,15 @@
   services = {
     udisks2 = {
       enable = true;
+    };
+  };
+
+  shit = {
+    home-manager = {
+      enable = true;
+      users = {
+        skettisouls = import ../../homes/skettisouls/fluorine.nix;
+      };
     };
   };
 

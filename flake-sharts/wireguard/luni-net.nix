@@ -1,9 +1,19 @@
 { self, config, lib, ... }:
 
+let
+  inherit (lib)
+    mkEnableOption
+    mkIf
+    ;
+
+  cfg = config.shit.wireguard;
+in
 {
   imports = [self.nixosModules.flake-guard-host];
 
-  config = {
+  options.shit.wireguard.enable = mkEnableOption "Luni-net";
+
+  config = mkIf cfg.enable {
     networking = {
       hosts = {
         "172.16.2.1" = [

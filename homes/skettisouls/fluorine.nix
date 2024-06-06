@@ -1,31 +1,17 @@
-{ inputs, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   imports = [
-    ./modules/home
-    ./overlays.nix
-    inputs.schizofox.homeManagerModule
+    ../../modules/home
   ];
 
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
+
   home = {
     username = "skettisouls";
     homeDirectory = "/home/skettisouls";
-    pointerCursor = {
-      name = "phinger-cursors-dark";
-      package = pkgs.phinger-cursors;
-      size = 24;
-      gtk.enable = true;
-    };
-    packages = with pkgs; [
-      rofi
-      scarab
-      heroic
-      minetest
-      element-desktop
-      sketti.eat
-    ];
+    packages = with pkgs; [];
   };
 
 
@@ -44,26 +30,9 @@
 
   shit = {
     bash.enable = true;
-    discord.enable = true;
     git.enable = true;
     gpg.enable = true;
-    hyprland.enable = true;
-    kitty.enable = true;
-    mangohud.enable = true;
-    mpv.enable = true;
     udiskie.enable = true;
-
-    audio = {
-      bluetooth.enable = true;
-      carla.enable = true;
-    };
-
-    browsers = {
-      default = "qutebrowser";
-      brave.enable = true;
-      qutebrowser.enable = true;
-      schizofox.enable = true;
-    };
 
     fetch = {
       active = with pkgs; [
