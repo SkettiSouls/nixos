@@ -77,7 +77,7 @@
 
               nixosConfigurations = mapAttrs (name: value: nixosSystem {
                 specialArgs = { inherit inputs self; };
-                modules = [ value ./overlays.nix ./flake-sharts/wireguard/luni-net.nix ];
+                modules = [ value ./global.nix ./overlays.nix ./flake-sharts/wireguard/luni-net.nix ];
               }) config.nixos;
 
               homeConfigurations = mapAttrs (name: value: home-manager.lib.homeManagerConfiguration {

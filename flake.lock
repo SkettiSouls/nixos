@@ -2,11 +2,11 @@
   "nodes": {
     "asluni": {
       "locked": {
-        "lastModified": 1717516697,
-        "narHash": "sha256-DaNKoiqJqtciTTJEAKduOB54mDJi4nEUEqU5bDWIOkA=",
+        "lastModified": 1717831648,
+        "narHash": "sha256-/0uYflKN6NohKhVP3O1gCrq6tC/riYhxN35k9Tis/Vw=",
         "owner": "the-computer-club",
         "repo": "automous-zones",
-        "rev": "a23bedf612f5640c5c88a087488f37335cbcf283",
+        "rev": "9626b5c0647239e930df45a0dcad13095fae7bf1",
         "type": "github"
       },
       "original": {
