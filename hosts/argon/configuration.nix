@@ -49,9 +49,6 @@
     ];
   };
 
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -69,24 +66,18 @@
   #   enableSSHSupport = true;
   # };
 
-  # List services that you want to enable:
-
   services = {
     flatpak.enable = true;
   };
 
   programs = {
+
     dconf.enable = true;
     xwayland.enable = true;
   };
 
   hardware = {
     enableRedistributableFirmware = true;
-  };
-
-  nix = {
-    package = pkgs.nix;
-    settings.experimental-features = [ "nix-command" "flakes" ];
   };
 
   xdg.portal = {
@@ -119,9 +110,6 @@
     MatchUdevType=mouse;
     ModelBouncingKeys=1;
   */
-
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
