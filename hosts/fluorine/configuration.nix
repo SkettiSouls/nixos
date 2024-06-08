@@ -11,12 +11,16 @@
       ../../modules/nixos
     ];
 
+  roles = {
+    server.enable = true;
+    workstation.enable = true;
+  };
+
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "fluorine"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   users.users.skettisouls.openssh.authorizedKeys.keys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHAV0a5O5FiI6ApGw0C+9lWWi0WQvYNivNkcwp3owwfz"
@@ -30,35 +34,8 @@
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
-
-  # Enable networking
-  networking.networkmanager.enable = true;
-  systemd.services.NetworkManager-wait-online.enable = false;
-
   # Set your time zone.
   time.timeZone = "America/Chicago";
-
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
-
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "en_US.UTF-8";
-    LC_IDENTIFICATION = "en_US.UTF-8";
-    LC_MEASUREMENT = "en_US.UTF-8";
-    LC_MONETARY = "en_US.UTF-8";
-    LC_NAME = "en_US.UTF-8";
-    LC_NUMERIC = "en_US.UTF-8";
-    LC_PAPER = "en_US.UTF-8";
-    LC_TELEPHONE = "en_US.UTF-8";
-    LC_TIME = "en_US.UTF-8";
-  };
-
-  fonts.packages = with pkgs; [
-    noto-fonts
-    noto-fonts-cjk-sans
-    noto-fonts-color-emoji
-    (nerdfonts.override { fonts = [ "DejaVuSansMono" ]; })
-  ];
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.skettisouls = {
@@ -71,16 +48,6 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    neovim
-    fzf
-    zip
-    unzip
-    btop
-  ];
-
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
@@ -91,17 +58,7 @@
 
   # List services that you want to enable:
 
-  services = {
-    openssh.enable = true;
-
-    udisks2 = {
-      enable = true;
-    };
-  };
-
   shit = {
-    wireguard.enable = true;
-
     home-manager = {
       enable = true;
       users = {
