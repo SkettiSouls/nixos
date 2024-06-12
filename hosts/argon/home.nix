@@ -1,5 +1,11 @@
-{ pkgs, ... }:
+{ config, lib, pkgs, ... }:
+let
+  inherit (lib)
+    mkIf
+    ;
 
+  kitty = config.shit.kitty;
+in
 {
   imports = [
     ../../modules/home
@@ -36,17 +42,22 @@
     };
 
     browsers = {
-      default = "qutebrowser";
+      default = "brave";
       brave.enable = true;
       qutebrowser.enable = true;
       schizofox.enable = true;
     };
 
     fetch = {
-      active = with pkgs; [
-        neofetch
-        fastfetch
-      ];
+      neofetch = {
+        enable = true;
+        distroName = "TrollOS ${config.home.version.release}";
+        image = {
+          source = "${config.home.homeDirectory}/Pictures/meme/troll/troll3D.png";
+          renderer = mkIf kitty.enable "kitty";
+          size = "320px";
+        };
+      };
     };
   };
 }

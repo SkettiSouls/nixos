@@ -8,14 +8,18 @@
     lynx.url = "github:the-computer-club/lynx";
     asluni.url = "github:the-computer-club/automous-zones";
     neovim.url = "github:skettisouls/neovim";
-    hyprland.url = "github:hyprwm/hyprland/v0.40.0";
+    hyprland = {
+      type = "git";
+      url = "https://github.com/hyprwm/hyprland";
+      submodules = true;
+    };
     hyprpicker.url = "github:hyprwm/hyprpicker";
     schizofox.url = "github:schizofox/schizofox";
   };
 
   outputs = inputs @ { self, nixpkgs, home-manager, flake-parts, lynx, asluni, ... }:
     flake-parts.lib.mkFlake { inherit inputs; }
-      (args @ { config, flake-parts-lib, ... }:
+      (args @ { config, options, flake-parts-lib, ... }:
         let
           inherit (flake-parts-lib) importApply;
 
@@ -73,6 +77,9 @@
             };
 
             flake = {
+              _config = config;
+              _options = options;
+
               inherit flakeModules;
 
               nixosConfigurations = mapAttrs (name: value: nixosSystem {

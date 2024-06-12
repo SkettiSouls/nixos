@@ -15,23 +15,21 @@ in
   };
 
   config = mkIf cfg.enable {
-    # Enable Steam hardware (Steam Controller, HTC Vive, etc...)
-    hardware.steam-hardware.enable = true;
-
+    hardware.steam-hardware.enable = true; # Enable Steam hardware (Steam Controller, HTC Vive, etc...)
     programs.gamemode.enable = true;
 
     programs.steam = {
       enable = true;
       gamescopeSession.enable = true;
-      package = pkgs.steam-small.override {
+      package = pkgs.steam.override {
         extraEnv = {
           MANGOHUD = true;
           OBS_VKCAPTURE = true;
         };
 
-        extraLibraries = p: with p; [
-          atk
-        ];
+        # extraLibraries = p: with p; [
+        #   atk
+        # ];
       };
     };
   };
