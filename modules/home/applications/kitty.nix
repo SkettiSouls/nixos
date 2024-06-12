@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 
 let
   inherit (lib)
@@ -16,6 +16,7 @@ in
   config = mkIf cfg.enable {
     programs.kitty = {
       enable = true;
+      package = pkgs.unstable.kitty;
       font.name = "DejaVu Sans Mono";
 
       shellIntegration = {

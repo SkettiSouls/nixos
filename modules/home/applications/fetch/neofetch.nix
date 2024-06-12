@@ -1,32 +1,64 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 
 let
   inherit (lib)
     mkEnableOption
     mkIf
+    mkOption
+    types
     ;
 
-  cfg = config.kalyx.neofetch;
+  cfg = config.shit.fetch.neofetch;
 in
 {
-  options.kalyx.neofetch = {
-    enable = mkEnableOption "neofetch";
+  options.shit.fetch.neofetch = {
+    enable = mkEnableOption "Neofetch user configuration";
+
+    image = {
+      # Must be set for non-ascii images
+      renderer = mkOption {
+        type = types.str;
+        default = "ascii";
+      };
+
+      source = mkOption {
+        type = with types; nullOr (either str path);
+        default = null;
+      };
+
+      size = mkOption {
+        type = types.str;
+        default = "auto";
+      };
+    };
+
+    distroName = mkOption {
+      type = types.nullOr types.str;
+      default = null;
+    };
+
+    asciiColors = mkOption {
+      type = types.nullOr types.str;
+      default = null;
+    };
   };
 
   config = mkIf cfg.enable {
+    home.packages = [pkgs.neofetch];
+    # TODO: Find a way to shorten Host
     home.file.".config/neofetch/config.conf".text = ''
       print_info() {
         info title
         info underline
 
-        distro="Kalyx [NixOS] x86_64"
+        ${if (cfg.distroName != null) then (''distro="${cfg.distroName}"'') else ""}
         info "OS" distro
-        info "Host" model
+        # info "Host" model # Too long, collides with images.
         info "Kernel" kernel
         info "Uptime" uptime
         info "Packages" packages
         info "Shell" shell
-        info "Resolution" resolution
+        # info "Resolution" resolution
         info "DE" de
         info "WM" wm
         info "WM Theme" wm_theme
@@ -44,16 +76,17 @@ in
         # info "Font" font
         # info "Song" song
         # [[ "$player" ]] && prin "Music Player" "$player"
-        # info "Local IP" local_ip
-        # info "Public IP" public_ip
         # info "Users" users
         # info "Locale" locale  # This only works on glibc systems.
 
         info cols
       }
 
-      ascii_colors=(11 3 10 2)
-      image_source="${./kalyx-ansii}"
+      image_backend=${cfg.image.renderer}
+      image_size=${cfg.image.size}
+
+      ${if (cfg.asciiColors != null) then ("ascii_colors=(${cfg.asciiColors})") else ""}
+      ${if (cfg.image.source != null) then ("image_source=${cfg.image.source}") else ""}
     '';
   };
 }

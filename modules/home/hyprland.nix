@@ -152,6 +152,7 @@ in
         "$TERM" = "kitty";
 
         bind = [
+        # TODO: Better binds system.
           # System Binds
           "$mainMod, Q, killactive"
           #"$mainMod, E, wlogout -p layer-shell"
@@ -169,7 +170,7 @@ in
           "$mainMod ALT, C, exec, $TERM -e nvim /etc/nixos/modules/home/hyprland.nix"
 
           # App Binds (SUPER_SHIFT)
-          "$mainMod SHIFT, B, exec, ${config.shit.browsers.default}"
+          "$mainMod SHIFT, B, exec, qutebrowser"
           "$mainMod SHIFT ALT, B, exec, brave"
           "$mainMod SHIFT, D, exec, [workspace 2 silent] vesktop"
           "$mainMod SHIFT, S, exec, [workspace 3 silent] steam"

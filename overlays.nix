@@ -9,18 +9,18 @@ let
       config.allowUnfree = true;
     };
 
-    vesktop-unstable = inputs.vesktop.legacyPackages.${system}.vesktop;
+    vesktop-unstable = vesktop.legacyPackages.${system}.vesktop;
   };
 
 
   overlay-sketti = final: prev: {
     sketti = self.packages.${system};
-    neovim = inputs.neovim.packages.${system}.default;
+    neovim = neovim.packages.${system}.default;
   };
 
   overlay-hyprland = final: prev: {
-    hyprland-git = inputs.hyprland.packages.${system}.hyprland;
-    hyprpicker-git = inputs.hyprpicker.packages.${system}.default;
+    hyprland-git = hyprland.packages.${system}.hyprland;
+    hyprpicker-git = hyprpicker.packages.${system}.default;
   };
 
 in

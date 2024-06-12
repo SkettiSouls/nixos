@@ -7,6 +7,7 @@ let
     ;
 
   cfg = config.shit.udiskie;
+  hyprland = config.shit.hyprland;
 in
 {
   options.shit.udiskie = {
@@ -17,7 +18,8 @@ in
     services.udiskie = {
       enable = true;
       automount = true;
-      notify = true;
+      # TODO: Switch to dunst.enable once dunst module is made.
+      notify = mkIf hyprland.enable true;
       tray = "never";
 
       settings = {
