@@ -74,11 +74,13 @@
             nixos = {
               argon = ./hosts/argon/configuration.nix; 
               fluorine = ./hosts/fluorine/configuration.nix;
+              victus = ./hosts/victus/configuration.nix;
             };
 
             home = {
               "skettisouls@argon" = ./hosts/argon/home.nix;
               "skettisouls@fluorine" = ./hosts/fluorine/home.nix;
+              "skettisouls@victus" = ./hosts/victus/home.nix;
             };
 
             flake = {
