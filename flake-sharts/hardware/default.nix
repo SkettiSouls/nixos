@@ -8,6 +8,7 @@ let
 in
 {
   flake.nixosModules = {
+    nvidia = import ./modules/nvidia.nix;
     amdgpu = import ./modules/amdgpu.nix;
     bluetooth = import ./modules/bluetooth.nix;
     fstab = import ./modules/fstab.nix;

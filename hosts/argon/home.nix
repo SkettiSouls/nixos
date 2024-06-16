@@ -41,6 +41,12 @@ in
       bluetooth.enable = true;
     };
 
+    hyprland = {
+      monitors = {
+        "HDMI-A-1" = {};
+      };
+    };
+
     browsers = {
       default = "brave";
       brave.enable = true;

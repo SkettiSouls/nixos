@@ -4,6 +4,8 @@ let
   inherit (lib)
     mkEnableOption
     mkIf
+    mkOption
+    types
     ;
 
   cfg = config.shit.hyprland;
@@ -11,10 +13,38 @@ let
 
   bluetooth = config.peripherals.bluetooth;
   headphones = bluetooth.headphones;
+
+  monitorSpecs = lib.mapAttrsToList (ports: options: ports + "," + options.resolution + "@" + options.refreshRate + "," + options.position + "," + options.scale) cfg.monitors;
 in
 {
   options.shit.hyprland = {
     enable = mkEnableOption "Hyprland user configuration";
+
+    monitors = mkOption {
+      default = {};
+
+      type = with types; attrsOf (submodule {
+        options.resolution = mkOption {
+          type = types.str;
+          default = "19200x1080";
+        };
+
+        options.refreshRate = mkOption {
+          type = types.str;
+          default = "60";
+        };
+
+        options.position = mkOption {
+          type = types.str;
+          default = "0x0";
+        };
+
+        options.scale = mkOption {
+          type = types.str;
+          default = "1";
+        };
+      });
+    };
   };
 
   config = mkIf cfg.enable {
@@ -42,6 +72,8 @@ in
     };
 
     home.file = {
+      # TODO: Move wallpaper to /etc/nixos/shit/wallpapers
+      # TODO: Somehow get derive the monitor for the wallpaper from cfg.monitors.
       # Configure wallpaper.
       ".config/hypr/hyprpaper.conf".text = ''
           preload = ${home}/Pictures/wallpapers/suncat.jpg
@@ -56,7 +88,7 @@ in
       xwayland.enable = true;
       settings = {
         # Monitor layouts, see https://wiki.hyprland.org/Configuring/Monitors/
-        "monitor" = "HDMI-A-1,1920x1080@60,0x0,1";
+        monitor = monitorSpecs;
 
         exec-once = [
           "hyprpaper &"
@@ -266,7 +298,6 @@ in
           #swallow_exception_regex = "^(spit)"; # anti-swallow bash script planned
         };
       };
-
     };
   };
 }

@@ -37,9 +37,18 @@ in
   programs.home-manager.enable = true;
 
   shit = {
-    #audio = {
-    #  bluetooth.enable = true;
-    #};
+    audio = {
+     bluetooth.enable = true;
+    };
+
+    hyprland = {
+      monitors = {
+        "eDP-1" = {
+          refreshRate = "144";
+          scale = "1.25";
+        };
+      };
+    };
 
     browsers = {
       default = "brave";
@@ -53,6 +62,7 @@ in
         enable = true;
         distroName = "TrollOS ${config.home.version.release}";
         image = {
+          # TODO: move this image to `/etc/nixos/shit/images`
           # source = "${config.home.homeDirectory}/Pictures/meme/troll/troll3D.png";
           renderer = mkIf kitty.enable "kitty";
           size = "320px";

@@ -51,9 +51,14 @@
   # };
 
   shit = {
-    # pipewire.enable = true;
+    pipewire.enable = true;
     # TODO: Add to luni-net.
     wireguard.enable = lib.mkForce false;
+
+    hardware = {
+      nvidia.enable = true;
+      bluetooth.enable = true;
+    };
 
     home-manager = {
       enable = true;
