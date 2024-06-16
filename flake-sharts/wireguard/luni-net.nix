@@ -9,8 +9,6 @@ let
   cfg = config.shit.wireguard;
 in
 {
-  imports = [self.nixosModules.flake-guard-host];
-
   options.shit.wireguard.enable = mkEnableOption "Luni-net";
 
   config = mkIf cfg.enable {

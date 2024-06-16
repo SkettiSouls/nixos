@@ -10,10 +10,11 @@ let
 in
 {
   options.shit.hardware.bluetooth = {
-    enable = mkEnableOption "BlueTooth";
+    enable = mkEnableOption "Bluetooth";
   };
 
   config = mkIf cfg.enable {
+    # TODO: Make bluetooth a feature instead of a hardware module.
     hardware = {
       bluetooth = {
         enable = true;

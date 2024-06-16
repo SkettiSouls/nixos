@@ -6,14 +6,15 @@ let
     mkIf
     ;
 
-  cfg = config.shit.hardware.gpu;
+  cfg = config.shit.hardware.amdgpu;
 in
 {
-  options.shit.hardware.gpu = {
+  options.shit.hardware.amdgpu = {
     enable = mkEnableOption "AMDGPU";
   };
 
   config = mkIf cfg.enable {
+    # TODO: Check if this is redundant.
     environment.systemPackages = with pkgs; [
       mesa
       libva

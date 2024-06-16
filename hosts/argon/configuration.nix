@@ -92,7 +92,7 @@
     pipewire.enable = true;
 
     hardware = {
-      gpu.enable = true;
+      amdgpu.enable = true;
       fstab.enable = true;
       bluetooth.enable = true;
     };

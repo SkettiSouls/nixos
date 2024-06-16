@@ -32,11 +32,11 @@
 
           flakeModules = {
             # features = importApply ./flake-sharts/features args;
-            # hardware = importApply ./flake-sharts/hardware args;
+            hardware = importApply ./flake-sharts/hardware args;
             # home-manager = importApply ./flake-sharts/home-manager args;
             # hosts = importApply ./flake-sharts/hosts args;
             libs = importApply ./flake-sharts/libs args;
-            # nixos = importApply ./flake-sharts/nixos args;
+            nixos = importApply ./flake-sharts/nixos args;
             # packages = importApply ./flake-sharts/packages args;
             # roles = importApply ./flake-sharts/roles args;
             # users = importApply ./flake-sharts/users args;
@@ -45,8 +45,13 @@
         in
         {
           imports = with flakeModules; [
+            hardware
             libs
+            nixos
             wireguard
+
+            inputs.lynx.flakeModules.flake-guard
+            inputs.asluni.flakeModules.asluni
           ];
 
           options = {
@@ -84,7 +89,7 @@
 
               nixosConfigurations = mapAttrs (name: value: nixosSystem {
                 specialArgs = { inherit inputs self; };
-                modules = [ value ./global.nix ./roles ./overlays.nix ./flake-sharts/wireguard/luni-net.nix ];
+                modules = [ value ./global.nix ./roles ./overlays.nix config.flake.nixosModules.default ];
               }) config.nixos;
 
               homeConfigurations = mapAttrs (name: value: home-manager.lib.homeManagerConfiguration {
