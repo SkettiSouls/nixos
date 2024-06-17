@@ -1,32 +1,33 @@
 { config, lib, pkgs, ... }:
-
 let
   inherit (lib)
+    concatLists
+    mapAttrsToList
     mkEnableOption
     mkIf
     mkOption
     types
     ;
 
+  inherit (builtins)
+    map
+    ;
+
   cfg = config.shit.hyprland;
+  headphones = config.peripherals.bluetooth.headphones;
   home = config.home.homeDirectory;
 
-  bluetooth = config.peripherals.bluetooth;
-  headphones = bluetooth.headphones;
-
-  monitorSpecs = lib.mapAttrsToList (ports: options: ports + "," + options.resolution + "@" + options.refreshRate + "," + options.position + "," + options.scale) cfg.monitors;
+  monitorSpecs = mapAttrsToList (ports: options: with options; "${ports},${resolution}@${refreshRate},${position},${scale}") cfg.monitors;
 in
 {
   options.shit.hyprland = {
     enable = mkEnableOption "Hyprland user configuration";
-
     monitors = mkOption {
       default = {};
-
       type = with types; attrsOf (submodule {
         options.resolution = mkOption {
           type = types.str;
-          default = "19200x1080";
+          default = "1920x1080";
         };
 
         options.refreshRate = mkOption {
@@ -42,6 +43,19 @@ in
         options.scale = mkOption {
           type = types.str;
           default = "1";
+        };
+      });
+    };
+
+    wallpapers = mkOption {
+      default = {};
+      type = with types; attrsOf (submodule {
+        options.monitors = mkOption {
+          type = with types; either (listOf str) str;
+        };
+
+        options.source = mkOption {
+          type = with types; either path str;
         };
       });
     };
@@ -71,15 +85,13 @@ in
       config.common.default = "*";
     };
 
-    home.file = {
-      # TODO: Move wallpaper to /etc/nixos/shit/wallpapers
-      # TODO: Somehow get derive the monitor for the wallpaper from cfg.monitors.
-      # Configure wallpaper.
-      ".config/hypr/hyprpaper.conf".text = ''
-          preload = ${home}/Pictures/wallpapers/suncat.jpg
-          wallpaper = HDMI-A-1,contain:${home}/Pictures/wallpapers/suncat.jpg
-          splash = false
-      '';
+    services.hyprpaper = {
+      enable = true;
+      settings = {
+        preload = mapAttrsToList (name: options: options.source) cfg.wallpapers;
+        wallpaper = concatLists (mapAttrsToList (name: options: (map (port: "${port},contain:${options.source}") options.monitors)) cfg.wallpapers);
+        splash = false;
+      };
     };
 
     wayland.windowManager.hyprland = {

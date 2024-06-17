@@ -5,6 +5,10 @@ let
     ;
 
   kitty = config.shit.kitty;
+
+  # Allow for easily switching my main monitor
+  samsung27Curved = "HDMI-A-1";
+  mainMonitor = samsung27Curved;
 in
 {
   imports = [
@@ -43,7 +47,14 @@ in
 
     hyprland = {
       monitors = {
-        "HDMI-A-1" = {};
+        "${mainMonitor}" = {};
+      };
+
+      wallpapers = {
+        suncat = {
+          monitors = [ mainMonitor ];
+          source = "/etc/nixos/shit/images/suncat.jpg";
+        };
       };
     };
 
@@ -59,7 +70,7 @@ in
         enable = true;
         distroName = "TrollOS ${config.home.version.release}";
         image = {
-          source = "${config.home.homeDirectory}/Pictures/meme/troll/troll3D.png";
+          source = ../../shit/images/troll3D.png;
           renderer = mkIf kitty.enable "kitty";
           size = "320px";
         };
