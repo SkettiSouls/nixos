@@ -37,7 +37,7 @@
             # hosts = importApply ./flake-sharts/hosts args;
             libs = importApply ./flake-sharts/libs args;
             nixos = importApply ./flake-sharts/nixos args;
-            # packages = importApply ./flake-sharts/packages args;
+            packages = importApply ./flake-sharts/packages args;
             # roles = importApply ./flake-sharts/roles args;
             # users = importApply ./flake-sharts/users args;
             wireguard = importApply ./flake-sharts/wireguard args;
@@ -48,6 +48,7 @@
             hardware
             libs
             nixos
+            packages
             wireguard
 
             inputs.lynx.flakeModules.flake-guard
@@ -98,14 +99,6 @@
                 pkgs = nixpkgs.legacyPackages.x86_64-linux;
                 modules = [ value ./overlays.nix ];
               }) config.home;
-            };
-
-            perSystem = { config, lib, pkgs, ... }: {
-              packages = {
-                connect-headphones = pkgs.callPackage ./packages/connect-headphones {};
-                eat = pkgs.callPackage ./packages/eat {};
-                play = pkgs.callPackage ./packages/play {};
-              };
             };
           };
         });
