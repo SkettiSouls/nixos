@@ -115,13 +115,6 @@ in
         "env" = [
           "XCURSOR_THEME,phinger-cursors-dark"
           "XCURSOR_SIZE,24"
-
-          # TODO: mkIf nvidia proprietary drivers
-          # NVIDIA
-          "LIBVA_DRIVER_NAME,nvidia"
-          "XDG_SESSION_TYPE,wayland"
-          "LIBVA_DRIVER_NAME,nvidia-drm"
-          "__GLX_VENDOR_LIBRARY,nvidia"
         ];
 
         # TODO: mkIf nvidia proprietary drivers
