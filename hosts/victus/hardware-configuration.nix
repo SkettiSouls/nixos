@@ -13,6 +13,17 @@
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
+  hardware.nvidia.prime = {
+    intelBusId = "PCI:0:2:0";
+    nvidiaBusId = "PCI:1:0:0";
+
+    offload = {
+      enable = true;
+      # Run `nvidia-offload <CMD>` to use dGPU.
+      enableOffloadCmd = true;
+    };
+  };
+
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/ee1c930c-b331-4000-9bfb-36db4cdf74e0";
       fsType = "ext4";

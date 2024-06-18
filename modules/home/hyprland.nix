@@ -78,11 +78,10 @@ in
 
     xdg.portal = {
       enable = true;
+      config.common.default = "hyprland";
       extraPortals = with pkgs; [
         xdg-desktop-portal-hyprland
-        xdg-desktop-portal-gtk
       ];
-      config.common.default = "*";
     };
 
     services.hyprpaper = {
@@ -116,7 +115,19 @@ in
         "env" = [
           "XCURSOR_THEME,phinger-cursors-dark"
           "XCURSOR_SIZE,24"
+
+          # TODO: mkIf nvidia proprietary drivers
+          # NVIDIA
+          "LIBVA_DRIVER_NAME,nvidia"
+          "XDG_SESSION_TYPE,wayland"
+          "LIBVA_DRIVER_NAME,nvidia-drm"
+          "__GLX_VENDOR_LIBRARY,nvidia"
         ];
+
+        # TODO: mkIf nvidia proprietary drivers
+        cursor = {
+          no_hardware_cursors = true;
+        };
 
         input = {
           kb_layout = "us";

@@ -8,6 +8,7 @@
 
   roles = {
     desktop.enable = true;
+    gaming.enable = true;
     workstation.enable = true;
   };
 
@@ -46,6 +47,11 @@
   #   enableSSHSupport = true;
   # };
 
+  programs = {
+    dconf.enable = true;
+    xwayland.enable = true;
+  };
+
   # hardware = {
   #   enableRedistributableFirmware = true;
   # };
@@ -56,8 +62,8 @@
     wireguard.enable = lib.mkForce false;
 
     hardware = {
-      nvidia.enable = true;
       bluetooth.enable = true;
+      nvidia.enable = true;
     };
 
     home-manager = {
