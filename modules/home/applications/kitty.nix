@@ -26,7 +26,6 @@ in
       settings = {
         scrollback_lines = 10000;
         background_opacity = "0.8";
-        linux_display_server = "wayland";
         editor = "nvim";
         update_check_interval = 0;
         ### Tab Bar ###

@@ -17,6 +17,8 @@
     workstation.enable = true;
   };
 
+  shit.users.skettisouls = true;
+
   # Kernel
   boot.kernelPackages = pkgs.linuxPackages_6_8;
 
@@ -38,16 +40,6 @@
 
   # Set your time zone.
   time.timeZone = "America/Chicago";
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.skettisouls = {
-    isNormalUser = true;
-    description = "skettisouls";
-    extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-      gnome.nautilus
-    ];
-  };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget

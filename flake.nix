@@ -39,7 +39,7 @@
             nixos = importApply ./flake-sharts/nixos args;
             packages = importApply ./flake-sharts/packages args;
             # roles = importApply ./flake-sharts/roles args;
-            # users = importApply ./flake-sharts/users args;
+            users = importApply ./flake-sharts/users args;
             wireguard = importApply ./flake-sharts/wireguard args;
           };
         in
@@ -49,6 +49,7 @@
             libs
             nixos
             packages
+            users
             wireguard
 
             inputs.lynx.flakeModules.flake-guard
@@ -90,14 +91,24 @@
 
               inherit flakeModules;
 
-              nixosConfigurations = mapAttrs (name: value: nixosSystem {
+              nixosConfigurations = mapAttrs (hostName: configFile: nixosSystem {
                 specialArgs = { inherit inputs self; };
-                modules = [ value ./global.nix ./roles ./overlays.nix config.flake.nixosModules.default ];
+                modules = [
+                  configFile
+                  ./global.nix
+                  ./roles
+                  ./overlays.nix
+                  config.flake.nixosModules.default
+                  config.flake.userModules.default
+                ];
               }) config.nixos;
 
               homeConfigurations = mapAttrs (name: value: home-manager.lib.homeManagerConfiguration {
                 pkgs = nixpkgs.legacyPackages.x86_64-linux;
-                modules = [ value ./overlays.nix ];
+                modules = [
+                  value
+                  ./overlays.nix
+                ];
               }) config.home;
             };
           };

@@ -34,8 +34,6 @@ in
       shellAliases = {
         ":q" = " exit";
         cp = "rsync";
-        compile = "./compile";
-        run = "./run";
         icat = mkIf kitty.enable "kitten icat";
         ls = "eza --icons=always --group-directories-first";
       };

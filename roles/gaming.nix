@@ -17,20 +17,23 @@ in
       home-manager.enable = true;
     };
 
-    home-manager.users.skettisouls = {
-      shit = {
-        mangohud.enable = true;
-      };
+    home-manager.users = lib.mapAttrs
+    (name: value:
+      {
+        shit = {
+          mangohud.enable = true;
+        };
 
-      home.packages = with pkgs; [
-        prismlauncher
-        lutris
-        wineWowPackages.staging
-        winetricks
-        heroic
-        scarab
-        minetest
-      ];
-    };
+        home.packages = with pkgs; [
+          heroic
+          lutris
+          minetest
+          prismlauncher
+          scarab
+          wineWowPackages.staging
+          winetricks
+        ];
+      }
+    ) config.shit.home-manager.users;
   };
 }

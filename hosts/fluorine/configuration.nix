@@ -14,6 +14,8 @@
     workstation.enable = true;
   };
 
+  shit.users.skettisouls = true;
+
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -34,13 +36,6 @@
 
   # Set your time zone.
   time.timeZone = "America/Chicago";
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.skettisouls = {
-    isNormalUser = true;
-    description = "skettisouls";
-    extraGroups = [ "networkmanager" "wheel" ];
-  };
 
   shit = {
     home-manager = {
