@@ -371,6 +371,22 @@
         "type": "github"
       }
     },
+    "midnight-discord": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1718915348,
+        "narHash": "sha256-Mp6tuvFKrGjvsAbXx4abyncKPIgdqlpZvI7T1QJH+iw=",
+        "ref": "refs/heads/master",
+        "rev": "7b4ce4c7c27aae896d8e0b893e4a943ad6b1b375",
+        "revCount": 372,
+        "type": "git",
+        "url": "https://github.com/refact0r/midnight-discord"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://github.com/refact0r/midnight-discord"
+      }
+    },
     "neovim": {
       "inputs": {
         "nixpkgs": "nixpkgs_4",
@@ -464,11 +480,11 @@
     },
     "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1717786204,
-        "narHash": "sha256-4q0s6m0GUcN7q+Y2DqD27iLvbcd1G50T2lv08kKxkSI=",
+        "lastModified": 1718714799,
+        "narHash": "sha256-FUZpz9rg3gL8NVPKbqU8ei1VkPLsTIfAJ2fdAf5qjak=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "051f920625ab5aabe37c920346e3e69d7d34400e",
+        "rev": "c00d587b1a1afbf200b1d8f0b0e4ba9deb1c7f0e",
         "type": "github"
       },
       "original": {
@@ -566,6 +582,7 @@
         "hyprland": "hyprland",
         "hyprpicker": "hyprpicker",
         "lynx": "lynx",
+        "midnight-discord": "midnight-discord",
         "neovim": "neovim",
         "nixpkgs": "nixpkgs_5",
         "nixpkgs-unstable": "nixpkgs-unstable",
@@ -667,11 +684,11 @@
     },
     "vesktop": {
       "locked": {
-        "lastModified": 1717974879,
-        "narHash": "sha256-GTO3C88+5DX171F/gVS3Qga/hOs/eRMxPFpiHq2t+D8=",
+        "lastModified": 1718895438,
+        "narHash": "sha256-k3JqJrkdoYwE3fHE6xGDY676AYmyh4U2Zw+0Bwe5DLU=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "c7b821ba2e1e635ba5a76d299af62821cbcb09f3",
+        "rev": "d603719ec6e294f034936c0d0dc06f689d91b6c3",
         "type": "github"
       },
       "original": {

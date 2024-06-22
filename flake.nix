@@ -15,6 +15,11 @@
     };
     hyprpicker.url = "github:hyprwm/hyprpicker";
     schizofox.url = "github:schizofox/schizofox";
+    midnight-discord = {
+      type = "git";
+      url = "https://github.com/refact0r/midnight-discord";
+      flake = false;
+    };
   };
 
   outputs = inputs @ { self, nixpkgs, home-manager, flake-parts, lynx, asluni, ... }:
