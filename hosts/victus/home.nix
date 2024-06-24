@@ -5,8 +5,7 @@ let
     ;
 
   kitty = config.shit.kitty;
-
-internalMonitor = "eDP-1";
+  internalMonitor = "eDP-1";
 in
 {
   imports = [
@@ -44,11 +43,10 @@ in
     };
 
     hyprland = {
-      monitors."${internalMonitor}".refreshRate = "144";
       wallpapers = {
         suncat = {
           monitors = [ internalMonitor ];
-          source = "/etc/nixos/shit/images/suncat.jpg";
+          source = "/etc/nixos/shit/images/wallpapers/suncat.jpg";
         };
       };
     };
@@ -65,7 +63,7 @@ in
         enable = true;
         distroName = "TrollOS ${config.home.version.release}";
         image = {
-          source = ../../shit/images/troll3D.png;
+          source = ../../shit/images/fetch/troll3D.png;
           renderer = mkIf kitty.enable "kitty";
           size = "320px";
         };

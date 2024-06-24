@@ -8,10 +8,13 @@ let
 in
 {
   flake.nixosModules = {
-    nvidia = import ./modules/nvidia.nix;
     amdgpu = import ./modules/amdgpu.nix;
+    nvidia = import ./modules/nvidia.nix;
+
     bluetooth = import ./modules/bluetooth.nix;
     fstab = import ./modules/fstab.nix;
+
+    hardwareOptions = import ./modules/options.nix;
 
     default.imports = combineModules config.flake.nixosModules;
   };

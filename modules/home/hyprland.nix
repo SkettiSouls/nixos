@@ -80,7 +80,7 @@ in
       enable = true;
       config.common.default = "hyprland";
       extraPortals = with pkgs; [
-        xdg-desktop-portal-hyprland
+        xdph-git
       ];
     };
 
@@ -116,11 +116,6 @@ in
           "XCURSOR_THEME,phinger-cursors-dark"
           "XCURSOR_SIZE,24"
         ];
-
-        # TODO: mkIf nvidia proprietary drivers
-        cursor = {
-          no_hardware_cursors = true;
-        };
 
         input = {
           kb_layout = "us";
@@ -182,12 +177,13 @@ in
         dwindle = {
           # See https://wiki.hyprland.org/Configuring/Dwindle-Layout/
           pseudotile = "yes"; # master switch for psuedotiling. mainMod + P
-          preserve_split = "yes"; # you probably want this
+          preserve_split = true; # you probably want this
         };
 
         master = {
           # See https://wiki.hyprland.org/Configuring/Master-Layout/
-          new_is_master = true;
+          # new_is_master = true; # Becomes new_status in 0.41.0 and later.
+          new_status = "slave";
         };
 
         gestures = {
@@ -199,8 +195,8 @@ in
         "$mainMod" = "SUPER";
         "$TERM" = "kitty";
 
-        bind = [
         # TODO: Better binds system.
+        bind = [
           # System Binds
           "$mainMod, Q, killactive"
           #"$mainMod, E, wlogout -p layer-shell"
@@ -244,6 +240,11 @@ in
           "$mainMod, K, movefocus, u"
           "$mainMod, J, movefocus, d"
 
+          # TODO: Make it more like a DE ( swap back and forth, show windows )
+          # DE like alt tab
+          "ALT, TAB, cyclenext"
+          "ALT, TAB, bringactivetotop"
+
           # Switch Workspaces (SUPER + [0-9])
           "$mainMod, 1, workspace, 1"
           "$mainMod, 2, workspace, 2"
@@ -282,20 +283,25 @@ in
           "$mainMod CTRL, 0, movetoworkspace, 10"
           "$mainMod CTRL, TAB, movetoworkspace, special"
 
-          # Move/Resize Windows
+          # Move Windows
           "$mainMod SHIFT, left, movewindow, l"
           "$mainMod SHIFT, right, movewindow, r"
           "$mainMod SHIFT, up, movewindow, u"
           "$mainMod SHIFT, down, movewindow, d"
-          "$mainMod CTRL, left, resizeactive, -1% 0%"
-          "$mainMod CTRL, right, resizeactive, 1% 0%"
-          "$mainMod CTRL, up, resizeactive, 0% 1%"
-          "$mainMod CTRL, down, resizeactive, 0% -1%"
           # W/ Vim Controls
           "$mainMod SHIFT, H, movewindow, l"
           "$mainMod SHIFT, L, movewindow, r"
           "$mainMod SHIFT, K, movewindow, u"
           "$mainMod SHIFT, J, movewindow, d"
+        ];
+
+        binde = [
+          # Resize Windows
+          "$mainMod CTRL, left, resizeactive, -1% 0%"
+          "$mainMod CTRL, right, resizeactive, 1% 0%"
+          "$mainMod CTRL, up, resizeactive, 0% 1%"
+          "$mainMod CTRL, down, resizeactive, 0% -1%"
+          # W/ Vim Controls
           "$mainMod CTRL, H, resizeactive, -1% 0%"
           "$mainMod CTRL, L, resizeactive, 1% 0%"
           "$mainMod CTRL, K, resizeactive, 0% 1%"
@@ -311,7 +317,8 @@ in
           disable_hyprland_logo = true;
           enable_swallow = true;
           swallow_regex = "^(kitty)$";
-          #swallow_exception_regex = "^(spit)"; # anti-swallow bash script planned
+          # TODO: Make a bash script that lets me prevent window swallowing.
+          # swallow_exception_regex = "^(spit)";
         };
       };
     };
