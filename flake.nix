@@ -35,6 +35,9 @@
             types
             ;
 
+          mapHosts = map (host: { ${host} = ./hosts/${host}/configuration.nix; });
+          delist = builtins.foldl' (acc: attrs: acc // attrs) {};
+
           flakeModules = {
             # features = importApply ./flake-sharts/features args;
             hardware = importApply ./flake-sharts/hardware args;
@@ -62,15 +65,8 @@
           ];
 
           options = {
-            nixos = mkOption {
-              type = with types; attrsOf unspecified;
-              default = {};
-            };
-
-            home = mkOption {
-              type = with types; attrsOf unspecified;
-              default = {};
-            };
+            nixos = mkOption { type = with types; attrsOf unspecified; };
+            home = mkOption { type = with types; attrsOf unspecified; };
           };
 
           config = {
@@ -78,12 +74,13 @@
               "x86_64-linux"
             ];
 
-            nixos = {
-              argon = ./hosts/argon/configuration.nix; 
-              fluorine = ./hosts/fluorine/configuration.nix;
-              victus = ./hosts/victus/configuration.nix;
-            };
+            nixos = delist (mapHosts [
+              "argon"
+              "fluorine"
+              "victus"
+            ]);
 
+            # TODO: Switch to `skettisouls = [ argon fluorine victus ]` structure.
             home = {
               "skettisouls@argon" = ./hosts/argon/home.nix;
               "skettisouls@fluorine" = ./hosts/fluorine/home.nix;
@@ -108,6 +105,7 @@
                 ];
               }) config.nixos;
 
+              # FIXME: Infinite recursion.
               homeConfigurations = mapAttrs (name: value: home-manager.lib.homeManagerConfiguration {
                 pkgs = nixpkgs.legacyPackages.x86_64-linux;
                 modules = [

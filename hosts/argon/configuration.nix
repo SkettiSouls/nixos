@@ -63,7 +63,6 @@
   };
 
   programs = {
-
     dconf.enable = true;
     xwayland.enable = true;
   };
@@ -82,19 +81,6 @@
 
   shit = {
     pipewire.enable = true;
-
-    hardware = {
-      amdgpu.enable = true;
-      fstab.enable = true;
-      bluetooth.enable = true;
-    };
-
-    home-manager = {
-      enable = true;
-      users = {
-        skettisouls = import ./home.nix;
-      };
-    };
   };
 
   /* Doesn't work

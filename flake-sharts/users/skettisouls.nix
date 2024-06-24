@@ -6,7 +6,10 @@ let
     ;
 
   cfg.enable = config.shit.users.skettisouls;
-  home = config.home-manager.users.skettisouls.home.homeDirectory;
+  homeManager = config.home-manager.users.skettisouls;
+  home = homeManager.home.homeDirectory;
+
+  notServer = config.roles.server.enable != true;
 
   # Headphones
   soundcoreSpaceQ45 = "E8:EE:CC:4B:FA:2A";
@@ -24,9 +27,18 @@ in
       ];
     };
 
+    shit.home-manager = {
+      enable = true;
+      users.skettisouls = import ../../hosts/${config.networking.hostName}/home.nix;
+    };
+
     home-manager.users.skettisouls = {
-      home.sessionVariables = {
-        EDITOR = "nvim";
+      home = {
+        username = "skettisouls";
+        homeDirectory = "/home/skettisouls";
+        sessionVariables = {
+          EDITOR = "nvim";
+        };
       };
 
       peripherals.bluetooth = {
@@ -41,13 +53,18 @@ in
       };
 
       shit = {
+        fetch.trollOS.enable = mkIf notServer true;
         git.enable = true;
         gpg.enable = true;
-        browsers.default = lib.mkDefault "qutebrowser";
 
         bash = {
           enable = true;
           aliaspp.enable = true;
+        };
+
+        browsers = mkIf notServer {
+          default = lib.mkDefault "qutebrowser";
+          qutebrowser.enable = true;
         };
       };
     };

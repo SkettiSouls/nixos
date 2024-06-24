@@ -40,15 +40,12 @@ in
       (nerdfonts.override { fonts = [ "SourceCodePro" "DejaVuSansMono" ]; })
     ];
 
-    home-manager.users = lib.mapAttrs
-    (name: value:
-      {
-        shit = {
-          bash.enable = true;
-          git.enable = true;
-          gpg.enable = true;
-        };
-      }
-    ) config.shit.home-manager.users;
+    home-manager.sharedModules = [{
+      shit = {
+        bash.enable = true;
+        git.enable = true;
+        gpg.enable = true;
+      };
+    }];
   };
 }

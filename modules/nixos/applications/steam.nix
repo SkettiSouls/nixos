@@ -9,11 +9,11 @@ let
     types
     ;
 
-  cfg = config.shit.applications.steam;
+  cfg = config.shit.steam;
   nvidia-offload = config.hardware.nvidia.prime.offload.enable;
 in
 {
-  options.shit.applications.steam = {
+  options.shit.steam = {
     enable = mkEnableOption "Steam";
     offload.nvidia = mkOption {
       type = types.bool;

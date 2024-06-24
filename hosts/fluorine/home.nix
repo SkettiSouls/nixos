@@ -5,21 +5,12 @@
     ../../modules/home
   ];
 
-  # Home Manager needs a bit of information about you and the
-  # paths it should manage.
-
-  home = {
-    username = "skettisouls";
-    homeDirectory = "/home/skettisouls";
-    packages = with pkgs; [];
-  };
+  home.packages = with pkgs; [];
 
   shit = {
-    fetch = {
-      active = with pkgs; [
-        neofetch
-        fastfetch
-      ];
+    fetch.neofetch = {
+      enable = true;
+      showHost = true;
     };
   };
 

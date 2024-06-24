@@ -37,15 +37,6 @@
   # Set your time zone.
   time.timeZone = "America/Chicago";
 
-  shit = {
-    home-manager = {
-      enable = true;
-      users = {
-        skettisouls = import ./home.nix;
-      };
-    };
-  };
-
   nix.settings = {
     trusted-users = [
       "skettisouls"
