@@ -1,8 +1,5 @@
 { config, lib, pkgs,  ... }:
-let
-  monitors = builtins.foldl' (acc: attrs: acc // attrs) {} config.shit.hardware.monitors;
-  internalMonitor = if monitors.primary then monitors.displayPort else "";
-in
+
 {
   imports = [
     ./hardware-configuration.nix
@@ -46,22 +43,6 @@ in
     # TODO: Add to luni-net.
     wireguard.enable = lib.mkForce false;
   };
-
-  home-manager.sharedModules = [{
-    # Set default system wallpaper and monitor settings.
-    # TODO: Move to hyprland or monitors home-manager module.
-    shit = {
-      hyprland = lib.mkDefault {
-        monitors.${internalMonitor}.refreshRate = monitors.refreshRate;
-        wallpapers = {
-          nixos = {
-            monitors = [ internalMonitor ];
-            source = "/etc/nixos/shit/images/wallpapers/nixos-frappe.png";
-          };
-        };
-      };
-    };
-  }];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

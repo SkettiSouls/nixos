@@ -1,15 +1,4 @@
 { config, lib, pkgs, ... }:
-let
-  inherit (lib)
-    mkIf
-    ;
-
-  kitty = config.shit.kitty;
-
-  # Allow for easily switching my main monitor
-  samsung27Curved = "HDMI-A-1";
-  mainMonitor = samsung27Curved;
-in
 {
   imports = [
     ../../modules/home
@@ -24,17 +13,8 @@ in
       bluetooth.enable = true;
     };
 
-    hyprland = {
-      monitors = {
-        "${mainMonitor}" = {};
-      };
-
-      wallpapers = {
-        suncat = {
-          monitors = [ mainMonitor ];
-          source = "/etc/nixos/shit/images/wallpapers/suncat.jpg";
-        };
-      };
+    hyprland.wallpapers = {
+      suncat.source = "/etc/nixos/shit/images/wallpapers/suncat.jpg";
     };
 
     browsers = {

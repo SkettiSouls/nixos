@@ -3,7 +3,8 @@
     ./applications
     ./audio
     ./cli
-    ./hyprland.nix
+    ./hyprland
+
     ./peripherals.nix
     ./udiskie.nix
   ];

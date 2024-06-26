@@ -1,11 +1,5 @@
 { config, lib, pkgs, ... }:
-let
-  inherit (lib)
-    mkIf
-    ;
 
-  internalMonitor = "eDP-1";
-in
 {
   imports = [
     ../../modules/home
@@ -20,13 +14,8 @@ in
      bluetooth.enable = true;
     };
 
-    hyprland = {
-      wallpapers = {
-        suncat = {
-          monitors = [ internalMonitor ];
-          source = "/etc/nixos/shit/images/wallpapers/suncat.jpg";
-        };
-      };
+    hyprland.wallpapers = {
+      suncat.source = "/etc/nixos/shit/images/wallpapers/suncat.jpg";
     };
 
     browsers = {

@@ -16,49 +16,10 @@ let
   cfg = config.shit.hyprland;
   headphones = config.peripherals.bluetooth.headphones;
   home = config.home.homeDirectory;
-
-  monitorSpecs = mapAttrsToList (ports: options: with options; "${ports},${resolution}@${refreshRate},${position},${scale}") cfg.monitors;
 in
 {
   options.shit.hyprland = {
     enable = mkEnableOption "Hyprland user configuration";
-    monitors = mkOption {
-      default = {};
-      type = with types; attrsOf (submodule {
-        options.resolution = mkOption {
-          type = types.str;
-          default = "1920x1080";
-        };
-
-        options.refreshRate = mkOption {
-          type = types.str;
-          default = "60";
-        };
-
-        options.position = mkOption {
-          type = types.str;
-          default = "0x0";
-        };
-
-        options.scale = mkOption {
-          type = types.str;
-          default = "1";
-        };
-      });
-    };
-
-    wallpapers = mkOption {
-      default = {};
-      type = with types; attrsOf (submodule {
-        options.monitors = mkOption {
-          type = with types; either (listOf str) str;
-        };
-
-        options.source = mkOption {
-          type = with types; either path str;
-        };
-      });
-    };
   };
 
   config = mkIf cfg.enable {
@@ -71,7 +32,6 @@ in
         hyprpicker = pkgs.hyprpicker-git;
       })
       wl-clipboard
-      hyprpaper
       dunst
       sketti.connect-headphones
     ];
@@ -84,23 +44,11 @@ in
       ];
     };
 
-    services.hyprpaper = {
-      enable = true;
-      settings = {
-        preload = mapAttrsToList (name: options: options.source) cfg.wallpapers;
-        wallpaper = concatLists (mapAttrsToList (name: options: (map (port: "${port},contain:${options.source}") options.monitors)) cfg.wallpapers);
-        splash = false;
-      };
-    };
-
     wayland.windowManager.hyprland = {
       enable = true;
       package = pkgs.hyprland-git;
       xwayland.enable = true;
       settings = {
-        # Monitor layouts, see https://wiki.hyprland.org/Configuring/Monitors/
-        monitor = monitorSpecs;
-
         exec-once = [
           "hyprpaper &"
           "dunst &"

@@ -16,9 +16,7 @@ in
     bluetooth = import ./modules/bluetooth.nix;
     fstab = import ./modules/fstab.nix;
     laptop = import ./modules/laptop.nix;
-
-    # Option Modules
-    monitors = import ./options/monitors.nix;
+    monitors = import ./modules/monitors.nix;
 
     default.imports = combineModules config.flake.nixosModules;
   };
