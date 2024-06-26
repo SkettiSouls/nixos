@@ -15,6 +15,11 @@
     };
     hyprpicker.url = "github:hyprwm/hyprpicker";
     schizofox.url = "github:schizofox/schizofox";
+    midnight-discord = {
+      type = "git";
+      url = "https://github.com/refact0r/midnight-discord";
+      flake = false;
+    };
   };
 
   outputs = inputs @ { self, nixpkgs, home-manager, flake-parts, lynx, asluni, ... }:
@@ -30,6 +35,9 @@
             types
             ;
 
+          mapHosts = map (host: { ${host} = ./hosts/${host}/configuration.nix; });
+          delist = builtins.foldl' (acc: attrs: acc // attrs) {};
+
           flakeModules = {
             # features = importApply ./flake-sharts/features args;
             hardware = importApply ./flake-sharts/hardware args;
@@ -37,9 +45,9 @@
             # hosts = importApply ./flake-sharts/hosts args;
             libs = importApply ./flake-sharts/libs args;
             nixos = importApply ./flake-sharts/nixos args;
-            # packages = importApply ./flake-sharts/packages args;
+            packages = importApply ./flake-sharts/packages args;
             # roles = importApply ./flake-sharts/roles args;
-            # users = importApply ./flake-sharts/users args;
+            users = importApply ./flake-sharts/users args;
             wireguard = importApply ./flake-sharts/wireguard args;
           };
         in
@@ -48,6 +56,8 @@
             hardware
             libs
             nixos
+            packages
+            users
             wireguard
 
             inputs.lynx.flakeModules.flake-guard
@@ -55,15 +65,8 @@
           ];
 
           options = {
-            nixos = mkOption {
-              type = with types; attrsOf unspecified;
-              default = {};
-            };
-
-            home = mkOption {
-              type = with types; attrsOf unspecified;
-              default = {};
-            };
+            nixos = mkOption { type = with types; attrsOf unspecified; };
+            home = mkOption { type = with types; attrsOf unspecified; };
           };
 
           config = {
@@ -71,14 +74,17 @@
               "x86_64-linux"
             ];
 
-            nixos = {
-              argon = ./hosts/argon/configuration.nix; 
-              fluorine = ./hosts/fluorine/configuration.nix;
-            };
+            nixos = delist (mapHosts [
+              "argon"
+              "fluorine"
+              "victus"
+            ]);
 
+            # TODO: Switch to `skettisouls = [ argon fluorine victus ]` structure.
             home = {
               "skettisouls@argon" = ./hosts/argon/home.nix;
               "skettisouls@fluorine" = ./hosts/fluorine/home.nix;
+              "skettisouls@victus" = ./hosts/victus/home.nix;
             };
 
             flake = {
@@ -87,23 +93,26 @@
 
               inherit flakeModules;
 
-              nixosConfigurations = mapAttrs (name: value: nixosSystem {
+              nixosConfigurations = mapAttrs (hostName: configFile: nixosSystem {
                 specialArgs = { inherit inputs self; };
-                modules = [ value ./global.nix ./roles ./overlays.nix config.flake.nixosModules.default ];
+                modules = [
+                  configFile
+                  ./global.nix
+                  ./roles
+                  ./overlays.nix
+                  config.flake.nixosModules.default
+                  config.flake.userModules.default
+                ];
               }) config.nixos;
 
+              # FIXME: Infinite recursion.
               homeConfigurations = mapAttrs (name: value: home-manager.lib.homeManagerConfiguration {
                 pkgs = nixpkgs.legacyPackages.x86_64-linux;
-                modules = [ value ./overlays.nix ];
+                modules = [
+                  value
+                  ./overlays.nix
+                ];
               }) config.home;
-            };
-
-            perSystem = { config, lib, pkgs, ... }: {
-              packages = {
-                connect-headphones = pkgs.callPackage ./packages/connect-headphones {};
-                eat = pkgs.callPackage ./packages/eat {};
-                play = pkgs.callPackage ./packages/play {};
-              };
             };
           };
         });

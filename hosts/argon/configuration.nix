@@ -17,6 +17,8 @@
     workstation.enable = true;
   };
 
+  shit.users.skettisouls = true;
+
   # Kernel
   boot.kernelPackages = pkgs.linuxPackages_6_8;
 
@@ -38,16 +40,6 @@
 
   # Set your time zone.
   time.timeZone = "America/Chicago";
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.skettisouls = {
-    isNormalUser = true;
-    description = "skettisouls";
-    extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-      gnome.nautilus
-    ];
-  };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -71,7 +63,6 @@
   };
 
   programs = {
-
     dconf.enable = true;
     xwayland.enable = true;
   };
@@ -90,19 +81,6 @@
 
   shit = {
     pipewire.enable = true;
-
-    hardware = {
-      amdgpu.enable = true;
-      fstab.enable = true;
-      bluetooth.enable = true;
-    };
-
-    home-manager = {
-      enable = true;
-      users = {
-        skettisouls = import ./home.nix;
-      };
-    };
   };
 
   /* Doesn't work

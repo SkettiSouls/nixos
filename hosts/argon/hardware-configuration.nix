@@ -4,6 +4,22 @@
 { config, lib, pkgs, modulesPath, ... }:
 
 {
+  shit.hardware = {
+    amdgpu.enable = true;
+    bluetooth.enable = true;
+    fstab.enable = true;
+
+    monitors = [
+      {
+        primary = true;
+        displayPort = "HDMI-A-1";
+        resolution = "1920x1080";
+        refreshRate = 60;
+        scale = 1;
+      }
+    ];
+  };
+  # hardware-configuration.nix {{{
   imports =
     [
       (modulesPath + "/installer/scan/not-detected.nix")
@@ -37,4 +53,5 @@
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  # }}}
 }

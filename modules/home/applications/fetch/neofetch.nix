@@ -13,6 +13,7 @@ in
 {
   options.shit.fetch.neofetch = {
     enable = mkEnableOption "Neofetch user configuration";
+    showHost = mkEnableOption "Show motherboard info";
 
     image = {
       # Must be set for non-ascii images
@@ -54,6 +55,7 @@ in
         ${if (cfg.distroName != null) then (''distro="${cfg.distroName}"'') else ""}
         info "OS" distro
         # info "Host" model # Too long, collides with images.
+        ${if cfg.showHost then (''info "Host" model'') else ""}
         info "Kernel" kernel
         info "Uptime" uptime
         info "Packages" packages

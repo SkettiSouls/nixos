@@ -49,7 +49,7 @@ in
        background_alpha=0.500000
 
       /* KEYBINDS */
-      toggle_hud=F12
+      toggle_hud=F11
     '';
   };
 }

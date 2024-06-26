@@ -4,7 +4,7 @@ stdenvNoCC.mkDerivation {
   pname = "connect-headphones";
   version = "1.0";
   nobuild = true;
-  src = ./.;
+  src = ./bash;
   nativeBuildInputs = [ bluez ];
   installPhase = ''
     mkdir -p $out/bin

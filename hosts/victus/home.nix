@@ -1,16 +1,25 @@
-{ pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   imports = [
     ../../modules/home
   ];
 
-  home.packages = with pkgs; [];
+  home.packages = with pkgs; [
+    rofi
+  ];
 
   shit = {
-    fetch.neofetch = {
-      enable = true;
-      showHost = true;
+    audio = {
+     bluetooth.enable = true;
+    };
+
+    hyprland.wallpapers = {
+      suncat.source = "/etc/nixos/shit/images/wallpapers/suncat.jpg";
+    };
+
+    browsers = {
+      brave.enable = true;
     };
   };
 

@@ -13,24 +13,24 @@ in
 
   config = mkIf cfg.enable {
     shit = {
-      applications.steam.enable = true;
+      steam.enable = true;
       home-manager.enable = true;
     };
 
-    home-manager.users.skettisouls = {
+    home-manager.sharedModules = [{
       shit = {
         mangohud.enable = true;
       };
 
       home.packages = with pkgs; [
-        prismlauncher
+        heroic
         lutris
+        minetest
+        prismlauncher
+        scarab
         wineWowPackages.staging
         winetricks
-        heroic
-        scarab
-        minetest
       ];
-    };
+    }];
   };
 }

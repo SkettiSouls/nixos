@@ -12,14 +12,13 @@ let
     recursiveUpdate
     types
     ;
+
   inherit (builtins)
-    isPath
-    isString
     listToAttrs
     ;
 
   cfg = config.programs.vesktop;
-  makeConfig = builtins.toJSON;
+  mkConfig = builtins.toJSON;
 in
 {
   options.programs.vesktop = {
@@ -130,37 +129,49 @@ in
       description = ''Local css themes for vencord.'';
       default = { };
       type = with types; attrsOf (submodule {
-        options.css = mkOption {
-          type = with types; (either lines path);
+        options.source = mkOption {
+          type = with types; (either str path);
+          default = "";
+        };
+
+        options.text = mkOption {
+          type = with types; (either str lines);
+          default = "";
         };
       });
-      example = ''
-        programs.vesktop.themes = {
-          mytheme.css = "custom css";
-          mytheme2.css = ./path/to/css;
-          };
-        };
-      '';
+
+      example = {
+        mytheme.text = "custom css";
+        mytheme2.source = ./path/to/css;
+      };
     };
   };
 
   config = mkIf cfg.enable {
     # Requires Vesktop v1.5.0 or newer, as vesktop was rebranded from vencorddesktop, changing file structures and directory names.
     home.packages = [ cfg.package ];
+    # TODO: Assert if Vesktop version < v1.5.0
 
     home.file = mkMerge ([
       (mapAttrs'
         (name: themes: nameValuePair
           ".config/vesktop/themes/${name}.css"
           {
-            text = mkIf (isString themes.css) themes.css;
-            source = mkIf (isPath themes.css) themes.css;
-          })
-        cfg.themes)
+            text = mkIf (themes.text != "") themes.text;
+            source = mkIf (themes.source != "") themes.source;
+          }
+        )
+      cfg.themes)
 
       {
-        ".config/vesktop/settings.json".text = makeConfig cfg.state;
-        ".config/vesktop/settings/settings.json".text = makeConfig (recursiveUpdate
+        # Vesktop can't work without write access to `state.json`, and will error on first launch if settings.json is read-only.
+        # For now, you must hit the 'submit' button, and then close and reopen vesktop.
+
+        # TODO: Find a way around 'Welcome to Vesktop' menu.
+        # TODO: (Optional) Find a way to disable vesktop writing window bounds to state.json.
+
+        ".config/vesktop/settings.json".text = mkConfig cfg.state;
+        ".config/vesktop/settings/settings.json".text = mkConfig (recursiveUpdate
           cfg.settings
           {
             notifications = cfg.notifications;
@@ -170,14 +181,16 @@ in
               (listToAttrs (map
                 (plugins: nameValuePair
                   plugins
-                  { enabled = true; })
-                cfg.enabledPlugins)) //
+                  { enabled = true; }
+                )
+              cfg.enabledPlugins)) //
               # Map 'settings' attrset
               (mapAttrs'
                 (name: plugin: nameValuePair
                   name
-                  ({ enabled = plugin.enable; } // plugin.settings))
-                cfg.plugins);
+                  ({ enabled = plugin.enable; } // plugin.settings)
+                )
+              cfg.plugins);
           }
         );
       }

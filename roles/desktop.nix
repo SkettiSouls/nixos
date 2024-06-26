@@ -65,7 +65,6 @@ in
           carla.enable = true;
         };
       };
-
     };
   };
 }

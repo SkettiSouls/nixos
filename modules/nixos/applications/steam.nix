@@ -5,17 +5,25 @@ let
   inherit (lib)
     mkEnableOption
     mkIf
+    mkOption
+    types
     ;
 
-  cfg = config.shit.applications.steam;
+  cfg = config.shit.steam;
+  nvidia-offload = config.hardware.nvidia.prime.offload.enable;
 in
 {
-  options.shit.applications.steam = {
+  options.shit.steam = {
     enable = mkEnableOption "Steam";
+    offload.nvidia = mkOption {
+      type = types.bool;
+      default = nvidia-offload;
+    };
   };
 
   config = mkIf cfg.enable {
-    hardware.steam-hardware.enable = true; # Enable Steam hardware (Steam Controller, HTC Vive, etc...)
+    # Enable Steam hardware (Steam Controller, HTC Vive, etc...)
+    hardware.steam-hardware.enable = true;
     programs.gamemode.enable = true;
 
     programs.steam = {
@@ -24,9 +32,16 @@ in
       package = pkgs.steam.override {
         extraEnv = {
           MANGOHUD = true;
-          OBS_VKCAPTURE = true;
+          # OBS_VKCAPTURE = true; # TODO: Figure out what this does lol
+
+          ### NVIDIA Offloading ###
+          __NV_PRIME_RENDER_OFFLOAD = mkIf cfg.offload.nvidia true;
+          __NV_PRIME_RENDER_OFFLOAD_PROVIDER = mkIf cfg.offload.nvidia "NVIDIA-60";
+          __GLX_VENDOR_LIBRARY_NAME = mkIf cfg.offload.nvidia "nvidia";
+          __VK_LAYER_NV_optimus = mkIf cfg.offload.nvidia "NVIDIA_only";
         };
 
+        # TODO: Figure out what this does
         # extraLibraries = p: with p; [
         #   atk
         # ];

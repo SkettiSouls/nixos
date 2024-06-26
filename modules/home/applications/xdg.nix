@@ -44,8 +44,8 @@ let
   };
 in
 {
-  options.shit.browsers = {
   # Hyprland browser keybind is set to the value of cfg.default. See hyprland.nix:170.
+  options.shit.browsers = {
     default = mkOption {
       type = types.str;
       default = "";
@@ -53,10 +53,6 @@ in
   };
 
   config = {
-    home.sessionVariables = {
-      EDITOR = "nvim";
-    };
-
     xdg = {
       enable = true;
       cacheHome = "${home}/.cache";
@@ -74,6 +70,9 @@ in
         music = "${home}/Music";
         pictures = "${home}/Pictures";
         videos = "${home}/Videos";
+
+        templates = null;
+        publicShare = null;
 
         extraConfig = {
           XDG_SCREENSHOTS_DIR = "${config.xdg.userDirs.pictures}/screenshots";

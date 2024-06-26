@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ inputs, config, lib, pkgs, ... }:
 
 let
   inherit (lib)
@@ -14,27 +14,21 @@ in
   };
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [
-      (discord.override {
-        withOpenASAR = true;
-        withVencord = true;
-        withTTS = true;
-      })
-    ];
-
-    programs.vesktop = {
+    programs.vencord = {
       enable = true;
-      package = pkgs.vesktop-unstable;
-
-      state = {
-        discordBranch = "stable";
-        firstLaunch = false;
-        arRPC = "off";
-        splashColor = "rgb(138, 148, 168)";
-        splashBackground = "rgb(22, 24, 29)";
-        minimizeToTray = false;
-        splashTheming = true;
-        customTitleBar = false;
+      vesktop = {
+        enable = true;
+        package = pkgs.vesktop-unstable;
+        state = {
+          discordBranch = "stable";
+          # firstLaunch = false; # Causes vesktop to hang indefinitely on first launch.
+          arRPC = "off";
+          splashColor = "rgb(138, 148, 168)";
+          splashBackground = "rgb(22, 24, 29)";
+          minimizeToTray = false;
+          splashTheming = true;
+          customTitleBar = false;
+        };
       };
 
       settings = {
@@ -43,14 +37,13 @@ in
         autoUpdateNotification = true;
         useQuickCss = false;
         themeLinks = [ ];
-        enabledThemes = [ "midnight.css" ];
         enableReactDevtools = false;
         frameless = false;
         transparent = false;
       };
 
       cloud = {
-        authenticated = true;
+        authenticated = false;
         url = "https://api.vencord.dev";
         settingsSync = false;
       };
@@ -63,7 +56,10 @@ in
       };
 
       themes = {
-        midnight.css = ./midnight.css;
+        midnight = {
+          enable = true;
+          source = "${inputs.midnight-discord}/midnight.css";
+        };
       };
     };
   };

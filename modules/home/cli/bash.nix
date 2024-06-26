@@ -12,12 +12,17 @@ in
 {
   options.shit.bash = {
     enable = mkEnableOption "bash";
+    customScripts = mkEnableOption "Enable all custom scripts";
+    aliaspp.enable = mkEnableOption "Activate all Alias++ scripts";
   };
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
-      rsync
+      (mkIf cfg.aliaspp.enable sketti.aliaspp)
       eza
+      rsync
+      sketti.rebuild
+      (mkIf cfg.customScripts sketti.scripts)
     ];
 
     programs.bash = {
@@ -29,12 +34,8 @@ in
       shellAliases = {
         ":q" = " exit";
         cp = "rsync";
-        compile = "./compile";
-        run = "./run";
         icat = mkIf kitty.enable "kitten icat";
         ls = "eza --icons=always --group-directories-first";
-        rebuild = "sudo nixos-rebuild switch; hyprctl reload";
-        vim = "nvim";
       };
 
       # TODO: Make window swallowing override (`spit`).

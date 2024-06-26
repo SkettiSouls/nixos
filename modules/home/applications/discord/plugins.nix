@@ -6,10 +6,11 @@ let
     ;
 
   vesktop = config.programs.vesktop;
+  vencord = config.programs.vencord;
 in
 {
-  config = mkIf vesktop.enable {
-    programs.vesktop = {
+  config = mkIf vencord.enable {
+    programs.vencord = {
       enabledPlugins = [
         ### Required (Always Enabled) ###
         "NoTrack"

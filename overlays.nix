@@ -19,7 +19,8 @@ let
   };
 
   overlay-hyprland = final: prev: {
-    hyprland-git = hyprland.packages.${system}.hyprland;
+    hyprland-git = hyprland.packages.${system}.default;
+    xdph-git = hyprland.packages.${system}.xdg-desktop-portal-hyprland;
     hyprpicker-git = hyprpicker.packages.${system}.default;
   };
 

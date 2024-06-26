@@ -4,7 +4,7 @@ stdenvNoCC.mkDerivation {
   pname = "play";
   version = "1.0";
   nobuild = true;
-  src = ./.;
+  src = ./bash;
   nativeBuildInputs = [ mpv fzf ];
   installPhase = ''
     mkdir -p $out/bin
