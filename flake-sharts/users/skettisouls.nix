@@ -29,7 +29,7 @@ in
 
     shit.home-manager = {
       enable = true;
-      users.skettisouls = import ../../hosts/${config.networking.hostName}/home.nix;
+      users.skettisouls = import ../homes/skettisouls/${config.networking.hostName}.nix;
     };
 
     home-manager.users.skettisouls = {

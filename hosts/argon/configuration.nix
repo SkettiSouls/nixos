@@ -83,6 +83,12 @@
     pipewire.enable = true;
   };
 
+  home-manager.sharedModules = [{
+    # Ensure home-manager is properly installed for all users.
+    programs.home-manager.enable = true;
+    home.stateVersion = "24.05";
+  }];
+
   /* Doesn't work
     # mtwk's weird mouse fix or w/e
     MatchUdevType=mouse;

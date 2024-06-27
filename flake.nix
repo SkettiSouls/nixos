@@ -82,9 +82,9 @@
 
             # TODO: Switch to `skettisouls = [ argon fluorine victus ]` structure.
             home = {
-              "skettisouls@argon" = ./hosts/argon/home.nix;
-              "skettisouls@fluorine" = ./hosts/fluorine/home.nix;
-              "skettisouls@victus" = ./hosts/victus/home.nix;
+              "skettisouls@argon" = ./flake-sharts/homes/skettisouls/argon.nix;
+              "skettisouls@fluorine" = ./flake-sharts/homes/skettisouls/fluorine.nix;
+              "skettisouls@victus" = ./flake-sharts/homes/skettisouls/victus.nix;
             };
 
             flake = {

@@ -50,4 +50,9 @@
   # networking.firewall.enable = false;
 
   system.stateVersion = "24.05";
+
+  home-manager.sharedModules = [{
+    programs.home-manager.enable = true;
+    home.stateVersion = "24.05";
+  }];
 }
