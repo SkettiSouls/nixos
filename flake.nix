@@ -46,7 +46,7 @@
             libs = importApply ./flake-sharts/libs args;
             nixos = importApply ./flake-sharts/nixos args;
             packages = importApply ./flake-sharts/packages args;
-            # roles = importApply ./flake-sharts/roles args;
+            roles = importApply ./flake-sharts/roles args;
             users = importApply ./flake-sharts/users args;
             wireguard = importApply ./flake-sharts/wireguard args;
           };
@@ -57,6 +57,7 @@
             libs
             nixos
             packages
+            roles
             users
             wireguard
 
@@ -98,7 +99,6 @@
                 modules = [
                   configFile
                   ./global.nix
-                  ./roles
                   ./overlays.nix
                   config.flake.nixosModules.default
                   config.flake.userModules.default
