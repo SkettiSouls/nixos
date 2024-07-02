@@ -36,7 +36,7 @@
             ;
 
           mapHosts = map (host: { ${host} = ./hosts/${host}/configuration.nix; });
-          delist = builtins.foldl' (acc: attrs: acc // attrs) {};
+          listToAttrs' = builtins.foldl' (acc: attrs: acc // attrs) {};
 
           flakeModules = {
             # features = importApply ./flake-sharts/features args;
@@ -67,7 +67,7 @@
 
           options = {
             nixos = mkOption { type = with types; attrsOf unspecified; };
-            home = mkOption { type = with types; attrsOf unspecified; };
+            homes = mkOption { type = with types; attrsOf unspecified; };
           };
 
           config = {
@@ -75,17 +75,18 @@
               "x86_64-linux"
             ];
 
-            nixos = delist (mapHosts [
+            nixos = listToAttrs' (mapHosts [
               "argon"
               "fluorine"
               "victus"
             ]);
 
-            # TODO: Switch to `skettisouls = [ argon fluorine victus ]` structure.
-            home = {
-              "skettisouls@argon" = ./flake-sharts/homes/skettisouls/argon.nix;
-              "skettisouls@fluorine" = ./flake-sharts/homes/skettisouls/fluorine.nix;
-              "skettisouls@victus" = ./flake-sharts/homes/skettisouls/victus.nix;
+            homes = {
+              skettisouls = [
+                "argon"
+                "fluorine"
+                "victus"
+              ];
             };
 
             flake = {
@@ -104,14 +105,24 @@
                 ];
               }) config.nixos;
 
-              # FIXME: Infinite recursion.
-              homeConfigurations = mapAttrs (name: value: home-manager.lib.homeManagerConfiguration {
-                pkgs = nixpkgs.legacyPackages.x86_64-linux;
-                modules = [
-                  value
-                  ./overlays.nix
-                ];
-              }) config.home;
+              # FIXME: Infinite recursion when using schizofox.
+              homeConfigurations = mapAttrs (user: hostList:
+                listToAttrs' (map (host: { ${host} =
+                  home-manager.lib.homeManagerConfiguration {
+                    pkgs = nixpkgs.legacyPackages.x86_64-linux;
+                    extraSpecialArgs = { inherit inputs self; };
+                    modules = [
+                      ./flake-sharts/homes/${user}/${host}.nix
+                      config.flake.userModules.${user}
+                      ./overlays.nix
+                      {
+                        # Share nixos stateVersion
+                        home.stateVersion = config.flake.nixosConfigurations.${host}.config.system.stateVersion;
+                      }
+                    ];
+                  };
+                }) hostList)
+              ) config.homes;
             };
           };
         });

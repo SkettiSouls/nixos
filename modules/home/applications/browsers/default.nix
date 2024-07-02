@@ -2,11 +2,11 @@
 
 {
   imports = [
-    inputs.schizofox.homeManagerModule
+    # inputs.schizofox.homeManagerModule
 
     ./brave.nix
     ./qutebrowser.nix
-    ./schizofox.nix
-    ./tridactyl.nix
+    # ./schizofox.nix
+    # ./tridactyl.nix
   ];
 }

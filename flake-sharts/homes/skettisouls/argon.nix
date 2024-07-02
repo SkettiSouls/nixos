@@ -27,7 +27,7 @@
       default = "brave";
       brave.enable = true;
       qutebrowser.enable = true;
-      schizofox.enable = true;
+      # schizofox.enable = true;
     };
   };
 }
