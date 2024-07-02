@@ -1,6 +1,5 @@
 /* For some reason, Steam nix options are only available in nixos scope, not home-manager. */
 { config, lib, pkgs, ... }:
-
 let
   inherit (lib)
     mkEnableOption
