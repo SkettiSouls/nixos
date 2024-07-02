@@ -17,7 +17,7 @@
     workstation.enable = true;
   };
 
-  shit.users.skettisouls = true;
+  shit.users.skettisouls.enable = true;
 
   # Kernel
   boot.kernelPackages = pkgs.linuxPackages_6_8;

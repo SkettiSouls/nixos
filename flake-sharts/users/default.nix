@@ -1,13 +1,9 @@
-_: { config, inputs, ... }:
-let
-  inherit (config.flake.lib)
-    combineModules
-    ;
-in
 {
-  config.flake.userModules = {
-    skettisouls = import ./skettisouls.nix;
+  config.flake.nixosModules = {
+    users = import ./modules/users.nix;
+  };
 
-    default.imports = combineModules config.flake.userModules;
+  config.flake.userModules = {
+    skettisouls = ./modules/skettisouls.nix;
   };
 }

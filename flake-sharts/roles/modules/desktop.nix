@@ -13,7 +13,6 @@ in
 
   config = mkIf cfg.enable {
     shit = {
-      home-manager.enable = true;
       pipewire.enable = true;
     };
 
@@ -39,7 +38,7 @@ in
       (nerdfonts.override { fonts = [ "SourceCodePro" "DejaVuSansMono" ]; })
     ];
 
-    home-manager.users.skettisouls = mkIf config.shit.users.skettisouls {
+    home-manager.users.skettisouls = mkIf config.shit.users.skettisouls.enable {
       home = {
         pointerCursor = {
           name = "phinger-cursor-dark";

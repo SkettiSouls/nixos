@@ -14,9 +14,6 @@ in
   config = mkIf cfg.enable {
     shit = {
       wireguard.enable = true;
-      home-manager = {
-        enable = true;
-      };
     };
 
     services = {

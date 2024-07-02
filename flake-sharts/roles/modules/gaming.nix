@@ -14,7 +14,6 @@ in
   config = mkIf cfg.enable {
     shit = {
       steam.enable = true;
-      home-manager.enable = true;
     };
 
     home-manager.sharedModules = [{

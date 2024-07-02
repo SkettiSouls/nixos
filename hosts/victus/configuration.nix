@@ -12,7 +12,7 @@
     workstation.enable = true;
   };
 
-  shit.users.skettisouls = true;
+  shit.users.skettisouls.enable = true;
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
