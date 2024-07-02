@@ -11,6 +11,8 @@ let
   cfg = config.shit.browsers.schizofox;
 in
 {
+  imports = [ ./tridactyl.nix ];
+
   options.shit.browsers.schizofox = {
     enable = mkEnableOption "funny nix firefox";
     tridactyl.enable = mkEnableOption "tridactyl";

@@ -1,11 +1,6 @@
 { config, lib, pkgs, ... }:
 
 {
-  # TODO: Include home modules by default.
-  imports = [
-    ../../../modules/home
-  ];
-
   home.packages = with pkgs;[
     rofi
   ];

@@ -9,6 +9,11 @@ let
   cfg = config.shit.discord;
 in
 {
+  imports = [
+    ./vencord.nix
+    ./plugins.nix
+  ];
+
   options.shit.discord = {
     enable = mkEnableOption "Discord clients configuration";
   };

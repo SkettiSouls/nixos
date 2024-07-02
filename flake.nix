@@ -22,7 +22,7 @@
     };
   };
 
-  outputs = inputs @ { self, nixpkgs, home-manager, flake-parts, lynx, asluni, ... }:
+  outputs = inputs @ { self, nixpkgs, flake-parts, lynx, asluni, ... }:
     flake-parts.lib.mkFlake { inherit inputs; }
       (args @ { config, options, flake-parts-lib, ... }:
         let
@@ -41,8 +41,9 @@
           flakeModules = {
             # features = importApply ./flake-sharts/features args;
             hardware = importApply ./flake-sharts/hardware args;
-            # home-manager = importApply ./flake-sharts/home-manager args;
+            home-manager = import ./flake-sharts/home-manager;
             # hosts = importApply ./flake-sharts/hosts args;
+            hyprland = import ./flake-sharts/hyprland;
             libs = importApply ./flake-sharts/libs args;
             nixos = importApply ./flake-sharts/nixos args;
             packages = importApply ./flake-sharts/packages args;
@@ -54,6 +55,8 @@
         {
           imports = with flakeModules; [
             hardware
+            home-manager
+            hyprland
             libs
             nixos
             packages
@@ -108,12 +111,13 @@
               # FIXME: Infinite recursion when using schizofox.
               homeConfigurations = mapAttrs (user: hostList:
                 listToAttrs' (map (host: { ${host} =
-                  home-manager.lib.homeManagerConfiguration {
+                  inputs.home-manager.lib.homeManagerConfiguration {
                     pkgs = nixpkgs.legacyPackages.x86_64-linux;
                     extraSpecialArgs = { inherit inputs self; };
                     modules = [
                       ./flake-sharts/homes/${user}/${host}.nix
                       config.flake.userModules.${user}
+                      config.flake.homeModules.default
                       ./overlays.nix
                       {
                         # Share nixos stateVersion

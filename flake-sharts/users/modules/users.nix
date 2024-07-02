@@ -1,9 +1,13 @@
-{ options, config, pkgs, lib, ... }:
+{ self, options, config, pkgs, lib, ... }:
 let
   inherit (lib)
     mkEnableOption
     mkOption
     types
+    ;
+
+  inherit (self)
+    homeModules
     ;
 
   cfg = config.shit.users;
@@ -45,6 +49,7 @@ in
         imports = [
           ../../homes/${uname}/${config.networking.hostName}.nix
           ./${uname}.nix
+          homeModules.default
         ];
       }
     ) cfg;

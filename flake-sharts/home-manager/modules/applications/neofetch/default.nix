@@ -11,6 +11,8 @@ let
   cfg = config.shit.fetch.neofetch;
 in
 {
+  imports = [ ./trollos.nix ];
+
   options.shit.fetch.neofetch = {
     enable = mkEnableOption "Neofetch user configuration";
     showHost = mkEnableOption "Show motherboard info";

@@ -1,10 +1,6 @@
 { config, lib, pkgs, ... }:
 
 {
-  imports = [
-    ../../../modules/home
-  ];
-
   home.packages = with pkgs; [];
 
   shit = {

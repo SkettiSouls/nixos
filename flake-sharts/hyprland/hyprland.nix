@@ -1,16 +1,8 @@
 { config, lib, pkgs, ... }:
 let
   inherit (lib)
-    concatLists
-    mapAttrsToList
     mkEnableOption
     mkIf
-    mkOption
-    types
-    ;
-
-  inherit (builtins)
-    map
     ;
 
   cfg = config.shit.hyprland;
@@ -18,6 +10,11 @@ let
   home = config.home.homeDirectory;
 in
 {
+  imports = [
+    ./monitors.nix
+    ./wallpapers.nix
+  ];
+
   options.shit.hyprland = {
     enable = mkEnableOption "Hyprland user configuration";
   };
