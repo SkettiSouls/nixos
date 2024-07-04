@@ -1,7 +1,10 @@
-{ config, lib, ... }:
+{ self, config, lib, ... }:
 let
+  inherit (self.lib)
+    listToAttrs'
+    ;
+
   inherit (lib)
-    mkIf
     mkOption
     types
     ;
@@ -11,7 +14,7 @@ let
     ;
 
   cfg = config.shit.hardware.monitors;
-  mon = builtins.foldl' (acc: attrs: acc // attrs) {} ([ cfg.defaultMonitor ] ++ cfg.monitors);
+  mon = listToAttrs' ([ cfg.defaultMonitor ] ++ cfg.monitors);
 
   bitdepth = if mon.bitdepth != 8 then ",bitdepth,10" else "";
   mirror = if mon.mirror != null then ",mirror,${mon.mirror}" else "";

@@ -1,5 +1,9 @@
-{ config, lib, ... }:
+{ self, config, lib, ... }:
 let
+  inherit (self.lib)
+    listToAttrs'
+    ;
+
   inherit (lib)
     concatLists
     mapAttrsToList
@@ -10,7 +14,7 @@ let
     ;
 
   cfg = config.shit.hyprland;
-  monitors = builtins.foldl' (acc: attrs: acc // attrs) {} config.shit.hardware.monitors.monitors;
+  monitors = listToAttrs' config.shit.hardware.monitors.monitors;
 in
 {
   options.shit.hyprland.wallpapers = mkOption {

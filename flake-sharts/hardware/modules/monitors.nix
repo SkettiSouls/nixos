@@ -1,5 +1,9 @@
-{ config, lib, ... }:
+{ self, config, lib, ... }:
 let
+  inherit (self.lib)
+    listToAttrs'
+    ;
+
   inherit (lib)
     mkEnableOption
     mkOption
@@ -84,7 +88,7 @@ let
   };
 
   cfg = config.shit.hardware;
-  mon = builtins.foldl' (acc: attrs: acc // attrs) {} cfg.monitors;
+  mon = listToAttrs' cfg.monitors;
 in
 {
   options.shit.hardware = {

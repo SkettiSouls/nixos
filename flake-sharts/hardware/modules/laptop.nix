@@ -1,5 +1,9 @@
-{ config, lib, pkgs, ... }:
+{ self, config, lib, pkgs, ... }:
 let
+  inherit (self.lib)
+    listToAttrs'
+    ;
+
   inherit (lib)
     mkEnableOption
     mkIf
@@ -7,7 +11,7 @@ let
 
   laptop = config.shit.hardware.laptop;
 
-  monitors = builtins.foldl' (acc: attrs: acc // attrs) {} config.shit.hardware.monitors;
+  monitors = listToAttrs' config.shit.hardware.monitors;
   internalMonitor = if monitors.primary then monitors.displayPort else "";
   lidSwitch = monitors.lidSwitch;
 in

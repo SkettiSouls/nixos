@@ -28,6 +28,10 @@
         let
           inherit (flake-parts-lib) importApply;
 
+          inherit (config.flake.lib)
+            listToAttrs'
+            ;
+
           inherit (nixpkgs.lib)
             mapAttrs
             mkOption
@@ -36,7 +40,6 @@
             ;
 
           mapHosts = map (host: { ${host} = ./hosts/${host}/configuration.nix; });
-          listToAttrs' = builtins.foldl' (acc: attrs: acc // attrs) {};
 
           flakeModules = {
             # features = importApply ./flake-sharts/features args;
