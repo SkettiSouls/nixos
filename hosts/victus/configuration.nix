@@ -1,17 +1,15 @@
 { config, lib, pkgs,  ... }:
 
 {
-  imports = [
-    ./hardware-configuration.nix
-  ];
+  shit.users = {
+    skettisouls.enable = true;
+  };
 
   roles = {
     desktop.enable = true;
     gaming.enable = true;
     workstation.enable = true;
   };
-
-  shit.users.skettisouls.enable = true;
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;

@@ -105,9 +105,10 @@
                 specialArgs = { inherit inputs self; };
                 modules = [
                   configFile
+                  config.flake.nixosModules.default
+                  config.flake.hardwareModules.${hostName}
                   ./global.nix
                   ./overlays.nix
-                  config.flake.nixosModules.default
                 ];
               }) config.nixos;
 
