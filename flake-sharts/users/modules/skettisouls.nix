@@ -1,17 +1,16 @@
 { config, lib, pkgs, ... }:
 let
-  cfg = config.shit.users.skettisouls;
   home = config.home.homeDirectory;
 
   # Headphones
+  # TODO: Make this a submodule of `name = mac`
   soundcoreSpaceQ45 = "E8:EE:CC:4B:FA:2A";
   sennheiserMomentum4 = "80:C3:BA:3F:EB:B9";
 in
 {
   config = {
     home = {
-      username = "skettisouls";
-      homeDirectory = "/home/skettisouls";
+      packages = [ pkgs.neovim ];
       sessionVariables = {
         EDITOR = "nvim";
       };

@@ -34,6 +34,7 @@
 
           inherit (nixpkgs.lib)
             mapAttrs
+            mkDefault
             mkOption
             nixosSystem
             types
@@ -44,7 +45,10 @@
           flakeModules = {
             # features = importApply ./flake-sharts/features args;
             hardware = importApply ./flake-sharts/hardware args;
-            home-manager = import ./flake-sharts/home-manager;
+            home-manager.imports = [
+              ./flake-sharts/home-manager
+              ./flake-sharts/home-manager/nixos-module.nix
+            ];
             # hosts = importApply ./flake-sharts/hosts args;
             hyprland = import ./flake-sharts/hyprland;
             libs = importApply ./flake-sharts/libs args;
@@ -109,6 +113,8 @@
                   config.flake.hardwareModules.${hostName}
                   ./global.nix
                   ./overlays.nix
+                  # Share state version with home-manager
+                  { home-manager.sharedModules = [{ home.stateVersion = config.flake.nixosConfigurations.${hostName}.config.system.stateVersion; }]; }
                 ];
               }) config.nixos;
 
@@ -124,8 +130,11 @@
                       config.flake.homeModules.default
                       ./overlays.nix
                       {
-                        # Share nixos stateVersion
-                        home.stateVersion = config.flake.nixosConfigurations.${host}.config.system.stateVersion;
+                        home = rec {
+                          username = "${user}";
+                          homeDirectory = mkDefault "/home/${username}";
+                          stateVersion = config.flake.nixosConfigurations.${host}.config.system.stateVersion;
+                        };
                       }
                     ];
                   };

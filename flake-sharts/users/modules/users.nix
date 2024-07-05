@@ -6,12 +6,7 @@ let
     types
     ;
 
-  inherit (self)
-    homeModules
-    ;
-
   cfg = config.shit.users;
-  _options = options.shit.users;
 in
 {
   options.shit.users = mkOption {
@@ -41,22 +36,5 @@ in
         packages = options.packages;
       }
     ) cfg;
-
-    home-manager.users = lib.mapAttrs
-    (uname: options:
-      {
-        # TODO: Switch to using userModules and homeModules instead of paths
-        imports = [
-          ../../homes/${uname}/${config.networking.hostName}.nix
-          ./${uname}.nix
-          homeModules.default
-        ];
-      }
-    ) cfg;
-
-    home-manager.sharedModules = [{
-      options.shit.users = _options;
-      config.shit.users = lib.mkDefault cfg;
-    }];
   };
 }
