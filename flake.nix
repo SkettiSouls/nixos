@@ -33,14 +33,13 @@
             ;
 
           inherit (nixpkgs.lib)
+            genAttrs
             mapAttrs
             mkDefault
             mkOption
             nixosSystem
             types
             ;
-
-          mapHosts = map (host: { ${host} = ./hosts/${host}/configuration.nix; });
 
           flakeModules = {
             # features = importApply ./flake-sharts/features args;
@@ -49,7 +48,7 @@
               ./flake-sharts/home-manager
               ./flake-sharts/home-manager/nixos-module.nix
             ];
-            # hosts = importApply ./flake-sharts/hosts args;
+            hosts = import ./flake-sharts/hosts;
             hyprland = import ./flake-sharts/hyprland;
             libs = importApply ./flake-sharts/libs args;
             nixos = importApply ./flake-sharts/nixos args;
@@ -63,6 +62,7 @@
           imports = with flakeModules; [
             hardware
             home-manager
+            hosts
             hyprland
             libs
             nixos
@@ -76,7 +76,7 @@
           ];
 
           options = {
-            nixos = mkOption { type = with types; attrsOf unspecified; };
+            nixos = mkOption { type = with types; listOf unspecified; };
             homes = mkOption { type = with types; attrsOf unspecified; };
           };
 
@@ -85,11 +85,11 @@
               "x86_64-linux"
             ];
 
-            nixos = listToAttrs' (mapHosts [
+            nixos = [
               "argon"
               "fluorine"
               "victus"
-            ]);
+            ];
 
             homes = {
               skettisouls = [
@@ -105,19 +105,19 @@
 
               inherit flakeModules;
 
-              nixosConfigurations = mapAttrs (hostName: configFile: nixosSystem {
+              nixosConfigurations = genAttrs config.nixos (host: nixosSystem {
                 specialArgs = { inherit inputs self; };
                 modules = [
-                  configFile
+                  config.flake.hostModules.${host}
                   config.flake.nixosModules.default
-                  config.flake.hardwareModules.${hostName}
-                  (config.flake.userModules.default { machine = hostName; })
+                  config.flake.hardwareModules.${host}
+                  (config.flake.userModules.default { machine = host; })
                   ./global.nix
                   ./overlays.nix
                   # Share state version with home-manager
-                  { home-manager.sharedModules = [{ home.stateVersion = config.flake.nixosConfigurations.${hostName}.config.system.stateVersion; }]; }
+                  { home-manager.sharedModules = [{ home.stateVersion = config.flake.nixosConfigurations.${host}.config.system.stateVersion; }]; }
                 ];
-              }) config.nixos;
+              });
 
               # FIXME: Infinite recursion when using schizofox.
               homeConfigurations = mapAttrs (user: hostList:
