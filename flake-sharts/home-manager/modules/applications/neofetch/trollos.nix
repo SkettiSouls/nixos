@@ -5,8 +5,9 @@ let
     mkIf
     ;
 
+  inherit (config.shit) kitty;
+
   cfg = config.shit.fetch.trollOS;
-  kitty = config.shit.kitty;
 in
 {
   options.shit.fetch.trollOS.enable = mkEnableOption "Enable trollOS fetch";

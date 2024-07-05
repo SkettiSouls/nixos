@@ -5,8 +5,9 @@ let
     mkIf
     ;
 
+  inherit (config.peripherals.bluetooth) headphones;
+
   cfg = config.shit.hyprland;
-  headphones = config.peripherals.bluetooth.headphones;
   home = config.home.homeDirectory;
 in
 {

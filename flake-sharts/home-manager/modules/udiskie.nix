@@ -5,8 +5,9 @@ let
     mkIf
     ;
 
+  inherit (config.shit) hyprland;
+
   cfg = config.shit.udiskie;
-  hyprland = config.shit.hyprland;
 in
 {
   options.shit.udiskie = {

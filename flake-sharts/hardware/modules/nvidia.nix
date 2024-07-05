@@ -70,7 +70,7 @@ in
       nvidia = {
         package = mkIf proprietary driverPkg;
         modesetting.enable = true;
-        open = (cfg.driver == "open");
+        open = cfg.driver == "open";
       };
     };
 

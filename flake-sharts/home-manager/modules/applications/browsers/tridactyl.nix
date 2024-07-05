@@ -4,7 +4,7 @@ let
     mkIf
     ;
 
-  schizofox = config.shit.browsers.schizofox;
+  inherit (config.shit.browsers) schizofox;
 in
 {
   config = mkIf schizofox.enable {

@@ -53,10 +53,10 @@ in
         info title
         info underline
 
-        ${if (cfg.distroName != null) then (''distro="${cfg.distroName}"'') else ""}
+        ${if (cfg.distroName != null) then ''distro="${cfg.distroName}"'' else ""}
         info "OS" distro
         # info "Host" model # Too long, collides with images.
-        ${if cfg.showHost then (''info "Host" model'') else ""}
+        ${if cfg.showHost then ''info "Host" model'' else ""}
         info "Kernel" kernel
         info "Uptime" uptime
         info "Packages" packages
@@ -88,8 +88,8 @@ in
       image_backend=${cfg.image.renderer}
       image_size=${cfg.image.size}
 
-      ${if (cfg.asciiColors != null) then ("ascii_colors=(${cfg.asciiColors})") else ""}
-      ${if (cfg.image.source != null) then ("image_source=${cfg.image.source}") else ""}
+      ${if (cfg.asciiColors != null) then "ascii_colors=(${cfg.asciiColors})" else ""}
+      ${if (cfg.image.source != null) then "image_source=${cfg.image.source}" else ""}
     '';
   };
 }

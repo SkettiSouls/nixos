@@ -1,6 +1,6 @@
 { inputs, pkgs, self, ... }: with inputs;
 let
-  system = pkgs.stdenv.hostPlatform.system;
+  inherit (pkgs.stdenv.hostPlatform) system;
 
   overlay-unstable = final: prev: {
     unstable = import nixpkgs-unstable {

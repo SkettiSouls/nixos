@@ -9,11 +9,11 @@ let
     mkIf
     ;
 
-  laptop = config.shit.hardware.laptop;
+  inherit (config.shit.hardware) laptop;
+  inherit (monitors) lidSwitch;
 
   monitors = listToAttrs' config.shit.hardware.monitors;
   internalMonitor = if monitors.primary then monitors.displayPort else "";
-  lidSwitch = monitors.lidSwitch;
 in
 {
   options.shit.hardware.laptop = mkEnableOption "Set device as a laptop";

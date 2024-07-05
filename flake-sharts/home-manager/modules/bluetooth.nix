@@ -5,8 +5,12 @@ let
     mkIf
     ;
 
+  inherit (config.peripherals.bluetooth)
+    controller
+    headphones
+    ;
+
   cfg = config.shit.audio.bluetooth;
-  headphones = config.peripherals.bluetooth.headphones;
 in
 {
   options.shit.audio.bluetooth = {

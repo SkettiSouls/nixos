@@ -26,13 +26,12 @@ let
     else ""
     ;
 
-  rotation = let add = if mon.flipped then 4 else 0; mr = mon.rotation; in (
+  rotation = let add = if mon.flipped then 4 else 0; mr = mon.rotation; in
     if mr == 0 then (toString (add + 0))
     else if mr == 90 then (toString (add + 1))
     else if mr == 180 then (toString (add + 2))
     else if mr == 270 then (toString (add + 3))
-    else "0"
-  );
+    else "0";
 in
 {
   options.shit.hardware.monitors = {

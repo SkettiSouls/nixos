@@ -60,10 +60,12 @@ in
       description = ''Vencord plugins.'';
       default = { };
       type = with types; attrsOf (submodule {
-        options.enable = mkEnableOption "Enable specified plugin.";
-        options.settings = mkOption {
-          type = types.attrs;
-          default = { };
+        options = {
+          enable = mkEnableOption "Enable specified plugin.";
+          settings = mkOption {
+            type = types.attrs;
+            default = { };
+          };
         };
       });
 
@@ -117,15 +119,18 @@ in
       description = ''Local css themes for vencord.'';
       default = { };
       type = with types; attrsOf (submodule {
-        options.enable = mkEnableOption "Enable theme";
-        options.source = mkOption {
-          type = with types; (either str path);
-          default = "";
-        };
+        options = {
+          enable = mkEnableOption "Enable theme";
 
-        options.text = mkOption {
-          type = with types; (either str lines);
-          default = "";
+          source = mkOption {
+            type = with types; (either str path);
+            default = "";
+          };
+
+          text = mkOption {
+            type = with types; (either str lines);
+            default = "";
+          };
         };
       });
 
@@ -137,13 +142,13 @@ in
   };
 
   config = mkIf cfg.enable {
-    programs.vencord.package = if (cfg.vesktop.enable)
+    programs.vencord.package = if cfg.vesktop.enable
       then mkDefault cfg.vesktop.package
       else mkDefault (pkgs.discord.override { withVencord = true; });
 
     home.packages = [ cfg.package ];
 
-    home.file = mkMerge ([
+    home.file = mkMerge [
       (mapAttrs'
         (name: attrs: nameValuePair
           ".config/Vencord/themes/${name}.css"
@@ -158,8 +163,7 @@ in
         ".config/Vencord/settings/settings.json".text = mkConfig (recursiveUpdate
           cfg.settings
           {
-            notifications = cfg.notifications;
-            cloud = cfg.cloud;
+            inherit (cfg) notifications cloud;
             enabledThemes = lib.mapAttrsToList (name: attrs: (if attrs.enable then name + ".css" else "")) cfg.themes;
             plugins =
               # Convert enabled plugins list to "plugin":{ "enabled" = true }
@@ -206,6 +210,6 @@ in
           ".config/vesktop/settings/settings.json".text = config.home.file.".config/Vencord/settings/settings.json".text;
         }
       else {})
-    ]);
+    ];
   };
 }

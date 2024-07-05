@@ -5,8 +5,9 @@ let
     mkIf
     ;
 
+  inherit (config.shit) kitty;
+
   cfg = config.shit.bash;
-  kitty = config.shit.kitty;
 in
 {
   options.shit.bash = {
