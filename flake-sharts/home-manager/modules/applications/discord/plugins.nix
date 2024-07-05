@@ -1,12 +1,13 @@
 { config, lib, ... }:
-
 let
   inherit (lib)
     mkIf
     ;
 
-  vesktop = config.programs.vesktop;
-  vencord = config.programs.vencord;
+  inherit (config.programs)
+    vencord
+    vesktop
+    ;
 in
 {
   config = mkIf vencord.enable {

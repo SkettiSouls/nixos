@@ -1,4 +1,5 @@
-_: { config, inputs, lib, self, ... }:
+{ lib, ... }:
+
 {
   flake = {
     lib = {
@@ -6,7 +7,5 @@ _: { config, inputs, lib, self, ... }:
 
       listToAttrs' = builtins.foldl' (acc: attr: acc // attr) {};
     };
-
-    libraries = config.flake.lib;
   };
 }

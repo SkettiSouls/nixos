@@ -1,5 +1,4 @@
-{ inputs, pkgs, self, ... }:
-with inputs;
+{ inputs, pkgs, self, ... }: with inputs;
 let
   system = pkgs.stdenv.hostPlatform.system;
 
@@ -12,7 +11,6 @@ let
     vesktop-unstable = vesktop.legacyPackages.${system}.vesktop;
   };
 
-
   overlay-sketti = final: prev: {
     sketti = self.packages.${system};
     neovim = neovim.packages.${system}.default;
@@ -20,10 +18,9 @@ let
 
   overlay-hyprland = final: prev: {
     hyprland-git = hyprland.packages.${system}.default;
-    xdph-git = hyprland.packages.${system}.xdg-desktop-portal-hyprland;
     hyprpicker-git = hyprpicker.packages.${system}.default;
+    xdph-git = hyprland.packages.${system}.xdg-desktop-portal-hyprland;
   };
-
 in
 {
   nixpkgs.overlays = [

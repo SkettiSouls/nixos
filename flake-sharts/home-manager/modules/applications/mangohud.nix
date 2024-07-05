@@ -1,5 +1,4 @@
 { config, lib, ... }:
-
 let
   inherit (lib)
     mkEnableOption
@@ -14,11 +13,12 @@ in
   };
 
   config = mkIf cfg.enable {
+    # TODO: Figure out how to set the order options are generated in
     programs.mangohud = {
       enable = true;
     };
 
-    # Unsure how to set the order in which options are generated in MangoHud.conf using 'programs.mangohud'.
+    # Workaround, see todo above
     home.file.".config/MangoHud/MangoHud.conf".text = ''
        /* PERFORMANCE */
        fps_limit=0
@@ -39,7 +39,7 @@ in
        /* WINDOW */
        legacy_layout=0
        #horizontal_stretch
-       position=top-left
+       position=top-right
        round_corners=10
        #offset_x=0
        #offset_y=0

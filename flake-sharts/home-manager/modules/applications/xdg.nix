@@ -1,8 +1,7 @@
 { config, lib, ... }:
-
 let
   inherit (lib)
-    mkMerge
+    mkIf
     mkOption
     optional
     types
@@ -10,6 +9,7 @@ let
 
   cfg = config.shit.browsers;
   home = config.home.homeDirectory;
+  vesktop = config.programs.vencord.vesktop.enable;
 
   brave = "brave-browser.desktop";
   qutebrowser = "org.qutebrowser.qutebrowser.desktop";
@@ -25,6 +25,7 @@ let
     ++ optional isSchizofox schizofox
     ;
 
+# browserMimeList {{{
   browserMimelist = {
     "browser/internal" = browser;
     "text/html" = browser;
@@ -42,6 +43,7 @@ let
     "application/json" = browser;
     "application/pdf" = browser;
   };
+# }}}
 in
 {
   # Hyprland browser keybind is set to the value of cfg.default. See hyprland.nix:170.
@@ -60,7 +62,7 @@ in
       dataHome = "${home}/.local/share";
       stateHome = "${home}/.local/state";
 
-      userDirs = {
+      userDirs = rec {
         enable = true;
         createDirectories = true;
 
@@ -75,19 +77,16 @@ in
         publicShare = null;
 
         extraConfig = {
-          XDG_SCREENSHOTS_DIR = "${config.xdg.userDirs.pictures}/screenshots";
+          XDG_SCREENSHOTS_DIR = "${pictures}/screenshots";
         };
       };
 
-      mimeApps = mkMerge [
-        {
-          enable = true;
-          defaultApplications = {
-            "x-scheme-handler/discord" = ["Vesktop.desktop"];
-          };
-        }
-        { defaultApplications = browserMimelist; }
-      ];
+      mimeApps = {
+        enable = true;
+        defaultApplications = browserMimelist // {
+          "x-scheme-handler/discord" = mkIf vesktop ["Vesktop.desktop"];
+        };
+      };
     };
   };
 }

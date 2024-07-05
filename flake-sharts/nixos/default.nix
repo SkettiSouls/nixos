@@ -1,10 +1,8 @@
-_: {config, inputs, ...}:
-
+{ config, ... }:
 let
   inherit (config.flake.lib)
     combineModules
     ;
-
 in
 {
   flake.nixosModules = {

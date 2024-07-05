@@ -12,7 +12,6 @@ in
 {
   imports = [
     ./monitors.nix
-    ./wallpapers.nix
   ];
 
   options.shit.hyprland = {

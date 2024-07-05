@@ -1,5 +1,3 @@
-_: { config, inputs, ... }:
-
 {
   flake.nixosModules.wireguard = import ./luni-net.nix;
 
