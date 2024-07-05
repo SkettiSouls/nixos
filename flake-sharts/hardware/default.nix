@@ -1,9 +1,3 @@
-{config, ...}:
-let
-  inherit (config.flake.lib)
-    combineModules
-    ;
-in
 {
   config.flake = {
     nixosModules = {
@@ -15,8 +9,6 @@ in
       bluetooth = import ./modules/bluetooth.nix;
       laptop = import ./modules/laptop.nix;
       monitors = import ./modules/monitors.nix;
-
-      default.imports = combineModules config.flake.nixosModules;
     };
 
     hardwareModules = {

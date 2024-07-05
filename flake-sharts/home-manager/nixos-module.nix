@@ -32,7 +32,6 @@ in
           };
 
           imports = [
-            # TODO: Replace homes path with a flake module
             ../homes/${user}/${host}.nix
             userModules.${user}
             homeModules.default

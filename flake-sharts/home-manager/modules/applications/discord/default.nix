@@ -37,8 +37,8 @@ in
 
       settings = {
         notifyAboutUpdates = true;
-        autoUpdate = true;
-        autoUpdateNotification = true;
+        autoUpdate = false;
+        autoUpdateNotification = false;
         useQuickCss = false;
         themeLinks = [ ];
         enableReactDevtools = false;

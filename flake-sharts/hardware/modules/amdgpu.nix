@@ -13,12 +13,6 @@ in
   };
 
   config = mkIf cfg.enable {
-    # TODO: Check if this is redundant.
-    environment.systemPackages = with pkgs; [
-      mesa
-      libva
-    ];
-
     boot.initrd.kernelModules = [ "amdgpu" ];
 
     hardware = {
