@@ -111,6 +111,7 @@
                   configFile
                   config.flake.nixosModules.default
                   config.flake.hardwareModules.${hostName}
+                  (config.flake.userModules.default { machine = hostName; })
                   ./global.nix
                   ./overlays.nix
                   # Share state version with home-manager

@@ -1,8 +1,4 @@
 {
-  shit.users = {
-    skettisouls.enable = true;
-  };
-
   roles = {
     server.enable = true;
     workstation.enable = true;

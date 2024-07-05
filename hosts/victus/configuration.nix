@@ -1,10 +1,6 @@
 { config, lib, pkgs,  ... }:
 
 {
-  shit.users = {
-    skettisouls.enable = true;
-  };
-
   roles = {
     desktop.enable = true;
     gaming.enable = true;

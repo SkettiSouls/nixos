@@ -38,7 +38,8 @@ in
       (nerdfonts.override { fonts = [ "SourceCodePro" "DejaVuSansMono" ]; })
     ];
 
-    home-manager.users.skettisouls = mkIf config.shit.users.skettisouls.enable {
+    # TODO: mkIf logic
+    home-manager.users.skettisouls = {
       home = {
         pointerCursor = {
           name = "phinger-cursor-dark";

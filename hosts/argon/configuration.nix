@@ -5,10 +5,6 @@
 { config, lib, pkgs, ... }:
 
 {
-  shit.users = {
-    skettisouls.enable = true;
-  };
-
   roles = {
     # TODO: Make roles a list instead of attrs.
     desktop.enable = true;
