@@ -102,18 +102,16 @@
               inherit flakeModules;
 
               nixosConfigurations = genAttrs config.machines (host: nixosSystem {
-                specialArgs = { inherit inputs self; };
+                specialArgs = { inherit inputs self; currentMachine = host; };
                 modules = with config.flake; [
                   hostModules.${host}
                   hardwareModules.${host}
                   nixosModules.default
                   # Pass host down to userModules.default
-                  (userModules.default { machine = host; })
+                  (userModules.default { inherit host; })
                   ./global.nix
                   ./overlays.nix
-                  # Share state version with home-manager
-                  { home-manager.sharedModules = [{ home.stateVersion = config.flake.nixosConfigurations.${host}.config.system.stateVersion; }]; }
-                ];
+                ] ++ map (module: module { inherit host; }) config.flake.nixosModules.home-manager.imports;
               });
 
               # FIXME: Infinite recursion when using schizofox.

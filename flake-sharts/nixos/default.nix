@@ -1,7 +1,7 @@
 { config, ... }:
 let
   inherit (config.flake.lib)
-    combineModules
+    combineModulesExcept
     ;
 in
 {
@@ -10,6 +10,6 @@ in
     steam = import ./modules/steam.nix;
 
     roles = config.flake.roles.default;
-    default.imports = combineModules config.flake.nixosModules;
+    default.imports = combineModulesExcept config.flake.nixosModules "home-manager";
   };
 }
