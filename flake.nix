@@ -26,14 +26,9 @@
     flake-parts.lib.mkFlake { inherit inputs; }
       ({ config, options, flake-parts-lib, ... }:
         let
-          inherit (config.flake.lib)
-            listToAttrs'
-            ;
-
           inherit (nixpkgs.lib)
             genAttrs
             mapAttrs
-            mkDefault
             mkOption
             nixosSystem
             types
@@ -52,6 +47,8 @@
             users = import ./flake-sharts/users;
             wireguard = import ./flake-sharts/wireguard;
           };
+
+          hm-module = (builtins.head config.flake.nixosModules.home-manager.imports);
         in
         {
           imports = with flakeModules; [
@@ -104,37 +101,30 @@
               nixosConfigurations = genAttrs config.machines (host: nixosSystem {
                 specialArgs = { inherit inputs self; currentMachine = host; };
                 modules = with config.flake; [
+                  ./global.nix
+                  ./overlays.nix
                   hostModules.${host}
                   hardwareModules.${host}
                   nixosModules.default
-                  # Pass host down to userModules.default
+                  (hm-module { inherit host; })
                   (userModules.default { inherit host; })
-                  ./global.nix
-                  ./overlays.nix
-                ] ++ map (module: module { inherit host; }) config.flake.nixosModules.home-manager.imports;
+                ];
               });
 
               # FIXME: Infinite recursion when using schizofox.
               homeConfigurations = mapAttrs (user: hostList:
-                listToAttrs' (map (host: { ${host} =
+                genAttrs hostList (host:
                   inputs.home-manager.lib.homeManagerConfiguration {
+                    # TODO: Support other arch
                     pkgs = nixpkgs.legacyPackages.x86_64-linux;
                     extraSpecialArgs = { inherit inputs self; };
-                    modules = with config.flake; [
-                      ./flake-sharts/homes/${user}/${host}.nix
-                      homeModules.default
-                      userModules.${user}
+                    modules = [
                       ./overlays.nix
-                      {
-                        home = rec {
-                          username = "${user}";
-                          homeDirectory = mkDefault "/home/${username}";
-                          stateVersion = config.flake.nixosConfigurations.${host}.config.system.stateVersion;
-                        };
-                      }
+                      # Use the home-manager config from nixos.
+                      (hm-module { inherit host; }).home-manager.users.${user}
                     ];
-                  };
-                }) hostList)
+                  }
+                )
               ) config.homes;
             };
           };
