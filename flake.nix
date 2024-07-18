@@ -1,6 +1,11 @@
 {
   inputs = {
     # Base
+    deploy-rs = {
+      url = "github:serokell/deploy-rs";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     flake-parts.url = "github:hercules-ci/flake-parts";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -108,6 +113,18 @@
               _options = options;
 
               inherit flakeModules;
+
+              deploy.nodes = {
+                fluorine = {
+                  hostname = "192.168.1.17";
+                  profiles.system = {
+                    user = "root";
+                    sshUser = "root";
+                    sshOpts = [ "-T" ];
+                    path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos config.flake.nixosConfigurations.fluorine;
+                  };
+                };
+              };
 
               nixosConfigurations = genAttrs config.machines (host: nixosSystem {
                 specialArgs = { inherit inputs self; currentMachine = host; };

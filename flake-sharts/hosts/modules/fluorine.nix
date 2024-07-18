@@ -1,18 +1,22 @@
+let
+  keys = {
+    argon = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILU3q+/0jJLkAtvCk3hJ+QAXCvza7SZ9a0V6FZq6IJne";
+  };
+in
 {
   roles = {
     server.enable = true;
     workstation.enable = true;
   };
 
-
   networking.hostName = "fluorine";
 
-  users.users.skettisouls.openssh.authorizedKeys.keys = [
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHAV0a5O5FiI6ApGw0C+9lWWi0WQvYNivNkcwp3owwfz"
+  users.users.skettisouls.openssh.authorizedKeys.keys = with keys; [
+    argon
   ];
 
-  users.users.root.openssh.authorizedKeys.keys = [
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHAV0a5O5FiI6ApGw0C+9lWWi0WQvYNivNkcwp3owwfz"
+  users.users.root.openssh.authorizedKeys.keys = with keys; [
+    argon
   ];
 
   # Configure network proxy if necessary
@@ -22,11 +26,9 @@
   # Set your time zone.
   time.timeZone = "America/Chicago";
 
-  nix.settings = {
-    trusted-users = [
-      "skettisouls"
-    ];
-  };
+  nix.settings.trusted-users = [
+    "skettisouls"
+  ];
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

@@ -94,7 +94,7 @@ in
   options.shit.hardware = {
     monitors = mkOption {
       type = types.listOf monitorSubmodule;
-      default = [];
+      default = [{}];
     };
 
     defaultMonitor = mkOption {
