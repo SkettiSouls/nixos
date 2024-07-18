@@ -11,7 +11,7 @@ let
 in
 {
   options.flake.homeModules = mkOption {
-    type = types.attrs;
+    type = with types; attrsOf deferredModule;
     default = {};
   };
 

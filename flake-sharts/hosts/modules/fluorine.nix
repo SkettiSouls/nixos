@@ -1,9 +1,14 @@
+{ self, ... }:
 let
   keys = {
     argon = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILU3q+/0jJLkAtvCk3hJ+QAXCvza7SZ9a0V6FZq6IJne";
   };
 in
 {
+  imports = with self.serviceModules; [
+    postgres
+  ];
+
   roles = {
     server.enable = true;
     workstation.enable = true;

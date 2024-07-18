@@ -69,6 +69,7 @@
             nixos = import ./flake-sharts/nixos;
             packages = import ./flake-sharts/packages;
             roles = import ./flake-sharts/roles;
+            services = import ./flake-sharts/services;
             users = import ./flake-sharts/users;
             wireguard = import ./flake-sharts/wireguard;
           };
