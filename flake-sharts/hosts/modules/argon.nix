@@ -11,10 +11,6 @@
   # Kernel
   boot.kernelPackages = pkgs.linuxPackages_6_8;
 
-  # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-
   networking.hostName = "argon"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 

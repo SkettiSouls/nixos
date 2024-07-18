@@ -6,6 +6,8 @@ let
 in
 {
   flake.nixosModules = {
+    systemd-boot = import ./modules/systemd-boot.nix;
+
     pipewire = import ./modules/pipewire.nix;
     steam = import ./modules/steam.nix;
 

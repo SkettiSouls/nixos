@@ -7,10 +7,6 @@
     workstation.enable = true;
   };
 
-  # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-
   networking.hostName = "victus"; # Define your hostname.
   # TODO: See if wpa_supplicant is required for declaring wifi connections.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
