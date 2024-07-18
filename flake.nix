@@ -1,41 +1,50 @@
 {
   inputs = {
-    # Base
+    # Base {{{
     deploy-rs = {
       url = "github:serokell/deploy-rs";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     flake-parts.url = "github:hercules-ci/flake-parts";
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
-    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     home-manager = {
       url = "github:nix-community/home-manager/release-24.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Hyprland
-    hyprpicker.url = "github:hyprwm/hyprpicker";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    # }}}
+
+    # Hyprland {{{
     hyprland = {
       type = "git";
       url = "https://github.com/hyprwm/hyprland";
       submodules = true;
     };
 
-    neovim.url = "github:skettisouls/neovim";
+    hyprpicker.url = "github:hyprwm/hyprpicker";
+    # }}}
 
-    # Discord
-    vesktop.url = "github:NixOS/nixpkgs/nixos-unstable"; # Allow updating vesktop independent of other unstable pkgs
+    # Editor {{{
+    neovim.url = "github:skettisouls/neovim";
+    # }}}
+
+    # Discord {{{
     midnight-discord = {
       type = "git";
       url = "https://github.com/refact0r/midnight-discord";
       flake = false;
     };
 
-    # Luni-net
+    vesktop.url = "github:NixOS/nixpkgs/nixos-unstable"; # Allow updating vesktop independent of nixpkgs-unstable
+    # }}}
+
+    # Luni-net {{{
     asluni.url = "github:the-computer-club/automous-zones";
     lynx.url = "github:the-computer-club/lynx";
+    # }}}
   };
 
   outputs = inputs @ { self, nixpkgs, flake-parts, ... }:
@@ -67,18 +76,7 @@
           hm-module = (builtins.head config.flake.nixosModules.home-manager.imports);
         in
         {
-          imports = with flakeModules; [
-            hardware
-            home-manager
-            hosts
-            hyprland
-            libs
-            nixos
-            packages
-            roles
-            users
-            wireguard
-
+          imports = (builtins.attrValues flakeModules) ++ [
             inputs.lynx.flakeModules.flake-guard
             inputs.asluni.flakeModules.asluni
           ];
