@@ -38,7 +38,8 @@
       flake = false;
     };
 
-    vesktop.url = "github:NixOS/nixpkgs/nixos-unstable"; # Allow updating vesktop independent of nixpkgs-unstable
+    # Allow updating vesktop independent of nixpkgs-unstable
+    vesktop.url = "github:NixOS/nixpkgs/nixos-unstable";
     # }}}
 
     # Luni-net {{{
