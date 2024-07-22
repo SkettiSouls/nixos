@@ -30,7 +30,7 @@ in
       })
       wl-clipboard
       dunst
-      sketti.connect-headphones
+      bin.chp
     ];
 
     xdg.portal = {

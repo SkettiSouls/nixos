@@ -48,7 +48,7 @@ in
         };
 
         packages = with pkgs; [
-          sketti.eat
+          bin.eat
           element-desktop
         ];
       };

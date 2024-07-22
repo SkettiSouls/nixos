@@ -12,6 +12,7 @@ let
   };
 
   overlay-sketti = final: prev: {
+    bin = bin.packages.${system};
     sketti = self.packages.${system};
     neovim = neovim.packages.${system}.default;
   };

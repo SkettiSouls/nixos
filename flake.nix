@@ -1,6 +1,6 @@
 {
   inputs = {
-    # Base {{{
+  # Base {{{
     deploy-rs = {
       url = "github:serokell/deploy-rs";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -15,9 +15,9 @@
 
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
-    # }}}
+  # }}}
 
-    # Hyprland {{{
+  # Hyprland {{{
     hyprland = {
       type = "git";
       url = "https://github.com/hyprwm/hyprland";
@@ -25,13 +25,19 @@
     };
 
     hyprpicker.url = "github:hyprwm/hyprpicker";
-    # }}}
+  # }}}
 
-    # Editor {{{
+  # Tools {{{
     neovim.url = "github:skettisouls/neovim";
-    # }}}
 
-    # Discord {{{
+    bin = {
+      type = "git";
+      url = "file:/etc/nixos/flake-sharts/packages/scripts?submodules=1";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+  # }}}
+
+  # Discord {{{
     midnight-discord = {
       type = "git";
       url = "https://github.com/refact0r/midnight-discord";
@@ -40,12 +46,12 @@
 
     # Allow updating vesktop independent of nixpkgs-unstable
     vesktop.url = "github:NixOS/nixpkgs/nixos-unstable";
-    # }}}
+  # }}}
 
-    # Luni-net {{{
+  # Luni-net {{{
     asluni.url = "github:the-computer-club/automous-zones";
     lynx.url = "github:the-computer-club/lynx";
-    # }}}
+  # }}}
   };
 
   outputs = inputs @ { self, nixpkgs, flake-parts, ... }:

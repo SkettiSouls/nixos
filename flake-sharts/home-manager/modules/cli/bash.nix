@@ -18,11 +18,11 @@ in
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
-      (mkIf cfg.aliaspp.enable sketti.aliaspp)
+      # (mkIf cfg.aliaspp.enable sketti.rebuild)
       eza
       rsync
       sketti.rebuild
-      (mkIf cfg.customScripts sketti.scripts)
+      # (mkIf cfg.customScripts sketti.scripts)
     ];
 
     programs.bash = {
