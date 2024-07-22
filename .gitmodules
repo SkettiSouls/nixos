@@ -1,0 +1,3 @@
+[submodule "scripts"]
+	path = flake-sharts/packages/bin
+	url = git@github.com:skettisouls/bin.git
