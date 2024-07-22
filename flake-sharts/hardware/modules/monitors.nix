@@ -88,7 +88,6 @@ let
   };
 
   cfg = config.shit.hardware;
-  mon = listToAttrs' cfg.monitors;
 in
 {
   options.shit.hardware = {
@@ -118,7 +117,7 @@ in
       }
       {
         # Check if refreshRate is unset, and error when using a manual resolution
-        assertion = (builtins.any (bool: bool == true) (if mon.refreshRate == null then map (res: res == mon.resolution) [ "maxresolution" "maxrefreshrate" "preffered" ] else [true]));
+        assertion = !(builtins.any (bool: bool == false) (map (mon: if mon.refreshRate == null then builtins.any (res: res == mon.resolution) [ "maxresolution" "maxrefreshrate" "preffered" ] else true) cfg.monitors));
         message = ''
           Manual screen resolution requires setting a refresh rate.
         '';

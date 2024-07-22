@@ -25,15 +25,15 @@
       "locked": {
         "lastModified": 1721622602,
         "narHash": "sha256-UZE1pSjbjJo1zcAB7mmLe4M8uovNyq67Nf4l+xiQKMw=",
-        "ref": "ee18a67fd2f4ca1111d4df6895afbc65f76cbecc",
+        "ref": "refs/heads/master",
         "rev": "ee18a67fd2f4ca1111d4df6895afbc65f76cbecc",
         "revCount": 18,
         "type": "git",
-        "url": "file:/etc/nixos/flake-sharts/packages/scripts?submodules=1"
+        "url": "file:/etc/nixos/flake-sharts/packages/scripts"
       },
       "original": {
         "type": "git",
-        "url": "file:/etc/nixos/flake-sharts/packages/scripts?submodules=1"
+        "url": "file:/etc/nixos/flake-sharts/packages/scripts"
       }
     },
     "deploy-rs": {
@@ -364,11 +364,11 @@
         "rev": "61424ed9fbd735e48aefa90817f57e48a9f450a9",
         "revCount": 14,
         "type": "git",
-        "url": "file:/etc/nixos/flake-sharts/packages/neovim?submodules=1"
+        "url": "file:/etc/nixos/flake-sharts/packages/neovim"
       },
       "original": {
         "type": "git",
-        "url": "file:/etc/nixos/flake-sharts/packages/neovim?submodules=1"
+        "url": "file:/etc/nixos/flake-sharts/packages/neovim"
       }
     },
     "nixpkgs": {
