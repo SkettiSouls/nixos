@@ -9,9 +9,14 @@ in
 {
   options.peripherals = {
     bluetooth = {
-      headphones = mkOption {
+      defaultHeadphones = mkOption {
         type = types.str;
         default = "";
+      };
+
+      headphones = mkOption {
+        type = with types; attrsOf str;
+        default = {};
       };
 
       controller = mkOption {

@@ -5,7 +5,10 @@ let
     mkIf
     ;
 
-  inherit (config.peripherals.bluetooth) headphones;
+  inherit (config.peripherals.bluetooth)
+    headphones
+    defaultHeadphones
+    ;
 
   cfg = config.shit.hyprland;
   home = config.home.homeDirectory;
@@ -50,7 +53,7 @@ in
           "hyprpaper &"
           "dunst &"
           "polkit &"
-          "connect-headphones ${headphones}"
+          "connect-headphones ${defaultHeadphones}"
           "[workspace 10 silent] carla /etc/nixos/shit/carla/system.carxp"
           "[workspace 1 silent] qutebrowser"
           "[workspace 2 silent] vesktop"
@@ -153,8 +156,8 @@ in
           "$mainMod, V, togglesplit"
           "$mainMod, F, fullscreen"
           "$mainMod, RETURN, exec, $TERM"
-          "$mainMod, B, exec, connect-headphones ${headphones}"
-          "$mainMod ALT, B, exec, bluetoothctl disconnect ${headphones}"
+          "$mainMod, B, exec, connect-headphones ${defaultHeadphones}"
+          "$mainMod ALT, B, exec, bluetoothctl disconnect ${defaultHeadphones}"
           "$mainMod, C, exec, $TERM -e nvim /etc/nixos"
           "$mainMod ALT, C, exec, $TERM -e nvim /etc/nixos/modules/home/hyprland.nix"
 

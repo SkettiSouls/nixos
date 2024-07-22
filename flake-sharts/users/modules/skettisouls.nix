@@ -1,11 +1,7 @@
 { config, lib, pkgs, ... }:
 let
+  inherit (config.peripherals.bluetooth) headphones;
   home = config.home.homeDirectory;
-
-  # Headphones
-  # TODO: Make this a submodule of `name = mac`
-  soundcoreSpaceQ45 = "E8:EE:CC:4B:FA:2A";
-  sennheiserMomentum4 = "80:C3:BA:3F:EB:B9";
 in
 {
   config = {
@@ -17,7 +13,11 @@ in
     };
 
     peripherals.bluetooth = {
-      headphones = sennheiserMomentum4;
+      defaultHeadphones = headphones.momentum4;
+      headphones = {
+        momentum4 = "80:C3:BA:3F:EB:B9";
+        spaceQ45 = "E8:EE:CC:4B:FA:2A";
+      };
     };
 
     programs.git = {
