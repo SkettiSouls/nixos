@@ -32,7 +32,7 @@
 
     bin = {
       type = "git";
-      url = "file:/etc/nixos/flake-sharts/packages/bin?submodules=1";
+      url = "file:/etc/nixos/flake-sharts/packages/scripts?submodules=1";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
   # }}}
