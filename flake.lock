@@ -352,21 +352,23 @@
     },
     "neovim": {
       "inputs": {
-        "nixpkgs": "nixpkgs_3",
+        "nixpkgs": [
+          "nixpkgs-unstable"
+        ],
         "systems": "systems_5"
       },
       "locked": {
         "lastModified": 1721536637,
         "narHash": "sha256-GFYYBodECyvamY3TAjmsTg0VWjOTaOqJ+sKdk99Dk4k=",
-        "owner": "skettisouls",
-        "repo": "neovim",
+        "ref": "refs/heads/master",
         "rev": "61424ed9fbd735e48aefa90817f57e48a9f450a9",
-        "type": "github"
+        "revCount": 14,
+        "type": "git",
+        "url": "file:/etc/nixos/flake-sharts/packages/neovim?submodules=1"
       },
       "original": {
-        "owner": "skettisouls",
-        "repo": "neovim",
-        "type": "github"
+        "type": "git",
+        "url": "file:/etc/nixos/flake-sharts/packages/neovim?submodules=1"
       }
     },
     "nixpkgs": {
@@ -431,22 +433,6 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1721466660,
-        "narHash": "sha256-pFSxgSZqZ3h+5Du0KvEL1ccDZBwu4zvOil1zzrPNb3c=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "6e14bbce7bea6c4efd7adfa88a40dac750d80100",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "nixpkgs-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs_4": {
-      "locked": {
         "lastModified": 1717144377,
         "narHash": "sha256-F/TKWETwB5RaR8owkPPi+SPJh83AQsm6KrQAlJ8v/uA=",
         "owner": "NixOS",
@@ -473,7 +459,7 @@
         "lynx": "lynx",
         "midnight-discord": "midnight-discord",
         "neovim": "neovim",
-        "nixpkgs": "nixpkgs_4",
+        "nixpkgs": "nixpkgs_3",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "vesktop": "vesktop"
       }

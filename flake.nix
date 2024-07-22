@@ -28,7 +28,12 @@
   # }}}
 
   # Tools {{{
-    neovim.url = "github:skettisouls/neovim";
+    # neovim.url = "github:skettisouls/neovim";
+    neovim = {
+      type = "git";
+      url = "file:/etc/nixos/flake-sharts/packages/neovim?submodules=1";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
 
     bin = {
       type = "git";
