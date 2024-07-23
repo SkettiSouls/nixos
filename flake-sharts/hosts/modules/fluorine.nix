@@ -9,10 +9,10 @@ in
     postgres
   ];
 
-  roles = {
-    server.enable = true;
-    workstation.enable = true;
-  };
+  roles = with self.roles; [
+    server
+    workstation
+  ];
 
   networking.hostName = "fluorine";
 

@@ -5,10 +5,10 @@ let
     mkIf
     ;
 
-  cfg = config.roles.gaming;
+  cfg = config.shit.roles.gaming;
 in
 {
-  options.roles.gaming.enable = mkEnableOption "Gaming role";
+  options.shit.roles.gaming.enable = mkEnableOption "Gaming role";
 
   config = mkIf cfg.enable {
     shit = {

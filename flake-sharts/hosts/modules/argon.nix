@@ -1,12 +1,11 @@
-{ config, lib, pkgs, ... }:
+{ self, lib, pkgs, ... }:
 
 {
-  roles = {
-    # TODO: Make roles a list instead of attrs.
-    desktop.enable = true;
-    gaming.enable = true;
-    workstation.enable = true;
-  };
+  roles = with self.roles; [
+    desktop
+    gaming
+    workstation
+  ];
 
   # Kernel
   boot.kernelPackages = pkgs.linuxPackages_6_8;

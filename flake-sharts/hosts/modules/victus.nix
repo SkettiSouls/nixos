@@ -1,11 +1,11 @@
-{ config, lib, pkgs,  ... }:
+{ self, lib, pkgs,  ... }:
 
 {
-  roles = {
-    desktop.enable = true;
-    gaming.enable = true;
-    workstation.enable = true;
-  };
+  roles = with self.roles; [
+    desktop
+    gaming
+    workstation
+  ];
 
   networking.hostName = "victus"; # Define your hostname.
   # TODO: See if wpa_supplicant is required for declaring wifi connections.

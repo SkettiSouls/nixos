@@ -5,10 +5,10 @@ let
     mkIf
     ;
 
-  cfg = config.roles.desktop;
+  cfg = config.shit.roles.desktop;
 in
 {
-  options.roles.desktop.enable = mkEnableOption "Desktop role";
+  options.shit.roles.desktop.enable = mkEnableOption "Desktop role";
 
   config = mkIf cfg.enable {
     shit = {

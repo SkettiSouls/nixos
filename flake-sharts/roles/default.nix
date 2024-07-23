@@ -5,12 +5,17 @@ let
     ;
 in
 {
-  flake.roles = {
-    desktop = import ./modules/desktop.nix;
-    gaming = import ./modules/gaming.nix;
-    server = import ./modules/server.nix;
-    workstation = import ./modules/workstation.nix;
+  flake = {
+    roles = {
+      desktop = ./modules/desktop.nix;
+      gaming = ./modules/gaming.nix;
+      options = import ./modules/options.nix;
+      server = ./modules/server.nix;
+      workstation = ./modules/workstation.nix;
 
-    default.imports = combineModules config.flake.roles;
+      default.imports = combineModules config.flake.roles;
+    };
+
+    # nixosModules.roles = import ./modules/options.nix;
   };
 }

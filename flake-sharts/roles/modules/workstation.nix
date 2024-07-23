@@ -5,10 +5,10 @@ let
     mkIf
     ;
 
-  cfg = config.roles.workstation;
+  cfg = config.shit.roles.workstation;
 in
 {
-  options.roles.workstation.enable = mkEnableOption "Workstation role";
+  options.shit.roles.workstation.enable = mkEnableOption "Workstation role";
 
   config = mkIf cfg.enable {
     shit = {
