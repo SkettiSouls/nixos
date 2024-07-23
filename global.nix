@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }:
+{ inputs, lib, pkgs, ... }:
 
 {
   shit = {
@@ -11,6 +11,7 @@
   nix = {
     package = pkgs.nix;
     settings.experimental-features = [ "nix-command" "flakes" ];
+    registry = lib.mapAttrs (_: flake: { inherit flake; }) inputs;
   };
 
   i18n = rec {

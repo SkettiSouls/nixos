@@ -28,7 +28,6 @@
   # }}}
 
   # Tools {{{
-    # neovim.url = "github:skettisouls/neovim";
     neovim = {
       type = "git";
       url = "file:/etc/nixos/flake-sharts/packages/neovim";
@@ -87,6 +86,7 @@
           };
 
           hm-module = (builtins.head config.flake.nixosModules.home-manager.imports);
+          specialArgs = { inherit inputs self; };
         in
         {
           imports = (builtins.attrValues flakeModules) ++ [
@@ -138,7 +138,7 @@
               };
 
               nixosConfigurations = genAttrs config.machines (host: nixosSystem {
-                specialArgs = { inherit inputs self; currentMachine = host; };
+                specialArgs = specialArgs // { currentMachine = host; };
                 modules = with config.flake; [
                   ./global.nix
                   ./overlays.nix
@@ -156,7 +156,7 @@
                   inputs.home-manager.lib.homeManagerConfiguration {
                     # TODO: Support other arch
                     pkgs = nixpkgs.legacyPackages.x86_64-linux;
-                    extraSpecialArgs = { inherit inputs self; };
+                    extraSpecialArgs = specialArgs;
                     modules = [
                       ./overlays.nix
                       # Use the home-manager config from nixos.

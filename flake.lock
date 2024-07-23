@@ -23,11 +23,11 @@
         "systems": "systems"
       },
       "locked": {
-        "lastModified": 1721622602,
-        "narHash": "sha256-UZE1pSjbjJo1zcAB7mmLe4M8uovNyq67Nf4l+xiQKMw=",
+        "lastModified": 1721716594,
+        "narHash": "sha256-EK4NsSMgOBrX/y34fxG7k2Eez6LFRUj8rKBrznmnm5c=",
         "ref": "refs/heads/master",
-        "rev": "ee18a67fd2f4ca1111d4df6895afbc65f76cbecc",
-        "revCount": 18,
+        "rev": "0f818ff0ddaf85c214bba895208bc5c644ff5457",
+        "revCount": 19,
         "type": "git",
         "url": "file:/etc/nixos/flake-sharts/packages/scripts"
       },

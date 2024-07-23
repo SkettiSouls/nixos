@@ -11,9 +11,9 @@ let
     vesktop-unstable = vesktop.legacyPackages.${system}.vesktop;
   };
 
-  overlay-sketti = final: prev: {
+  overlay-self = final: prev: {
     bin = bin.packages.${system};
-    sketti = self.packages.${system};
+    self = self.packages.${system};
     neovim = neovim.packages.${system}.default;
   };
 
@@ -26,7 +26,7 @@ in
 {
   nixpkgs.overlays = [
     overlay-unstable
-    overlay-sketti
+    overlay-self
     overlay-hyprland
   ];
 }
