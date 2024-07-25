@@ -11,7 +11,24 @@ in
     default = {};
   };
 
-  config.flake.serviceModules = {
-    postgres = import ./modules/postgres.nix;
+  config = {
+    flake = {
+      serviceModules = {
+        airsonic = import ./modules/airsonic/service.nix;
+        postgres = import ./modules/postgres.nix;
+        deemix = import ./modules/deemix/service.nix;
+      };
+
+      nixosModules = {
+        deemix = import ./modules/deemix/nixos.nix;
+      };
+    };
+
+    perSystem = { pkgs, ... }: {
+      packages = {
+        airsonic-advanced = pkgs.callPackage ./modules/airsonic/package.nix {};
+        deemix-server = pkgs.callPackage ./modules/deemix/package.nix {};
+      };
+    };
   };
 }
