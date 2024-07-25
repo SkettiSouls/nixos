@@ -30,13 +30,13 @@
   # Tools {{{
     neovim = {
       type = "git";
-      url = "file:/etc/nixos/flake-sharts/packages/neovim";
+      url = "file:/etc/nixos/flake-sharts/packages/neovim?submodules=1";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
     bin = {
       type = "git";
-      url = "file:/etc/nixos/flake-sharts/packages/scripts";
+      url = "file:/etc/nixos/flake-sharts/packages/scripts?submodules=1";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
   # }}}
@@ -73,7 +73,12 @@
           flakeModules = {
             # features = importApply ./flake-sharts/features args;
             hardware = import ./flake-sharts/hardware;
-            home-manager.imports = [ ./flake-sharts/home-manager ./flake-sharts/home-manager/nixos-module.nix ];
+
+            home-manager.imports = [
+              ./flake-sharts/home-manager
+              ./flake-sharts/home-manager/nixos-module.nix
+            ];
+
             hosts = import ./flake-sharts/hosts;
             hyprland = import ./flake-sharts/hyprland;
             libs = import ./flake-sharts/libs;
