@@ -1,5 +1,6 @@
-{ config, lib, pkgs, ... }:
+{ self, config, lib, pkgs, ... }:
 let
+  inherit (self.lib) exponent;
   inherit (lib)
     filterAttrs
     isAttrs
@@ -13,8 +14,16 @@ let
 
   inherit (cfg.layout) generator;
 
+  checkForTags = value:
+    (if (value.tags != null) && (value.output != null) then { tags = mkTag value.tags; output = mkTag value.output; } else
+    (if (value.tags != null) then { tags = mkTag value.tags; } else
+    (if (value.output != null) then { output = mkTag value.output; } else {})));
+
+
   # Works because layout.generator is type `oneOf [ "rivertile" path package ]`
   isPackage = x: if (isPath x) || (isString x) then false else true;
+  rmNull = x: filterAttrs (n: v: v != null) x;
+  mkTag = tag: toString (exponent 2 (tag - 1));
   cfg = config.shit.river;
 in
 {
@@ -48,17 +57,17 @@ in
           "-app-id" = mkIf (cfg.rules.byId != null) (mapAttrs (id: value:
             if (isAttrs value) && (value.byTitle != null) then {
               "-title" = mapAttrs (title: option:
-                if isAttrs option then filterAttrs (n: v: v != null) option else option
+                if isAttrs option then (rmNull option) // checkForTags option else option
               ) value.byTitle;
-            } else if isAttrs value then filterAttrs (n: v: v != null) value else value)
+            } else if isAttrs value then (rmNull value) // checkForTags value else value)
           cfg.rules.byId);
 
           "-title" = mkIf (cfg.rules.byTitle != null) (mapAttrs (id: value:
               if (isAttrs value) && (value.byId != null) then {
                 "-app-id" = mapAttrs (id: option:
-                  if isAttrs option then filterAttrs (n: v: v != null) option else option
+                  if isAttrs option then (rmNull option) // checkForTags option else option
                 ) value.byId;
-              } else if isAttrs value then filterAttrs (n: v: v != null) value else value)
+              } else if isAttrs value then (rmNull value) // checkForTags value else value)
             cfg.rules.byTitle);
         });
 

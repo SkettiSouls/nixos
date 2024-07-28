@@ -48,7 +48,7 @@ let
     };
 
     output = mkOption {
-      type = with types; nullOr (either str int);
+      type = with types; nullOr int;
       default = null;
     };
 
@@ -58,7 +58,7 @@ let
     };
 
     tags = mkOption {
-      type = with types; nullOr (either str int);
+      type = with types; nullOr int;
       default = null;
     };
   };
