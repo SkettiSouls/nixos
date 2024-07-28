@@ -14,6 +14,7 @@
       trollOS.enable = true;
     };
 
+    river.enable = true;
     hyprland.wallpapers = {
       suncat.source = "/etc/nixos/shit/images/wallpapers/suncat.jpg";
     };
