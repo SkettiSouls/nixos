@@ -34,7 +34,7 @@ in
   ];
 
   # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
+  networking.firewall.allowedTCPPorts = [ 80 ];
   # networking.firewall.allowedUDPPorts = [ ... ];
 
   system.stateVersion = "24.05";

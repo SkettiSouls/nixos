@@ -53,4 +53,14 @@
       }];
     };
   };
+
+  # Add ogg encoder to airsonic.
+  environment.systemPackages = with pkgs; [ vorbis-tools ];
+  system.activationScripts = {
+    oggenc.text = ''
+      if [ ! -f /var/lib/airsonic/transcode/oggenc ]; then
+        ln -s ${pkgs.vorbis-tools}/bin/oggenc /var/lib/airsonic/transcode/oggenc
+      fi
+    '';
+  };
 }
