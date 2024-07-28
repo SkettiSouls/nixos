@@ -8,26 +8,33 @@ let
     types
     ;
 
-  keybindSubmodule = types.submodule {
+  bindSubmodule = types.submodule {
     options = (lib.genAttrs cfg.modes (n: mkOption {
       type = types.attrs;
       default = {};
     }));
   };
 
-  keybindOptions = {
+  unbindSubmodule = types.submodule {
+    options = (lib.genAttrs cfg.modes (n: mkOption {
+      type = with types; listOf str;
+      default = [];
+    }));
+  };
+
+  keybindOptions = type: {
     keys = mkOption {
-      type = keybindSubmodule;
+      type = type;
       default = {};
     };
 
     mouse = mkOption {
-      type = keybindSubmodule;
+      type = type;
       default = {};
     };
 
     switch = mkOption {
-      type = keybindSubmodule;
+      type = type;
       default = {};
     };
   };
@@ -68,8 +75,8 @@ in
 {
   options.shit.river = {
     enable = mkEnableOption "River WM";
-    bind = keybindOptions;
-    unbind = keybindOptions;
+    bind = keybindOptions bindSubmodule;
+    unbind = keybindOptions unbindSubmodule;
 
     installTerminal = mkOption {
       type = types.bool;
