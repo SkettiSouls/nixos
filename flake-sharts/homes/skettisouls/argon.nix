@@ -1,9 +1,17 @@
 { config, lib, pkgs, ... }:
 
 {
+  imports = [ ./default.nix ];
+
   home.packages = with pkgs;[
     rofi
   ];
+
+  sketti = {
+    desktops = {
+      river.enable = true;
+    };
+  };
 
   shit = {
     audio = {
@@ -14,7 +22,6 @@
       trollOS.enable = true;
     };
 
-    river.enable = true;
     hyprland.wallpapers = {
       suncat.source = "/etc/nixos/shit/images/wallpapers/suncat.jpg";
     };
