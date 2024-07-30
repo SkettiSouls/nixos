@@ -15,8 +15,9 @@ in
     flake = {
       serviceModules = {
         airsonic = import ./modules/airsonic/service.nix;
-        postgres = import ./modules/postgres.nix;
         deemix = import ./modules/deemix/service.nix;
+        invidious = import ./modules/invidious.nix;
+        postgres = import ./modules/postgres.nix;
       };
 
       nixosModules = {

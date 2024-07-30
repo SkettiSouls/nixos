@@ -8,6 +8,7 @@ in
   imports = with self.serviceModules; [
     airsonic
     deemix
+    invidious
     postgres
   ];
 

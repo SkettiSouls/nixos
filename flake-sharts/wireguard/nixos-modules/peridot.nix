@@ -1,17 +1,12 @@
-{ config, ... }:
+{ self, config, lib, ... }:
 let
   net = config.networking.wireguard.networks;
+  localDNS = [ "fluorine.lan" ] ++ (lib.attrNames self.nixosConfigurations.fluorine.config.services.nginx.virtualHosts);
 in
 {
   # TODO: Switch to using sops/agenix
   networking = {
-    hosts = {
-      "172.16.0.1" = [
-        "fluorine.lan"
-        "airsonic.fluorine.lan"
-        "deemix.fluorine.lan"
-      ];
-    };
+    hosts."172.16.0.1" = localDNS;
 
     firewall.interfaces = {
       eno1.allowedUDPPorts = [ net.peridot.self.listenPort ];
