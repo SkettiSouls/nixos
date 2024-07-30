@@ -11,13 +11,6 @@
   boot.kernelPackages = pkgs.linuxPackages_6_8;
 
   networking.hostName = "argon"; # Define your hostname.
-  networking.hosts = {
-    "192.168.1.17" = [
-      "fluorine.lan"
-      "airsonic.fluorine.lan"
-      "deemix.fluorine.lan"
-    ];
-  };
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary

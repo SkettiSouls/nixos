@@ -1,14 +1,11 @@
 {
-  flake.nixosModules.wireguard = import ./luni-net.nix;
+  imports = [
+    ./flake-modules/luni-net.nix
+    ./flake-modules/peridot.nix
+  ];
 
-  wireguard = {
-    enable = true;
-
-    networks.asluni = {
-      peers.by-name = {
-        argon.privateKeyFile = "/var/lib/wireguard/privatekey";
-        fluorine.privateKeyFile = "/var/lib/wireguard/privatekey";
-      };
-    };
+  flake.nixosModules = {
+    luni-net = import ./nixos-modules/luni-net.nix;
+    peridot = import ./nixos-modules/peridot.nix;
   };
 }

@@ -96,6 +96,7 @@
         in
         {
           imports = (builtins.attrValues flakeModules) ++ [
+            inputs.lynx.flakeModules.builtins
             inputs.lynx.flakeModules.flake-guard
             inputs.asluni.flakeModules.asluni
           ];
