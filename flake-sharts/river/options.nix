@@ -180,15 +180,10 @@ in
 
     tags = mkOption {
       type = with types; listOf int;
-      default = (range 1 9) ++ cfg.extraTags;
-    };
-
-    extraTags = mkOption {
-      type = with types; listOf int;
-      default = [];
+      default = (range 1 9);
       description = ''
-        Additional tags to be set after tags 1-9.
-        Removing any tags requires setting them manually with the `tags` option.
+        Set the tags to bind by default.
+        It is highly recommended to leave this option as is (binds keys 1-9).
       '';
     };
 

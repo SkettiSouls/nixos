@@ -71,12 +71,10 @@ in
         "sonixd"
       ];
 
-      extraTags = [ 10 11 ];
-
       rules = {
         byId = {
           ${discordClient} = { tags = 2; };
-          sonixd = { tags = 10; };
+          Sonixd = { tags = 10; };
           steam = { tags = 3; };
         };
       };
@@ -86,7 +84,7 @@ in
           normal = {
             # Screenshots
             "None Print" = "spawn 'grim - | wl-copy'";
-            "Shift Print" = ''spawn "grim -g '$(slurp)' - | wl-copy"'';
+            "Shift Print" = ''spawn 'grim -g "$(slurp)" - | wl-copy' '';
 
             # System binds
             "${modKey} C" = "spawn '${terminal} -e nvim /etc/nixos/'";

@@ -42,9 +42,9 @@ let
     "None XF86MonBrightnessDown" = "spawn 'brightnessctl set 5%-'";
   };
 
-  mkTag = tag: exponent 2 (tag - 1);
+  mkTag = tag: toString (exponent 2 (tag - 1));
   allTags = toString ((exponent 2 32) - 1);
-  bindTags = key: cmd: listToAttrs' (map (tag: { "${key} ${toString tag}" = "${cmd} ${toString (mkTag tag)}"; }) cfg.tags);
+  bindTags = key: cmd: listToAttrs' (map (tag: { "${key} ${toString tag}" = "${cmd} ${mkTag tag}"; }) cfg.tags);
 
   mkAllDefault = set: mapAttrs (_: v: mkDefault v) set;
 
