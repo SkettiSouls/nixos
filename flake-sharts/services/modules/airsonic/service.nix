@@ -29,6 +29,7 @@
       ];
       maxMemory = 8192;
       war = "${pkgs.self.airsonic-advanced}/webapps/airsonic.war";
+      listenAddress = "0.0.0.0"; # Allow unproxied connections.
     };
 
     nginx = {

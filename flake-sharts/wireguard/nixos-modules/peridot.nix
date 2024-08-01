@@ -1,7 +1,13 @@
 { self, config, lib, ... }:
 let
+  inherit (self.nixosConfigurations.fluorine.config.services)
+    airsonic
+    invidious
+    nginx
+    ;
+
   net = config.networking.wireguard.networks;
-  localDNS = [ "fluorine.lan" ] ++ (lib.attrNames self.nixosConfigurations.fluorine.config.services.nginx.virtualHosts);
+  localDNS = [ "fluorine.lan" ] ++ (lib.attrNames nginx.virtualHosts);
 in
 {
   # TODO: Switch to using sops/agenix
@@ -10,7 +16,14 @@ in
 
     firewall.interfaces = {
       eno1.allowedUDPPorts = [ net.peridot.self.listenPort ];
-      peridot.allowedTCPPorts = [ 20 80 443 ];
+      peridot.allowedTCPPorts = [
+        20
+        80
+        443
+        airsonic.port
+        invidious.port
+        net.peridot.self.listenPort
+      ];
     };
 
     wireguard = {
