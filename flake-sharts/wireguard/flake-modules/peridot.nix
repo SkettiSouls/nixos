@@ -19,6 +19,11 @@ in
           privateKeyFile = "/var/lib/wireguard/key";
           selfEndpoint = "192.168.1.17:${port}";
         };
+
+        xenon = {
+          publicKey = "DmcneJyadpfz6GHp1Zc+JUeuSUJHvVLrjLshc1hVBk0=";
+          ipv4 = [ "172.16.0.3/32" ];
+        };
       };
     };
   };
