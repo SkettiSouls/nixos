@@ -1,5 +1,15 @@
-{ pkgs, ... }:
+{ config, lib, pkgs, ... }:
+let
+  inherit (config.services)
+    airsonic
+    caddy
+    nginx
+    ;
 
+  inherit (lib) mkIf;
+
+  port = toString airsonic.port;
+in
 {
   services = {
     airsonic = {
@@ -32,13 +42,14 @@
       listenAddress = "0.0.0.0"; # Allow unproxied connections.
     };
 
-    nginx = {
-      enable = true;
-      virtualHosts."airsonic.flourine.lan" = {
-        enableACME = false;
-        forceSSL = false;
-        locations."/".proxyPass = "http://127.0.0.1:4040/";
-      };
+    caddy.virtualHosts."http://airsonic.fluorine.lan".extraConfig = mkIf caddy.enable ''
+      reverse_proxy http://127.0.0.1:${port}
+    '';
+
+    nginx.virtualHosts."airsonic.flourine.lan" = mkIf nginx.enable {
+      enableACME = false;
+      forceSSL = false;
+      locations."/".proxyPass = "http://127.0.0.1:4040/";
     };
 
     postgresql = {

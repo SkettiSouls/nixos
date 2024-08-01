@@ -15,8 +15,10 @@ in
     flake = {
       serviceModules = {
         airsonic = import ./modules/airsonic/service.nix;
+        caddy = import ./modules/caddy.nix;
         deemix = import ./modules/deemix/service.nix;
         invidious = import ./modules/invidious.nix;
+        nginx = import ./modules/nginx.nix;
         postgres = import ./modules/postgres.nix;
       };
 
