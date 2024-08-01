@@ -7,19 +7,25 @@ let
     mkIf
     ;
 
-  cfg = config.shit.deemix-server;
+  cfg = config.services.deemix-server;
 in
 {
-  options.shit.deemix-server = {
+  options.services.deemix-server = {
     enable = mkEnableOption "Deemix Server";
-    port = mkOption {
-      type = types.port;
-      default = 6595;
+
+    listenAddress = mkOption {
+      type = types.str;
+      default = "127.0.0.1";
     };
 
     openPort = mkOption {
       type = types.bool;
       default = false;
+    };
+
+    port = mkOption {
+      type = types.port;
+      default = 6595;
     };
   };
 
@@ -39,7 +45,7 @@ in
       after = [ "network.target" ];
       serviceConfig = {
         ExecStart = ''
-          ${pkgs.self.deemix-server}/bin/deemix-server --port ${toString cfg.port}
+          ${pkgs.self.deemix-server}/bin/deemix-server --port ${toString cfg.port} --host ${toString cfg.listenAddress}
         '';
         PrivateTmp = false;
         Restart = "always";

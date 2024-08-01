@@ -2,6 +2,7 @@
 let
   inherit (self.nixosConfigurations.fluorine.config.services)
     airsonic
+    deemix-server
     invidious
     nginx
     ;
@@ -21,6 +22,7 @@ in
         80
         443
         airsonic.port
+        deemix-server.port
         invidious.port
         net.peridot.self.listenPort
       ];
