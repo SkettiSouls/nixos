@@ -17,6 +17,7 @@ in
         airsonic = import ./modules/airsonic/service.nix;
         caddy = import ./modules/caddy.nix;
         deemix = import ./modules/deemix/service.nix;
+        forgejo = import ./modules/forgejo.nix;
         invidious = import ./modules/invidious.nix;
         nginx = import ./modules/nginx.nix;
         postgres = import ./modules/postgres.nix;

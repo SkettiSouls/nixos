@@ -9,6 +9,7 @@ in
     airsonic
     caddy
     deemix
+    forgejo
     invidious
     postgres
   ];
