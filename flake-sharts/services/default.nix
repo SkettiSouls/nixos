@@ -28,10 +28,15 @@ in
       };
     };
 
-    perSystem = { pkgs, ... }: {
+    perSystem = { pkgs, inputs', ... }:
+    let
+      callPackageUnstable = inputs'.nixpkgs-unstable.legacyPackages.callPackage;
+    in
+    {
       packages = {
         airsonic-advanced = pkgs.callPackage ./modules/airsonic/package.nix {};
         deemix-server = pkgs.callPackage ./modules/deemix/package.nix {};
+        movie-web-backend = callPackageUnstable ./modules/movie-web/backend/package.nix {};
       };
     };
   };
