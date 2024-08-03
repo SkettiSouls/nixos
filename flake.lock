@@ -447,6 +447,21 @@
         "type": "github"
       }
     },
+    "peridot": {
+      "locked": {
+        "lastModified": 1722659622,
+        "narHash": "sha256-PSp7ZeDNTos2vqYWmvtWnvhu8SuROavIoHjdGmU6eRg=",
+        "owner": "skettisouls",
+        "repo": "peridot",
+        "rev": "2dd65b9f5981cb450442394941dec10de719eae1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "skettisouls",
+        "repo": "peridot",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "asluni": "asluni",
@@ -461,6 +476,7 @@
         "neovim": "neovim",
         "nixpkgs": "nixpkgs_3",
         "nixpkgs-unstable": "nixpkgs-unstable",
+        "peridot": "peridot",
         "vesktop": "vesktop"
       }
     },

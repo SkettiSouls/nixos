@@ -27,18 +27,20 @@
     hyprpicker.url = "github:hyprwm/hyprpicker";
   # }}}
 
-  # Tools {{{
+  # Projects {{{
+    bin = {
+      type = "git";
+      url = "file:/etc/nixos/flake-sharts/packages/scripts?submodules=1";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
     neovim = {
       type = "git";
       url = "file:/etc/nixos/flake-sharts/packages/neovim?submodules=1";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
-    bin = {
-      type = "git";
-      url = "file:/etc/nixos/flake-sharts/packages/scripts?submodules=1";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
+    peridot.url = "github:skettisouls/peridot";
   # }}}
 
   # Discord {{{
@@ -99,6 +101,7 @@
             inputs.lynx.flakeModules.builtins
             inputs.lynx.flakeModules.flake-guard
             inputs.asluni.flakeModules.asluni
+            inputs.peridot.flakeModules.peridot
           ];
 
           options = {
