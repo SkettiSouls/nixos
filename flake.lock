@@ -449,11 +449,11 @@
     },
     "peridot": {
       "locked": {
-        "lastModified": 1722659622,
-        "narHash": "sha256-PSp7ZeDNTos2vqYWmvtWnvhu8SuROavIoHjdGmU6eRg=",
+        "lastModified": 1722762811,
+        "narHash": "sha256-dSLMCr7yYohNs2/L1/tic26Q5ZHRpfPF9YJ6bRlBapE=",
         "owner": "skettisouls",
         "repo": "peridot",
-        "rev": "2dd65b9f5981cb450442394941dec10de719eae1",
+        "rev": "51c68a98070f28583216fdfafae9ae98b1fc8115",
         "type": "github"
       },
       "original": {
