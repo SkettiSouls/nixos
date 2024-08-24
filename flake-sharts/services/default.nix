@@ -21,10 +21,12 @@ in
         invidious = import ./modules/invidious.nix;
         nginx = import ./modules/nginx.nix;
         postgres = import ./modules/postgres.nix;
+        terraFirmaGreg = import ./modules/minecraft/terrafirmagreg/service.nix;
       };
 
       nixosModules = {
         deemix = import ./modules/deemix/nixos.nix;
+        terraFirmaGreg = import ./modules/minecraft/terrafirmagreg/nixos.nix;
       };
     };
 
@@ -32,6 +34,7 @@ in
       packages = {
         airsonic-advanced = pkgs.callPackage ./modules/airsonic/package.nix {};
         deemix-server = pkgs.callPackage ./modules/deemix/package.nix {};
+        terraFirmaGreg = pkgs.callPackage ./modules/minecraft/terrafirmagreg/package.nix {};
       };
     };
   };

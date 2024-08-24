@@ -12,6 +12,7 @@ in
     forgejo
     invidious
     postgres
+    terraFirmaGreg
   ];
 
   roles = with self.roles; [
