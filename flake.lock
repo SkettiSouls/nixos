@@ -353,11 +353,11 @@
     "midnight-discord": {
       "flake": false,
       "locked": {
-        "lastModified": 1721422792,
-        "narHash": "sha256-e1Rc+D7/xSHSPVh+Awiv7GNW6teCwceiUxmK5bkzKR8=",
+        "lastModified": 1723586881,
+        "narHash": "sha256-yQgB5lh9+EC4zZZSgtmUQ1VbwP/Ky/fl/JWjr/ZDyX8=",
         "ref": "refs/heads/master",
-        "rev": "6bcea95e1af5ded90eb68cb1b7ef28669da2f6f7",
-        "revCount": 387,
+        "rev": "b4f885e10fb763e1c40f5dcacc8b7a9b50081b9d",
+        "revCount": 396,
         "type": "git",
         "url": "https://github.com/refact0r/midnight-discord"
       },
@@ -500,11 +500,11 @@
     },
     "peridot": {
       "locked": {
-        "lastModified": 1722762811,
-        "narHash": "sha256-dSLMCr7yYohNs2/L1/tic26Q5ZHRpfPF9YJ6bRlBapE=",
+        "lastModified": 1724699124,
+        "narHash": "sha256-+/AZKqt7zDrOFNQgXZUhqBtMewZOKyYE0iTFKerKfvw=",
         "owner": "skettisouls",
         "repo": "peridot",
-        "rev": "51c68a98070f28583216fdfafae9ae98b1fc8115",
+        "rev": "300064ab3cde7005d8aa2dde8e4d514d6038f187",
         "type": "github"
       },
       "original": {
@@ -627,11 +627,11 @@
     },
     "vesktop": {
       "locked": {
-        "lastModified": 1721379653,
-        "narHash": "sha256-8MUgifkJ7lkZs3u99UDZMB4kbOxvMEXQZ31FO3SopZ0=",
+        "lastModified": 1724479785,
+        "narHash": "sha256-pP3Azj5d6M5nmG68Fu4JqZmdGt4S4vqI5f8te+E/FTw=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "1d9c2c9b3e71b9ee663d11c5d298727dace8d374",
+        "rev": "d0e1602ddde669d5beb01aec49d71a51937ed7be",
         "type": "github"
       },
       "original": {
