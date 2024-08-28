@@ -36,6 +36,22 @@
         "url": "file:/etc/nixos/flake-sharts/packages/scripts?submodules=1"
       }
     },
+    "curseforge-server-downloader-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1691252534,
+        "narHash": "sha256-GqFj2Rms6BxzWdQTQ9imXKSlov3sDk8Cwwl9lwjIGzM=",
+        "owner": "Malpiszonekx4",
+        "repo": "curseforge-server-downloader",
+        "rev": "91901b2efc64ac54c9135d537e4118e2ac0bd286",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Malpiszonekx4",
+        "repo": "curseforge-server-downloader",
+        "type": "github"
+      }
+    },
     "deploy-rs": {
       "inputs": {
         "flake-compat": "flake-compat",
@@ -350,6 +366,25 @@
         "url": "https://github.com/refact0r/midnight-discord"
       }
     },
+    "minix": {
+      "inputs": {
+        "curseforge-server-downloader-src": "curseforge-server-downloader-src",
+        "nixpkgs": "nixpkgs_3"
+      },
+      "locked": {
+        "lastModified": 1724635699,
+        "narHash": "sha256-y48Ufp1K7SlOb7esrn01xGntgzWRnNjlczplnNVN/9c=",
+        "owner": "skettisouls",
+        "repo": "minix",
+        "rev": "b734eb52789d6f0af51574a96fdb8cfe960df2eb",
+        "type": "github"
+      },
+      "original": {
+        "owner": "skettisouls",
+        "repo": "minix",
+        "type": "github"
+      }
+    },
     "neovim": {
       "inputs": {
         "nixpkgs": [
@@ -433,6 +468,22 @@
     },
     "nixpkgs_3": {
       "locked": {
+        "lastModified": 1722185531,
+        "narHash": "sha256-veKR07psFoJjINLC8RK4DiLniGGMgF3QMlS4tb74S6k=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "52ec9ac3b12395ad677e8b62106f0b98c1f8569d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_4": {
+      "locked": {
         "lastModified": 1717144377,
         "narHash": "sha256-F/TKWETwB5RaR8owkPPi+SPJh83AQsm6KrQAlJ8v/uA=",
         "owner": "NixOS",
@@ -473,8 +524,9 @@
         "hyprpicker": "hyprpicker",
         "lynx": "lynx",
         "midnight-discord": "midnight-discord",
+        "minix": "minix",
         "neovim": "neovim",
-        "nixpkgs": "nixpkgs_3",
+        "nixpkgs": "nixpkgs_4",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "peridot": "peridot",
         "vesktop": "vesktop"

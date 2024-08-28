@@ -1,11 +1,6 @@
 {
   inputs = {
   # Base {{{
-    deploy-rs = {
-      url = "github:serokell/deploy-rs";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     flake-parts.url = "github:hercules-ci/flake-parts";
 
     home-manager = {
@@ -15,6 +10,17 @@
 
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+  # }}}
+
+  # Discord {{{
+    midnight-discord = {
+      type = "git";
+      url = "https://github.com/refact0r/midnight-discord";
+      flake = false;
+    };
+
+    # Allow updating vesktop independent of nixpkgs-unstable
+    vesktop.url = "github:NixOS/nixpkgs/nixos-unstable";
   # }}}
 
   # Hyprland {{{
@@ -43,18 +49,18 @@
     peridot.url = "github:skettisouls/peridot";
   # }}}
 
-  # Discord {{{
-    midnight-discord = {
-      type = "git";
-      url = "https://github.com/refact0r/midnight-discord";
-      flake = false;
+  # Server {{{
+    deploy-rs = {
+      url = "github:serokell/deploy-rs";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Allow updating vesktop independent of nixpkgs-unstable
-    vesktop.url = "github:NixOS/nixpkgs/nixos-unstable";
+    minix = {
+      url = "github:skettisouls/minix";
+    };
   # }}}
 
-  # Luni-net {{{
+  # Wireguard {{{
     asluni.url = "github:the-computer-club/automous-zones";
     lynx.url = "github:the-computer-club/lynx";
   # }}}
