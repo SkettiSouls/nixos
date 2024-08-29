@@ -7,9 +7,10 @@ let
     types
     ;
 
+  inherit (config.nixcord) vesktop;
+
   cfg = config.shit.browsers;
   home = config.home.homeDirectory;
-  vesktop = config.programs.vencord.vesktop.enable;
 
   brave = "brave-browser.desktop";
   qutebrowser = "org.qutebrowser.qutebrowser.desktop";
@@ -84,7 +85,7 @@ in
       mimeApps = {
         enable = true;
         defaultApplications = browserMimelist // {
-          "x-scheme-handler/discord" = mkIf vesktop ["Vesktop.desktop"];
+          "x-scheme-handler/discord" = mkIf vesktop.enable ["Vesktop.desktop"];
         };
       };
     };

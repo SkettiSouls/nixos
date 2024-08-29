@@ -24,7 +24,7 @@ let
     terminal
     ;
 
-  inherit (config.programs.vencord) vesktop;
+  inherit (config.nixcord) vesktop;
   inherit (config.peripherals.bluetooth) defaultHeadphones;
 
 

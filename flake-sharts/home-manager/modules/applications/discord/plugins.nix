@@ -4,14 +4,14 @@ let
     mkIf
     ;
 
-  inherit (config.programs)
+  inherit (config.nixcord)
     vencord
     vesktop
     ;
 in
 {
   config = mkIf vencord.enable {
-    programs.vencord = {
+    nixcord.vencord = {
       enabledPlugins = [
         ### Required (Always Enabled) ###
         "NoTrack"

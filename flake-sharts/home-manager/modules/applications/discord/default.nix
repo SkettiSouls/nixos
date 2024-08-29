@@ -9,7 +9,7 @@ let
 in
 {
   imports = [
-    ./vencord.nix
+    inputs.nixcord.nixosModules.vencord
     ./plugins.nix
   ];
 
@@ -17,46 +17,39 @@ in
     enable = mkEnableOption "Discord clients configuration";
   };
 
-  config = mkIf cfg.enable {
-    programs.vencord = {
+  config.nixcord = mkIf cfg.enable {
+    vesktop = {
       enable = true;
-      vesktop = {
-        enable = true;
-        package = pkgs.vesktop-unstable;
-        state = {
-          discordBranch = "stable";
-          # firstLaunch = false; # Causes vesktop to hang indefinitely on first launch.
-          arRPC = "off";
-          splashColor = "rgb(138, 148, 168)";
-          splashBackground = "rgb(22, 24, 29)";
-          minimizeToTray = false;
-          splashTheming = true;
-          customTitleBar = false;
-        };
+      package = pkgs.vesktop-unstable;
+      state = {
+        discordBranch = "stable";
+        arRPC = false;
+        splashColor = "rgb(138, 148, 168)";
+        splashBackground = "rgb(22, 24, 29)";
+        minimizeToTray = false;
+        splashTheming = true;
+        customTitleBar = false;
       };
+    };
+
+    vencord = {
+      enable = true;
 
       settings = {
         notifyAboutUpdates = true;
-        autoUpdate = false;
-        autoUpdateNotification = false;
-        useQuickCss = false;
+        # autoUpdate = false;
+        # autoUpdateNotification = false;
         themeLinks = [ ];
         enableReactDevtools = false;
         frameless = false;
         transparent = false;
-      };
 
-      cloud = {
-        authenticated = false;
-        url = "https://api.vencord.dev";
-        settingsSync = false;
-      };
-
-      notifications = {
-        timeout = 5000;
-        position = "bottom-right";
-        useNative = "not-focused";
-        logLimit = 75;
+        notifications = {
+          timeout = 5000;
+          position = "bottom-right";
+          useNative = "not-focused";
+          logLimit = 75;
+        };
       };
 
       themes = {

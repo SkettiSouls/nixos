@@ -19,6 +19,11 @@
       flake = false;
     };
 
+    nixcord = {
+      url = "github:skettisouls/nixcord";
+      inputs.nixpkgs.follows = "vesktop";
+    };
+
     # Allow updating vesktop independent of nixpkgs-unstable
     vesktop.url = "github:NixOS/nixpkgs/nixos-unstable";
   # }}}
@@ -33,7 +38,7 @@
     hyprpicker.url = "github:hyprwm/hyprpicker";
   # }}}
 
-  # Projects {{{
+  # Dev {{{
     bin = {
       type = "git";
       url = "file:/etc/nixos/flake-sharts/packages/scripts?submodules=1";
@@ -45,8 +50,6 @@
       url = "file:/etc/nixos/flake-sharts/packages/neovim?submodules=1";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
-
-    peridot.url = "github:skettisouls/peridot";
   # }}}
 
   # Server {{{
@@ -61,6 +64,7 @@
   # Wireguard {{{
     asluni.url = "github:the-computer-club/automous-zones";
     lynx.url = "github:the-computer-club/lynx";
+    peridot.url = "github:skettisouls/peridot";
   # }}}
   };
 
