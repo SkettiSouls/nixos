@@ -13,7 +13,7 @@ let
     forgejo
     invidious
     nginx
-    minix
+    nix-mc
     ;
 
   net = config.networking.wireguard.networks;
@@ -35,7 +35,7 @@ in
         deemix-server.port
         git.port
         invidious.port
-        minix.instances.TerraFirmaGreg.serverConfig.server-port
+        nix-mc.instances.TerraFirmaGreg.serverConfig.server-port
         net.peridot.self.listenPort
       ];
     };

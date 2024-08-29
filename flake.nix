@@ -55,9 +55,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    minix = {
-      url = "github:skettisouls/minix";
-    };
+    nix-mc.url = "github:skettisouls/nix-mc";
   # }}}
 
   # Wireguard {{{

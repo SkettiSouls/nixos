@@ -1,14 +1,15 @@
 { inputs, pkgs, ... }:
 
 {
-  imports = [ inputs.minix.nixosModules.minix ];
+  imports = [ inputs.nix-mc.nixosModules.nix-mc ];
 
   services = {
-    minix = {
+    nix-mc = {
       eula = true;
       instances = {
         TerraFirmaGreg = {
           enable = true;
+          jarFile = "minecraft_server.jar";
           jvmPackage = pkgs.temurin-bin-17;
           jvmMaxAllocation = "12288M";
           jvmInitialAllocation = "3072M";

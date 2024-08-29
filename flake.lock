@@ -366,25 +366,6 @@
         "url": "https://github.com/refact0r/midnight-discord"
       }
     },
-    "minix": {
-      "inputs": {
-        "curseforge-server-downloader-src": "curseforge-server-downloader-src",
-        "nixpkgs": "nixpkgs_3"
-      },
-      "locked": {
-        "lastModified": 1724635699,
-        "narHash": "sha256-y48Ufp1K7SlOb7esrn01xGntgzWRnNjlczplnNVN/9c=",
-        "owner": "skettisouls",
-        "repo": "minix",
-        "rev": "b734eb52789d6f0af51574a96fdb8cfe960df2eb",
-        "type": "github"
-      },
-      "original": {
-        "owner": "skettisouls",
-        "repo": "minix",
-        "type": "github"
-      }
-    },
     "neovim": {
       "inputs": {
         "nixpkgs": [
@@ -404,6 +385,25 @@
       "original": {
         "type": "git",
         "url": "file:/etc/nixos/flake-sharts/packages/neovim?submodules=1"
+      }
+    },
+    "nix-mc": {
+      "inputs": {
+        "curseforge-server-downloader-src": "curseforge-server-downloader-src",
+        "nixpkgs": "nixpkgs_3"
+      },
+      "locked": {
+        "lastModified": 1724906287,
+        "narHash": "sha256-0XsaD+vTTEScx4LeZIw28+pv/Y3PCNmCfJ1mSTXF738=",
+        "owner": "skettisouls",
+        "repo": "nix-mc",
+        "rev": "c73dd459011d6977a6f53996b23dc57b84275782",
+        "type": "github"
+      },
+      "original": {
+        "owner": "skettisouls",
+        "repo": "nix-mc",
+        "type": "github"
       }
     },
     "nixpkgs": {
@@ -524,8 +524,8 @@
         "hyprpicker": "hyprpicker",
         "lynx": "lynx",
         "midnight-discord": "midnight-discord",
-        "minix": "minix",
         "neovim": "neovim",
+        "nix-mc": "nix-mc",
         "nixpkgs": "nixpkgs_4",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "peridot": "peridot",
