@@ -18,7 +18,7 @@
       bluetooth.enable = true;
     };
 
-    fetch = {
+    neofetch = {
       trollOS.enable = true;
     };
 

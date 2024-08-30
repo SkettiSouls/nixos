@@ -7,20 +7,20 @@ let
 
   inherit (config.shit) kitty;
 
-  cfg = config.shit.fetch.trollOS;
+  cfg = config.shit.neofetch.trollOS;
 in
 {
-  options.shit.fetch.trollOS.enable = mkEnableOption "Enable trollOS fetch";
+  options.shit.neofetch.trollOS.enable = mkEnableOption "Enable trollOS fetch";
+
   config.shit = mkIf cfg.enable {
-    fetch = {
-      neofetch = {
-        enable = true;
-        distroName = "TrollOS ${config.home.version.release}";
-        image = {
-          source = "/etc/nixos/shit/images/fetch/troll3D.png";
-          renderer = mkIf kitty.enable "kitty";
-          size = "320px";
-        };
+    neofetch = {
+      enable = true;
+      distroName = "TrollOS ${config.home.version.release}";
+      image = {
+        source = "/etc/nixos/shit/images/fetch/troll3D.png";
+        # TODO: Automatically change to the current terminal
+        renderer = mkIf kitty.enable "kitty";
+        size = "320px";
       };
     };
   };

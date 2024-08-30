@@ -4,7 +4,7 @@
   home.packages = with pkgs; [];
 
   shit = {
-    fetch.neofetch = {
+    neofetch = {
       enable = true;
       showHost = true;
     };
