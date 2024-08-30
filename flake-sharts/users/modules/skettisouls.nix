@@ -36,5 +36,33 @@ in
         aliaspp.enable = true;
       };
     };
+
+    xdg = {
+      enable = true;
+
+      cacheHome = "${home}/.cache";
+      configHome = "${home}/.config";
+      dataHome = "${home}/.local/share";
+      stateHome = "${home}/.local/state";
+
+      userDirs = rec {
+        enable = true;
+        createDirectories = true;
+
+        download = "${home}/Downloads";
+        desktop = "${home}/Desktop";
+        documents = "${home}/Documents";
+        music = "${home}/Music";
+        pictures = "${home}/Pictures";
+        videos = "${home}/Videos";
+
+        templates = null;
+        publicShare = null;
+
+        extraConfig = {
+          XDG_SCREENSHOTS_DIR = "${pictures}/screenshots";
+        };
+      };
+    };
   };
 }

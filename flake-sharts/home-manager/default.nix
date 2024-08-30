@@ -25,10 +25,10 @@ in
     kitty = import ./modules/applications/kitty.nix;
     mangohud = import ./modules/applications/mangohud.nix;
     neofetch = import ./modules/applications/neofetch;
-    xdg = import ./modules/applications/xdg.nix;
 
     # Browser modules
     brave = ./modules/applications/browsers/brave.nix;
+    mimelist = import ./modules/applications/browsers/mimelist.nix;
     qutebrowser = ./modules/applications/browsers/qutebrowser.nix;
     # FIXME: Infinite recursion
     # schizofox = ./modules/applications/browsers/schizofox.nix;
