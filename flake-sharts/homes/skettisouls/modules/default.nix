@@ -3,5 +3,6 @@
   imports = [
     ./desktops/river.nix
     ./discord
+    ./terminals/kitty.nix
   ];
 }

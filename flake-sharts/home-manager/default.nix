@@ -22,7 +22,6 @@ in
 
     # Application modules
     carla = import ./modules/applications/carla;
-    kitty = import ./modules/applications/kitty.nix;
     mangohud = import ./modules/applications/mangohud.nix;
     neofetch = import ./modules/applications/neofetch;
 
