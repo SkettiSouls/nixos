@@ -1,10 +1,15 @@
 {
   # TODO: Move all configs here (most of hyprland module, bluetooth, etc)
   imports = [
-    ./audio/carla.nix
     ./desktops/river.nix
     ./discord
+    ./mangohud.nix
     ./terminals/kitty.nix
+    ./udiskie.nix
+
+    ### Audio ###
+    ./audio/carla.nix
+    ./audio/bluetooth.nix
 
     ### Browsers ###
     ./browsers/brave.nix

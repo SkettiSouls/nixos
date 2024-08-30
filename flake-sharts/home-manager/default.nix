@@ -16,14 +16,11 @@ in
   };
 
   config.flake.homeModules = {
-    bluetooth = import ./modules/bluetooth.nix;
     mimelist = import ./modules/applications/mimelist.nix;
     peripherals = import ./modules/peripherals.nix;
-    udiskie = import ./modules/udiskie.nix;
 
     # Application modules
     carla = import ./modules/applications/carla.nix;
-    mangohud = import ./modules/applications/mangohud.nix;
     neofetch = import ./modules/applications/neofetch;
 
     # CLI modules
