@@ -10,7 +10,6 @@ let
     ;
 
   inherit (config.shit)
-    browsers
     discord
     kitty
     river
@@ -30,6 +29,7 @@ let
 
   mkTag = tag: toString (exponent 2 (tag - 1));
 
+  defaultBrowser = config.xdg.browser.default;
   cfg = config.sketti.desktops.river;
 in
 {
@@ -65,7 +65,7 @@ in
         "polkit &"
         "connect-headphones ${defaultHeadphones}"
 
-        config.shit.browsers.default
+        defaultBrowser
         (mkIf discord.enable "${discordClient}")
         "steam"
         "sonixd"
@@ -96,7 +96,7 @@ in
             "${specialMod} B" = "spawn 'bluetoothctl disconnect ${defaultHeadphones}'";
 
             # Open Apps
-            "${appMod} B" = "spawn ${browsers.default}";
+            "${appMod} B" = "spawn ${defaultBrowser}";
             "${appMod} D" = mkIf discord.enable "spawn ${discordClient}";
             "${appMod} M" = "spawn sonixd";
             "${appMod} S" = "spawn steam";

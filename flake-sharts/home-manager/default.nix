@@ -17,6 +17,7 @@ in
 
   config.flake.homeModules = {
     bluetooth = import ./modules/bluetooth.nix;
+    mimelist = import ./modules/applications/mimelist.nix;
     peripherals = import ./modules/peripherals.nix;
     udiskie = import ./modules/udiskie.nix;
 
@@ -24,13 +25,6 @@ in
     carla = import ./modules/applications/carla.nix;
     mangohud = import ./modules/applications/mangohud.nix;
     neofetch = import ./modules/applications/neofetch;
-
-    # Browser modules
-    brave = ./modules/applications/browsers/brave.nix;
-    mimelist = import ./modules/applications/browsers/mimelist.nix;
-    qutebrowser = ./modules/applications/browsers/qutebrowser.nix;
-    # FIXME: Infinite recursion
-    # schizofox = ./modules/applications/browsers/schizofox.nix;
 
     # CLI modules
     bash = import ./modules/cli/bash.nix;

@@ -5,6 +5,7 @@ let
     mkIf
     ;
 
+  isDefault = config.xdg.browser.default == "qutebrowser";
   cfg = config.shit.browsers.qutebrowser;
 in
 {
@@ -13,6 +14,7 @@ in
   };
 
   config = mkIf cfg.enable {
+    xdg.browser.desktopEntry = mkIf isDefault "org.qutebrowser.qutebrowser.desktop";
     programs.qutebrowser = {
       enable = true;
       package = pkgs.unstable.qutebrowser;

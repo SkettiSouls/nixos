@@ -5,5 +5,10 @@
     ./desktops/river.nix
     ./discord
     ./terminals/kitty.nix
+
+    ### Browsers ###
+    ./browsers/brave.nix
+    ./browsers/qutebrowser.nix
+    # ./browsers/schizofox.nix
   ];
 }

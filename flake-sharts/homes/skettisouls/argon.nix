@@ -27,10 +27,11 @@
     };
 
     browsers = {
-      default = "brave";
       brave.enable = true;
       qutebrowser.enable = true;
       # schizofox.enable = true;
     };
   };
+
+  xdg.browser.default = "brave";
 }

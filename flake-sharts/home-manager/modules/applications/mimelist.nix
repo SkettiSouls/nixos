@@ -3,28 +3,15 @@ let
   inherit (lib)
     mkIf
     mkOption
-    optional
     types
     ;
 
   inherit (config.nixcord) vesktop;
 
-  brave = "brave-browser.desktop";
-  qutebrowser = "org.qutebrowser.qutebrowser.desktop";
-  schizofox = "Schizofox.desktop";
-
-  isDefaultSet = cfg.default != "";
-  isBrave = isDefaultSet && cfg.default == "brave";
-  isQutebrowser = isDefaultSet && cfg.default == "qutebrowser";
-  isSchizofox = isDefaultSet && cfg.default == "schizofox";
-
-  browser = optional isQutebrowser qutebrowser
-    ++ optional isBrave brave
-    ++ optional isSchizofox schizofox
-    ;
-
 # browserMimeList {{{
-  browserMimelist = {
+  browserMimelist = let
+    browser = cfg.desktopEntry;
+  in {
     "browser/internal" = browser;
     "text/html" = browser;
     "x-scheme-handler/http" = browser;
@@ -43,13 +30,18 @@ let
   };
 # }}}
 
-  cfg = config.shit.browsers;
+  cfg = config.xdg.browser;
 in
 {
-  options.shit.browsers = {
+  options.xdg.browser = {
     default = mkOption {
       type = types.str;
       default = "";
+    };
+
+    desktopEntry = mkOption {
+      type = types.str;
+      default = if cfg.default != "" then "${cfg.default}.desktop" else "";
     };
   };
 

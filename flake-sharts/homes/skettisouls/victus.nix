@@ -1,6 +1,8 @@
 { config, lib, pkgs, ... }:
 
 {
+  imports = [ ./modules ];
+
   home.packages = with pkgs; [
     rofi
   ];
@@ -19,9 +21,10 @@
     };
 
     browsers = {
-      default = "qutebrowser";
       brave.enable = true;
       qutebrowser.enable = true;
     };
   };
+
+  xdg.browser.default = "qutebrowser";
 }
