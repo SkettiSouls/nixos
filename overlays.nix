@@ -8,7 +8,7 @@ let
       config.allowUnfree = true;
     };
 
-    vesktop-unstable = vesktop.legacyPackages.${system}.vesktop;
+    vesktop = vesktop.legacyPackages.${system}.vesktop;
   };
 
   overlay-self = final: prev: {

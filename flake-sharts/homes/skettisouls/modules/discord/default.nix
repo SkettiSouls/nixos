@@ -1,4 +1,4 @@
-{ inputs, config, lib, pkgs, ... }:
+{ inputs, config, lib, ... }:
 let
   inherit (lib)
     mkEnableOption
@@ -8,10 +8,7 @@ let
   cfg = config.shit.discord;
 in
 {
-  imports = [
-    inputs.nixcord.nixosModules.vencord
-    ./plugins.nix
-  ];
+  imports = [ inputs.nixcord.homeModules.vencord ];
 
   options.shit.discord = {
     enable = mkEnableOption "Discord clients configuration";
@@ -20,29 +17,18 @@ in
   config.nixcord = mkIf cfg.enable {
     vesktop = {
       enable = true;
-      package = pkgs.vesktop-unstable;
       state = {
         discordBranch = "stable";
-        arRPC = false;
         splashColor = "rgb(138, 148, 168)";
         splashBackground = "rgb(22, 24, 29)";
         minimizeToTray = false;
         splashTheming = true;
-        customTitleBar = false;
       };
     };
 
-    vencord = {
-      enable = true;
-
+    vencord = import ./plugins.nix // {
       settings = {
-        notifyAboutUpdates = true;
-        # autoUpdate = false;
-        # autoUpdateNotification = false;
-        themeLinks = [ ];
-        enableReactDevtools = false;
-        frameless = false;
-        transparent = false;
+        notifyAboutUpdates = false;
 
         notifications = {
           timeout = 5000;

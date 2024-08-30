@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 
 {
-  imports = [ ./default.nix ];
+  imports = [ ./modules ];
 
   home.packages = with pkgs;[
     rofi

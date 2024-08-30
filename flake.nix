@@ -21,7 +21,7 @@
 
     nixcord = {
       url = "github:skettisouls/nixcord";
-      inputs.nixpkgs.follows = "vesktop";
+      # inputs.nixpkgs.follows = "vesktop";
     };
 
     # Allow updating vesktop independent of nixpkgs-unstable
