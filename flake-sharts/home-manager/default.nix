@@ -21,7 +21,7 @@ in
     udiskie = import ./modules/udiskie.nix;
 
     # Application modules
-    carla = import ./modules/applications/carla;
+    carla = import ./modules/applications/carla.nix;
     mangohud = import ./modules/applications/mangohud.nix;
     neofetch = import ./modules/applications/neofetch;
 

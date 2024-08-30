@@ -1,3 +1,4 @@
+# TODO: Rework this entire module lmfao
 { config, lib, pkgs, ... }:
 let
   inherit (lib)

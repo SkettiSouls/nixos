@@ -8,8 +8,6 @@ let
   cfg = config.shit.audio.carla;
 in
 {
-  imports = [ ./carla.nix ];
-
   options.shit.audio.carla = {
     enable = mkEnableOption "Carla user configuration";
   };
