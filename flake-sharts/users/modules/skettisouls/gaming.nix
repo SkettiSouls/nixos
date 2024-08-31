@@ -18,9 +18,5 @@ in
         winetricks
       ];
     };
-
-    shit = {
-      mangohud.enable = true;
-    };
   };
 }

@@ -34,8 +34,6 @@ in
     };
 
     shit = {
-      git.enable = true;
-
       bash = {
         enable = true;
         aliaspp.enable = true;

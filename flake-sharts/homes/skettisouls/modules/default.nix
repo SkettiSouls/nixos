@@ -23,7 +23,6 @@
 
     ### Tools ###
     ./tools/bash.nix
-    ./tools/git.nix
     ./tools/gpg.nix
   ];
 }

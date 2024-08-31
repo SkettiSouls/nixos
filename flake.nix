@@ -83,12 +83,7 @@
           flakeModules = {
             # features = importApply ./flake-sharts/features args;
             hardware = import ./flake-sharts/hardware;
-
-            home-manager.imports = [
-              ./flake-sharts/home-manager
-              ./flake-sharts/home-manager/nixos-module.nix
-            ];
-
+            home-manager = import ./flake-sharts/home-manager;
             hosts = import ./flake-sharts/hosts;
             hyprland = import ./flake-sharts/hyprland;
             libs = import ./flake-sharts/libs;
@@ -156,7 +151,7 @@
               };
 
               nixosConfigurations = genAttrs config.machines (host: nixosSystem {
-                specialArgs = specialArgs // { currentMachine = host; };
+                specialArgs = specialArgs;
                 modules = with config.flake; [
                   ./global.nix
                   ./overlays.nix

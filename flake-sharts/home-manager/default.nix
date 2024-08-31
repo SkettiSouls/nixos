@@ -10,12 +10,15 @@ let
     ;
 in
 {
+  imports = [ ./nixos-module.nix ];
+
   options.flake.homeModules = mkOption {
     type = with types; attrsOf deferredModule;
     default = {};
   };
 
   config.flake.homeModules = {
+    git = ./modules/git.nix;
     peripherals = import ./modules/peripherals.nix;
 
     # Application modules

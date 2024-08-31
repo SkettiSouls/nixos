@@ -1,18 +1,12 @@
 { config, lib, ... }:
 let
-  inherit (lib)
-    mkEnableOption
-    mkIf
-    ;
+  inherit (lib) mkIf;
+  inherit (config) roles;
 
-  cfg = config.shit.mangohud;
+  isGamingRig = roles.desktop.enable && roles.gaming.enable;
 in
 {
-  options.shit.mangohud = {
-    enable = mkEnableOption "MangoHud user configuration";
-  };
-
-  config = mkIf cfg.enable {
+  config = mkIf isGamingRig {
     # TODO: Figure out how to set the order options are generated in
     programs.mangohud = {
       enable = true;

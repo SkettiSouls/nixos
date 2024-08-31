@@ -139,5 +139,8 @@ in
         '')
       ];
     };
+
+    # Required for `qute-keepassxc` userscript
+    shit.gpg.enable = true;
   };
 }

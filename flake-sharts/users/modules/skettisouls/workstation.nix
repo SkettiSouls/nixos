@@ -7,10 +7,6 @@ let
 in
 {
   config = mkIf isWorkstation {
-    shit = {
-      bash.enable = true;
-      git.enable = true;
-      gpg.enable = true;
-    };
+    # Unneeded atm lol
   };
 }
