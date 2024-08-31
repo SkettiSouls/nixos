@@ -3,6 +3,8 @@ let
   inherit (lib)
     mkEnableOption
     mkIf
+    mkOption
+    types
     ;
 
   cfg = config.shit.discord;
@@ -10,8 +12,15 @@ in
 {
   imports = [ inputs.nixcord.homeModules.vencord ];
 
-  options.shit.discord = {
-    enable = mkEnableOption "Discord clients configuration";
+  options.shit = {
+    discord.enable = mkEnableOption "Discord clients configuration";
+
+    river.variables = {
+      discordClient = mkOption {
+        type = types.str;
+        default = lib.getName config.nixcord.vencord.package;
+      };
+    };
   };
 
   config.nixcord = mkIf cfg.enable {

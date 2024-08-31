@@ -13,6 +13,7 @@ in
   };
 
   config = mkIf cfg.enable {
+    shit.river.variables.terminal = lib.mkDefault "kitty";
     programs.kitty = {
       enable = true;
       package = pkgs.unstable.kitty;

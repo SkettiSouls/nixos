@@ -5,13 +5,16 @@ let
   inherit (lib)
     mkEnableOption
     mkIf
-    mkOption
-    types
     ;
 
-  inherit (config.shit)
+  inherit (config)
+    shit
+    roles
+    peripherals
+    ;
+
+  inherit (shit)
     discord
-    kitty
     river
     ;
 
@@ -23,9 +26,7 @@ let
     terminal
     ;
 
-  inherit (config.nixcord) vesktop;
-  inherit (config.peripherals.bluetooth) defaultHeadphones;
-
+  inherit (peripherals.bluetooth) defaultHeadphones;
 
   mkTag = tag: toString (exponent 2 (tag - 1));
 
@@ -35,15 +36,6 @@ in
 {
   options.sketti.desktops.river = {
     enable = mkEnableOption "RiverWM Config";
-  };
-
-  options.shit.river = {
-    variables = {
-      discordClient = mkOption {
-        type = types.str;
-        default = "discord";
-      };
-    };
   };
 
   config = {
@@ -67,15 +59,15 @@ in
 
         defaultBrowser
         (mkIf discord.enable "${discordClient}")
-        "steam"
+        (mkIf roles.gaming.enable "steam")
         "sonixd"
       ];
 
       rules = {
         byId = {
-          ${discordClient} = { tags = 2; };
+          ${discordClient} = mkIf discord.enable { tags = 2; };
           Sonixd = { tags = 10; };
-          steam = { tags = 3; };
+          steam = mkIf roles.gaming.enable { tags = 3; };
         };
       };
 
@@ -99,7 +91,7 @@ in
             "${appMod} B" = "spawn ${defaultBrowser}";
             "${appMod} D" = mkIf discord.enable "spawn ${discordClient}";
             "${appMod} M" = "spawn sonixd";
-            "${appMod} S" = "spawn steam";
+            "${appMod} S" = mkIf roles.gaming.enable "spawn steam";
           };
         };
       };
@@ -117,9 +109,6 @@ in
       };
 
       variables = {
-        # TODO: Move to discord module for universal default
-        discordClient = mkIf vesktop.enable "vesktop";
-        terminal = mkIf kitty.enable "kitty";
         specialMod = "${modKey}+Alt";
       };
     };
