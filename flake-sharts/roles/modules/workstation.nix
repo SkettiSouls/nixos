@@ -35,13 +35,5 @@ in
       noto-fonts-color-emoji
       (nerdfonts.override { fonts = [ "SourceCodePro" "DejaVuSansMono" ]; })
     ];
-
-    home-manager.sharedModules = [{
-      shit = {
-        bash.enable = true;
-        git.enable = true;
-        gpg.enable = true;
-      };
-    }];
   };
 }

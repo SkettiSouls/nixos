@@ -8,7 +8,7 @@ let
 in
 {
   config.flake.userModules = {
-    skettisouls = ./modules/skettisouls.nix;
+    skettisouls = ./modules/skettisouls;
 
     default = { host, ... }: {
       users.users = mapAttrs (user: hostList:

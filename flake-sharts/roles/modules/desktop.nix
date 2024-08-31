@@ -36,34 +36,5 @@ in
       noto-fonts-color-emoji
       (nerdfonts.override { fonts = [ "SourceCodePro" "DejaVuSansMono" ]; })
     ];
-
-    # TODO: mkIf logic
-    home-manager.users.skettisouls = {
-      home = {
-        pointerCursor = {
-          name = "phinger-cursor-dark";
-          package = pkgs.phinger-cursors;
-          size = 24;
-          gtk.enable = true;
-        };
-
-        packages = with pkgs; [
-          bin.eat
-          element-desktop
-        ];
-      };
-
-      shit = {
-        discord.enable = true;
-        hyprland.enable = true;
-        kitty.enable = true;
-        mpv.enable = true;
-        udiskie.enable = true;
-
-        audio = {
-          carla.enable = true;
-        };
-      };
-    };
   };
 }

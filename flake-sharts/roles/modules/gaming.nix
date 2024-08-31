@@ -14,21 +14,5 @@ in
     shit = {
       steam.enable = true;
     };
-
-    home-manager.sharedModules = [{
-      shit = {
-        mangohud.enable = true;
-      };
-
-      home.packages = with pkgs; [
-        heroic
-        lutris
-        minetest
-        prismlauncher
-        scarab
-        wineWowPackages.staging
-        winetricks
-      ];
-    }];
   };
 }

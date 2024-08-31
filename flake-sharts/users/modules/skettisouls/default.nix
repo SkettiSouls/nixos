@@ -4,6 +4,12 @@ let
   home = config.home.homeDirectory;
 in
 {
+  imports = [
+    ./desktop.nix
+    ./gaming.nix
+    ./workstation.nix
+  ];
+
   config = {
     home = {
       packages = [ pkgs.neovim ];
@@ -29,7 +35,6 @@ in
 
     shit = {
       git.enable = true;
-      gpg.enable = true;
 
       bash = {
         enable = true;

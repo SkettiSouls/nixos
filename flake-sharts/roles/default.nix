@@ -15,7 +15,5 @@ in
 
       default.imports = combineModules config.flake.roles;
     };
-
-    # nixosModules.roles = import ./modules/options.nix;
   };
 }
