@@ -11,8 +11,8 @@ in
     deemix
     forgejo
     invidious
+    minecraft
     postgres
-    TerraFirmaGreg
   ];
 
   roles = with self.roles; [

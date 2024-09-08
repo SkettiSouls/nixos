@@ -19,9 +19,9 @@ in
         deemix = import ./modules/deemix/service.nix;
         forgejo = import ./modules/forgejo.nix;
         invidious = import ./modules/invidious.nix;
+        minecraft = import ./modules/minecraft.nix;
         nginx = import ./modules/nginx.nix;
         postgres = import ./modules/postgres.nix;
-        TerraFirmaGreg = import ./modules/minecraft/terrafirmagreg.nix;
       };
 
       nixosModules = {
