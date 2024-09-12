@@ -5,6 +5,8 @@ let
   inherit (lib)
     mkEnableOption
     mkIf
+    mkOption
+    types
     ;
 
   inherit (config)
@@ -31,11 +33,20 @@ let
   mkTag = tag: toString (exponent 2 (tag - 1));
 
   defaultBrowser = config.xdg.browser.default;
-  cfg = config.sketti.desktops.river;
+  cfg = config.shit.desktops.river;
 in
 {
-  options.sketti.desktops.river = {
-    enable = mkEnableOption "RiverWM Config";
+  options.shit = {
+    desktops.river.enable = mkEnableOption "RiverWM Config";
+
+    river = {
+      variables = {
+        discordClient = mkOption {
+          type = types.str;
+          default = lib.getName config.nixcord.vencord.package;
+        };
+      };
+    };
   };
 
   config = {

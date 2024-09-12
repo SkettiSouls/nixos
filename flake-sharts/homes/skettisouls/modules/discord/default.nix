@@ -15,12 +15,6 @@ in
   options.shit = {
     discord.enable = mkEnableOption "Discord clients configuration";
 
-    river.variables = {
-      discordClient = mkOption {
-        type = types.str;
-        default = lib.getName config.nixcord.vencord.package;
-      };
-    };
   };
 
   config.nixcord = mkIf cfg.enable {

@@ -7,15 +7,13 @@
     rofi
   ];
 
-  sketti = {
-    desktops = {
-      river.enable = true;
-    };
-  };
-
   shit = {
     audio = {
       bluetooth.enable = true;
+    };
+
+    desktops = {
+      river.enable = true;
     };
 
     neofetch = {
