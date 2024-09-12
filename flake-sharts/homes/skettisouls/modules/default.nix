@@ -1,3 +1,14 @@
+{ config, lib, ... }:
+let
+  inherit (lib) mkIf mkOption types;
+
+  mkVar = mkOption {
+    type = types.str;
+    default = "";
+  };
+
+  cfg = config.shit.defaultApps;
+in
 {
   imports = [
     ./discord
@@ -18,6 +29,10 @@
     # TODO: Move hyprland here
     ./desktops/river.nix
 
+    ### Launchers ###
+    ./launchers/rofi.nix
+    ./launchers/fuzzel.nix
+
     ### Terminals ###
     ./terminals/kitty.nix
 
@@ -25,4 +40,11 @@
     ./tools/bash.nix
     ./tools/gpg.nix
   ];
+
+  options.shit.defaultApps = {
+    launcher = mkVar;
+    browser = mkVar;
+  };
+
+  config.xdg.browser.default = mkIf (cfg.browser != "") cfg.browser;
 }
