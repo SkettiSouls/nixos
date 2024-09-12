@@ -20,6 +20,7 @@ in
         forgejo = import ./modules/forgejo.nix;
         invidious = import ./modules/invidious.nix;
         minecraft = import ./modules/minecraft.nix;
+        navidrome = import ./modules/navidrome.nix;
         nginx = import ./modules/nginx.nix;
         postgres = import ./modules/postgres.nix;
       };

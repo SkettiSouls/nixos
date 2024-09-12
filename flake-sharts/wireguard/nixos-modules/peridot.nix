@@ -15,6 +15,7 @@ let
     deemix-server
     forgejo
     invidious
+    navidrome
     nginx
     nix-mc
     ;
@@ -43,6 +44,7 @@ in
         git.port
         invidious.port
         minecraft.ports
+        navidrome.settings.Port
         net.peridot.self.listenPort
       ];
     };
