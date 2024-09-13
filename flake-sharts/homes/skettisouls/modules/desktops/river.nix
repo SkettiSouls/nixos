@@ -49,7 +49,7 @@ in
 
         discordClient = mkOption {
           type = types.str;
-          default = lib.getName config.nixcord.vencord.package;
+          default = lib.getName config.nixcord.vencord.finalPackage;
         };
       };
     };

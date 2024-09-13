@@ -433,11 +433,11 @@
         "nixpkgs": "nixpkgs_4"
       },
       "locked": {
-        "lastModified": 1725090973,
-        "narHash": "sha256-7ZURy31LHWQFHlaEumyZi82YQ3o3LPVpHJ5JxfW+zms=",
+        "lastModified": 1726220761,
+        "narHash": "sha256-RzG+MAzfj88YckgoOW17+BDNiA0haijznZv3cvCMbrE=",
         "owner": "skettisouls",
         "repo": "nixcord",
-        "rev": "ede3ee9721e16464c42d0b82b00db3b4dc88e8c9",
+        "rev": "0dba8a40582235e88e03e04e597b590124abad30",
         "type": "github"
       },
       "original": {
