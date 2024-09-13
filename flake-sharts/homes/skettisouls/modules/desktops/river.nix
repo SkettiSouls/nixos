@@ -62,6 +62,7 @@ in
       grim
       slurp
       wl-clipboard
+      wbg
       unstable.feishin
       keepassxc
     ];
@@ -80,6 +81,7 @@ in
         (mkIf roles.gaming.enable "steam")
         "feishin"
         "keepassxc"
+        "wbg ${config.shit.wallpapers.suncat}"
       ];
 
       rules = {

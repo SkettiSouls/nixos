@@ -24,5 +24,9 @@
     hyprland.wallpapers = {
       suncat.source = "/etc/nixos/shit/images/wallpapers/suncat.jpg";
     };
+
+    wallpapers = {
+      suncat = "/etc/nixos/shit/images/wallpapers/suncat.jpg";
+    };
   };
 }

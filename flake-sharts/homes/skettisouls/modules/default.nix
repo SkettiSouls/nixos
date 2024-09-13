@@ -14,6 +14,7 @@ in
     ./discord
     ./mangohud.nix
     ./udiskie.nix
+    ./variables.nix
 
     ### Audio ###
     ./audio/bluetooth.nix
