@@ -99,7 +99,6 @@ in
             # System binds
             "${modKey} C" = "spawn '${terminal} -e nvim /etc/nixos/'";
             "${altMod} E" = "exit";
-            "${modKey} M" = "set-focused-tags ${mkTag 10}";
 
             # Connect/disconnect headphones
             "${modKey} B" = "spawn 'connect-headphones ${defaultHeadphones}'";
@@ -108,13 +107,12 @@ in
             # Open Apps
             "${appMod} B" = "spawn ${defaultBrowser}";
             "${appMod} D" = mkIf discord.enable "spawn ${discordClient}";
-            "${appMod} M" = "spawn feishin";
             "${appMod} S" = mkIf roles.gaming.enable "spawn steam";
 
-            # Workspaces 10-18
-            # TODO: Map altMod 1-9 to tags 10-18
-            "${altMod} 1" = "set-focused-tags ${mkTag 10}";
-            "${altMod}+Control" = "set-view-tags ${mkTag 10}";
+            # Music
+            "${modKey} M" = "set-focused-tags ${mkTag 10}";
+            "${appMod} M" = "spawn feishin";
+            "${altMod} M" = "set-view-tags ${mkTag 10}";
           };
         };
       };
