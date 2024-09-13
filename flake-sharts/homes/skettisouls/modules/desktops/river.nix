@@ -63,6 +63,7 @@ in
       slurp
       wl-clipboard
       unstable.feishin
+      keepassxc
     ];
 
     shit.river = mkIf cfg.enable {
@@ -78,13 +79,15 @@ in
         (mkIf discord.enable "${discordClient}")
         (mkIf roles.gaming.enable "steam")
         "feishin"
+        "keepassxc"
       ];
 
       rules = {
         byId = {
           ${discordClient} = mkIf discord.enable { tags = 2; };
-          # Sonixd = { tags = 10; };
           feishin = { tags = 10; };
+          "org.keepassxc.KeePassXC" = { tags = 11; };
+          Sonixd = { tags = 10; };
           steam = mkIf roles.gaming.enable { tags = 3; };
         };
       };
@@ -113,6 +116,11 @@ in
             "${modKey} M" = "set-focused-tags ${mkTag 10}";
             "${appMod} M" = "spawn feishin";
             "${altMod} M" = "set-view-tags ${mkTag 10}";
+
+            # Keepassxc
+            "${modKey} P" = "set-focused-tags ${mkTag 11}";
+            "${appMod} P" = "spawn keepassxc";
+            "${altMod} P" = "set-view-tags ${mkTag 11}";
           };
         };
       };
