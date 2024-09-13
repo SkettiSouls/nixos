@@ -21,6 +21,7 @@ let
     ;
 
   inherit (river.variables)
+    altMod
     appMod
     discordClient
     modKey
@@ -41,6 +42,11 @@ in
 
     river = {
       variables = {
+        altMod = mkOption {
+          type = types.str;
+          default = "${modKey}+Alt";
+        };
+
         discordClient = mkOption {
           type = types.str;
           default = lib.getName config.nixcord.vencord.package;
@@ -56,7 +62,7 @@ in
       grim
       slurp
       wl-clipboard
-      sonixd
+      unstable.feishin
     ];
 
     shit.river = mkIf cfg.enable {
@@ -71,13 +77,14 @@ in
         defaultBrowser
         (mkIf discord.enable "${discordClient}")
         (mkIf roles.gaming.enable "steam")
-        "sonixd"
+        "feishin"
       ];
 
       rules = {
         byId = {
           ${discordClient} = mkIf discord.enable { tags = 2; };
-          Sonixd = { tags = 10; };
+          # Sonixd = { tags = 10; };
+          feishin = { tags = 10; };
           steam = mkIf roles.gaming.enable { tags = 3; };
         };
       };
@@ -91,18 +98,23 @@ in
 
             # System binds
             "${modKey} C" = "spawn '${terminal} -e nvim /etc/nixos/'";
-            "${specialMod} E" = "exit";
+            "${altMod} E" = "exit";
             "${modKey} M" = "set-focused-tags ${mkTag 10}";
 
             # Connect/disconnect headphones
             "${modKey} B" = "spawn 'connect-headphones ${defaultHeadphones}'";
-            "${specialMod} B" = "spawn 'bluetoothctl disconnect ${defaultHeadphones}'";
+            "${altMod} B" = "spawn 'bluetoothctl disconnect ${defaultHeadphones}'";
 
             # Open Apps
             "${appMod} B" = "spawn ${defaultBrowser}";
             "${appMod} D" = mkIf discord.enable "spawn ${discordClient}";
-            "${appMod} M" = "spawn sonixd";
+            "${appMod} M" = "spawn feishin";
             "${appMod} S" = mkIf roles.gaming.enable "spawn steam";
+
+            # Workspaces 10-18
+            # TODO: Map altMod 1-9 to tags 10-18
+            "${altMod} 1" = "set-focused-tags ${mkTag 10}";
+            "${altMod}+Control" = "set-view-tags ${mkTag 10}";
           };
         };
       };
@@ -117,10 +129,6 @@ in
             "${modKey} BTN_MIDDLE"
           ];
         };
-      };
-
-      variables = {
-        specialMod = "${modKey}+Alt";
       };
     };
   };
