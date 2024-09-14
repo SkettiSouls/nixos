@@ -71,7 +71,7 @@ in
             cfg.rules.byTitle);
         });
 
-        spawn = cfg.startup.apps;
+        spawn = map (cmd: "'${cmd}'") cfg.startup.apps;
       };
     };
   };
