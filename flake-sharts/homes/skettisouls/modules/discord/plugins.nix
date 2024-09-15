@@ -596,6 +596,10 @@
         echoCancellation = true;
       };
     };
+    VolumeBooster = {
+      enable = true;
+      settings.multiplier = 1;
+    };
     WebKeybinds.enable = true;
     "WebRichPresence (arRPC)".enable = false;
     WhoReacted.enable = true;

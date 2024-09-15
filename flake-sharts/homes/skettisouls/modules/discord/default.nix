@@ -31,6 +31,7 @@ in
 
     vencord = import ./plugins.nix // {
       settings = {
+        autoUpdate = true;
         notifyAboutUpdates = false;
 
         notifications = {
