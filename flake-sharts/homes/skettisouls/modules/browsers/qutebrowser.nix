@@ -14,6 +14,11 @@ in
   };
 
   config = mkIf cfg.enable {
+    home.packages = with pkgs; [
+      gobble
+      rofi # qute-keepassxc
+    ];
+
     xdg.browser.desktopEntry = mkIf isDefault "org.qutebrowser.qutebrowser.desktop";
     programs.qutebrowser = {
       enable = true;
@@ -27,11 +32,12 @@ in
           "." = "tab-next";
           "<" = "back";
           ">" = "forward";
-          "<Ctrl+F>" = "hint links spawn mpv {hint-url}";
           "dd" = "tab-close";
           "uu" = "undo";
           "rr" = "reload";
           "pw" = "spawn --userscript qute-keepassxc --key 682D163ED56008C1A787BCEA6E9A2F35535BE87F";
+          "<Ctrl+F>" = "hint links spawn gobble brave {hint-url}";
+          "<Ctrl+G>" = "spawn gobble brave {url}";
         };
 
         insert = {
@@ -53,6 +59,7 @@ in
         aw = "https://wiki.archlinux.org/?search={}";
         gh = "https://github.com/{}";
         ghr = "https://github.com/search?q={}&type=repositories";
+        nix = "https://noogle.dev/q?term={}";
         np = "https://search.nixos.org/packages?query={}";
         npu = "https://search.nixos.org/packages?channel=unstable&query={}";
         no = "https://search.nixos.org/options?query={}";
@@ -60,7 +67,7 @@ in
         nw = "https://wiki.nixos.org/w/index.php?search={}";
         hm = "https://home-manager-options.extranix.com/?query={}&release=master";
         yt = "https://www.youtube.com/results?search_query={}";
-        yew = "https://yewtu.be/search?q={}";
+        inv = "http://inv.fluorine.lan/search?q={}";
       };
 
       settings = {
@@ -113,7 +120,7 @@ in
           // @run-at       document-start
           // ==/UserScript==
 
-          document.location.href=document.location.href.replace("youtube.com","yewtu.be");
+          document.location.href=document.location.href.replace("youtube.com","inv.fluorine.lan");
         '')
         */
 
@@ -142,6 +149,5 @@ in
 
     # Required for `qute-keepassxc` userscript
     shit.gpg.enable = true;
-    home.packages = [ pkgs.rofi ];
   };
 }
