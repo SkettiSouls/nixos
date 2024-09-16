@@ -9,6 +9,7 @@ in
     airsonic
     caddy
     deemix
+    discord-bots
     forgejo
     invidious
     minecraft

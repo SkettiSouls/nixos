@@ -15,6 +15,7 @@ in
     flake = {
       serviceModules = {
         airsonic = import ./modules/airsonic/service.nix;
+        discord-bots = import ./modules/discord-bots/service.nix;
         caddy = import ./modules/caddy.nix;
         deemix = import ./modules/deemix/service.nix;
         forgejo = import ./modules/forgejo.nix;
@@ -27,6 +28,7 @@ in
 
       nixosModules = {
         deemix = import ./modules/deemix/nixos.nix;
+        discord-bots = import ./modules/discord-bots/nixos.nix;
       };
     };
 

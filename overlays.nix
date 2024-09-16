@@ -15,6 +15,7 @@ let
     bin = bin.packages.${system};
     self = self.packages.${system};
     neovim = neovim.packages.${system}.default;
+    boris = boris.packages.${system}.default;
   };
 
   overlay-hyprland = final: prev: {

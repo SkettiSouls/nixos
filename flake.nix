@@ -13,6 +13,11 @@
   # }}}
 
   # Discord {{{
+    boris = { # Bot
+      url = "github:skettisouls/boris";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
     midnight-discord = {
       type = "git";
       url = "https://github.com/refact0r/midnight-discord";
@@ -44,6 +49,7 @@
       url = "file:/etc/nixos/flake-sharts/packages/scripts?submodules=1";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
+
 
     neovim = {
       type = "git";
