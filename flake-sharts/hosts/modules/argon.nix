@@ -42,6 +42,7 @@
   #   enableSSHSupport = true;
   # };
 
+  # TODO: Find a way to move this to hm
   services = {
     flatpak.enable = true;
   };
@@ -55,6 +56,7 @@
     enableRedistributableFirmware = true;
   };
 
+  # Needed for flatpak support
   xdg.portal = {
     enable = true;
     config.common.default = "*";

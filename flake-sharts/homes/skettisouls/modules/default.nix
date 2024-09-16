@@ -28,6 +28,7 @@ in
 
     ### Desktops ###
     # TODO: Move hyprland here
+    ./desktops/portals.nix
     ./desktops/river.nix
 
     ### Launchers ###
