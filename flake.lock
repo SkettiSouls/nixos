@@ -25,15 +25,15 @@
       "locked": {
         "lastModified": 1721724042,
         "narHash": "sha256-tUwDaJis+T06kXL3WFFqFbCX+7atNQNXqqSgcKomB7Q=",
-        "ref": "refs/heads/master",
+        "owner": "skettisouls",
+        "repo": "bin",
         "rev": "b1214930caf3bdb456d4853076f942c213d9c1a1",
-        "revCount": 20,
-        "type": "git",
-        "url": "file:/etc/nixos/flake-sharts/packages/scripts?submodules=1"
+        "type": "github"
       },
       "original": {
-        "type": "git",
-        "url": "file:/etc/nixos/flake-sharts/packages/scripts?submodules=1"
+        "owner": "skettisouls",
+        "repo": "bin",
+        "type": "github"
       }
     },
     "boris": {
@@ -45,11 +45,11 @@
         "systems": "systems_2"
       },
       "locked": {
-        "lastModified": 1726382292,
-        "narHash": "sha256-sFvaMmgXYKBf0sGetFnZbPqCrucA+lKN2vwjY0wQS6k=",
+        "lastModified": 1726546750,
+        "narHash": "sha256-gtH5MHbxI0M/96ljLxbumlqZRLhPUwGbrobqEWmjcV4=",
         "owner": "skettisouls",
         "repo": "boris",
-        "rev": "71319ad0b42691033a530e29db1b48cf74a30179",
+        "rev": "c7eb68f1dd296ebc0ec16f16b155f85d1ed5e5d6",
         "type": "github"
       },
       "original": {
@@ -417,17 +417,17 @@
         "systems": "systems_6"
       },
       "locked": {
-        "lastModified": 1721536637,
-        "narHash": "sha256-GFYYBodECyvamY3TAjmsTg0VWjOTaOqJ+sKdk99Dk4k=",
-        "ref": "61424ed9fbd735e48aefa90817f57e48a9f450a9",
-        "rev": "61424ed9fbd735e48aefa90817f57e48a9f450a9",
-        "revCount": 14,
-        "type": "git",
-        "url": "file:/etc/nixos/flake-sharts/packages/neovim?submodules=1"
+        "lastModified": 1726499148,
+        "narHash": "sha256-aY1fhbkkCE+2TSl2DatjLpZZeFqFYkDs98wxqNrlNNQ=",
+        "owner": "skettisouls",
+        "repo": "neovim",
+        "rev": "7e6ca5dacb340f087eaf5c9e8f9721df428e7e3f",
+        "type": "github"
       },
       "original": {
-        "type": "git",
-        "url": "file:/etc/nixos/flake-sharts/packages/neovim?submodules=1"
+        "owner": "skettisouls",
+        "repo": "neovim",
+        "type": "github"
       }
     },
     "nix-mc": {

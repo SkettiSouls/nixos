@@ -1,6 +1,0 @@
-[submodule "scripts"]
-	path = flake-sharts/packages/scripts
-	url = git@github.com:skettisouls/bin.git
-[submodule "flake-sharts/packages/neovim"]
-	path = flake-sharts/packages/neovim
-	url = git@github.com:skettisouls/neovim

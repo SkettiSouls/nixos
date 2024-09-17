@@ -45,15 +45,13 @@
 
   # Dev {{{
     bin = {
-      type = "git";
-      url = "file:/etc/nixos/flake-sharts/packages/scripts?submodules=1";
+      url = "github:skettisouls/bin";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
 
     neovim = {
-      type = "git";
-      url = "file:/etc/nixos/flake-sharts/packages/neovim?submodules=1";
+      url = "github:skettisouls/neovim";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
   # }}}
