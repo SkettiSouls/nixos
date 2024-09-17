@@ -20,6 +20,10 @@ in
       udisks2.enable = true;
     };
 
+    programs = {
+      direnv.enable = true;
+    };
+
     environment.systemPackages = with pkgs; [
       btop
       comma
