@@ -8,7 +8,7 @@
   ];
 
   # Kernel
-  boot.kernelPackages = pkgs.linuxPackages_6_8;
+  boot.kernelPackages = pkgs.linuxPackages_6_10;
 
   networking.hostName = "argon"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -30,7 +30,6 @@
   environment.systemPackages = with pkgs; [
     appimage-run
     cloudflare-warp
-    linuxKernel.kernels.linux_6_8
     pavucontrol
   ];
 
