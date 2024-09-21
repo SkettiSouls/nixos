@@ -1,7 +1,10 @@
 {
-  perSystem = { pkgs, ... }: {
+  perSystem = { pkgs, inputs', ... }: let
+    callPackageUnstable = inputs'.nixpkgs-unstable.legacyPackages.callPackage;
+  in
+  {
     packages = {
-      # TODO: Make an alias++ meta package somehow
+      creek = callPackageUnstable ./creek {};
       rebuild = pkgs.callPackage ./aliaspp/rebuild.nix {};
       xdg-desktop-portal-luminous = pkgs.callPackage ./luminous.nix {};
     };
