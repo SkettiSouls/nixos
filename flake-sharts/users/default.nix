@@ -9,6 +9,7 @@ in
 {
   config.flake.userModules = {
     skettisouls = ./modules/skettisouls;
+    wrapper_temp = ./modules/wrapper_temp; # Avoid nuking my entire home config (git, terminal, etc)
 
     default = { host, ... }: {
       users.users = mapAttrs (user: hostList:

@@ -6,7 +6,6 @@
 
     browsers = {
       brave.enable = true;
-      qutebrowser.enable = true;
       # schizofox.enable = true;
     };
 

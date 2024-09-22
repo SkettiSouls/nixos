@@ -10,6 +10,11 @@
 
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+
+    wrapper-manager = {
+      url = "github:viperML/wrapper-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   # }}}
 
   # Discord {{{
@@ -98,6 +103,7 @@
             services = import ./flake-sharts/services;
             users = import ./flake-sharts/users;
             wireguard = import ./flake-sharts/wireguard;
+            wrapper-manager = import ./flake-sharts/wrapper-manager;
           };
 
           hm-module = (builtins.head config.flake.nixosModules.home-manager.imports);
@@ -164,6 +170,7 @@
                   nixosModules.default
                   (hm-module { inherit host; })
                   (userModules.default { inherit host; })
+                  userModules.wrapper_temp
                 ];
               });
 
