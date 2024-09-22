@@ -1,14 +1,11 @@
-{ config, lib, pkgs, ... }:
+{ self, config, lib, pkgs, ... }:
 let
   inherit (config.peripherals.bluetooth) headphones;
+  inherit (self.lib) getAllModules;
   home = config.home.homeDirectory;
 in
 {
-  imports = [
-    ./desktop.nix
-    ./gaming.nix
-    ./workstation.nix
-  ];
+  imports = getAllModules ./roles;
 
   config = {
     home = {

@@ -1,10 +1,7 @@
 { lib, ... }:
 let
-  inherit (builtins)
-    attrValues
-    ;
-
   inherit (lib)
+    attrValues
     filterAttrs
     ;
 
@@ -23,6 +20,9 @@ in
       listToAttrs' = builtins.foldl' (acc: attr: acc // attr) {};
 
       exponent = exponent;
+
+      getAllModules = dir: map (file: "${dir}/${file}") (builtins.attrNames 
+        (lib.filterAttrs (n: _: n != "default.nix" && lib.hasSuffix ".nix" n) (builtins.readDir dir)));
     };
   };
 }
