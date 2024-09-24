@@ -3,12 +3,12 @@
 {
   imports = [ ./option.nix ];
 
-  perSystem = { pkgs', ... }: {
+  perSystem = { pkgs', pkgs, ... }: {
     # Export wrapper-manager packages as `wrappedPackages.<system>.<user>.<package-name>`
     wrappedPackages = builtins.mapAttrs (u: m:
       (inputs.wrapper-manager.lib.eval {
-        pkgs = pkgs';
-        specialArgs = { inherit self inputs; };
+        inherit pkgs;
+        specialArgs = { inherit self inputs pkgs'; };
         modules = [
           self.userModules.${u}.wrapper-manager
         ];

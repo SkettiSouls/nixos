@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+flake@{ config, lib, ... }:
 let
   inherit (lib)
     mkOption
@@ -18,6 +18,11 @@ in
           type = deferredModule;
           default = {};
         };
+
+        nixos = mkOption {
+          type = deferredModule;
+          default = {};
+        };
       };
     });
   };
@@ -27,32 +32,21 @@ in
       skettisouls = {
         home-manager  = ./skettisouls/home-manager;
         wrapper-manager = import ./skettisouls/wrapper-manager;
+        nixos = import ./skettisouls/nixos;
       };
     };
 
-    nixosModules = let
-      eachUser = config.homes;
-    in
-    {
-      users = ({ inputs, self, pkgs, config, ... }: {
+    nixosModules = flake.lib.mapAttrs' (u: m: flake.lib.nameValuePair "perUser" m.nixos) config.flake.userModules
+    // {
+      users = ({ config, ... }: {
         # Create all users in `homes`
         users.users = lib.mapAttrs (user: hostList:
           # Check if the host is present in the user's host list
           lib.mkIf (lib.elem config.networking.hostName hostList) {
             isNormalUser = true;
             extraGroups = lib.mkDefault [ "networkmanager" "wheel" ];
-            # Wrapper-manager
-            packages = [
-              (inputs.wrapper-manager.lib.build {
-                inherit pkgs;
-                specialArgs = { inherit inputs self; };
-                modules = [
-                  self.userModules.${user}.wrapper-manager
-                ];
-              })
-            ];
           }
-        ) eachUser;
+        ) flake.config.homes;
       });
     };
   };
