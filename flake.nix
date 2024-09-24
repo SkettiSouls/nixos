@@ -98,6 +98,7 @@
             hyprland = import ./flake-sharts/hyprland;
             libs = import ./flake-sharts/libs;
             nixos = import ./flake-sharts/nixos;
+            overlays = import ./flake-sharts/overlays;
             packages = import ./flake-sharts/packages;
             river = import ./flake-sharts/river;
             roles = import ./flake-sharts/roles;
@@ -164,7 +165,6 @@
                 specialArgs = specialArgs;
                 modules = with config.flake; [
                   ./global.nix
-                  ./overlays.nix
                   hostModules.${host}
                   hardwareModules.${host}
                   nixosModules.default
@@ -199,7 +199,7 @@
                     pkgs = nixpkgs.legacyPackages.x86_64-linux;
                     extraSpecialArgs = specialArgs;
                     modules = [
-                      ./overlays.nix
+                      config.flake.nixosModules.overlays
                       # Use the home-manager config from nixos.
                       (hm-module { inherit host; }).home-manager.users.${user}
                     ];
