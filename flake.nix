@@ -81,7 +81,8 @@
     flake-parts.lib.mkFlake { inherit inputs; }
       ({ config, options, flake-parts-lib, ... }:
         let
-          inherit (nixpkgs.lib)
+          inherit (nixpkgs) lib;
+          inherit (lib)
             genAttrs
             mapAttrs
             mkOption
@@ -118,7 +119,7 @@
           ];
 
           options = {
-            homes = mkOption { type = with types; attrsOf unspecified; };
+            homes = mkOption { type = with types; attrsOf (listOf (enum config.machines)); };
             machines = mkOption { type = with types; listOf unspecified; };
           };
 
@@ -169,8 +170,25 @@
                   hardwareModules.${host}
                   nixosModules.default
                   (hm-module { inherit host; })
-                  (userModules.default { inherit host; })
-                  userModules.wrapper_temp
+
+                  ({ pkgs, ... }: { # Create all users in `homes`
+                    users.users = mapAttrs (user: hostList:
+                      # Check if the host is present in the user's host list
+                      lib.mkIf (lib.elem host hostList) {
+                        isNormalUser = true;
+                        extraGroups = lib.mkDefault [ "networkmanager" "wheel" ];
+                        # Wrapper-manager
+                        packages = [
+                          (inputs.wrapper-manager.lib.build {
+                            inherit pkgs specialArgs;
+                            modules = [
+                              userModules.${user}.wrapper-manager
+                            ];
+                          })
+                        ];
+                      }
+                    ) config.homes;
+                  })
                 ];
               });
 

@@ -33,7 +33,7 @@ in
         imports = [
           ../homes/${user}/${host}.nix
           ../homes/${user}/modules
-          userModules.${user}
+          userModules.${user}.home-manager
           homeModules.default
 
           {

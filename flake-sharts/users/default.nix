@@ -1,25 +1,31 @@
-{ config, lib, ... }:
+{ lib, ... }:
 let
   inherit (lib)
-    elem
-    mapAttrs
-    mkDefault
+    mkOption
+    types
     ;
 in
 {
-  config.flake.userModules = {
-    skettisouls = ./modules/skettisouls;
-    wrapper_temp = ./modules/wrapper_temp; # Avoid nuking my entire home config (git, terminal, etc)
+  options.flake.userModules = mkOption {
+    type = with types; attrsOf (submodule {
+      options = {
+        home-manager = mkOption {
+          type = deferredModule;
+          default = {};
+        };
 
-    default = { host, ... }: {
-      users.users = mapAttrs (user: hostList:
-        # Check if the host is present in the user's host list
-        if elem host hostList then {
-          # TODO: Add more defaults
-          isNormalUser = true;
-          extraGroups = mkDefault [ "networkmanager" "wheel" ];
-        } else {}
-      ) config.homes;
+        wrapper-manager = mkOption {
+          type = deferredModule;
+          default = {};
+        };
+      };
+    });
+  };
+
+  config.flake.userModules = {
+    skettisouls = {
+      home-manager  = ./modules/skettisouls/home-manager;
+      wrapper-manager = ./modules/skettisouls/wrapper-manager;
     };
   };
 }
