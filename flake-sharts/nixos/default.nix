@@ -23,6 +23,6 @@ in
       };
     };
 
-    default.imports = combineModulesExcept config.flake.nixosModules "home-manager";
+    default.imports = combineModulesExcept [ "home-manager" ] config.flake.nixosModules;
   };
 }
