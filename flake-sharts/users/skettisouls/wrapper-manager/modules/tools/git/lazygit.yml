@@ -1,0 +1,7 @@
+git:
+  commit:
+    autoWrapCommitMessage: false
+  mainBranches:
+  - master
+  - main
+  - shit

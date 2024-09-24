@@ -23,12 +23,12 @@ in
       };
     };
 
-    programs.git = {
+    /* programs.git = {
       userName = "SkettiSouls";
       userEmail = "skettisouls@gmail.com";
 
       signing.key = home + "/.keys/ssh/git.key";
-    };
+    }; */
 
     shit = {
       bash = {

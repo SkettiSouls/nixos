@@ -6,7 +6,7 @@ let
     ;
 in
 {
-  config = {
+  /* config = {
     programs = {
       git = {
         enable = true;
@@ -34,5 +34,5 @@ in
         };
       };
     };
-  };
+  }; */
 }
