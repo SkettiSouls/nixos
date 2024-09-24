@@ -1,6 +1,6 @@
 {
   imports = [
-    ./modules/eza
-    ./modules/qutebrowser
+    ./modules/tools/eza
+    ./modules/browsers/qutebrowser
   ];
 }
