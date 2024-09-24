@@ -2,7 +2,7 @@
 
 The package set for [wrapper-manager](https://github.com/viperML/wrapper-manager) can be handled **one** of **two** ways:
 
-* As a `perSystem` module (`./per-system.nix`):
+* As a `perSystem` module (`./per-system`):
   - Using this method places user wrappers under `wrappedPackages.<system>.<user>.<package>`, which can be used like so:
       ```nix
       # Flake module
@@ -17,7 +17,7 @@ The package set for [wrapper-manager](https://github.com/viperML/wrapper-manager
           });
       }
       ```
-* As a flake output (`./packages.nix`):
+* As a flake module (`./flake-module.nix`):
   - Using this method places user wrappers under `wrappedPackages.<user>.<package>`, which can be used like so:
       ```nix
       # NixOS module

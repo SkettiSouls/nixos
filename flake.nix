@@ -105,6 +105,7 @@
             services = import ./flake-sharts/services;
             users = import ./flake-sharts/users;
             wireguard = import ./flake-sharts/wireguard;
+            wrapper-manager = import ./flake-sharts/wrapper-manager;
           };
 
           hm-module = (builtins.head config.flake.nixosModules.home-manager.imports);
@@ -169,25 +170,6 @@
                   hardwareModules.${host}
                   nixosModules.default
                   (hm-module { inherit host; })
-
-                  ({ pkgs, ... }: { # Create all users in `homes`
-                    users.users = mapAttrs (user: hostList:
-                      # Check if the host is present in the user's host list
-                      lib.mkIf (lib.elem host hostList) {
-                        isNormalUser = true;
-                        extraGroups = lib.mkDefault [ "networkmanager" "wheel" ];
-                        # Wrapper-manager
-                        packages = [
-                          (inputs.wrapper-manager.lib.build {
-                            inherit pkgs specialArgs;
-                            modules = [
-                              userModules.${user}.wrapper-manager
-                            ];
-                          })
-                        ];
-                      }
-                    ) config.homes;
-                  })
                 ];
               });
 
