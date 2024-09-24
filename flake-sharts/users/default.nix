@@ -24,8 +24,8 @@ in
 
   config.flake.userModules = {
     skettisouls = {
-      home-manager  = ./modules/skettisouls/home-manager;
-      wrapper-manager = ./modules/skettisouls/wrapper-manager;
+      home-manager  = ./skettisouls/home-manager;
+      wrapper-manager = ./skettisouls/wrapper-manager;
     };
   };
 }
