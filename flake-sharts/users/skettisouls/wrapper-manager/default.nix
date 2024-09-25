@@ -1,8 +1,8 @@
 {
   imports = [
-    ./modules/browsers/qutebrowser
+    ./browsers/qutebrowser
 
-    ./modules/tools/eza
-    ./modules/tools/git
+    ./tools/eza
+    ./tools/git
   ];
 }
