@@ -30,7 +30,7 @@ in
   config.flake = {
     userModules = {
       skettisouls = {
-        home-manager  = ./skettisouls/home-manager;
+        home-manager  = import ./skettisouls/home-manager;
         wrapper-manager = import ./skettisouls/wrapper-manager;
         nixos = import ./skettisouls/nixos;
       };

@@ -1,8 +1,9 @@
 { inputs, self, config, lib, ... }:
 let
-  inherit (self)
+  inherit (config.flake)
     userModules
     homeModules
+    machines
     ;
 
   inherit (lib)
@@ -19,8 +20,8 @@ in
       useGlobalPkgs = true;
       useUserPackages = true;
       users = mapAttrs (user: hostList: let
-        nixosConfig = self.nixosConfigurations.${host}.config;
-        nixosOptions = self.nixosConfigurations.${host}.options;
+        nixosConfig = config.flake.nixosConfigurations.${host}.config;
+        nixosOptions = config.flake.nixosConfigurations.${host}.options;
       in {
         programs.home-manager.enable = true;
 
@@ -31,10 +32,9 @@ in
         };
 
         imports = [
-          ../homes/${user}/${host}.nix
-          ../homes/${user}/modules
           userModules.${user}.home-manager
           homeModules.default
+          machines.homes.${user}.${host}
 
           {
             options.roles = nixosOptions.shit.roles;

@@ -94,9 +94,9 @@
             # features = importApply ./flake-sharts/features args;
             hardware = import ./flake-sharts/hardware;
             home-manager = import ./flake-sharts/home-manager;
-            hosts = import ./flake-sharts/hosts;
             hyprland = import ./flake-sharts/hyprland;
             libs = import ./flake-sharts/libs;
+            machines = import ./flake-sharts/machines;
             nixos = import ./flake-sharts/nixos;
             overlays = import ./flake-sharts/overlays;
             packages = import ./flake-sharts/packages;
@@ -166,8 +166,8 @@
                 specialArgs = specialArgs;
                 modules = with config.flake; [
                   ./global.nix
-                  hostModules.${host}
-                  hardwareModules.${host}
+                  machines.hosts.${host}
+                  machines.hardware.${host}
                   nixosModules.default
                   (hm-module { inherit host; })
                 ];

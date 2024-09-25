@@ -1,6 +1,4 @@
 {
-  imports = [ ./modules ];
-
   shit = {
     audio.bluetooth.enable = true;
 

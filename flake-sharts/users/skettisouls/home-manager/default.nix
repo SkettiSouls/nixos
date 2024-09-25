@@ -5,7 +5,9 @@ let
   home = config.home.homeDirectory;
 in
 {
-  imports = getAllModules ./roles;
+  imports = (getAllModules ./roles) ++ [
+    ./modules
+  ];
 
   config = {
     home = {
