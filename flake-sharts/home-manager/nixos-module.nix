@@ -8,13 +8,23 @@ let
 
   inherit (lib)
     mapAttrs
+    mkEnableOption
+    mkIf
+    mkOption
+    types
     ;
 in
 {
   config.flake.nixosModules.home-manager = { host, ... }: {
     imports = [ inputs.home-manager.nixosModules.home-manager ];
 
-    home-manager = {
+    options.users.users = mkOption {
+      type = with types; attrsOf (submodule {
+        options.home-manager.enable = mkEnableOption "Manage user configs with home-manager";
+      });
+    };
+
+    config.home-manager = {
       extraSpecialArgs = { inherit inputs self; };
       backupFileExtension = "bak";
       useGlobalPkgs = true;
@@ -22,16 +32,18 @@ in
       users = mapAttrs (user: hostList: let
         nixosConfig = config.flake.nixosConfigurations.${host}.config;
         nixosOptions = config.flake.nixosConfigurations.${host}.options;
-      in {
-        programs.home-manager.enable = true;
+        hm = nixosConfig.users.users.${user}.home-manager;
+      in
+      {
+        programs.home-manager.enable = mkIf hm.enable true;
 
-        home = rec {
+        home = mkIf hm.enable (rec {
           username = user;
           homeDirectory = lib.mkDefault "/home/${username}";
           stateVersion = nixosConfig.system.stateVersion;
-        };
+        });
 
-        imports = [
+        imports = lib.optionals hm.enable [
           userModules.${user}.home-manager
           homeModules.default
           machines.homes.${user}.${host}
