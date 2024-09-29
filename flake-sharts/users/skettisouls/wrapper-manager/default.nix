@@ -1,5 +1,7 @@
 {
   imports = [
+    ./audio/feishin
+
     ./browsers/qutebrowser
 
     ./tools/eza

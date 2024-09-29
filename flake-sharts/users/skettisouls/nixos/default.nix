@@ -10,6 +10,7 @@ nixos@{ config, ... }:
 
       packages = with perSystem.config.wrappedPackages; with skettisouls; [
         eza
+        feishin
         qutebrowser
       ];
     };

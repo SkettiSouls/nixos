@@ -63,7 +63,6 @@ in
       slurp
       wl-clipboard
       wbg
-      unstable.feishin
       keepassxc
     ];
 
