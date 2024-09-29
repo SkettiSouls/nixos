@@ -1,4 +1,4 @@
-flake@{ config, lib, ... }:
+flake@{ config, lib, moduleWithSystem, ... }:
 let
   inherit (lib)
     mkOption
@@ -14,12 +14,12 @@ in
           default = {};
         };
 
-        wrapper-manager = mkOption {
+        nixos = mkOption {
           type = deferredModule;
           default = {};
         };
 
-        nixos = mkOption {
+        wrapper-manager = mkOption {
           type = deferredModule;
           default = {};
         };
@@ -31,8 +31,8 @@ in
     userModules = {
       skettisouls = {
         home-manager  = import ./skettisouls/home-manager;
+        nixos = moduleWithSystem (import ./skettisouls/nixos);
         wrapper-manager = import ./skettisouls/wrapper-manager;
-        nixos = import ./skettisouls/nixos;
       };
     };
 
