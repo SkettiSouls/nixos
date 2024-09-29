@@ -8,9 +8,15 @@ let
 
   inherit (config.nixcord) vesktop;
 
+  desktopEntries = {
+    brave = "brave.desktop";
+    qutebrowser = "org.qutebrowser.qutebrowser.desktop";
+    schizofox = "Schizofox.desktop";
+  };
+
 # browserMimeList {{{
   browserMimelist = let
-    browser = cfg.desktopEntry;
+    browser = desktopEntries.${cfg.default};
   in {
     "browser/internal" = browser;
     "text/html" = browser;
@@ -35,22 +41,20 @@ in
 {
   options.xdg.browser = {
     default = mkOption {
-      type = types.str;
-      default = "";
-    };
-
-    desktopEntry = mkOption {
-      type = types.str;
-      default = if cfg.default != "" then "${cfg.default}.desktop" else "";
+      type = with types; nullOr (enum (builtins.attrNames desktopEntries));
+      default = null;
     };
   };
 
   config.xdg = {
     mimeApps = {
       enable = true;
-      defaultApplications = browserMimelist // {
-        "x-scheme-handler/discord" = mkIf vesktop.enable ["Vesktop.desktop"];
-      };
+      defaultApplications = lib.mkMerge [
+        (mkIf (cfg.default != null) browserMimelist)
+        {
+          "x-scheme-handler/discord" = mkIf vesktop.enable ["Vesktop.desktop"];
+        }
+      ];
     };
   };
 }

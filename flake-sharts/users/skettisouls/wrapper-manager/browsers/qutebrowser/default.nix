@@ -5,6 +5,6 @@
     basePackage = pkgs.qutebrowser;
     pathAdd = with pkgs; [ gobble rofi gnupg ];
 
-    flags = [ "--config-py" ./config.py ":adblock-update" ];
+    flags = [ "--config-py" ./config.py ];
   };
 }

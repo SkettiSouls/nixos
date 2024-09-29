@@ -5,7 +5,6 @@ let
     mkIf
     ;
 
-  isDefault = config.xdg.browser.default == "brave";
   cfg = config.shit.browsers.brave;
 in
 {
@@ -14,7 +13,6 @@ in
   };
 
   config = mkIf cfg.enable {
-    xdg.browser.desktopEntry = mkIf isDefault "brave-browser.desktop";
     # TODO: Make this module programs.chromium with brave as the package.
     home.packages = with pkgs; [
       brave

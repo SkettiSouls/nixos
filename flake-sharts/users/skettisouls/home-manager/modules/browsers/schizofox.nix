@@ -8,7 +8,6 @@ let
   mkUrl = lib.mapAttrs' (name: id: lib.nameValuePair
     id { install_url = "https://addons.mozilla.org/firefox/downloads/latest/${name}/latest.xpi"; });
 
-  isDefault = config.xdg.browser.default == "qutebrowser";
   cfg = config.shit.browsers.schizofox;
 in
 {
@@ -20,7 +19,6 @@ in
   };
 
   config = mkIf cfg.enable {
-    xdg.browser.desktopEntry = mkIf isDefault "Schizofox.desktop";
     programs.schizofox = {
       enable = true;
       # package = pkgs.tor-browser;
