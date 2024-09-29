@@ -3,6 +3,7 @@
     ./browsers/qutebrowser
 
     ./tools/eza
-    ./tools/git
+    # ./tools/git
+    # ./tools/lsd
   ];
 }
