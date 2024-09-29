@@ -183,7 +183,7 @@
                     modules = [
                       config.flake.nixosModules.overlays
                       # Use the home-manager config from nixos.
-                      (hm-module { inherit host; }).home-manager.users.${user}
+                      (hm-module { inherit host; }).config.home-manager.users.${user}
                     ];
                   }
                 )

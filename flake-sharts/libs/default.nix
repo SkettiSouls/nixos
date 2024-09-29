@@ -16,7 +16,7 @@
         else n * exponent n (i - 1)
         ;
 
-      getAllModules = path: map (file: "${path}/${file}") (builtins.attrNames 
+      getAllModules = path: map (file: "${path}/${file}") (builtins.attrNames
         (lib.filterAttrs (n: _: n != "default.nix" && lib.hasSuffix ".nix" n) (builtins.readDir path)));
 
       getAllDirs = path: map (file: path + "/${file}") (builtins.attrNames
