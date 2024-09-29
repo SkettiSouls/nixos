@@ -1,5 +1,5 @@
 {
-  perSystem = { pkgs, inputs', ... }: let
+  perSystem = { inputs', pkgs, ... }: let
     callPackageUnstable = inputs'.nixpkgs-unstable.legacyPackages.callPackage;
   in
   {

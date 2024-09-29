@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, lib, ... }:
 let
   inherit (config.flake.lib)
     combineModulesExcept
@@ -12,6 +12,17 @@ in
     steam = import ./modules/steam.nix;
 
     roles = config.flake.roles.default;
-    default.imports = combineModulesExcept config.flake.nixosModules "home-manager";
+
+    # Stolen from lunarix
+    # Pass config.flake down to nixos scope
+    stretch = {
+      options.flake = lib.mkOption {
+        type = lib.types.unspecified;
+        default = config.flake;
+        readOnly = true;
+      };
+    };
+
+    default.imports = combineModulesExcept [ "home-manager" ] config.flake.nixosModules;
   };
 }

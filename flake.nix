@@ -10,6 +10,11 @@
 
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+
+    wrapper-manager = {
+      url = "github:viperML/wrapper-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   # }}}
 
   # Discord {{{
@@ -76,7 +81,8 @@
     flake-parts.lib.mkFlake { inherit inputs; }
       ({ config, options, flake-parts-lib, ... }:
         let
-          inherit (nixpkgs.lib)
+          inherit (nixpkgs) lib;
+          inherit (lib)
             genAttrs
             mapAttrs
             mkOption
@@ -88,16 +94,18 @@
             # features = importApply ./flake-sharts/features args;
             hardware = import ./flake-sharts/hardware;
             home-manager = import ./flake-sharts/home-manager;
-            hosts = import ./flake-sharts/hosts;
             hyprland = import ./flake-sharts/hyprland;
             libs = import ./flake-sharts/libs;
+            machines = import ./flake-sharts/machines;
             nixos = import ./flake-sharts/nixos;
+            overlays = import ./flake-sharts/overlays;
             packages = import ./flake-sharts/packages;
             river = import ./flake-sharts/river;
             roles = import ./flake-sharts/roles;
             services = import ./flake-sharts/services;
             users = import ./flake-sharts/users;
             wireguard = import ./flake-sharts/wireguard;
+            wrapper-manager = import ./flake-sharts/wrapper-manager;
           };
 
           hm-module = (builtins.head config.flake.nixosModules.home-manager.imports);
@@ -112,7 +120,7 @@
           ];
 
           options = {
-            homes = mkOption { type = with types; attrsOf unspecified; };
+            homes = mkOption { type = with types; attrsOf (listOf (enum config.machines)); };
             machines = mkOption { type = with types; listOf unspecified; };
           };
 
@@ -158,12 +166,10 @@
                 specialArgs = specialArgs;
                 modules = with config.flake; [
                   ./global.nix
-                  ./overlays.nix
-                  hostModules.${host}
-                  hardwareModules.${host}
+                  machines.hosts.${host}
+                  machines.hardware.${host}
                   nixosModules.default
                   (hm-module { inherit host; })
-                  (userModules.default { inherit host; })
                 ];
               });
 
@@ -175,7 +181,7 @@
                     pkgs = nixpkgs.legacyPackages.x86_64-linux;
                     extraSpecialArgs = specialArgs;
                     modules = [
-                      ./overlays.nix
+                      config.flake.nixosModules.overlays
                       # Use the home-manager config from nixos.
                       (hm-module { inherit host; }).home-manager.users.${user}
                     ];

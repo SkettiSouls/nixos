@@ -1,24 +1,53 @@
-{ config, lib, ... }:
+flake@{ config, lib, moduleWithSystem, ... }:
 let
   inherit (lib)
-    elem
-    mapAttrs
-    mkDefault
+    mkOption
+    types
     ;
 in
 {
-  config.flake.userModules = {
-    skettisouls = ./modules/skettisouls;
+  options.flake.userModules = mkOption {
+    type = with types; attrsOf (submodule {
+      options = {
+        home-manager = mkOption {
+          type = deferredModule;
+          default = {};
+        };
 
-    default = { host, ... }: {
-      users.users = mapAttrs (user: hostList:
-        # Check if the host is present in the user's host list
-        if elem host hostList then {
-          # TODO: Add more defaults
-          isNormalUser = true;
-          extraGroups = mkDefault [ "networkmanager" "wheel" ];
-        } else {}
-      ) config.homes;
+        nixos = mkOption {
+          type = deferredModule;
+          default = {};
+        };
+
+        wrapper-manager = mkOption {
+          type = deferredModule;
+          default = {};
+        };
+      };
+    });
+  };
+
+  config.flake = {
+    userModules = {
+      skettisouls = {
+        home-manager  = import ./skettisouls/home-manager;
+        nixos = moduleWithSystem (import ./skettisouls/nixos);
+        wrapper-manager = import ./skettisouls/wrapper-manager;
+      };
+    };
+
+    nixosModules = flake.lib.mapAttrs' (u: m: flake.lib.nameValuePair "perUser" m.nixos) config.flake.userModules
+    // {
+      users = ({ config, ... }: {
+        # Create all users in `homes`
+        users.users = lib.mapAttrs (user: hostList:
+          # Check if the host is present in the user's host list
+          lib.mkIf (lib.elem config.networking.hostName hostList) {
+            isNormalUser = true;
+            extraGroups = lib.mkDefault [ "networkmanager" "wheel" ];
+          }
+        ) flake.config.homes;
+      });
     };
   };
 }

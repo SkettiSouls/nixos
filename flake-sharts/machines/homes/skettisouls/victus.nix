@@ -1,8 +1,6 @@
 { config, lib, pkgs, ... }:
 
 {
-  imports = [ ./modules ];
-
   home.packages = with pkgs; [
     rofi
   ];

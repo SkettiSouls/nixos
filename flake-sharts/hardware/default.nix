@@ -10,11 +10,5 @@
       laptop = import ./modules/laptop.nix;
       monitors = import ./modules/monitors.nix;
     };
-
-    hardwareModules = {
-      argon = import ./modules/machines/argon.nix;
-      fluorine = import ./modules/machines/fluorine.nix;
-      victus = import ./modules/machines/victus.nix;
-    };
   };
 }

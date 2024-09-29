@@ -19,7 +19,6 @@ in
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
       # (mkIf cfg.aliaspp.enable self.rebuild)
-      eza
       rsync
       self.rebuild
       # (mkIf cfg.customScripts self.scripts)
@@ -35,7 +34,11 @@ in
         ":q" = " exit";
         cp = "rsync";
         icat = mkIf kitty.enable "kitten icat";
-        ls = "eza --icons=always --group-directories-first";
+
+        l = "eza -alh";
+        ls = "eza";
+        la = "eza -a";
+        lt = "eza -T";
       };
 
       # TODO: Make window swallowing override (`spit`).

@@ -625,7 +625,8 @@
         "nixpkgs": "nixpkgs_6",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "peridot": "peridot",
-        "vesktop": "vesktop"
+        "vesktop": "vesktop",
+        "wrapper-manager": "wrapper-manager"
       }
     },
     "rust-overlay": {
@@ -767,6 +768,26 @@
         "owner": "NixOS",
         "ref": "nixos-unstable",
         "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "wrapper-manager": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1724503599,
+        "narHash": "sha256-WVhNq3QjnG/2mi772CkTxZCQcomKV5S03TbQKwe1Kj4=",
+        "owner": "viperML",
+        "repo": "wrapper-manager",
+        "rev": "c936f9203217e654a6074d206505c16432edbc70",
+        "type": "github"
+      },
+      "original": {
+        "owner": "viperML",
+        "repo": "wrapper-manager",
         "type": "github"
       }
     },
