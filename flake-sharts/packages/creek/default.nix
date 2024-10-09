@@ -7,6 +7,7 @@
 , fcft
 , pkg-config
 , wayland-protocols
+, wayland-scanner
 }:
 
 stdenv.mkDerivation rec {
@@ -23,6 +24,7 @@ stdenv.mkDerivation rec {
   nativeBuildInputs = [
     pkg-config
     wayland
+    wayland-scanner
     zig.hook
   ];
 
