@@ -64,6 +64,7 @@ in
       wl-clipboard
       wbg
       keepassxc
+      lswt
     ];
 
     shit.river = mkIf cfg.enable {
@@ -87,9 +88,26 @@ in
         byId = {
           ${discordClient} = mkIf discord.enable { tags = 2; };
           feishin = { tags = 10; };
-          "org.keepassxc.KeePassXC" = { tags = 11; };
           Sonixd = { tags = 10; };
-          steam = mkIf roles.gaming.enable { tags = 3; };
+          steam = {
+            byTitle = mkIf roles.gaming.enable {
+              "*Steam" = {
+                tags = 3;
+                float = false;
+              };
+
+              "Launching..." = {
+                float = true;
+              };
+            };
+          };
+
+          # Spawn keepassxc on tag 11, but allow the "Unlock Database" popup to spawn on any tag.
+          "org.keepassxc.KeePassXC".byTitle = {
+            "'*[Locked] - KeePassXC'" = {
+              tags = 11;
+            };
+          };
         };
       };
 
@@ -101,8 +119,9 @@ in
             "Shift Print" = ''spawn 'grim -g "$(slurp)" - | wl-copy' '';
 
             # System binds
-            "${modKey} C" = "spawn '${terminal} -e nvim /etc/nixos/'";
-            "${altMod} E" = "exit";
+            "${modKey} C" = "spawn '${terminal} -e nvim /etc/nixos/flake-sharts'";
+            "${altMod} E" = "exit"; # Alt mod to prevent accidentally killing river
+            "${modKey} S" = "toggle-float";
 
             # Connect/disconnect headphones
             "${modKey} B" = "spawn 'connect-headphones ${defaultHeadphones}'";
@@ -129,6 +148,7 @@ in
       unbind = {
         keys.normal = [
           "${appMod} E"
+          "${modKey} Space"
         ];
 
         mouse = {

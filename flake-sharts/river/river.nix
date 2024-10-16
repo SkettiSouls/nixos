@@ -3,7 +3,6 @@ let
   inherit (self.lib) exponent;
   inherit (lib)
     filterAttrs
-    isAttrs
     isPath
     isString
     mapAttrs
@@ -14,15 +13,8 @@ let
 
   inherit (cfg.layout) generator;
 
-  checkForTags = value:
-    (if (value.tags != null) && (value.output != null) then { tags = mkTag value.tags; output = mkTag value.output; } else
-    (if (value.tags != null) then { tags = mkTag value.tags; } else
-    (if (value.output != null) then { output = mkTag value.output; } else {})));
-
-
   # Works because layout.generator is type `oneOf [ "rivertile" path package ]`
   isPackage = x: if (isPath x) || (isString x) then false else true;
-  rmNull = x: filterAttrs (n: v: v != null) x;
   mkTag = tag: toString (exponent 2 (tag - 1));
   cfg = config.shit.river;
 in
@@ -43,8 +35,9 @@ in
       enable = true;
       package = cfg.package;
       xwayland.enable = true;
+      extraConfig = cfg.extraConfig;
 
-      settings = {
+      settings = recursiveUpdate cfg.settings {
         background-color = mkDefault "0x002b36";
         border-color-focused = mkDefault "0x93a1a1";
         border-color-unfocused = mkDefault "0x586e75";
@@ -53,22 +46,40 @@ in
 
         declare-mode = cfg.modes;
 
-        rule-add = (recursiveUpdate cfg.rules.extraConfig {
-          "-app-id" = mkIf (cfg.rules.byId != null) (mapAttrs (id: value:
-            if (isAttrs value) && (value.byTitle != null) then {
-              "-title" = mapAttrs (title: option:
-                if isAttrs option then (rmNull option) // checkForTags option else option
-              ) value.byTitle;
-            } else if isAttrs value then (rmNull value) // checkForTags value else value)
+        rule-add = let
+          checkForTags = value:
+            (if (value.tags != null) && (value.output != null) then { tags = mkTag value.tags; output = mkTag value.output; } else
+            (if (value.tags != null) then { tags = mkTag value.tags; } else
+            (if (value.output != null) then { output = mkTag value.output; } else {})));
+
+          rmNull = x: filterAttrs (n: v: v != null) x;
+
+          # Fix rules that lack args
+          handleRules = attrs: (rmNull attrs) // checkForTags attrs // {
+            csd = mkIf (attrs.csd == true) "";
+            ssd = mkIf (attrs.ssd == true) "";
+            float = mkIf (attrs.float == true) "";
+            no-float = mkIf (attrs.float == false) "";
+            fullscreen = mkIf (attrs.fullscreen == true) "";
+            no-fullscreen = mkIf (attrs.fullscreen == false) "";
+          };
+        in
+        (recursiveUpdate cfg.rules.extraConfig {
+          "-app-id" = mkIf (cfg.rules.byId != null) (mapAttrs (id: attrs:
+            if attrs.byTitle != null then {
+              "-title" = mapAttrs (_: option:
+                handleRules option
+              ) attrs.byTitle;
+            } else handleRules attrs)
           cfg.rules.byId);
 
-          "-title" = mkIf (cfg.rules.byTitle != null) (mapAttrs (id: value:
-              if (isAttrs value) && (value.byId != null) then {
-                "-app-id" = mapAttrs (id: option:
-                  if isAttrs option then (rmNull option) // checkForTags option else option
-                ) value.byId;
-              } else if isAttrs value then (rmNull value) // checkForTags value else value)
-            cfg.rules.byTitle);
+          "-title" = mkIf (cfg.rules.byTitle != null) (mapAttrs (id: attrs:
+            if attrs.byId != null then {
+              "-app-id" = mapAttrs (_: option:
+                handleRules option
+              ) attrs.byId;
+            } else handleRules attrs)
+          cfg.rules.byTitle);
         });
 
         spawn = map (cmd: "'${cmd}'") cfg.startup.apps;

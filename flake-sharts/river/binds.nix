@@ -64,7 +64,6 @@ in
           "${modKey} Comma" = "focus-output previous";
           "${modKey} Space" = "toggle-float";
           "${modKey} F" = "toggle-fullscreen";
-          "${modKey} ${cfg.passthrough.keybind}" = mkIf cfg.passthrough.enable "enter-mode passthrough";
           "${modKey} 0" = "set-focused-tags ${allTags}";
 
           "${appMod} Return" = "spawn ${terminal}";
@@ -98,11 +97,16 @@ in
           // bindTags "${specialMod}" "toggle-focused-tags"
           // bindTags "${specialMod}+Shift" "toggle-view-tags"
         ));
+      }
+      (mkIf cfg.passthrough.enable {
+        normal = mkIf (elem "normal" declare-mode) {
+          "${modKey} ${cfg.passthrough.keybind}" = mkDefault "enter-mode passthrough";
+        };
 
-        passthrough = mkIf cfg.passthrough.enable {
+        passthrough = mkIf (elem "normal" declare-mode) {
           "${modKey} ${cfg.passthrough.keybind}" = mkDefault "enter-mode normal";
         };
-      }];
+      })];
 
       map-pointer = mkMerge [ cfg.bind.mouse {
         normal = mkIf (elem "normal" declare-mode) (mkAllDefault {

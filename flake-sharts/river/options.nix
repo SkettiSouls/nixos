@@ -1,9 +1,8 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, options, ... }:
 let
   inherit (lib)
     mkEnableOption
     mkOption
-    mkPackageOption
     range
     types
     ;
@@ -39,16 +38,18 @@ let
     };
   };
 
-  rulesEnum = (types.enum [
-    "csd"
-    "float"
-    "fullscreen"
-    "no-float"
-    "no-fullscreen"
-    "ssd"
-  ]);
+  mkNullableBool = str: mkOption {
+    type = with types; nullOr (either bool types.str);
+    default = null;
+    description = str;
+  };
 
-  rulesSubmodule = {
+  ruleOptions = {
+    csd = mkNullableBool "";
+    ssd = mkNullableBool "";
+    float = mkNullableBool "View floating state on spawn";
+    fullscreen = mkNullableBool "View fullscreen state on spawn";
+
     dimensions = mkOption {
       type = with types; nullOr (either str int);
       default = null;
@@ -77,6 +78,11 @@ in
     enable = mkEnableOption "River WM";
     bind = keybindOptions bindSubmodule;
     unbind = keybindOptions unbindSubmodule;
+
+    # Passthrough
+    package = options.wayland.windowManager.river.package;
+    settings = options.wayland.windowManager.river.settings;
+    extraConfig = options.wayland.windowManager.river.extraConfig;
 
     installTerminal = mkOption {
       type = types.bool;
@@ -108,13 +114,6 @@ in
       '';
     };
 
-    package = mkPackageOption pkgs "river" {
-      nullable = true;
-      extraDescription = ''
-        Convenience passthrough for wayland.windowManagers.river.package.
-      '';
-    };
-
     passthrough = {
       enable = mkOption {
         type = types.bool;
@@ -134,30 +133,26 @@ in
 
     rules = {
       byId = mkOption {
-        type = with types; nullOr (attrsOf (either rulesEnum (submodule {
+        type = with types; nullOr (attrsOf (submodule {
           options = {
             byTitle = mkOption {
-              type = with types; nullOr (attrsOf (either rulesEnum (submodule {
-                options = rulesSubmodule;
-              })));
+              type = with types; nullOr (attrsOf (submodule { options = ruleOptions; }));
               default = null;
             };
-          } // rulesSubmodule;
-        })));
+          } // ruleOptions;
+        }));
         default = null;
       };
 
       byTitle = mkOption {
-        type = with types; nullOr (attrsOf (either rulesEnum (submodule {
+        type = with types; nullOr (attrsOf (submodule {
           options = {
             byId = mkOption {
-              type = with types; nullOr (attrsOf (either rulesEnum (submodule {
-                options = rulesSubmodule;
-              })));
+              type = with types; nullOr (attrsOf (submodule { options = ruleOptions; }));
               default = null;
             };
-          } // rulesSubmodule;
-        })));
+          } // ruleOptions;
+        }));
         default = null;
       };
 
@@ -165,12 +160,6 @@ in
         type = types.attrs;
         default = {};
       };
-    };
-
-    settings = mkOption {
-      type = types.attrs;
-      default = {};
-      description = "Convenience passthrough for wayland.windowManagers.river.settings";
     };
 
     startup.apps = mkOption {
