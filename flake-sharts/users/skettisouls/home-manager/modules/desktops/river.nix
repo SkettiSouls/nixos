@@ -58,13 +58,12 @@ in
   config = {
     home.packages = with pkgs; [
       bin.chp
+      bin.grime
       dunst
-      grim
-      slurp
-      wl-clipboard
-      wbg
       keepassxc
       lswt
+      wbg
+      wl-clipboard
     ];
 
     shit.river = mkIf cfg.enable {
@@ -74,7 +73,7 @@ in
       startup.apps = [
         "dunst &"
         "polkit &"
-        "connect-headphones ${defaultHeadphones}"
+        "chp ${defaultHeadphones}"
 
         defaultBrowser
         (mkIf discord.enable "${discordClient}")
@@ -115,8 +114,10 @@ in
         keys = {
           normal = {
             # Screenshots
-            "None Print" = "spawn 'grim - | wl-copy'";
-            "Shift Print" = ''spawn 'grim -g "$(slurp)" - | wl-copy' '';
+            "None Print" = "spawn 'grime copy screen'";
+            "Shift Print" = "spawn 'grime copy area'";
+            "${modKey} Print" = "spawn 'grime copysave screen'";
+            "${appMod} Print" = "spawn 'grime copysave area'";
 
             # System binds
             "${modKey} C" = "spawn '${terminal} -e nvim /etc/nixos/flake-sharts'";
@@ -124,7 +125,7 @@ in
             "${modKey} S" = "toggle-float";
 
             # Connect/disconnect headphones
-            "${modKey} B" = "spawn 'connect-headphones ${defaultHeadphones}'";
+            "${modKey} B" = "spawn 'chp ${defaultHeadphones}'";
             "${altMod} B" = "spawn 'bluetoothctl disconnect ${defaultHeadphones}'";
 
             # Open Apps

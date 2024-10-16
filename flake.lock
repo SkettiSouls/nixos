@@ -23,11 +23,11 @@
         "systems": "systems"
       },
       "locked": {
-        "lastModified": 1721724042,
-        "narHash": "sha256-tUwDaJis+T06kXL3WFFqFbCX+7atNQNXqqSgcKomB7Q=",
+        "lastModified": 1728545868,
+        "narHash": "sha256-Bu0gThdWba5tIRUcKp7o/2lSTjZf2xsbGJ33NB4zQjs=",
         "owner": "skettisouls",
         "repo": "bin",
-        "rev": "b1214930caf3bdb456d4853076f942c213d9c1a1",
+        "rev": "12a4e5d84192a4bd55300e57c5ff3a95552ea49b",
         "type": "github"
       },
       "original": {
