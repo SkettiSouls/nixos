@@ -108,7 +108,7 @@
             wrapper-manager = import ./flake-sharts/wrapper-manager;
           };
 
-          hm-module = (builtins.head config.flake.nixosModules.home-manager.imports);
+          # hm-module = (builtins.head config.flake.nixosModules.home-manager.imports);
           specialArgs = { inherit inputs self; };
         in
         {
@@ -169,11 +169,12 @@
                   machines.hosts.${host}
                   machines.hardware.${host}
                   nixosModules.default
-                  (hm-module { inherit host; })
+                  nixosModules.home-manager
                 ];
               });
 
               # FIXME: Infinite recursion when using schizofox.
+              # FIXME: broken
               homeConfigurations = mapAttrs (user: hostList:
                 genAttrs hostList (host:
                   inputs.home-manager.lib.homeManagerConfiguration {
@@ -183,7 +184,7 @@
                     modules = [
                       config.flake.nixosModules.overlays
                       # Use the home-manager config from nixos.
-                      (hm-module { inherit host; }).config.home-manager.users.${user}
+                      config.flake.nixosConfigurations.${host}.config.home-manager.users.${user}
                     ];
                   }
                 )
