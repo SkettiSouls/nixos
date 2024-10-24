@@ -10,7 +10,14 @@
   # Kernel
   boot.kernelPackages = pkgs.linuxPackages_6_10;
 
-  networking.hostName = "argon"; # Define your hostname.
+  networking = {
+    hostName = "argon";
+    networkmanager.enable = true;
+    interfaces.enp37s0.ipv4.addresses = [{
+      address = "192.168.1.18";
+      prefixLength = 24;
+    }];
+  };
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -19,7 +26,6 @@
 
 
   # Enable networking
-  networking.networkmanager.enable = true;
   systemd.services.NetworkManager-wait-online.enable = false;
 
   # Set your time zone.

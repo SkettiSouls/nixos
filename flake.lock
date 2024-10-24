@@ -417,11 +417,11 @@
         "systems": "systems_6"
       },
       "locked": {
-        "lastModified": 1726555199,
-        "narHash": "sha256-FiBoEoEnpTkSmcM9xNaZFuePIqjQ5O4ntEW4E6XSDcE=",
+        "lastModified": 1729142253,
+        "narHash": "sha256-UlAdoSEPB0bOaFg+6f6GrAdb472PKQvMLf56J/1Kmhg=",
         "owner": "skettisouls",
         "repo": "neovim",
-        "rev": "c635ea1235684df4cba21bcb1c0fd49bc16fe3c2",
+        "rev": "b0fde0464b8942f52a9bcd032cc6d2d49d9aa805",
         "type": "github"
       },
       "original": {
@@ -498,11 +498,11 @@
     },
     "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1727348695,
-        "narHash": "sha256-J+PeFKSDV+pHL7ukkfpVzCOO7mBSrrpJ3svwBFABbhI=",
+        "lastModified": 1729413321,
+        "narHash": "sha256-I4tuhRpZFa6Fu6dcH9Dlo5LlH17peT79vx1y1SpeKt0=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "1925c603f17fc89f4c8f6bf6f631a802ad85d784",
+        "rev": "1997e4aa514312c1af7e2bda7fad1644e778ff26",
         "type": "github"
       },
       "original": {
@@ -594,11 +594,11 @@
     },
     "peridot": {
       "locked": {
-        "lastModified": 1724699124,
-        "narHash": "sha256-+/AZKqt7zDrOFNQgXZUhqBtMewZOKyYE0iTFKerKfvw=",
+        "lastModified": 1729625713,
+        "narHash": "sha256-VoEkWVfaHh2NDBwp4qNa5CXLc58s/q+ObVFPiLNXsaQ=",
         "owner": "skettisouls",
         "repo": "peridot",
-        "rev": "300064ab3cde7005d8aa2dde8e4d514d6038f187",
+        "rev": "c24a059f8abdbbc23694390118e684491f2b1616",
         "type": "github"
       },
       "original": {
