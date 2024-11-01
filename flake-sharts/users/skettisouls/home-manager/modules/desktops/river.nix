@@ -91,14 +91,22 @@ in
           steam = {
             byTitle = mkIf roles.gaming.enable {
               "*Steam" = {
-                tags = 3;
                 float = false;
+                tags = 3;
               };
 
               "Launching..." = {
                 float = true;
               };
+
+              "'Special Offers'" = {
+                float = true;
+                tags = 3;
+              };
             };
+
+            # Fix missing borders
+            ssd = true;
           };
 
           # Spawn keepassxc on tag 11, but allow the "Unlock Database" popup to spawn on any tag.

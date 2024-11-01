@@ -65,20 +65,35 @@ in
           };
         in
         (recursiveUpdate cfg.rules.extraConfig {
+          # Updating with `idRules` and `titleRules` allows for both nested (i.e `byTitle`) and top level rules.
+          # For example:
+          # ```
+          # rules.byId.steam.ssd = true;
+          # rules.byId.steam.byTitle."Launching...".float = true;
+          # ```
+
           "-app-id" = mkIf (cfg.rules.byId != null) (mapAttrs (id: attrs:
-            if attrs.byTitle != null then {
+            if attrs.byTitle != null then
+            let
+              idRules = filterAttrs (n: v: n != "byTitle") attrs;
+            in
+            {
               "-title" = mapAttrs (_: option:
                 handleRules option
               ) attrs.byTitle;
-            } else handleRules attrs)
+            } // handleRules idRules else handleRules attrs)
           cfg.rules.byId);
 
           "-title" = mkIf (cfg.rules.byTitle != null) (mapAttrs (id: attrs:
-            if attrs.byId != null then {
-              "-app-id" = mapAttrs (_: option:
-                handleRules option
-              ) attrs.byId;
-            } else handleRules attrs)
+          if attrs.byId != null then
+          let
+            titleRules = filterAttrs (n: v: n != "byId") attrs;
+          in
+          {
+            "-app-id" = mapAttrs (_: option:
+              handleRules option
+            ) attrs.byId;
+          } // handleRules titleRules else handleRules attrs)
           cfg.rules.byTitle);
         });
 

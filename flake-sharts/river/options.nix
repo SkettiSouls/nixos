@@ -45,8 +45,8 @@ let
   };
 
   ruleOptions = {
-    csd = mkNullableBool "";
-    ssd = mkNullableBool "";
+    csd = mkNullableBool "Use client side decorations";
+    ssd = mkNullableBool "Use server side decorations";
     float = mkNullableBool "View floating state on spawn";
     fullscreen = mkNullableBool "View fullscreen state on spawn";
 
