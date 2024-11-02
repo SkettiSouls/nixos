@@ -39,6 +39,7 @@ in
         20
         80
         443
+        4747
         airsonic.port
         deemix-server.port
         git.port

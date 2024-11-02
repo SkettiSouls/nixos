@@ -2,7 +2,7 @@
 
 {
   wrappers.feishin = {
-    basePackage = pkgs'.self.feishin;
+    basePackage = pkgs'.unstable.feishin;
     pathAdd = [ pkgs.mpv ];
   };
 }

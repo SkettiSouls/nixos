@@ -7,6 +7,7 @@ in
 {
   imports = with self.serviceModules; [
     airsonic
+    gonic
     caddy
     deemix
     discord-bots
