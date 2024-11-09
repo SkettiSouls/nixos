@@ -119,23 +119,12 @@
             inputs.peridot.flakeModules.peridot
           ];
 
-          options = {
-            homes = mkOption { type = with types; attrsOf (listOf (enum config.machines)); };
-            machines = mkOption { type = with types; listOf unspecified; };
-          };
+          options.machines = mkOption { type = with types; listOf unspecified; };
 
           config = {
             systems = [
               "x86_64-linux"
             ];
-
-            homes = {
-              skettisouls = [
-                "argon"
-                "fluorine"
-                "victus"
-              ];
-            };
 
             machines = [
               "argon"

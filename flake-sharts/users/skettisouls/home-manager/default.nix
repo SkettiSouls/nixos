@@ -1,4 +1,4 @@
-{ self, config, lib, pkgs, ... }:
+{ self, config, pkgs, ... }:
 let
   inherit (config.peripherals.bluetooth) headphones;
   inherit (self.lib) getAllModules;

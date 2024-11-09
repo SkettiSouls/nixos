@@ -30,8 +30,8 @@ in
     backupFileExtension = "bak";
     useGlobalPkgs = true;
     useUserPackages = true;
-    users = mapAttrs (user: hostList: let
-      hm = config.users.users.${user}.home-manager;
+    users = mapAttrs (user: attrs: let
+      hm = attrs.home-manager;
     in
     {
       programs.home-manager.enable = mkIf hm.enable true;
@@ -52,6 +52,6 @@ in
           config.roles = config.shit.roles;
         }
       ];
-    }) config.flake._config.homes;
+    }) config.flake._config.users;
   };
 }

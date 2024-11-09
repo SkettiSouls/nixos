@@ -1,53 +1,71 @@
-flake@{ config, lib, moduleWithSystem, ... }:
+{ config, lib, moduleWithSystem, ... }:
 let
   inherit (lib)
+    mkEnableOption
+    mkIf
     mkOption
     types
     ;
-in
-{
-  options.flake.userModules = mkOption {
-    type = with types; attrsOf (submodule {
-      options = {
-        home-manager = mkOption {
-          type = deferredModule;
-          default = {};
-        };
 
-        nixos = mkOption {
-          type = deferredModule;
-          default = {};
-        };
-
-        wrapper-manager = mkOption {
-          type = deferredModule;
-          default = {};
-        };
-      };
-    });
+  mkModuleSystem = mkOption {
+    type = types.deferredModule;
+    default = {};
   };
 
-  config.flake = {
-    userModules = {
-      skettisouls = {
-        home-manager  = import ./skettisouls/home-manager;
-        nixos = moduleWithSystem (import ./skettisouls/nixos);
-        wrapper-manager = import ./skettisouls/wrapper-manager;
-      };
-    };
+  cfg = config;
+in
+{
+  # TODO: Get all user dirs
+  imports = [ ./skettisouls/default.nix ];
 
-    nixosModules = flake.lib.mapAttrs' (u: m: flake.lib.nameValuePair "perUser" m.nixos) config.flake.userModules
-    // {
-      users = ({ config, ... }: {
-        # Create all users in `homes`
-        users.users = lib.mapAttrs (user: hostList:
-          # Check if the host is present in the user's host list
-          lib.mkIf (lib.elem config.networking.hostName hostList) {
-            isNormalUser = true;
-            extraGroups = lib.mkDefault [ "networkmanager" "wheel" ];
-          }
-        ) flake.config.homes;
+  options = {
+    users = mkOption {
+      # type = with types; attrsOf (listOf (enum config.machines));
+      type = with types; attrsOf (submodule {
+        options = {
+          home-manager.enable = mkEnableOption "Home manager";
+
+          machines = mkOption {
+            type = listOf (enum config.machines);
+            default = config.machines;
+          };
+
+          wrapper-manager = {
+            enable = mkEnableOption "Wrapper Manager";
+            installedWrappers = mkOption {
+              type = listOf str;
+              default = [];
+            };
+          };
+        };
       });
     };
+
+    flake.userModules = mkOption {
+      type = with types; attrsOf (submodule {
+        options = {
+          home-manager = mkModuleSystem;
+          nixos = mkModuleSystem;
+          wrapper-manager = mkModuleSystem;
+        };
+      });
+    };
+  };
+
+  config = {
+    flake.nixosModules.mkUsers = moduleWithSystem (
+      perSystem@{ config }:
+      nixos@{ config, ... }: {
+        users.users = lib.mapAttrs (user: attrs:
+          lib.mkIf (lib.elem nixos.config.networking.hostName attrs.machines) {
+            isNormalUser = true;
+            extraGroups = lib.mkDefault [ "networkmanager" "wheel" ];
+            packages = mkIf attrs.wrapper-manager.enable (map
+              (wrp: perSystem.config.wrappedPackages.${user}.${wrp})
+            attrs.wrapper-manager.installedWrappers);
+          }
+        ) cfg.users;
+      }
+    );
   };
 }
