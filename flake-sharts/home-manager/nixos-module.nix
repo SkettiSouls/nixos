@@ -50,6 +50,6 @@ in
           config.roles = config.shit.roles;
         }
       ];
-    }) config.flake._config.users;
+    }) config.flake.users;
   };
 }

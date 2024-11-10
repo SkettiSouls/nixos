@@ -1,5 +1,5 @@
 {
-  config = {
+  config.flake = {
     users.skettisouls = {
       home-manager.enable = true;
       wrapper-manager = {
@@ -12,7 +12,7 @@
       };
     };
 
-    flake.userModules.skettisouls = {
+    userModules.skettisouls = {
       home-manager = import ./home-manager;
       wrapper-manager = import ./wrapper-manager;
     };

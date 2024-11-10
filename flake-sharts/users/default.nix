@@ -16,12 +16,12 @@ let
   userDirs = map (user: ./${user}) getUserDirs;
 
   machines = (builtins.attrNames config.flake.machines);
-  cfg = config;
+  cfg = config.flake;
 in
 {
   imports = userDirs;
 
-  options = {
+  options.flake = {
     users = mkOption {
       type = with types; attrsOf (submodule {
         options = {
@@ -43,7 +43,7 @@ in
       });
     };
 
-    flake.userModules = mkOption {
+    userModules = mkOption {
       type = with types; attrsOf (submodule {
         options = {
           home-manager = mkModuleSystem;
