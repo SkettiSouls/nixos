@@ -12,15 +12,16 @@ let
     default = {};
   };
 
+  getUserDirs = builtins.attrNames (lib.filterAttrs (_: v: v == "directory") (builtins.readDir ./.));
+  userDirs = map (user: ./${user}) getUserDirs;
+
   cfg = config;
 in
 {
-  # TODO: Get all user dirs
-  imports = [ ./skettisouls/default.nix ];
+  imports = userDirs;
 
   options = {
     users = mkOption {
-      # type = with types; attrsOf (listOf (enum config.machines));
       type = with types; attrsOf (submodule {
         options = {
           home-manager.enable = mkEnableOption "Home manager";
