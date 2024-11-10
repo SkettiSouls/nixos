@@ -5,8 +5,11 @@ let
     attrValues
     flatten
     mapAttrs
+    mkEnableOption
     mkIf
+    mkOption
     removePrefix
+    types
     ;
 
   inherit (self.nixosConfigurations.fluorine.config.services)
@@ -28,9 +31,24 @@ let
     (mapAttrs
       (_: instance: mkIf instance.enable instance.serverConfig.server-port)
     nix-mc.instances);
+
+  cfg = config.wireguard.peridot;
 in
 {
-  networking = {
+  options.wireguard.peridot = {
+    enable = mkEnableOption "Peridot network";
+
+    # TODO: Make work lol
+    local = mkOption {
+      type = types.bool;
+      default = true;
+      description = ''
+        Whether to use the lan access point (192.168.1.17)
+      '';
+    };
+  };
+
+  config.networking = mkIf cfg.enable {
     hosts."172.16.0.1" = [ "fluorine.lan" ] ++ localDNS;
 
     firewall.interfaces = mkIf (config.networking.hostName == "fluorine") {
@@ -39,7 +57,7 @@ in
         20
         80
         443
-        4747
+        4747 # Gonic
         airsonic.port
         deemix-server.port
         git.port

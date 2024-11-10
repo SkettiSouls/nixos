@@ -5,10 +5,11 @@ let
     mkIf
     ;
 
-  cfg = config.shit.wireguard;
+  cfg = config.wireguard.luni-net;
 in
 {
-  options.shit.wireguard.enable = mkEnableOption "Luni-net";
+  # TODO: integrate peridot
+  options.wireguard.luni-net.enable = mkEnableOption "Lunarix's network";
 
   config = mkIf cfg.enable {
     networking = {

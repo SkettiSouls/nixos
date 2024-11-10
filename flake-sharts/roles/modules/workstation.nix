@@ -1,6 +1,7 @@
 { config, lib, pkgs, ... }:
 let
   inherit (lib)
+    mkDefault
     mkEnableOption
     mkIf
     ;
@@ -11,8 +12,9 @@ in
   options.shit.roles.workstation.enable = mkEnableOption "Workstation role";
 
   config = mkIf cfg.enable {
-    shit = {
-      wireguard.enable = true;
+    wireguard = {
+      peridot.enable = mkDefault true;
+      luni-net.enable = mkDefault true;
     };
 
     services = {

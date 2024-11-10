@@ -28,9 +28,10 @@
   #   enableRedistributableFirmware = true;
   # };
 
-  shit = {
-    # TODO: Add to luni-net.
-    wireguard.enable = lib.mkForce false;
+  # TODO: Setup wireguard
+  wireguard = {
+    luni-net.enable = false;
+    peridot.enable = false;
   };
 
   # This value determines the NixOS release from which the default

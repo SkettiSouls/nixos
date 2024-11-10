@@ -1,11 +1,11 @@
 {
   imports = [
-    ./flake-modules/luni-net.nix
-    ./flake-modules/peridot.nix
+    ./luni-net
+    ./peridot
   ];
 
   flake.nixosModules = {
-    luni-net = import ./nixos-modules/luni-net.nix;
-    peridot = import ./nixos-modules/peridot.nix;
+    luni-net = import ./luni-net/nixos-module.nix;
+    peridot = import ./peridot/nixos-module.nix;
   };
 }
