@@ -2,7 +2,6 @@
 let
   inherit (config.flake)
     homeModules
-    machines
     userModules
     ;
 
@@ -26,7 +25,7 @@ in
   };
 
   config.home-manager = {
-    extraSpecialArgs = { inherit inputs self; };
+    extraSpecialArgs = { inherit inputs self host; };
     backupFileExtension = "bak";
     useGlobalPkgs = true;
     useUserPackages = true;
@@ -44,7 +43,6 @@ in
 
       imports = lib.optionals hm.enable [
         homeModules.default
-        machines.homes.${user}.${host}
         userModules.${user}.home-manager
 
         {

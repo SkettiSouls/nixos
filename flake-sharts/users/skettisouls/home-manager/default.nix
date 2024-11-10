@@ -1,4 +1,4 @@
-{ self, config, pkgs, ... }:
+{ self, config, pkgs, host, ... }:
 let
   inherit (config.peripherals.bluetooth) headphones;
   inherit (self.lib) getAllModules;
@@ -7,6 +7,7 @@ in
 {
   imports = (getAllModules ./roles) ++ [
     ./modules
+    ./machines/${host}.nix
   ];
 
   config = {

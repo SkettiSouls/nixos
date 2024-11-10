@@ -15,6 +15,7 @@ let
   getUserDirs = builtins.attrNames (lib.filterAttrs (_: v: v == "directory") (builtins.readDir ./.));
   userDirs = map (user: ./${user}) getUserDirs;
 
+  machines = (builtins.attrNames config.flake.machines);
   cfg = config;
 in
 {
@@ -27,8 +28,8 @@ in
           home-manager.enable = mkEnableOption "Home manager";
 
           machines = mkOption {
-            type = listOf (enum config.machines);
-            default = config.machines;
+            type = listOf (enum machines);
+            default = machines;
           };
 
           wrapper-manager = {
@@ -58,7 +59,7 @@ in
       perSystem@{ config }:
       nixos@{ config, ... }: {
         users.users = lib.mapAttrs (user: attrs:
-          lib.mkIf (lib.elem nixos.config.networking.hostName attrs.machines) {
+          lib.mkIf (lib.elem nixos.config.networking.hostName machines) {
             isNormalUser = true;
             extraGroups = lib.mkDefault [ "networkmanager" "wheel" ];
             packages = mkIf attrs.wrapper-manager.enable (map

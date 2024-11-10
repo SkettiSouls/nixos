@@ -85,9 +85,7 @@
           inherit (lib)
             genAttrs
             mapAttrs
-            mkOption
             nixosSystem
-            types
             ;
 
           flakeModules = {
@@ -118,20 +116,14 @@
             inputs.peridot.flakeModules.peridot
           ];
 
-          options.machines = mkOption { type = with types; listOf unspecified; };
-
           config = {
             systems = [
               "x86_64-linux"
             ];
 
-            machines = [
-              "argon"
-              "fluorine"
-              "victus"
-            ];
-
-            flake = {
+            flake = let
+              hostList = builtins.attrNames config.flake.machines;
+            in {
               # Debug
               _config = config;
               _options = options;
@@ -150,12 +142,11 @@
                 };
               };
 
-              nixosConfigurations = genAttrs config.machines (host: nixosSystem {
+              nixosConfigurations = genAttrs hostList (host: nixosSystem {
                 specialArgs = specialArgs;
                 modules = with config.flake; [
                   ./global.nix
-                  machines.hosts.${host}
-                  machines.hardware.${host}
+                  machines.${host}
                   nixosModules.default
                   nixosModules.home-manager
                 ];
