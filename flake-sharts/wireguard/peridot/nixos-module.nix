@@ -17,6 +17,7 @@ let
     caddy
     deemix-server
     forgejo
+    gonic
     invidious
     nginx
     nix-mc
@@ -60,6 +61,7 @@ in
         airsonic.port
         deemix-server.port
         git.port
+        gonic.port
         invidious.port
         minecraft.ports
         net.peridot.self.listenPort
