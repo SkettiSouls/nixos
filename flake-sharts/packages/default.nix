@@ -1,4 +1,6 @@
 {
+  imports = [ ./wrapper-manager/per-system ];
+
   perSystem = { inputs', pkgs, ... }: let
     callPackageUnstable = inputs'.nixpkgs-unstable.legacyPackages.callPackage;
   in

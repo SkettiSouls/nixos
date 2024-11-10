@@ -1,7 +1,7 @@
 { self, inputs,  ... }:
 
 {
-  imports = [ ./option.nix ];
+  imports = [ ./module.nix ];
 
   perSystem = { pkgs', pkgs, ... }: {
     # Export wrapper-manager packages as `wrappedPackages.<system>.<user>.<package-name>`

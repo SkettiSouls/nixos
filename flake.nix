@@ -105,7 +105,6 @@
             services = import ./flake-sharts/services;
             users = import ./flake-sharts/users;
             wireguard = import ./flake-sharts/wireguard;
-            wrapper-manager = import ./flake-sharts/wrapper-manager;
           };
 
           # hm-module = (builtins.head config.flake.nixosModules.home-manager.imports);
