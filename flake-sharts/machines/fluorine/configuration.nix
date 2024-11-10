@@ -14,7 +14,6 @@ in
     forgejo
     invidious
     minecraft
-    navidrome
     postgres
   ];
 
