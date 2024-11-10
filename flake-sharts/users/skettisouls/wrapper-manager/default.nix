@@ -7,5 +7,7 @@
     ./tools/eza
     ./tools/git
     ./tools/lsd
+
+    ./shells/nushell
   ];
 }

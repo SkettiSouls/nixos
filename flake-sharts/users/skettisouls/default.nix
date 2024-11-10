@@ -7,6 +7,7 @@
         installedWrappers = [
           "eza"
           "feishin"
+          "nushell"
         ];
       };
     };
