@@ -3,12 +3,14 @@
 {
   flake = {
     lib = rec {
-      # Stolen from quantumcoded @ (https://github.com/QuantumCoded/nixos/blob/master/flake-parts/libraries/combine-modules.nix)
+      # Stolen from quantumcoded:
+      # (https://github.com/QuantumCoded/nixos/blob/master/flake-parts/libraries/combine-modules.nix)
       combineModules = modules: lib.attrValues (lib.filterAttrs (k: _: k != "default") modules);
 
       combineModulesExcept = exceptions: modules: lib.flatten (map (exception: lib.attrValues (lib.filterAttrs (k: _: (k != "default") && (k != exception)) modules)) exceptions);
 
-      listToAttrs' = builtins.foldl' (acc: attr: acc // attr) {};
+      # listToAttrs' = builtins.foldl' (acc: attr: acc // attr) {};
+      listToAttrs' = builtins.foldl' lib.recursiveUpdate {};
 
       exponent = n: i:
         if i == 1 then n

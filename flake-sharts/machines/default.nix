@@ -1,12 +1,13 @@
-{ lib, ... }:
+{ config, lib, ... }:
 let
+  inherit (config.flake.lib) listToAttrs';
   inherit (lib)
     mkOption
     types
     ;
 
-  # TODO: Replace flake.lib.listToAttrs' with this
-  listToAttrs'' = builtins.foldl' lib.recursiveUpdate {};
+  getConfig = machine: { imports = [ ./${machine}/configuration.nix ./${machine}/hardware-configuration.nix ]; };
+  getConfigs = machines: listToAttrs' (map (machine: { ${machine} = getConfig machine; }) machines);
 in
 {
   options.flake = {
@@ -16,21 +17,10 @@ in
   };
 
   config.flake = {
-    machines = {
-      argon.imports = [
-        ./argon/configuration.nix
-        ./argon/hardware-configuration.nix
-      ];
-
-      fluorine.imports = [
-        ./fluorine/configuration.nix
-        ./fluorine/hardware-configuration.nix
-      ];
-
-      victus.imports = [
-        ./victus/configuration.nix
-        ./victus/hardware-configuration.nix
-      ];
-    };
+    machines = getConfigs [
+      "argon"
+      "fluorine"
+      "victus"
+    ];
   };
 }
