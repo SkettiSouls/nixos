@@ -13,4 +13,15 @@ alias icat = kitten icat
 
 $env.config = {
     show_banner: false
+    completions: {
+        external: (if ((which carapace | length) > 0) {
+            {
+                enable: true
+                completer: {|spans| carapace $spans.0 nushell ...$spans | from json}
+                max_results: 100
+            }
+        } else {
+            {}
+        })
+    }
 }
