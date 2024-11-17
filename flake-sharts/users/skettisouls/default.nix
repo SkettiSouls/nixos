@@ -9,6 +9,7 @@
         users.users.skettisouls = let
           wrappers = perSystem.config.wrappedPackages.skettisouls;
         in {
+          shell = wrappers.nushell;
           packages = with wrappers; [
             eza
             feishin

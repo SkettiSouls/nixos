@@ -11,6 +11,10 @@ alias la = ls -a
 alias lla = ls -la
 alias icat = kitten icat
 
+load-env {
+    "EDITOR": "nvim",
+}
+
 $env.config = {
     show_banner: false
     completions: {
