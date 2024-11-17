@@ -417,11 +417,11 @@
         "systems": "systems_6"
       },
       "locked": {
-        "lastModified": 1729142253,
-        "narHash": "sha256-UlAdoSEPB0bOaFg+6f6GrAdb472PKQvMLf56J/1Kmhg=",
+        "lastModified": 1731874892,
+        "narHash": "sha256-VbTlbxkXdADEDRI5s7aWHrDOZrDukWfz+1KdNo5HMWY=",
         "owner": "skettisouls",
         "repo": "neovim",
-        "rev": "b0fde0464b8942f52a9bcd032cc6d2d49d9aa805",
+        "rev": "b09a9866b4c80a1894fe32bf42e9897484dc38ef",
         "type": "github"
       },
       "original": {
