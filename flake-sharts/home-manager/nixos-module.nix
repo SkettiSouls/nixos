@@ -1,9 +1,6 @@
 { inputs, self, config, options, lib, ... }:
 let
-  inherit (config.flake)
-    homeModules
-    userModules
-    ;
+  inherit (config.flake) homeModules;
 
   inherit (lib)
     mapAttrs
@@ -30,20 +27,20 @@ in
     useGlobalPkgs = true;
     useUserPackages = true;
     users = mapAttrs (user: attrs: let
-      hm = attrs.home-manager;
+      inherit (attrs) home-manager;
     in
     {
-      programs.home-manager.enable = mkIf hm.enable true;
+      programs.home-manager.enable = mkIf home-manager.enable true;
 
-      home = mkIf hm.enable (rec {
+      home = mkIf home-manager.enable (rec {
         username = user;
         homeDirectory = lib.mkDefault "/home/${username}";
         stateVersion = config.system.stateVersion;
       });
 
-      imports = lib.optionals hm.enable [
+      imports = lib.optionals home-manager.enable [
         homeModules.default
-        userModules.${user}.home-manager
+        home-manager.modules
 
         {
           options.roles = options.shit.roles;

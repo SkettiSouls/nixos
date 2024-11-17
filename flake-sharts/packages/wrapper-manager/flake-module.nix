@@ -1,13 +1,13 @@
-{ inputs, self, ... }:
+{ self, inputs, config, ... }:
 
 {
-  config.flake.wrappedPackages = { pkgs, ... }: builtins.mapAttrs (u: m:
+  config.flake.wrappedPackages = { pkgs, ... }: builtins.mapAttrs (_: attrs:
     (inputs.wrapper-manager.lib.eval {
       inherit pkgs;
       specialArgs = { inherit self inputs; };
       modules = [
-        self.userModules.${u}.wrapper-manager
+        attrs.wrapper-manager.modules
       ];
     }).config.build.packages
-  ) self.userModules;
+  ) config.flake.users;
 }

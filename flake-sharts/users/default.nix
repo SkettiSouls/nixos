@@ -1,8 +1,7 @@
-{ config, lib, moduleWithSystem, ... }:
+{ config, lib, ... }:
 let
   inherit (lib)
     mkEnableOption
-    mkIf
     mkOption
     types
     ;
@@ -25,7 +24,10 @@ in
     users = mkOption {
       type = with types; attrsOf (submodule {
         options = {
-          home-manager.enable = mkEnableOption "Home manager";
+          home-manager = {
+            enable = mkEnableOption "Home manager";
+            modules = mkModuleSystem;
+          };
 
           machines = mkOption {
             type = listOf (enum machines);
@@ -34,40 +36,21 @@ in
 
           wrapper-manager = {
             enable = mkEnableOption "Wrapper Manager";
-            installedWrappers = mkOption {
-              type = listOf str;
-              default = [];
-            };
+            modules = mkModuleSystem;
           };
-        };
-      });
-    };
-
-    userModules = mkOption {
-      type = with types; attrsOf (submodule {
-        options = {
-          home-manager = mkModuleSystem;
-          nixos = mkModuleSystem;
-          wrapper-manager = mkModuleSystem;
         };
       });
     };
   };
 
   config = {
-    flake.nixosModules.mkUsers = moduleWithSystem (
-      perSystem@{ config }:
-      nixos@{ config, ... }: {
-        users.users = lib.mapAttrs (user: attrs:
-          lib.mkIf (lib.elem nixos.config.networking.hostName machines) {
-            isNormalUser = true;
-            extraGroups = lib.mkDefault [ "networkmanager" "wheel" ];
-            packages = mkIf attrs.wrapper-manager.enable (map
-              (wrp: perSystem.config.wrappedPackages.${user}.${wrp})
-            attrs.wrapper-manager.installedWrappers);
-          }
-        ) cfg.users;
-      }
-    );
+    flake.nixosModules.mkUsers = { config, ... }: {
+      users.users = lib.mapAttrs (user: attrs:
+        lib.mkIf (lib.elem config.networking.hostName machines) {
+          isNormalUser = true;
+          extraGroups = lib.mkDefault [ "networkmanager" "wheel" ];
+        }
+      ) cfg.users;
+    };
   };
 }
