@@ -16,10 +16,9 @@ in
     boot.initrd.kernelModules = [ "amdgpu" ];
 
     hardware = {
-      opengl = {
+      graphics = {
         enable = true;
-        driSupport = true;
-        driSupport32Bit = true; # Enable 32-Bit Support
+        enable32Bit = true;
         extraPackages = [ pkgs.mesa pkgs.libva ];
         extraPackages32 = [ pkgs.driversi686Linux.mesa ];
       };

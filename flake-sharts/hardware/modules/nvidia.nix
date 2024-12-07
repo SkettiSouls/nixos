@@ -52,11 +52,9 @@ in
     };
 
     hardware = {
-      opengl = {
+      graphics = {
         enable = true;
-        driSupport = true;
-        driSupport32Bit = true;
-        setLdLibraryPath = true;
+        enable32Bit = true;
 
         extraPackages = with pkgs; [] ++ (if proprietary then [
           vaapiVdpau

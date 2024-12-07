@@ -13,7 +13,7 @@ in
         lutris
         minetest
         prismlauncher
-        scarab
+        # scarab # Dotnet dependency is insecure
         wineWowPackages.staging
         winetricks
       ];
