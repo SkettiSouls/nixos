@@ -23,7 +23,6 @@ in
       peripherals = import ./modules/peripherals.nix;
 
       # Application modules
-      carla = import ./modules/applications/carla.nix;
       mimelist = import ./modules/applications/mimelist.nix;
       neofetch = import ./modules/applications/neofetch;
 

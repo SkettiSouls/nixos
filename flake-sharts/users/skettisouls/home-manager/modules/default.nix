@@ -18,7 +18,6 @@ in
 
     ### Audio ###
     ./audio/bluetooth.nix
-    ./audio/carla.nix
     ./audio/mpv.nix
 
     ### Browsers ###

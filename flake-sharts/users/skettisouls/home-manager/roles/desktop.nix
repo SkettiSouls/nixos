@@ -23,7 +23,6 @@ in
     };
 
     shit = {
-      audio.carla.enable = true;
       discord.enable = true;
       kitty.enable = true;
       mpv.enable = true;
