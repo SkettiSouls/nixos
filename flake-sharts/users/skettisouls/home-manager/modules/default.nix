@@ -22,8 +22,8 @@ in
 
     ### Browsers ###
     ./browsers/brave.nix
+    ./browsers/firefox.nix
     ./browsers/qutebrowser.nix
-    # ./browsers/schizofox.nix
 
     ### Desktops ###
     # TODO: Move hyprland here

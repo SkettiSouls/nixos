@@ -152,7 +152,6 @@
                 ];
               });
 
-              # FIXME: Infinite recursion when using schizofox.
               # FIXME: broken
               homeConfigurations = mapAttrs (user: hostList:
                 genAttrs hostList (host:

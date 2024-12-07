@@ -11,7 +11,7 @@ let
   desktopEntries = {
     brave = "brave.desktop";
     qutebrowser = "org.qutebrowser.qutebrowser.desktop";
-    schizofox = "Schizofox.desktop";
+    firefox = "firefox.desktop";
   };
 
 # browserMimeList {{{
