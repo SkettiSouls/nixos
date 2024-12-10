@@ -1,4 +1,4 @@
-{ self, config, lib, pkgs, ... }:
+{ self, config, lib, pkgs, flakeRoot, ... }:
 let
   inherit (self.lib) exponent;
 
@@ -128,7 +128,7 @@ in
             "${appMod} Print" = "spawn 'grime copysave area'";
 
             # System binds
-            "${modKey} C" = "spawn '${terminal} -e nvim /etc/nixos/src'";
+            "${modKey} C" = "spawn '${terminal} -e nvim ${flakeRoot}/src'";
             "${altMod} E" = "exit"; # Alt mod to prevent accidentally killing river
             "${modKey} S" = "toggle-float";
 

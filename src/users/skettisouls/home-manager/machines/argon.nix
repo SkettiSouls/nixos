@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, flakeRoot, ... }:
 {
   shit = {
     audio.bluetooth.enable = true;
@@ -21,11 +21,11 @@
     neofetch.trollOS.enable = true;
 
     hyprland.wallpapers = {
-      suncat.source = "/etc/nixos/etc/images/wallpapers/suncat.jpg";
+      suncat.source = "${flakeRoot}/etc/images/wallpapers/suncat.jpg";
     };
 
     wallpapers = {
-      suncat = "/etc/nixos/etc/images/wallpapers/suncat.jpg";
+      suncat = "${flakeRoot}/etc/images/wallpapers/suncat.jpg";
     };
   };
 }

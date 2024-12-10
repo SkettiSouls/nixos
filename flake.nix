@@ -105,7 +105,8 @@
           };
 
           # hm-module = (builtins.head config.flake.nixosModules.home-manager.imports);
-          specialArgs = { inherit inputs self; };
+          flakeRoot = ./.;
+          specialArgs = { inherit inputs self flakeRoot; };
         in
         {
           imports = (builtins.attrValues flakeModules) ++ [
@@ -127,7 +128,7 @@
               _config = config;
               _options = options;
 
-              inherit flakeModules;
+              inherit flakeModules flakeRoot;
 
               deploy.nodes = {
                 fluorine = {

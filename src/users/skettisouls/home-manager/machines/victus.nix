@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, flakeRoot, ... }:
 
 {
   home.packages = with pkgs; [
@@ -15,7 +15,7 @@
     };
 
     hyprland.wallpapers = {
-      suncat.source = "/etc/nixos/etc/images/wallpapers/suncat.jpg";
+      suncat.source = "${flakeRoot}/etc/images/wallpapers/suncat.jpg";
     };
 
     browsers = {

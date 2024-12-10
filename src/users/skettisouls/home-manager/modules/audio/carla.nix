@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, flakeRoot, ... }:
 let
   inherit (lib)
     mkEnableOption
@@ -96,8 +96,8 @@ in
         };
       };
       paths = {
-        folders = [ /etc/nixos/etc/carla ];
-        projectFolder = "/etc/nixos/etc/carla";
+        folders = [ "${flakeRoot}/etc/carla" ];
+        projectFolder = "${flakeRoot}/etc/carla";
         ladspa = [
           "${pkgs.rnnoise-plugin}/lib"
         ];

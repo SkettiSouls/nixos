@@ -1,4 +1,4 @@
-{ self, config, lib, ... }:
+{ self, config, lib, flakeRoot, ... }:
 let
   inherit (self.lib)
     listToAttrs'
@@ -27,7 +27,7 @@ in
 
         source = mkOption {
           type = with types; either path str;
-          default = "/etc/nixos/etc/images/wallpapers/nixos-frappe.png";
+          default = "${flakeRoot}/etc/images/wallpapers/nixos-frappe.png";
         };
       };
     });

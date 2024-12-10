@@ -1,4 +1,4 @@
-{ inputs, self, config, options, lib, ... }:
+{ inputs, self, flakeRoot, config, options, lib, ... }:
 let
   inherit (config.flake) homeModules;
 
@@ -22,7 +22,7 @@ in
   };
 
   config.home-manager = {
-    extraSpecialArgs = { inherit inputs self host; };
+    extraSpecialArgs = { inherit inputs self host flakeRoot; };
     backupFileExtension = "bak";
     useGlobalPkgs = true;
     useUserPackages = true;

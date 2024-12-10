@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, flakeRoot, ... }:
 let
   inherit (lib)
     mkEnableOption
@@ -54,7 +54,7 @@ in
           "dunst &"
           "polkit &"
           "chp ${defaultHeadphones}"
-          "[workspace 10 silent] carla /etc/nixos/etc/carla/system.carxp"
+          "[workspace 10 silent] carla ${flakeRoot}/etc/carla/system.carxp"
           "[workspace 1 silent] qutebrowser"
           "[workspace 2 silent] vesktop"
           "[workspace 3 silent] steam"
@@ -158,8 +158,8 @@ in
           "$mainMod, RETURN, exec, $TERM"
           "$mainMod, B, exec, chp ${defaultHeadphones}"
           "$mainMod ALT, B, exec, bluetoothctl disconnect ${defaultHeadphones}"
-          "$mainMod, C, exec, $TERM -e nvim /etc/nixos"
-          "$mainMod ALT, C, exec, $TERM -e nvim /etc/nixos/modules/home/hyprland.nix"
+          "$mainMod, C, exec, $TERM -e nvim ${flakeRoot}"
+          "$mainMod ALT, C, exec, $TERM -e nvim ${flakeRoot}/src/hyprland/hyprland.nix"
 
           # App Binds (SUPER_SHIFT)
           "$mainMod SHIFT, B, exec, qutebrowser"
