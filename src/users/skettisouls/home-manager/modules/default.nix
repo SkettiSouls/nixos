@@ -7,7 +7,7 @@ let
     default = "";
   };
 
-  cfg = config.shit.defaultApps;
+  cfg = config.basalt.defaultApps;
 in
 {
   imports = [
@@ -30,6 +30,9 @@ in
     ./desktops/portals.nix
     ./desktops/river.nix
 
+    ### Fetches ###
+    ./fetch/trollos.nix
+
     ### Launchers ###
     ./launchers/rofi.nix
     ./launchers/fuzzel.nix
@@ -42,7 +45,7 @@ in
     ./tools/gpg.nix
   ];
 
-  options.shit.defaultApps = {
+  options.basalt.defaultApps = {
     launcher = mkVar;
     browser = mkVar;
   };

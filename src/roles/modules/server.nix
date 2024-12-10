@@ -5,10 +5,10 @@ let
     mkIf
     ;
 
-  cfg = config.shit.roles.server;
+  cfg = config.regolith.roles.server;
 in
 {
-  options.shit.roles.server.enable = mkEnableOption "Server role";
+  options.regolith.roles.server.enable = mkEnableOption "Server role";
 
   config = mkIf cfg.enable {
     services.openssh.enable = true;

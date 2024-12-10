@@ -16,7 +16,7 @@ let
   # Works because layout.generator is type `oneOf [ "rivertile" path package ]`
   isPackage = x: if (isPath x) || (isString x) then false else true;
   mkTag = tag: toString (exponent 2 (tag - 1));
-  cfg = config.shit.river;
+  cfg = config.regolith.river;
 in
 {
   imports = [

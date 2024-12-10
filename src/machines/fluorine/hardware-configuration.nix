@@ -1,7 +1,7 @@
 { config, lib, pkgs, modulesPath, ... }:
 
 {
-  shit.hardware = {
+  regolith.hardware = {
     # TODO: Drive configuration.
   };
 

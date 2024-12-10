@@ -6,10 +6,10 @@ let
     mkIf
     ;
 
-  cfg = config.shit.roles.workstation;
+  cfg = config.regolith.roles.workstation;
 in
 {
-  options.shit.roles.workstation.enable = mkEnableOption "Workstation role";
+  options.regolith.roles.workstation.enable = mkEnableOption "Workstation role";
 
   config = mkIf cfg.enable {
     wireguard = {

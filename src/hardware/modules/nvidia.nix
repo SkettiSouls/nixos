@@ -8,14 +8,14 @@ let
     types
   ;
 
-  cfg = config.shit.hardware.nvidia;
+  cfg = config.regolith.hardware.nvidia;
   proprietary = lib.or (cfg.driver == "proprietary") (cfg.driver == "open");
 
   driverPkg = config.boot.kernelPackages.nvidiaPackages.beta;
 in
 {
   # TODO: Cuda support
-  options.shit.hardware.nvidia = {
+  options.regolith.hardware.nvidia = {
     enable = mkEnableOption "NoVideo";
     driver = mkOption {
       type = types.enum [ "nouveau" "proprietary" "open" ];

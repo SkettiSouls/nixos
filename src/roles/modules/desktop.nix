@@ -5,13 +5,13 @@ let
     mkIf
     ;
 
-  cfg = config.shit.roles.desktop;
+  cfg = config.regolith.roles.desktop;
 in
 {
-  options.shit.roles.desktop.enable = mkEnableOption "Desktop role";
+  options.regolith.roles.desktop.enable = mkEnableOption "Desktop role";
 
   config = mkIf cfg.enable {
-    shit = {
+    regolith = {
       pipewire.enable = true;
     };
 

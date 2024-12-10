@@ -1,7 +1,7 @@
 { config, lib, pkgs, modulesPath, ... }:
 
 {
-  shit.hardware = {
+  regolith.hardware = {
     amdgpu.enable = true;
     bluetooth.enable = true;
 

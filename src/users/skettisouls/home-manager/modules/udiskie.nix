@@ -5,12 +5,12 @@ let
     mkIf
     ;
 
-  inherit (config.shit) hyprland;
+  inherit (config.basalt) hyprland;
 
-  cfg = config.shit.udiskie;
+  cfg = config.basalt.udiskie;
 in
 {
-  options.shit.udiskie = {
+  options.basalt.udiskie = {
     enable = mkEnableOption "udiskie";
   };
 

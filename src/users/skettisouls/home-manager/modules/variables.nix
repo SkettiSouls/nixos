@@ -6,7 +6,7 @@ let
     ;
 in
 {
-  options.shit.wallpapers = mkOption {
+  options.basalt.wallpapers = mkOption {
     type = with types; attrsOf (either str path);
     default = {};
   };

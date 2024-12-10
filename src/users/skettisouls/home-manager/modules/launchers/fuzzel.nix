@@ -5,13 +5,13 @@ let
     mkIf
     ;
 
-  inherit (config.shit.river.variables) modKey;
+  inherit (config.regolith.river.variables) modKey;
 
-  isDefault = config.shit.defaultApps.launcher == "fuzzel";
-  cfg = config.shit.launchers.fuzzel;
+  isDefault = config.basalt.defaultApps.launcher == "fuzzel";
+  cfg = config.basalt.launchers.fuzzel;
 in
 {
-  options.shit.launchers.fuzzel.enable = mkEnableOption "Fuzzel config";
+  options.basalt.launchers.fuzzel.enable = mkEnableOption "Fuzzel config";
 
   config = mkIf cfg.enable {
     programs.fuzzel = {
@@ -30,7 +30,7 @@ in
       };
     };
 
-    shit.river = {
+    regolith.river = {
       bind.keys.normal = {
         "${modKey} R" = mkIf isDefault "spawn 'fuzzel'";
       };

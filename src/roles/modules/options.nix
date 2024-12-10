@@ -14,7 +14,7 @@ in
     default = [];
   };
 
-  config.shit.roles = lib.genAttrs [
+  config.regolith.roles = lib.genAttrs [
     "desktop"
     "gaming"
     "server"

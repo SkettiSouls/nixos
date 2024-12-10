@@ -10,17 +10,15 @@ let
     ;
 
   inherit (config)
-    shit
+    basalt
+    regolith
     roles
     peripherals
     ;
 
-  inherit (shit)
-    discord
-    river
-    ;
+  inherit (basalt) discord;
 
-  inherit (river.variables)
+  inherit (regolith.river.variables)
     altMod
     appMod
     discordClient
@@ -34,13 +32,13 @@ let
   mkTag = tag: toString (exponent 2 (tag - 1));
 
   defaultBrowser = config.xdg.browser.default;
-  cfg = config.shit.desktops.river;
+  cfg = config.basalt.desktops.river;
 in
 {
-  options.shit = {
-    desktops.river.enable = mkEnableOption "RiverWM Config";
+  options = {
+    basalt.desktops.river.enable = mkEnableOption "RiverWM Config";
 
-    river = {
+    regolith.river = {
       variables = {
         altMod = mkOption {
           type = types.str;
@@ -66,7 +64,7 @@ in
       wl-clipboard
     ];
 
-    shit.river = mkIf cfg.enable {
+    regolith.river = mkIf cfg.enable {
       enable = true;
       installTerminal = false;
 
@@ -80,7 +78,7 @@ in
         (mkIf roles.gaming.enable "steam")
         "feishin"
         "keepassxc"
-        "wbg ${config.shit.wallpapers.suncat}"
+        "wbg ${config.basalt.wallpapers.suncat}"
       ];
 
       rules = {

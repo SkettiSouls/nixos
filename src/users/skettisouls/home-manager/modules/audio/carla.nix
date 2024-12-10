@@ -5,10 +5,10 @@ let
     mkIf
     ;
 
-  cfg = config.shit.audio.carla;
+  cfg = config.basalt.audio.carla;
 in
 {
-  options.shit.audio.carla = {
+  options.basalt.audio.carla = {
     enable = mkEnableOption "Carla user configuration";
   };
 

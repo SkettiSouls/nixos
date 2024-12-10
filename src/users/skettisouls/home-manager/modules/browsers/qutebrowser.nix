@@ -5,10 +5,10 @@ let
     mkIf
     ;
 
-  cfg = config.shit.browsers.qutebrowser;
+  cfg = config.basalt.browsers.qutebrowser;
 in
 {
-  options.shit.browsers.qutebrowser = {
+  options.basalt.browsers.qutebrowser = {
     enable = mkEnableOption "QuteBrowser user configuration";
   };
 
@@ -146,6 +146,6 @@ in
     };
 
     # Required for `qute-keepassxc` userscript
-    shit.gpg.enable = true;
+    basalt.gpg.enable = true;
   };
 }

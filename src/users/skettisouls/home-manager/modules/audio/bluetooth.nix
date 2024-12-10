@@ -11,10 +11,10 @@ let
     defaultHeadphones
     ;
 
-  cfg = config.shit.audio.bluetooth;
+  cfg = config.basalt.audio.bluetooth;
 in
 {
-  options.shit.audio.bluetooth = {
+  options.basalt.audio.bluetooth = {
     enable = mkEnableOption "BlueTooth user configuration";
   };
 

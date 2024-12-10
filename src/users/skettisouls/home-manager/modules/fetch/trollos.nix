@@ -5,14 +5,14 @@ let
     mkIf
     ;
 
-  inherit (config.shit) kitty;
+  inherit (config.basalt) kitty;
 
-  cfg = config.shit.neofetch.trollOS;
+  cfg = config.basalt.neofetch.trollOS;
 in
 {
-  options.shit.neofetch.trollOS.enable = mkEnableOption "Enable trollOS fetch";
+  options.basalt.neofetch.trollOS.enable = mkEnableOption "Enable trollOS fetch";
 
-  config.shit = mkIf cfg.enable {
+  config.regolith = mkIf cfg.enable {
     neofetch = {
       enable = true;
       distroName = "TrollOS ${config.home.version.release}";

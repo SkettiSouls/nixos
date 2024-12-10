@@ -7,12 +7,12 @@ let
     types
     ;
 
-  cfg = config.shit.discord;
+  cfg = config.basalt.discord;
 in
 {
   imports = [ inputs.nixcord.homeModules.vencord ];
 
-  options.shit = {
+  options.basalt = {
     discord.enable = mkEnableOption "Discord clients configuration";
 
   };

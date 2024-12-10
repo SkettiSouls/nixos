@@ -5,13 +5,13 @@ let
     mkIf
     ;
 
-  cfg = config.shit.roles.gaming;
+  cfg = config.regolith.roles.gaming;
 in
 {
-  options.shit.roles.gaming.enable = mkEnableOption "Gaming role";
+  options.regolith.roles.gaming.enable = mkEnableOption "Gaming role";
 
   config = mkIf cfg.enable {
-    shit = {
+    regolith = {
       steam.enable = true;
     };
   };

@@ -13,11 +13,11 @@ let
     types
     ;
 
-  cfg = config.shit.hyprland;
-  monitors = listToAttrs' config.shit.hardware.monitors.monitors;
+  cfg = config.basalt.hyprland;
+  monitors = listToAttrs' config.regolith.hardware.monitors.monitors;
 in
 {
-  options.shit.hyprland.wallpapers = mkOption {
+  options.basalt.hyprland.wallpapers = mkOption {
     type = with types; attrsOf (submodule {
       options = {
         monitors = mkOption {

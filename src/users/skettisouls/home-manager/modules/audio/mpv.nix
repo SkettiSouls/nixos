@@ -5,10 +5,10 @@ let
     mkIf
     ;
 
-  cfg = config.shit.mpv;
+  cfg = config.basalt.mpv;
 in
 {
-  options.shit.mpv = {
+  options.basalt.mpv = {
     enable = mkEnableOption "mpv";
   };
 

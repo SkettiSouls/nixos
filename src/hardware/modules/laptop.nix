@@ -9,14 +9,14 @@ let
     mkIf
     ;
 
-  inherit (config.shit.hardware) laptop;
+  inherit (config.regolith.hardware) laptop;
   inherit (monitors) lidSwitch;
 
-  monitors = listToAttrs' config.shit.hardware.monitors;
+  monitors = listToAttrs' config.regolith.hardware.monitors;
   internalMonitor = if monitors.primary then monitors.displayPort else "";
 in
 {
-  options.shit.hardware.laptop = mkEnableOption "Set device as a laptop";
+  options.regolith.hardware.laptop = mkEnableOption "Set device as a laptop";
 
   config = mkIf laptop {
     environment.systemPackages = with pkgs; [

@@ -5,10 +5,10 @@ let
     mkIf
     ;
 
-  cfg = config.shit.browsers.brave;
+  cfg = config.basalt.browsers.brave;
 in
 {
-  options.shit.browsers.brave = {
+  options.basalt.browsers.brave = {
     enable = mkEnableOption "brave";
   };
 

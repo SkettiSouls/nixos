@@ -8,11 +8,11 @@ let
     types
     ;
 
-  cfg = config.shit.steam;
+  cfg = config.regolith.steam;
   nvidia-offload = config.hardware.nvidia.prime.offload.enable;
 in
 {
-  options.shit.steam = {
+  options.regolith.steam = {
     enable = mkEnableOption "Steam";
     offload.nvidia = mkOption {
       type = types.bool;

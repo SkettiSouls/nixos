@@ -33,7 +33,7 @@ in
       signing.key = home + "/.keys/ssh/git.key";
     };
 
-    shit = {
+    basalt = {
       bash = {
         enable = true;
         aliaspp.enable = true;

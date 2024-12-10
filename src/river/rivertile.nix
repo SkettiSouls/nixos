@@ -14,7 +14,7 @@ let
   inherit (config.wayland.windowManager.river.settings) declare-mode;
 
   rivertile = (cfg.layout.generator == "rivertile");
-  cfg = config.shit.river;
+  cfg = config.regolith.river;
 in
 {
   config.wayland.windowManager.river = mkIf (cfg.enable && rivertile) {

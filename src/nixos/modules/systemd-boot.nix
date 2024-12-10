@@ -5,10 +5,10 @@ let
     mkIf
     ;
 
-  cfg = config.shit.boot.systemd;
+  cfg = config.regolith.boot.systemd;
 in
 {
-  options.shit.boot.systemd.enable = mkEnableOption "Systemd bootloader";
+  options.regolith.boot.systemd.enable = mkEnableOption "Systemd bootloader";
 
   config.boot.loader = mkIf cfg.enable {
     efi.canTouchEfiVariables = true;

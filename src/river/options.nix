@@ -71,10 +71,10 @@ let
     };
   };
 
-  cfg = config.shit.river;
+  cfg = config.regolith.river;
 in
 {
-  options.shit.river = {
+  options.regolith.river = {
     enable = mkEnableOption "River WM";
     bind = keybindOptions bindSubmodule;
     unbind = keybindOptions unbindSubmodule;

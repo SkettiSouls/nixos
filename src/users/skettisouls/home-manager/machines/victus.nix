@@ -5,7 +5,7 @@
     rofi
   ];
 
-  shit = {
+  basalt = {
     audio = {
       bluetooth.enable = true;
     };

@@ -13,10 +13,10 @@ let
     };
   }) attrs;
 
-  cfg = config.shit.browsers.firefox;
+  cfg = config.basalt.browsers.firefox;
 in
 {
-  options.shit.browsers.firefox = {
+  options.basalt.browsers.firefox = {
     enable = mkEnableOption "Firefox";
   };
 

@@ -43,8 +43,8 @@ in
         home-manager.modules
 
         {
-          options.roles = options.shit.roles;
-          config.roles = config.shit.roles;
+          options.roles = options.regolith.roles;
+          config.roles = config.regolith.roles;
         }
       ];
     }) config.flake.users;

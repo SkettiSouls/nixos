@@ -5,12 +5,12 @@ let
     mkIf
     ;
 
-  inherit (config.shit) kitty;
+  inherit (config.basalt) kitty;
 
-  cfg = config.shit.bash;
+  cfg = config.basalt.bash;
 in
 {
-  options.shit.bash = {
+  options.basalt.bash = {
     enable = mkEnableOption "bash";
     customScripts = mkEnableOption "Enable all custom scripts";
     aliaspp.enable = mkEnableOption "Activate all Alias++ scripts";

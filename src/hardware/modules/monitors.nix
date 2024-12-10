@@ -87,10 +87,10 @@ let
     };
   };
 
-  cfg = config.shit.hardware;
+  cfg = config.regolith.hardware;
 in
 {
-  options.shit.hardware = {
+  options.regolith.hardware = {
     monitors = mkOption {
       type = types.listOf monitorSubmodule;
       default = [{}];
@@ -129,7 +129,7 @@ in
       defaultMon = cfg.defaultMonitor;
     in
     [{
-      shit.hardware.monitors = {
+      regolith.hardware.monitors = {
         monitors = monitorList;
         defaultMonitor = defaultMon;
       };

@@ -66,7 +66,7 @@
     ];
   };
 
-  shit = {
+  regolith = {
     pipewire.enable = true;
   };
 

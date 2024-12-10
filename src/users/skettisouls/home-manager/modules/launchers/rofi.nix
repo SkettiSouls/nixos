@@ -5,13 +5,13 @@ let
     mkIf
     ;
 
-  inherit (config.shit.river.variables) modKey;
+  inherit (config.regolith.river.variables) modKey;
 
-  isDefault = config.shit.defaultApps.launcher == "rofi";
-  cfg = config.shit.launchers.rofi;
+  isDefault = config.basalt.defaultApps.launcher == "rofi";
+  cfg = config.basalt.launchers.rofi;
 in
 {
-  options.shit.launchers.rofi.enable = mkEnableOption "Rofi config";
+  options.basalt.launchers.rofi.enable = mkEnableOption "Rofi config";
 
   config = mkIf cfg.enable {
     programs.rofi = {
@@ -23,7 +23,7 @@ in
       ];
     };
 
-    shit.river = {
+    regolith.river = {
       bind.keys.normal = {
         "${modKey} R" = mkIf isDefault "spawn 'rofi -show drun'";
         # TODO: Binds for different modes (i.e. rofi-calc)

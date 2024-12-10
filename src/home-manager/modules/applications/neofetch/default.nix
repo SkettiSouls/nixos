@@ -7,12 +7,10 @@ let
     types
     ;
 
-  cfg = config.shit.neofetch;
+  cfg = config.regolith.neofetch;
 in
 {
-  imports = [ ./trollos.nix ];
-
-  options.shit.neofetch = {
+  options.regolith.neofetch = {
     enable = mkEnableOption "Neofetch user configuration";
     showHost = mkEnableOption "Show motherboard info";
 

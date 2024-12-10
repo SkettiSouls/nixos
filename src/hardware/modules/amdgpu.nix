@@ -5,10 +5,10 @@ let
     mkIf
     ;
 
-  cfg = config.shit.hardware.amdgpu;
+  cfg = config.regolith.hardware.amdgpu;
 in
 {
-  options.shit.hardware.amdgpu = {
+  options.regolith.hardware.amdgpu = {
     enable = mkEnableOption "AMDGPU";
   };
 

@@ -5,15 +5,15 @@ let
     mkIf
     ;
 
-  cfg = config.shit.kitty;
+  cfg = config.basalt.kitty;
 in
 {
-  options.shit.kitty = {
+  options.basalt.kitty = {
     enable = mkEnableOption "Kitty user configuration";
   };
 
   config = mkIf cfg.enable {
-    shit.river.variables.terminal = lib.mkDefault "kitty";
+    regolith.river.variables.terminal = lib.mkDefault "kitty";
     programs.kitty = {
       enable = true;
       package = pkgs.unstable.kitty;

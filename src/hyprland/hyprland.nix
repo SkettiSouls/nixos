@@ -1,3 +1,4 @@
+# TODO: Move this out of regolith and into basalt
 { config, lib, pkgs, flakeRoot, ... }:
 let
   inherit (lib)
@@ -10,7 +11,7 @@ let
     defaultHeadphones
     ;
 
-  cfg = config.shit.hyprland;
+  cfg = config.basalt.hyprland;
   home = config.home.homeDirectory;
 in
 {
@@ -18,7 +19,7 @@ in
     ./monitors.nix
   ];
 
-  options.shit.hyprland = {
+  options.basalt.hyprland = {
     enable = mkEnableOption "Hyprland user configuration";
   };
 

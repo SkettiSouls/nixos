@@ -5,11 +5,11 @@ let
     mkIf
     ;
 
-  cfg = config.shit.gpg;
+  cfg = config.basalt.gpg;
   gpgHome = "${config.home.homeDirectory}/.keys/gpg";
 in
 {
-  options.shit.gpg = {
+  options.basalt.gpg = {
     enable = mkEnableOption "GPG";
   };
 

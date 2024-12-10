@@ -5,10 +5,10 @@ let
     mkIf
     ;
 
-  cfg = config.shit.pipewire;
+  cfg = config.regolith.pipewire;
 in
 {
-  options.shit.pipewire = {
+  options.regolith.pipewire = {
     enable = mkEnableOption "PipeWire";
   };
 

@@ -5,10 +5,10 @@ let
     mkIf
     ;
 
-  cfg = config.shit.hardware.bluetooth;
+  cfg = config.regolith.hardware.bluetooth;
 in
 {
-  options.shit.hardware.bluetooth = {
+  options.regolith.hardware.bluetooth = {
     enable = mkEnableOption "Bluetooth";
   };
 

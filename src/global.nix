@@ -1,7 +1,7 @@
 { inputs, lib, pkgs, ... }:
 
 {
-  shit = {
+  regolith = {
     boot.systemd.enable = lib.mkDefault true;
   };
 

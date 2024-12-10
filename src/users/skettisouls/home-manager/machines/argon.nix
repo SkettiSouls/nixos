@@ -1,6 +1,6 @@
 { pkgs, flakeRoot, ... }:
 {
-  shit = {
+  basalt = {
     audio.bluetooth.enable = true;
 
     browsers = {

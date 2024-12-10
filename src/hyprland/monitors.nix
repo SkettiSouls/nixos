@@ -10,10 +10,10 @@ let
     toString
     ;
 
-  cfg = config.shit.hardware.monitors;
+  cfg = config.regolith.hardware.monitors;
 in
 {
-  options.shit.hardware.monitors = {
+  options.regolith.hardware.monitors = {
     monitors = mkOption {
       type = with types; listOf attrs;
       default = [{ /* This option shares a value with the nixos `monitors` option */ }];

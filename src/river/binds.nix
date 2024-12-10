@@ -48,7 +48,7 @@ let
 
   mkAllDefault = set: mapAttrs (_: v: mkDefault v) set;
 
-  cfg = config.shit.river;
+  cfg = config.regolith.river;
 in
 {
   config.wayland.windowManager.river = mkIf cfg.enable {

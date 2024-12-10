@@ -3,7 +3,7 @@
 {
   home.packages = with pkgs; [];
 
-  shit = {
+  regolith = {
     neofetch = {
       enable = true;
       showHost = true;
