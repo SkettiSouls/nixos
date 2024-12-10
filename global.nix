@@ -12,6 +12,9 @@
     package = pkgs.nix;
     settings.experimental-features = [ "nix-command" "flakes" ];
     registry = lib.mapAttrs (_: flake: { inherit flake; }) inputs;
+    extraOptions = ''
+      trusted-users = root skettisouls
+    '';
   };
 
   i18n = rec {

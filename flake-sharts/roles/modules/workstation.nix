@@ -23,12 +23,16 @@ in
     };
 
     programs = {
-      direnv.enable = true;
+      direnv = {
+        enable = true;
+        silent = true;
+      };
     };
 
     environment.systemPackages = with pkgs; [
       btop
       comma
+      devenv
       fzf
       neovim
       unzip
