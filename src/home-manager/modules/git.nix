@@ -28,7 +28,6 @@ in
             mainBranches = [
               "master"
               "main"
-              "shit"
             ];
           };
         };
