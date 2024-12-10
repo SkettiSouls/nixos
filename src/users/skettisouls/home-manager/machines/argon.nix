@@ -21,11 +21,11 @@
     neofetch.trollOS.enable = true;
 
     hyprland.wallpapers = {
-      suncat.source = "/etc/nixos/shit/images/wallpapers/suncat.jpg";
+      suncat.source = "/etc/nixos/etc/images/wallpapers/suncat.jpg";
     };
 
     wallpapers = {
-      suncat = "/etc/nixos/shit/images/wallpapers/suncat.jpg";
+      suncat = "/etc/nixos/etc/images/wallpapers/suncat.jpg";
     };
   };
 }

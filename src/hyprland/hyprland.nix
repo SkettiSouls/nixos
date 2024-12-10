@@ -54,7 +54,7 @@ in
           "dunst &"
           "polkit &"
           "chp ${defaultHeadphones}"
-          "[workspace 10 silent] carla /etc/nixos/shit/carla/system.carxp"
+          "[workspace 10 silent] carla /etc/nixos/etc/carla/system.carxp"
           "[workspace 1 silent] qutebrowser"
           "[workspace 2 silent] vesktop"
           "[workspace 3 silent] steam"

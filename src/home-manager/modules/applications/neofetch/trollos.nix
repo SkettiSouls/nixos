@@ -17,7 +17,7 @@ in
       enable = true;
       distroName = "TrollOS ${config.home.version.release}";
       image = {
-        source = "/etc/nixos/shit/images/fetch/troll3D.png";
+        source = "/etc/nixos/etc/images/fetch/troll3D.png";
         # TODO: Automatically change to the current terminal
         renderer = mkIf kitty.enable "kitty";
         size = "320px";

@@ -89,20 +89,19 @@
             ;
 
           flakeModules = {
-            # features = importApply ./flake-sharts/features args;
-            hardware = import ./flake-sharts/hardware;
-            home-manager = import ./flake-sharts/home-manager;
-            hyprland = import ./flake-sharts/hyprland;
-            libs = import ./flake-sharts/libs;
-            machines = import ./flake-sharts/machines;
-            nixos = import ./flake-sharts/nixos;
-            overlays = import ./flake-sharts/overlays;
-            packages = import ./flake-sharts/packages;
-            river = import ./flake-sharts/river;
-            roles = import ./flake-sharts/roles;
-            services = import ./flake-sharts/services;
-            users = import ./flake-sharts/users;
-            wireguard = import ./flake-sharts/wireguard;
+            hardware = import ./src/hardware;
+            home-manager = import ./src/home-manager;
+            hyprland = import ./src/hyprland;
+            libs = import ./src/libs;
+            machines = import ./src/machines;
+            nixos = import ./src/nixos;
+            overlays = import ./src/overlays;
+            packages = import ./src/packages;
+            river = import ./src/river;
+            roles = import ./src/roles;
+            services = import ./src/services;
+            users = import ./src/users;
+            wireguard = import ./src/wireguard;
           };
 
           # hm-module = (builtins.head config.flake.nixosModules.home-manager.imports);
@@ -145,7 +144,7 @@
               nixosConfigurations = genAttrs hostList (host: nixosSystem {
                 specialArgs = specialArgs;
                 modules = with config.flake; [
-                  ./global.nix
+                  ./src/global.nix
                   machines.${host}
                   nixosModules.default
                   nixosModules.home-manager

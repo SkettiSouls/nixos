@@ -27,7 +27,7 @@ in
 
         source = mkOption {
           type = with types; either path str;
-          default = "/etc/nixos/shit/images/wallpapers/nixos-frappe.png";
+          default = "/etc/nixos/etc/images/wallpapers/nixos-frappe.png";
         };
       };
     });

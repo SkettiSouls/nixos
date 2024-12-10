@@ -96,8 +96,8 @@ in
         };
       };
       paths = {
-        folders = [ /etc/nixos/shit/carla ];
-        projectFolder = "/etc/nixos/shit/carla";
+        folders = [ /etc/nixos/etc/carla ];
+        projectFolder = "/etc/nixos/etc/carla";
         ladspa = [
           "${pkgs.rnnoise-plugin}/lib"
         ];

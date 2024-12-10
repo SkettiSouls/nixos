@@ -128,7 +128,7 @@ in
             "${appMod} Print" = "spawn 'grime copysave area'";
 
             # System binds
-            "${modKey} C" = "spawn '${terminal} -e nvim /etc/nixos/flake-sharts'";
+            "${modKey} C" = "spawn '${terminal} -e nvim /etc/nixos/src'";
             "${altMod} E" = "exit"; # Alt mod to prevent accidentally killing river
             "${modKey} S" = "toggle-float";
 
