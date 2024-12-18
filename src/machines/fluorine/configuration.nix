@@ -15,6 +15,7 @@ in
     invidious
     minecraft
     postgres
+    valheim
   ];
 
   roles = with self.roles; [

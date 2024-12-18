@@ -21,12 +21,15 @@ let
     invidious
     nginx
     nix-mc
+    steam-dedicated
     ;
 
+  git.port = forgejo.settings.server.HTTP_PORT;
   net = config.networking.wireguard.networks;
+
   localDNS = if caddy.enable then map (url: removePrefix "http://" url) (attrNames caddy.virtualHosts)
     else if nginx.enable then attrNames nginx.virtualHosts else [];
-  git.port = forgejo.settings.server.HTTP_PORT;
+
   minecraft.ports = attrValues
     (mapAttrs
       (_: instance: mkIf instance.enable instance.serverConfig.server-port)
@@ -65,6 +68,7 @@ in
         invidious.port
         minecraft.ports
         net.peridot.self.listenPort
+        steam-dedicated.valheim.port
       ];
     };
 
