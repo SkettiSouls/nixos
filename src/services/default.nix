@@ -25,11 +25,13 @@ in
         navidrome = import ./modules/navidrome.nix;
         nginx = import ./modules/nginx.nix;
         postgres = import ./modules/postgres.nix;
+        valheim = import ./modules/steam/valheim.nix;
       };
 
       nixosModules = {
         deemix = import ./modules/deemix/nixos.nix;
         discord-bots = import ./modules/discord-bots/nixos.nix;
+        steam-dedicated = import ./modules/steam/nixos.nix;
       };
     };
 

@@ -21,16 +21,24 @@ let
     invidious
     nginx
     nix-mc
+    steam-dedicated
     ;
 
+  git.port = forgejo.settings.server.HTTP_PORT;
   net = config.networking.wireguard.networks;
+
   localDNS = if caddy.enable then map (url: removePrefix "http://" url) (attrNames caddy.virtualHosts)
     else if nginx.enable then attrNames nginx.virtualHosts else [];
-  git.port = forgejo.settings.server.HTTP_PORT;
+
   minecraft.ports = attrValues
     (mapAttrs
       (_: instance: mkIf instance.enable instance.serverConfig.server-port)
     nix-mc.instances);
+
+    steam.ports = flatten (attrValues
+      (mapAttrs
+        (_: server: lib.optionals server.enable [ server.port (server.port + 1) ])
+        steam-dedicated));
 
   cfg = config.wireguard.peridot;
 in
@@ -53,19 +61,22 @@ in
 
     firewall.interfaces = mkIf (config.networking.hostName == "fluorine") {
       eno1.allowedUDPPorts = [ net.peridot.self.listenPort ];
-      peridot.allowedTCPPorts = flatten [
-        20
-        80
-        443
-        4747 # Gonic
-        airsonic.port
-        deemix-server.port
-        git.port
-        gonic.port
-        invidious.port
-        minecraft.ports
-        net.peridot.self.listenPort
-      ];
+      peridot = {
+        allowedUDPPorts = steam.ports;
+        allowedTCPPorts = flatten [
+          20
+          80
+          443
+          4747 # Gonic
+          airsonic.port
+          deemix-server.port
+          git.port
+          gonic.port
+          invidious.port
+          minecraft.ports
+          net.peridot.self.listenPort
+        ];
+      };
     };
 
     wireguard = {
