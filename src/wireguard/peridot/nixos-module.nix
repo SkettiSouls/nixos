@@ -37,7 +37,8 @@ let
 
     steam.ports = flatten (attrValues
       (mapAttrs
-        (_: server: lib.optionals server.enable [ server.port (server.port + 1) ])
+        # Port 27015 is used for steam server discovery
+        (_: server: lib.optionals server.enable [ server.port (server.port + 1) 27015 ])
         steam-dedicated));
 
   cfg = config.wireguard.peridot;

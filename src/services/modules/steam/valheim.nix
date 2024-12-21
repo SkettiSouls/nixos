@@ -22,11 +22,6 @@ in
         -batchmode \
         -public 1
       '';
-
-      serviceConfig = {
-        Nice = "-5";
-        Restart = "always";
-      };
     };
   };
 }

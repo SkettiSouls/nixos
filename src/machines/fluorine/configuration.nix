@@ -16,6 +16,7 @@ in
     minecraft
     postgres
     valheim
+    ark
   ];
 
   roles = with self.roles; [
