@@ -12,7 +12,7 @@
     desktops.river.enable = true;
 
     defaultApps = {
-      browser = "qutebrowser";
+      browser = "firefox";
       launcher = "fuzzel";
     };
 

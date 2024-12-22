@@ -9,7 +9,8 @@
         users.users.skettisouls = let
           wrappers = perSystem.config.wrappedPackages.skettisouls;
         in {
-          shell = wrappers.nushell;
+          # Nushell is really nice but has a major lack of command completion.
+          # shell = wrappers.nushell;
           packages = with wrappers; [
             eza
             feishin
