@@ -11,17 +11,18 @@ let
 
   inherit (config)
     basalt
+    nixcord
+    peripherals
     regolith
     roles
-    peripherals
     ;
 
   inherit (basalt) discord;
+  inherit (nixcord) vencord vesktop;
 
   inherit (regolith.river.variables)
     altMod
     appMod
-    discordClient
     modKey
     specialMod
     terminal
@@ -30,6 +31,10 @@ let
   inherit (peripherals.bluetooth) defaultHeadphones;
 
   mkTag = tag: toString (exponent 2 (tag - 1));
+
+  # Discord's canary branch has a different binary name than package name, and uses "discord" as the app-id
+  discordClient = if lib.getName vencord.finalPackage == "discord-canary" then "discordcanary" else lib.getName vencord.finalPackage;
+  discordAppId = if vesktop.enable then "vesktop" else "discord";
 
   defaultBrowser = config.xdg.browser.default;
   cfg = config.basalt.desktops.river;
@@ -43,11 +48,6 @@ in
         altMod = mkOption {
           type = types.str;
           default = "${modKey}+Alt";
-        };
-
-        discordClient = mkOption {
-          type = types.str;
-          default = lib.getName config.nixcord.vencord.finalPackage;
         };
       };
     };
@@ -83,7 +83,7 @@ in
 
       rules = {
         byId = {
-          ${discordClient} = mkIf discord.enable { tags = 2; };
+          ${discordAppId} = mkIf discord.enable { tags = 2; };
           feishin = { tags = 10; };
           Sonixd = { tags = 10; };
           steam = {

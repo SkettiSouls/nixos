@@ -1,10 +1,8 @@
-{ inputs, config, lib, ... }:
+{ inputs, config, lib, pkgs, ... }:
 let
   inherit (lib)
     mkEnableOption
     mkIf
-    mkOption
-    types
     ;
 
   cfg = config.basalt.discord;
@@ -14,12 +12,11 @@ in
 
   options.basalt = {
     discord.enable = mkEnableOption "Discord clients configuration";
-
   };
 
   config.nixcord = mkIf cfg.enable {
     vesktop = {
-      enable = true;
+      enable = false;
       state = {
         discordBranch = "stable";
         splashColor = "rgb(138, 148, 168)";
@@ -30,6 +27,8 @@ in
     };
 
     vencord = import ./plugins.nix // {
+      enable = true;
+      package = pkgs.unstable.discord-canary;
       settings = {
         autoUpdate = true;
         notifyAboutUpdates = false;
