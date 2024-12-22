@@ -85,8 +85,12 @@ in
         byId = {
           ${discordAppId} = mkIf discord.enable { tags = 2; };
           feishin = { tags = 10; };
+          firefox = { ssd = true; };
           Sonixd = { tags = 10; };
           steam = {
+            # Fix missing borders
+            ssd = true;
+
             byTitle = mkIf roles.gaming.enable {
               "*Steam" = {
                 float = false;
@@ -102,16 +106,12 @@ in
                 tags = 3;
               };
             };
-
-            # Fix missing borders
-            ssd = true;
           };
 
           # Spawn keepassxc on tag 11, but allow the "Unlock Database" popup to spawn on any tag.
           "org.keepassxc.KeePassXC".byTitle = {
-            "'*[Locked] - KeePassXC'" = {
-              tags = 11;
-            };
+            "'*[Locked] - KeePassXC'" = { tags = 11; };
+            "KeePassXC" = { tags = 11; };
           };
         };
       };
