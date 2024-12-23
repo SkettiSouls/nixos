@@ -14,7 +14,6 @@ in
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
-      gobble
       rofi # qute-keepassxc
     ];
 
@@ -107,21 +106,6 @@ in
       };
 
       greasemonkey = [
-        /*
-        (pkgs.writeText "yewtube.js" ''
-          // ==UserScript==
-          // @name         Youtube to Yewtube
-          // @version      0.1
-          // @description  none
-          // @author       You
-          // @include      *youtube.com*
-          // @run-at       document-start
-          // ==/UserScript==
-
-          document.location.href=document.location.href.replace("youtube.com","inv.fluorine.lan");
-        '')
-        */
-
         (pkgs.writeText "yt-forward.js" ''
           // ==UserScript==
           // u/name 	  Fast Forward YouTube Ads

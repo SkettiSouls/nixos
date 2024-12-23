@@ -1,8 +1,6 @@
 { config, lib, ... }:
 let
-  inherit (config.flake.lib)
-    combineModulesExcept
-    ;
+  inherit (config.flake.lib) combineModulesExcept;
 in
 {
   flake.nixosModules = {

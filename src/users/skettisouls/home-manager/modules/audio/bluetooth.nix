@@ -5,11 +5,7 @@ let
     mkIf
     ;
 
-  inherit (config.peripherals.bluetooth)
-    controller
-    headphones
-    defaultHeadphones
-    ;
+  inherit (config.basalt) headphones;
 
   cfg = config.basalt.audio.bluetooth;
 in
@@ -20,7 +16,7 @@ in
 
   config = mkIf cfg.enable {
     # FIXME: Fails on first login after reboot.
-    programs.bash.profileExtra = "chp ${defaultHeadphones}"; # Connect headphones automatically on login/ ensure connection on rebuild.
+    programs.bash.profileExtra = "chp ${headphones.default}"; # Connect headphones automatically on login/ ensure connection on rebuild.
     services.mpris-proxy.enable = true;
 
     home.file = {

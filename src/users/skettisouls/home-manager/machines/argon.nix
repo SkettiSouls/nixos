@@ -20,10 +20,6 @@
 
     neofetch.trollOS.enable = true;
 
-    hyprland.wallpapers = {
-      suncat.source = "${flakeRoot}/etc/images/wallpapers/suncat.jpg";
-    };
-
     wallpapers = {
       suncat = "${flakeRoot}/etc/images/wallpapers/suncat.jpg";
     };

@@ -1,6 +1,6 @@
-{ self, config, pkgs, host, ... }:
+{ self, config, lib, pkgs, host, ... }:
 let
-  inherit (config.peripherals.bluetooth) headphones;
+  inherit (lib) mkOption types;
   inherit (self.lib) getAllModules;
   home = config.home.homeDirectory;
 in
@@ -10,19 +10,17 @@ in
     ./machines/${host}.nix
   ];
 
+  # Options for passing around headphones mac address, mostly used for `chp`
+  options.basalt.headphones = mkOption {
+    type = types.attrs;
+    default = {};
+  };
+
   config = {
     home = {
       packages = [ pkgs.neovim ];
       sessionVariables = {
         EDITOR = "nvim";
-      };
-    };
-
-    peripherals.bluetooth = {
-      defaultHeadphones = headphones.momentum4;
-      headphones = {
-        momentum4 = "80:C3:BA:3F:EB:B9";
-        spaceQ45 = "E8:EE:CC:4B:FA:2A";
       };
     };
 
@@ -37,6 +35,12 @@ in
       bash = {
         enable = true;
         aliaspp.enable = true;
+      };
+
+      headphones = rec {
+        default = momentum4;
+        momentum4 = "80:C3:BA:3F:EB:B9";
+        spaceQ45 = "E8:EE:CC:4B:FA:2A";
       };
     };
 

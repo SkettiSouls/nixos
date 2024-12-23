@@ -1,9 +1,6 @@
-{ self, config, lib, ... }:
+# NOTE: Most of this module was written while working on the now defunct Kalyx, with Hyprland in mind.
+{ config, options, lib, ... }:
 let
-  inherit (self.lib)
-    listToAttrs'
-    ;
-
   inherit (lib)
     mkEnableOption
     mkOption
@@ -124,12 +121,14 @@ in
       }
     ];
 
+    # TODO: Implementation, will work on once I have 2 monitors again.
     home-manager.sharedModules = let
       monitorList = cfg.monitors;
       defaultMon = cfg.defaultMonitor;
     in
     [{
-      regolith.hardware.monitors = {
+      options.regolith.hardware = options.regolith.hardware;
+      config.regolith.hardware.monitors = {
         monitors = monitorList;
         defaultMonitor = defaultMon;
       };

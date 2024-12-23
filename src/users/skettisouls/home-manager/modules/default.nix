@@ -26,7 +26,6 @@ in
     ./browsers/qutebrowser.nix
 
     ### Desktops ###
-    # TODO: Move hyprland here
     ./desktops/portals.nix
     ./desktops/river.nix
 

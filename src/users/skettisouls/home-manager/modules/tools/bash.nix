@@ -10,18 +10,12 @@ let
   cfg = config.basalt.bash;
 in
 {
-  options.basalt.bash = {
-    enable = mkEnableOption "bash";
-    customScripts = mkEnableOption "Enable all custom scripts";
-    aliaspp.enable = mkEnableOption "Activate all Alias++ scripts";
-  };
+  options.basalt.bash.enable = mkEnableOption "bash";
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
-      # (mkIf cfg.aliaspp.enable self.rebuild)
       rsync
       self.rebuild
-      # (mkIf cfg.customScripts self.scripts)
     ];
 
     programs.bash = {

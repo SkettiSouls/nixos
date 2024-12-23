@@ -1,8 +1,6 @@
 { config, ... }:
 let
-  inherit (config.flake.lib)
-    combineModules
-    ;
+  inherit (config.flake.lib) combineModules;
 in
 {
   flake = {

@@ -2,8 +2,8 @@
 
 {
   wrappers.qutebrowser = {
-    basePackage = pkgs.qutebrowser;
-    pathAdd = with pkgs; [ gobble rofi gnupg ];
+    basePackage = pkgs.unstable.qutebrowser;
+    pathAdd = with pkgs; [ rofi gnupg ];
 
     flags = [ "--config-py" ./config.py ];
   };

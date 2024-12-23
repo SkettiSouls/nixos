@@ -12,7 +12,6 @@ let
   inherit (config)
     basalt
     nixcord
-    peripherals
     regolith
     roles
     ;
@@ -28,7 +27,6 @@ let
     terminal
     ;
 
-  inherit (peripherals.bluetooth) defaultHeadphones;
 
   mkTag = tag: toString (exponent 2 (tag - 1));
 
@@ -37,6 +35,7 @@ let
   discordAppId = if vesktop.enable then "vesktop" else "discord";
 
   defaultBrowser = config.xdg.browser.default;
+  defaultHeadphones = basalt.headphones.default;
   cfg = config.basalt.desktops.river;
 in
 {

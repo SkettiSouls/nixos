@@ -1,8 +1,6 @@
 { config, lib, ... }:
 let
-  inherit (config.flake.lib)
-    combineModules
-    ;
+  inherit (config.flake.lib) combineModules;
 
   inherit (lib)
     mkOption
@@ -20,11 +18,8 @@ in
 
     homeModules = {
       git = ./modules/git.nix;
-      peripherals = import ./modules/peripherals.nix;
-
-      # Application modules
-      mimelist = import ./modules/applications/mimelist.nix;
-      neofetch = import ./modules/applications/neofetch;
+      mimelist = import ./modules/mimelist.nix;
+      neofetch = import ./modules/neofetch.nix;
 
       default.imports = combineModules config.flake.homeModules;
     };

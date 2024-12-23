@@ -5,8 +5,6 @@ let
     mkIf
     ;
 
-  inherit (config.basalt) hyprland;
-
   cfg = config.basalt.udiskie;
 in
 {
@@ -19,7 +17,7 @@ in
       enable = true;
       automount = true;
       # TODO: Switch to dunst.enable once dunst module is made.
-      notify = mkIf hyprland.enable true;
+      notify = true;
       tray = "never";
 
       settings = {

@@ -31,11 +31,8 @@
 
     nixcord = {
       url = "github:skettisouls/nixcord";
-      # inputs.nixpkgs.follows = "vesktop";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
-
-    # Allow updating vesktop independent of nixpkgs-unstable
-    vesktop.url = "github:NixOS/nixpkgs/nixos-unstable";
   # }}}
 
   # Hyprland {{{
@@ -45,7 +42,10 @@
       submodules = true;
     };
 
-    hyprpicker.url = "github:hyprwm/hyprpicker";
+    hyprpicker = {
+      url = "github:hyprwm/hyprpicker";
+      inputs.nixpkgs.follows = "hyprland";
+    };
   # }}}
 
   # Dev {{{
@@ -53,7 +53,6 @@
       url = "github:skettisouls/bin";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
-
 
     neovim = {
       url = "github:skettisouls/neovim";
@@ -67,7 +66,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nix-mc.url = "github:skettisouls/nix-mc";
+    nix-mc = {
+      url = "github:skettisouls/nix-mc";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   # }}}
 
   # Wireguard {{{
@@ -91,7 +93,6 @@
           flakeModules = {
             hardware = import ./src/hardware;
             home-manager = import ./src/home-manager;
-            hyprland = import ./src/hyprland;
             libs = import ./src/libs;
             machines = import ./src/machines;
             nixos = import ./src/nixos;
@@ -104,7 +105,6 @@
             wireguard = import ./src/wireguard;
           };
 
-          # hm-module = (builtins.head config.flake.nixosModules.home-manager.imports);
           flakeRoot = ./.;
           specialArgs = { inherit inputs self flakeRoot; };
         in

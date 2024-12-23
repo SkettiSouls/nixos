@@ -75,20 +75,5 @@ in
     services.xserver.videoDrivers = [
       (mkIf proprietary "nvidia")
     ];
-
-    home-manager.sharedModules = mkIf proprietary [{
-      wayland.windowManager.hyprland.settings = {
-        "env" = [
-          "LIBVA_DRIVER_NAME,nvidia"
-          "XDG_SESSION_TYPE,wayland"
-          "LIBVA_DRIVER_NAME,nvidia-drm"
-          "__GLX_VENDOR_LIBRARY,nvidia"
-        ];
-
-        cursor = {
-          no_hardware_cursors = true;
-        };
-      };
-    }];
   };
 }

@@ -1,6 +1,7 @@
 { config, lib, ... }:
 let
   inherit (config.flake.lib) listToAttrs';
+
   inherit (lib)
     mkOption
     types

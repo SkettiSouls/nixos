@@ -14,10 +14,6 @@
       trollOS.enable = true;
     };
 
-    hyprland.wallpapers = {
-      suncat.source = "${flakeRoot}/etc/images/wallpapers/suncat.jpg";
-    };
-
     browsers = {
       brave.enable = true;
       qutebrowser.enable = true;
