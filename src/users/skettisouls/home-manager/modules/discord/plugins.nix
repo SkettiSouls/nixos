@@ -72,7 +72,8 @@
       };
     };
     CallTimer = {
-      enable = true;
+      # Causes discord to falsely show "This is awkward" screen on canary
+      enable = false;
       settings = {
         format = "stopwatch";
       };

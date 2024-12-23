@@ -23,7 +23,7 @@ in
   config = mkIf cfg.enable {
     programs.firefox = {
       enable = true;
-      nativeMessagingHosts = with pkgs; [ tridactyl-native ];
+      # nativeMessagingHosts = with pkgs; [ tridactyl-native ];
 
       policies = {
         Cookies.Behavior = "reject-tracker-and-partition-foreign";
