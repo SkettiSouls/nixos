@@ -1,8 +1,9 @@
+{ inputs, config, ... }:
 {
-  wireguard.networks.asluni = {
-    peers.by-name = {
-      argon.privateKeyFile = "/var/lib/wireguard/privatekey";
-      fluorine.privateKeyFile = "/var/lib/wireguard/privatekey";
-    };
+  wireguard.networks.lunk.privateKeyFile = "/var/lib/wireguard/privatekey";
+
+  flake.nixosModule = {
+    imports = [ inputs.lynx.nixosModules.flake-guard-host ];
+    wireguard.networks = config.wireguard.networks;
   };
 }

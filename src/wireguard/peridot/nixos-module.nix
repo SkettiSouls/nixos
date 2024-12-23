@@ -7,9 +7,7 @@ let
     mapAttrs
     mkEnableOption
     mkIf
-    mkOption
     removePrefix
-    types
     ;
 
   inherit (self.nixosConfigurations.fluorine.config.services)
@@ -44,24 +42,12 @@ let
   cfg = config.wireguard.peridot;
 in
 {
-  options.wireguard.peridot = {
-    enable = mkEnableOption "Peridot network";
-
-    # TODO: Make work lol
-    local = mkOption {
-      type = types.bool;
-      default = true;
-      description = ''
-        Whether to use the lan access point (192.168.1.17)
-      '';
-    };
-  };
+  options.wireguard.peridot.enable = mkEnableOption "Peridot network";
 
   config.networking = mkIf cfg.enable {
     hosts."172.16.0.1" = [ "fluorine.lan" ] ++ localDNS;
 
     firewall.interfaces = mkIf (config.networking.hostName == "fluorine") {
-      eno1.allowedUDPPorts = [ net.peridot.self.listenPort ];
       peridot = {
         allowedUDPPorts = steam.ports;
         allowedTCPPorts = flatten [
@@ -80,16 +66,18 @@ in
       };
     };
 
-    wireguard = {
-      interfaces.peridot = {
-        generatePrivateKeyFile = true;
-        privateKeyFile = "/var/lib/wireguard/key";
-      };
+    wireguard.networks.peridot = {
+      autoConfig = {
+        openFirewall = true;
 
-      networks.peridot = {
-        autoConfig = {
-          interface = true;
-          peers = true;
+        "networking.wireguard" = lib.mkForce {
+          interface.enable = true;
+          peers.mesh.enable = true;
+        };
+
+        "networking.hosts" = {
+          enable = true;
+          FQDNs.enable = true;
         };
       };
     };
