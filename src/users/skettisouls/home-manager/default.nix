@@ -32,10 +32,7 @@ in
     };
 
     basalt = {
-      bash = {
-        enable = true;
-        aliaspp.enable = true;
-      };
+      bash.enable = true;
 
       headphones = rec {
         default = momentum4;
