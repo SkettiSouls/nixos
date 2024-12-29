@@ -29,13 +29,14 @@
 
   fileSystems = {
     "/boot" = {
-      device = "/dev/disk/by-uuid/1C54-88CC";
+      device = "/dev/disk/by-id/ata-Samsung_SSD_870_EVO_1TB_S625NJ0R407709B-part1";
       fsType = "vfat";
+      options = [ "fmask=0077" "dmask=0077" ];
     };
 
     "/" = {
-      device = "/dev/disk/by-uuid/51fce10e-1c6a-4352-bfce-ca6f89b0403c";
-      fsType = "ext4";
+      device = "/dev/disk/by-id/ata-Samsung_SSD_870_EVO_1TB_S625NJ0R407709B-part2";
+      fsType = "btrfs";
     };
 
     "/home/skettisouls/Games" = {
