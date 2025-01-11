@@ -77,8 +77,7 @@
 
   # Wireguard {{{
     asluni.url = "github:the-computer-club/automous-zones";
-    lynx.url = "github:the-computer-club/lynx";
-    peridot.url = "github:skettisouls/peridot";
+    lynx.url = "github:the-computer-club/lynx/flake-guard-v2";
   # }}}
   };
 
@@ -101,6 +100,7 @@
             nixos = import ./src/nixos;
             overlays = import ./src/overlays;
             packages = import ./src/packages;
+            # peridot = import ./src/wireguard/peridot;
             river = import ./src/river;
             roles = import ./src/roles;
             services = import ./src/services;
@@ -113,10 +113,9 @@
         in
         {
           imports = (builtins.attrValues flakeModules) ++ [
-            inputs.lynx.flakeModules.builtins
+            # inputs.lynx.flakeModules.builtins
             inputs.lynx.flakeModules.flake-guard
             inputs.asluni.flakeModules.asluni
-            inputs.peridot.flakeModules.peridot
           ];
 
           config = {

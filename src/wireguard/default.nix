@@ -1,11 +1,8 @@
 {
   imports = [
     ./luni-net
-    ./peridot
+    # ./peridot
   ];
 
-  flake.nixosModules = {
-    luni-net = import ./luni-net/nixos-module.nix;
-    peridot = import ./peridot/nixos-module.nix;
-  };
+  wireguard.enable = true;
 }

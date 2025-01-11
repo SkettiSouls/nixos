@@ -12,11 +12,11 @@ in
   options.regolith.roles.workstation.enable = mkEnableOption "Workstation role";
 
   config = mkIf cfg.enable {
-    wireguard = {
-      peridot.enable = mkDefault true;
-      luni-net.enable = mkDefault true;
-    };
-
+    # wireguard = {
+    #   # peridot.enable = mkDefault true;
+    #   luni-net.enable = mkDefault true;
+    # };
+    #
     services = {
       openssh.enable = true;
       udisks2.enable = true;

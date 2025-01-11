@@ -510,15 +510,16 @@
     },
     "lynx": {
       "locked": {
-        "lastModified": 1722535064,
-        "narHash": "sha256-T9DRY+t2gVLuIn6oOvoSeJ831SPBNOdvNkjl2CK2VyM=",
+        "lastModified": 1733386641,
+        "narHash": "sha256-eU9falszQN2V45qLEvzs+eJpdBGHJBbCgNutRRA+/qY=",
         "owner": "the-computer-club",
         "repo": "lynx",
-        "rev": "ad66210b43c14e457e25e40f9228f23988cdd517",
+        "rev": "776a6665332dd76c61f7401a057d3232e141f4ec",
         "type": "github"
       },
       "original": {
         "owner": "the-computer-club",
+        "ref": "flake-guard-v2",
         "repo": "lynx",
         "type": "github"
       }
@@ -697,21 +698,6 @@
         "type": "github"
       }
     },
-    "peridot": {
-      "locked": {
-        "lastModified": 1734844936,
-        "narHash": "sha256-+RRAUrPY5zlj/DrVg5jih3Ens1xenggOlubvxX5paTI=",
-        "owner": "skettisouls",
-        "repo": "peridot",
-        "rev": "1caf25085c61737be173f536b1c2748893a5554b",
-        "type": "github"
-      },
-      "original": {
-        "owner": "skettisouls",
-        "repo": "peridot",
-        "type": "github"
-      }
-    },
     "pre-commit-hooks": {
       "inputs": {
         "flake-compat": "flake-compat_2",
@@ -753,7 +739,6 @@
         "nixcord": "nixcord",
         "nixpkgs": "nixpkgs_3",
         "nixpkgs-unstable": "nixpkgs-unstable",
-        "peridot": "peridot",
         "wrapper-manager": "wrapper-manager"
       }
     },
