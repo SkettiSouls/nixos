@@ -1,9 +1,19 @@
-{ inputs, config, ... }:
+{ inputs, lib, config, ... }:
 {
   wireguard.networks.lunk.privateKeyFile = "/var/lib/wireguard/privatekey";
+  wireguard.networks.lunk = {
+      autoConfig = {
+        openFirewall = true;
 
-  flake.nixosModule = {
-    imports = [ inputs.lynx.nixosModules.flake-guard-host ];
-    wireguard.networks = config.wireguard.networks;
-  };
+        "networking.wireguard" = lib.mkForce {
+          interface.enable = true;
+          peers.mesh.enable = true;
+        };
+
+        "networking.hosts" = {
+          enable = true;
+          FQDNs.enable = true;
+        };
+      };
+    };
 }

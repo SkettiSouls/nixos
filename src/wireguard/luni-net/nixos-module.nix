@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ inputs, config, lib, ... }:
 let
   inherit (lib)
     mkEnableOption
@@ -21,8 +21,7 @@ in
   #       "chat.cypress.local"
   #     ];
   #   };
-
-    wireguard.networks.lunk = {
+    wireguard.networks.asluni = {
       autoConfig = {
         openFirewall = true;
 
