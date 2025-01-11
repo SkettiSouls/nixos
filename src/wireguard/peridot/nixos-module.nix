@@ -69,12 +69,14 @@ in
           80
           443
           4747 # Gonic
+          27020 # Ark Rcon
           airsonic.port
           deemix-server.port
           git.port
           gonic.port
           invidious.port
           minecraft.ports
+          steam.ports
           net.peridot.self.listenPort
         ];
       };

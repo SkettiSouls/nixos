@@ -15,12 +15,16 @@ in
       startCmd = ''
         ${pkgs.steam-run}/bin/steam-run ./valheim_server.x86_64 \
         -name "Basically Hard" \
-        -world "JusticeForVirginia" \
+        -world "ZegullsBalls" \
         -password "zekesmells" \
         -port ${port} \
         -nographics \
+        -public 1 \
         -batchmode \
-        -public 1
+        -backups 4 \
+        -preset immersive \
+        -modifier combat veryhard \
+        -modifier raids less
       '';
     };
   };

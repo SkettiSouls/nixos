@@ -60,7 +60,7 @@ in
             User = "steam";
             WorkingDirectory = "/var/lib/steam/${name}";
             Nice = "-5";
-            Restart = "Always";
+            Restart = "always";
 
             ExecStartPre = ''
               ${pkgs.steamcmd}/bin/steamcmd \

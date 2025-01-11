@@ -10,7 +10,7 @@
     # TODO: Write config files in ExecStartPre
     startCmd = ''
       ${pkgs.steam-run}/bin/steam-run ./ShooterGame/Binaries/Linux/ShooterGameServer \
-      Fjordur?listen \
+      Fjordur?listen?RCONEnabled=true?RCONPort=27020?ServerAdminPassword=123 \
       -NoBattlEye \
       -NotifyAdminCommandsInChat \
       -server \
