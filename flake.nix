@@ -56,7 +56,10 @@
 
     neovim = {
       url = "github:skettisouls/neovim";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs = {
+        nixpkgs.follows = "nixpkgs-unstable";
+        flake-parts.follows = "flake-parts";
+      };
     };
   # }}}
 

@@ -28,10 +28,10 @@ in
     programs.steam = {
       enable = true;
       gamescopeSession.enable = true;
-      package = pkgs.steam.override {
+      package = pkgs.unstable.steam.override {
         extraEnv = {
           MANGOHUD = true;
-          # OBS_VKCAPTURE = true; # TODO: Figure out what this does lol
+          OBS_VKCAPTURE = true; # Used for obs vulkan capture plugin
 
           ### NVIDIA Offloading ###
           __NV_PRIME_RENDER_OFFLOAD = mkIf cfg.offload.nvidia true;
@@ -39,11 +39,6 @@ in
           __GLX_VENDOR_LIBRARY_NAME = mkIf cfg.offload.nvidia "nvidia";
           __VK_LAYER_NV_optimus = mkIf cfg.offload.nvidia "NVIDIA_only";
         };
-
-        # TODO: Figure out what this does
-        # extraLibraries = p: with p; [
-        #   atk
-        # ];
       };
     };
   };
