@@ -1,11 +1,19 @@
-{ inputs, config, ... }:
+{ inputs, config, lib, ... }:
 {
-  flake.nixosModule = {
-    imports = [ inputs.lynx.nixosModules.flake-guard-host ];
-    wireguard.networks = config.wireguard.networks;
-  };
-
   wireguard.networks.peridot = {
+    autoConfig = {
+      openFirewall = true;
+      "networking.wireguard" = lib.mkForce {
+        interface.enable = true;
+        peers.mesh.enable = true;
+      };
+
+      "networking.hosts" = {
+        enable = true;
+        FQDNs.enable = true;
+      };
+    };
+
     # TODO: Switch to using sops/agenix
     listenPort = 51820;
     privateKeyFile = "/var/lib/wireguard/key";
