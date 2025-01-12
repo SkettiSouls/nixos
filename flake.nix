@@ -78,7 +78,6 @@
   # Wireguard {{{
     asluni.url = "github:the-computer-club/automous-zones";
     lynx.url = "github:the-computer-club/lynx";
-    peridot.url = "github:skettisouls/peridot";
   # }}}
   };
 
@@ -116,7 +115,6 @@
             inputs.lynx.flakeModules.builtins
             inputs.lynx.flakeModules.flake-guard
             inputs.asluni.flakeModules.asluni
-            inputs.peridot.flakeModules.peridot
           ];
 
           config = {

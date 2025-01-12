@@ -14,7 +14,6 @@ in
   config = mkIf cfg.enable {
     wireguard = {
       peridot.enable = mkDefault true;
-      luni-net.enable = mkDefault true;
     };
 
     services = {
@@ -25,6 +24,7 @@ in
     programs = {
       # Mutually exclusive with nix-index, and depends on channels
       command-not-found.enable = false;
+
       nix-index = {
         enable = true;
         enableBashIntegration = true;

@@ -697,21 +697,6 @@
         "type": "github"
       }
     },
-    "peridot": {
-      "locked": {
-        "lastModified": 1734844936,
-        "narHash": "sha256-+RRAUrPY5zlj/DrVg5jih3Ens1xenggOlubvxX5paTI=",
-        "owner": "skettisouls",
-        "repo": "peridot",
-        "rev": "1caf25085c61737be173f536b1c2748893a5554b",
-        "type": "github"
-      },
-      "original": {
-        "owner": "skettisouls",
-        "repo": "peridot",
-        "type": "github"
-      }
-    },
     "pre-commit-hooks": {
       "inputs": {
         "flake-compat": "flake-compat_2",
@@ -753,7 +738,6 @@
         "nixcord": "nixcord",
         "nixpkgs": "nixpkgs_3",
         "nixpkgs-unstable": "nixpkgs-unstable",
-        "peridot": "peridot",
         "wrapper-manager": "wrapper-manager"
       }
     },
