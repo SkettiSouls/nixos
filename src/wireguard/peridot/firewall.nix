@@ -10,12 +10,10 @@ let
     ;
 
   inherit (self.nixosConfigurations.fluorine.config.services)
-    airsonic
     caddy
     deemix-server
     forgejo
     gonic
-    invidious
     nginx
     nix-mc
     steam-dedicated
@@ -54,11 +52,9 @@ in
           80
           443
           27020 # Ark Rcon
-          airsonic.port
           deemix-server.port
           git.port
           gonic.port
-          invidious.port
           minecraft.ports
           steam.ports
           peridot.listenPort

@@ -23,6 +23,7 @@ in
   config.services = {
     gonic = {
       enable = true;
+      port = 4040;
       settings = {
         listen-addr = "0.0.0.0:${port}";
         music-path = "/music";

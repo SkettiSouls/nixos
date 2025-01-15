@@ -6,13 +6,11 @@ let
 in
 {
   imports = with self.serviceModules; [
-    airsonic
     gonic
     caddy
     deemix
     discord-bots
     forgejo
-    invidious
     minecraft
     postgres
     valheim
