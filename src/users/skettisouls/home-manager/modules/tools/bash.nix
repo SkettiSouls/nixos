@@ -14,7 +14,6 @@ in
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
-      rsync
       self.rebuild
     ];
 
@@ -26,7 +25,6 @@ in
 
       shellAliases = {
         ":q" = " exit";
-        cp = "rsync";
         icat = mkIf kitty.enable "kitten icat";
 
         l = "eza -alh";
