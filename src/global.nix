@@ -9,9 +9,11 @@
   nixpkgs.config.allowUnfree = true;
 
   nix = {
+    nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
     package = pkgs.nix;
-    settings.experimental-features = [ "nix-command" "flakes" ];
     registry = lib.mapAttrs (_: flake: { inherit flake; }) inputs;
+    settings.experimental-features = [ "nix-command" "flakes" ];
+
     extraOptions = ''
       trusted-users = root skettisouls
     '';

@@ -551,11 +551,11 @@
         "wrapper-manager": "wrapper-manager"
       },
       "locked": {
-        "lastModified": 1736804976,
-        "narHash": "sha256-QdAHXAvGffsgBN4XK9Y2d1ze5+GAYSCNbpt4tkAAH6E=",
+        "lastModified": 1738334031,
+        "narHash": "sha256-nNgSvsahptXFiq8Ag2lzvFH+gtXIV6vuV1s0rEjipv0=",
         "owner": "skettisouls",
         "repo": "neovim",
-        "rev": "c07a67049d8f85b6615bb0b8648a7607c912f8f3",
+        "rev": "f27d135795ba72fcb932568fa7e3bc752991de2b",
         "type": "github"
       },
       "original": {
