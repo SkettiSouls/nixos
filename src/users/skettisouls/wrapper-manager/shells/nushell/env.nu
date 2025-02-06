@@ -8,7 +8,7 @@ def create_left_prompt [] {
     # == [USER@HOSTNAME:<PATH>] (Like bash)
     def create_boiler_plate [fmt: string] { [([$env.USER, "@", $hostname, ":", $fmt] | str join)] }
 
-    let dir = match (do --ignore-shell-errors { $env.PWD | path relative-to $nu.home-path }) {
+    let dir = match (do --ignore-errors { $env.PWD | path relative-to $nu.home-path }) {
         null => (create_boiler_plate $env.PWD)
         '' => (create_boiler_plate '~')
         $relative_pwd => (create_boiler_plate ([~ $relative_pwd] | path join))

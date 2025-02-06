@@ -41,7 +41,7 @@ in
           EmailTracking = true;
         };
 
-        Homepage.URL = "moz-extension://75a9d890-4bca-4c91-9888-97370eaec41e/static/newtab.html";
+        Homepage.URL = "https://search.brave.com";
         OfferToSaveLogins = false;
         PasswordManagerEnabled = false;
         PrivateBrowsingModeAvailability = 2; # 0 - Enabled, 1 - Disabled, 2 - Forced
@@ -55,9 +55,9 @@ in
           ublock-origin = "uBlock0@raymondhill.net";
           privacy-badger17 = "jid1-MnnxcxisBPnSXQ@jetpack"; # Not sure why 17 is required
           keepassxc-browser = "keepassxc-browser@keepassxc.org";
-          tridactyl-vim = "tridactyl.vim@cmcaine.co.uk";
           sponsorblock = "sponsorBlocker@ajay.app";
           return-youtube-dislikes = "{762f9885-5a13-4abd-9c77-433dcd38b8fd}";
+          vimium-c = "vimium-c@gdh1995.cn";
         };
       };
 
@@ -78,6 +78,36 @@ in
           "sidebar.revamp" = true; # Dependency of `verticalTabs`
           "sidebar.verticalTabs" = true;
           "sidebar.visibility" = "always-show";
+        };
+
+        search = {
+          default = "Brave";
+          engines = {
+            "Brave" = {
+              urls = [{ template = "https://search.brave.com/search?q={searchTerms}"; }];
+              definedAliases = [ "@b" ];
+            };
+
+            "Nix Packages" = {
+              urls = [{ template = "https://search.nixos.org/packages?query={searchTerms}"; }];
+              icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+              definedAliases = [ "@np" ];
+            };
+
+            "Nix Options" = {
+              urls = [{ template = "https://search.nixos.org/options?query={searchTerms}"; }];
+              icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+              definedAliases = [ "@no" ];
+            };
+
+            "NixOS Wiki" = {
+              urls = [{ template = "https://wiki.nixos.org/index.php?search={searchTerms}"; }];
+              iconUpdateURL = "https://wiki.nixos.org/favicon.png";
+              definedAliases = [ "@nw" ];
+            };
+
+            "Bing".metaData.hidden = true;
+          };
         };
       };
     };

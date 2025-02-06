@@ -17,5 +17,16 @@ in
     home.packages = with pkgs; [
       brave
     ];
+
+    programs.chromium = {
+      enable = true;
+      package = pkgs.brave;
+      extensions = [
+        { id = "hfjbmagddngcpeloejdejnfgbamkjaeg"; } # Vimium C
+        { id = "oboonakemofpalcgghocfoadofidjkkk"; } # KeePassXC-Browser
+        { id = "mnjggcdmjocbbbhaepdhchncahnbgone"; } # SponsorBlock
+        { id = "gebbhagfogifgggkldgodflihgfeippi"; } # Return Youtube Dislike
+      ];
+    };
   };
 }
