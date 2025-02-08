@@ -4,16 +4,6 @@
   regolith.hardware = {
     amdgpu.enable = true;
     bluetooth.enable = true;
-
-    monitors = [
-      {
-        primary = true;
-        displayPort = "HDMI-A-1";
-        resolution = "1920x1080";
-        refreshRate = 60;
-        scale = 1;
-      }
-    ];
   };
 
   # hardware-configuration.nix {{{

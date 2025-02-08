@@ -143,12 +143,17 @@
                 };
               };
 
-              nixosConfigurations = genAttrs hostList (host: nixosSystem {
+              nixosConfigurations = genAttrs hostList (host: let
+                enabledUsers = lib.filterAttrs (_: v: lib.elem host v.machines) config.flake.users;
+                checkForHM = lib.filterAttrs (_: v: v.home-manager.enable) enabledUsers;
+                hm-exists = if checkForHM != {} then true else false;
+              in nixosSystem {
                 specialArgs = specialArgs;
                 modules = with config.flake; [
                   ./src/global.nix
                   machines.${host}
                   nixosModules.default
+                ] ++ lib.optionals hm-exists [
                   nixosModules.home-manager
                 ];
               });

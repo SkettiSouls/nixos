@@ -8,7 +8,6 @@
       # Misc
       bluetooth = import ./modules/bluetooth.nix;
       laptop = import ./modules/laptop.nix;
-      monitors = import ./modules/monitors.nix;
     };
   };
 }

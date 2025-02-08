@@ -15,30 +15,24 @@ in
 {
   imports = [ inputs.home-manager.nixosModules.home-manager ];
 
-  options.users.users = mkOption {
-    type = with types; attrsOf (submodule {
-      options.home-manager.enable = mkEnableOption "Manage user configs with home-manager";
-    });
-  };
-
   config.home-manager = {
     extraSpecialArgs = { inherit inputs self host flakeRoot; };
     backupFileExtension = "bak";
     useGlobalPkgs = true;
     useUserPackages = true;
     users = mapAttrs (user: attrs: let
-      inherit (attrs) home-manager;
-    in
-    {
-      programs.home-manager.enable = mkIf home-manager.enable true;
+      inherit (attrs) home-manager machines;
+      isEnabled = home-manager.enable && (lib.elem host machines);
+    in {
+      programs.home-manager.enable = mkIf isEnabled true;
 
-      home = mkIf home-manager.enable (rec {
+      home = mkIf isEnabled rec {
         username = user;
         homeDirectory = lib.mkDefault "/home/${username}";
         stateVersion = config.system.stateVersion;
-      });
+      };
 
-      imports = lib.optionals home-manager.enable [
+      imports = lib.optionals isEnabled [
         homeModules.default
         home-manager.modules
 
