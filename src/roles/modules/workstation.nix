@@ -14,6 +14,7 @@ in
   config = mkIf cfg.enable {
     wireguard = {
       peridot.enable = mkDefault true;
+      luni-net.enable = mkDefault true;
     };
 
     services = {
