@@ -526,11 +526,11 @@
     "midnight-discord": {
       "flake": false,
       "locked": {
-        "lastModified": 1732688700,
-        "narHash": "sha256-AlWNYkM6Wtq3kS2lHZaJVx3nDmUdqHaJ76k4sU9vDt4=",
+        "lastModified": 1738909034,
+        "narHash": "sha256-SVdVagw+KCYvBaol2KJlrP9YQy1WXhw9fglaGWYnnpg=",
         "ref": "refs/heads/master",
-        "rev": "0b562e9d20ecdd58f13e328edc6398f1037ea5c5",
-        "revCount": 466,
+        "rev": "2b478ab4bf5d4fc6680d675427eafdc40b037ce6",
+        "revCount": 477,
         "type": "git",
         "url": "https://github.com/refact0r/midnight-discord"
       },
@@ -652,11 +652,11 @@
     },
     "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1736344531,
-        "narHash": "sha256-8YVQ9ZbSfuUk2bUf2KRj60NRraLPKPS0Q4QFTbc+c2c=",
+        "lastModified": 1738680400,
+        "narHash": "sha256-ooLh+XW8jfa+91F1nhf9OF7qhuA/y1ChLx6lXDNeY5U=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "bffc22eb12172e6db3c5dde9e3e5628f8e3e7912",
+        "rev": "799ba5bffed04ced7067a91798353d360788b30d",
         "type": "github"
       },
       "original": {

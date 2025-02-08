@@ -41,7 +41,7 @@ in
           EmailTracking = true;
         };
 
-        Homepage.URL = "https://search.brave.com";
+        Homepage.URL = "https://news.ycombinator.com";
         OfferToSaveLogins = false;
         PasswordManagerEnabled = false;
         PrivateBrowsingModeAvailability = 2; # 0 - Enabled, 1 - Disabled, 2 - Forced
@@ -69,7 +69,7 @@ in
       ] */
 
       profiles.skettisouls = {
-        isDefault = true;
+        isDefault = true; 
         # about:config
         settings = {
           "browser.fullscreen.autohide" = false;
@@ -81,6 +81,7 @@ in
         };
 
         search = {
+          force = true;
           default = "Brave";
           engines = {
             "Brave" = {

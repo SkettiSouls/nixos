@@ -20,5 +20,5 @@ mkTransposedPerSystemModule {
       `nix build .#<user>.<name>` will build `wrappedPackages.<user>.<package-name>`.
     '';
   };
-  file = ./wrapped.nix;
+  file = ./module.nix;
 }
