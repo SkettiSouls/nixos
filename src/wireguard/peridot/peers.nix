@@ -9,6 +9,7 @@
   argon = {
     allowedIPs = [ "172.16.0.2/32" ];
     publicKey = "bk06qmrZbETsEsMMLkk2JcvKFzMCT10tcUs590YdEGE=";
+    persistentKeepalive = 10;
   };
 
   xenon = {
