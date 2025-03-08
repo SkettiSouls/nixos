@@ -7,8 +7,6 @@ let
       inherit system;
       config.allowUnfree = true;
     };
-
-    vesktop = vesktop.legacyPackages.${system}.vesktop;
   };
 
   overlay-self = final: prev: {
@@ -16,6 +14,7 @@ let
     self = self.packages.${system};
     neovim = neovim.packages.${system}.default;
     boris = boris.packages.${system}.default;
+    polyphasia = polyphasia.packages.${system}.default;
   };
 
   overlay-hyprland = final: prev: {

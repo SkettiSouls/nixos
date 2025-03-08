@@ -698,6 +698,34 @@
         "type": "github"
       }
     },
+    "polyphasia": {
+      "inputs": {
+        "flake-parts": [
+          "flake-parts"
+        ],
+        "nixpkgs": [
+          "nixpkgs-unstable"
+        ],
+        "rust-overlay": "rust-overlay_2",
+        "systems": "systems_7",
+        "wrapper-manager": [
+          "wrapper-manager"
+        ]
+      },
+      "locked": {
+        "lastModified": 1740206427,
+        "narHash": "sha256-7dt6qVo3zjau2Jx5MrjvAk0BKeUrzaF7lOrcWg1pwaM=",
+        "ref": "refs/heads/master",
+        "rev": "ffcaa999c76fb93d29cb2198154fe74964134b00",
+        "revCount": 7,
+        "type": "git",
+        "url": "https://codeberg.org/skettisouls/polyphasia"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://codeberg.org/skettisouls/polyphasia"
+      }
+    },
     "pre-commit-hooks": {
       "inputs": {
         "flake-compat": "flake-compat_2",
@@ -739,6 +767,7 @@
         "nixcord": "nixcord",
         "nixpkgs": "nixpkgs_3",
         "nixpkgs-unstable": "nixpkgs-unstable",
+        "polyphasia": "polyphasia",
         "wrapper-manager": "wrapper-manager_2"
       }
     },
@@ -752,6 +781,27 @@
         "owner": "oxalica",
         "repo": "rust-overlay",
         "rev": "17d3930e54a50df2afe52a2d1d1f506edb262bbe",
+        "type": "github"
+      },
+      "original": {
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "type": "github"
+      }
+    },
+    "rust-overlay_2": {
+      "inputs": {
+        "nixpkgs": [
+          "polyphasia",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1739845646,
+        "narHash": "sha256-UGQVBU/yDn6u0kAE4z1PYrOaaf3wl+gAAv5rui2TkFQ=",
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "rev": "ab2cd2b8b25ab3f65b8ce4aa701a6d69fbb0210f",
         "type": "github"
       },
       "original": {
@@ -836,6 +886,21 @@
       }
     },
     "systems_6": {
+      "locked": {
+        "lastModified": 1681028828,
+        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default",
+        "type": "github"
+      }
+    },
+    "systems_7": {
       "locked": {
         "lastModified": 1681028828,
         "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
