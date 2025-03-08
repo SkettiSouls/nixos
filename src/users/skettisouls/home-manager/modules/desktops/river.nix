@@ -27,7 +27,6 @@ let
     terminal
     ;
 
-
   mkTag = tag: toString (exponent 2 (tag - 1));
 
   # Discord's canary branch has a different binary name than package name, and uses "discord" as the app-id
@@ -37,10 +36,28 @@ let
   defaultBrowser = config.xdg.browser.default;
   defaultHeadphones = basalt.headphones.default;
   cfg = config.basalt.desktops.river;
+
+  sleep = {
+    cores = with builtins;
+      toFile "polyphasia.json" (toJSON [
+        {
+          start = 0.0;
+          duration = 1.5;
+        }
+        {
+          start = 6.0;
+          duration = 1.0;
+        }
+        {
+          start = 11.5;
+          duration = 1.5;
+        }
+      ]);
+  };
 in
 {
-  options = {
-    basalt.desktops.river.enable = mkEnableOption "RiverWM Config";
+options = {
+  basalt.desktops.river.enable = mkEnableOption "RiverWM Config";
 
     regolith.river = {
       variables = {
@@ -59,6 +76,7 @@ in
       dunst
       keepassxc
       lswt
+      polyphasia
       wbg
       wl-clipboard
     ];
@@ -71,6 +89,7 @@ in
         "dunst &"
         "polkit &"
         "chp ${defaultHeadphones}"
+        "polyphasia ${sleep.cores} --padding 2"
 
         defaultBrowser
         (mkIf discord.enable "${discordClient}")

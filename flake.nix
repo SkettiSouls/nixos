@@ -61,6 +61,15 @@
         flake-parts.follows = "flake-parts";
       };
     };
+
+    polyphasia = {
+      url = "git+https://codeberg.org/skettisouls/polyphasia";
+      inputs = {
+        nixpkgs.follows = "nixpkgs-unstable";
+        flake-parts.follows = "flake-parts";
+        wrapper-manager.follows = "wrapper-manager";
+      };
+    };
   # }}}
 
   # Server {{{
@@ -83,7 +92,7 @@
 
   outputs = inputs @ { self, nixpkgs, flake-parts, ... }:
     flake-parts.lib.mkFlake { inherit inputs; }
-      ({ config, options, flake-parts-lib, ... }:
+      ({ config, options, ... }:
         let
           inherit (nixpkgs) lib;
           inherit (lib)
