@@ -508,6 +508,35 @@
         "type": "github"
       }
     },
+    "luagit": {
+      "inputs": {
+        "flake-parts": [
+          "neovim",
+          "flake-parts"
+        ],
+        "nixpkgs": [
+          "neovim",
+          "nixpkgs"
+        ],
+        "systems": [
+          "neovim",
+          "systems"
+        ]
+      },
+      "locked": {
+        "lastModified": 1741426427,
+        "narHash": "sha256-w8+saHlqcjhEHeR0lstaYVrza0dy2/nQBWctZrOjeMg=",
+        "ref": "refs/heads/master",
+        "rev": "27d2191faf0e49fc66eac71c8e37aa4a981f3b11",
+        "revCount": 9,
+        "type": "git",
+        "url": "https://codeberg.org/skettisouls/luagit"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://codeberg.org/skettisouls/luagit"
+      }
+    },
     "lynx": {
       "locked": {
         "lastModified": 1722535064,
@@ -526,11 +555,11 @@
     "midnight-discord": {
       "flake": false,
       "locked": {
-        "lastModified": 1738909034,
-        "narHash": "sha256-SVdVagw+KCYvBaol2KJlrP9YQy1WXhw9fglaGWYnnpg=",
+        "lastModified": 1742338632,
+        "narHash": "sha256-P8ZG9m5hwBsxlyEzNnRDP5IrXw6N/3nxEqQHbaGynC4=",
         "ref": "refs/heads/master",
-        "rev": "2b478ab4bf5d4fc6680d675427eafdc40b037ce6",
-        "revCount": 477,
+        "rev": "ef7cc83417a3a0d2d1af32b45a8125e58ddeacf3",
+        "revCount": 578,
         "type": "git",
         "url": "https://github.com/refact0r/midnight-discord"
       },
@@ -544,6 +573,7 @@
         "flake-parts": [
           "flake-parts"
         ],
+        "luagit": "luagit",
         "nixpkgs": [
           "nixpkgs-unstable"
         ],
@@ -551,11 +581,11 @@
         "wrapper-manager": "wrapper-manager"
       },
       "locked": {
-        "lastModified": 1738334031,
-        "narHash": "sha256-nNgSvsahptXFiq8Ag2lzvFH+gtXIV6vuV1s0rEjipv0=",
+        "lastModified": 1741426571,
+        "narHash": "sha256-10aIE/6YpYNmM6E0dUaKmCHsJAQ2imatmpfxxxiitL8=",
         "owner": "skettisouls",
         "repo": "neovim",
-        "rev": "f27d135795ba72fcb932568fa7e3bc752991de2b",
+        "rev": "003bd7722b74036d446a57ee516b793f400182b6",
         "type": "github"
       },
       "original": {
@@ -652,11 +682,11 @@
     },
     "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1738680400,
-        "narHash": "sha256-ooLh+XW8jfa+91F1nhf9OF7qhuA/y1ChLx6lXDNeY5U=",
+        "lastModified": 1742669843,
+        "narHash": "sha256-G5n+FOXLXcRx+3hCJ6Rt6ZQyF1zqQ0DL0sWAMn2Nk0w=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "799ba5bffed04ced7067a91798353d360788b30d",
+        "rev": "1e5b653dff12029333a6546c11e108ede13052eb",
         "type": "github"
       },
       "original": {
