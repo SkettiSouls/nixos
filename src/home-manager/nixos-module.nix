@@ -1,16 +1,10 @@
-{ inputs, self, flakeRoot, config, options, lib, ... }:
+{ inputs, self, flakeRoot, config, lib, ... }:
 let
+  inherit (lib) mapAttrs;
   inherit (config.flake) homeModules;
 
-  inherit (lib)
-    mapAttrs
-    mkEnableOption
-    mkIf
-    mkOption
-    types
-    ;
-
   host = config.networking.hostName;
+  users = lib.filterAttrs (_: v: v.isNormalUser) config.users.users;
 in
 {
   imports = [ inputs.home-manager.nixosModules.home-manager ];
@@ -19,28 +13,18 @@ in
     extraSpecialArgs = { inherit inputs self host flakeRoot; };
     backupFileExtension = "bak";
     useGlobalPkgs = true;
-    useUserPackages = true;
-    users = mapAttrs (user: attrs: let
-      inherit (attrs) home-manager machines;
-      isEnabled = home-manager.enable && (lib.elem host machines);
-    in {
-      programs.home-manager.enable = mkIf isEnabled true;
+    # Move packages from $HOME/.nix-profile to /etc/profiles/
+    # useUserPackages = true; # Causes infinite recursion when accessing users.users
+    users = mapAttrs (user: _: {
+      imports = lib.combineModules homeModules;
 
-      home = mkIf isEnabled rec {
+      programs.home-manager.enable = true;
+
+      home = rec {
         username = user;
         homeDirectory = lib.mkDefault "/home/${username}";
         stateVersion = config.system.stateVersion;
       };
-
-      imports = lib.optionals isEnabled [
-        homeModules.default
-        home-manager.modules
-
-        {
-          options.roles = options.regolith.roles;
-          config.roles = config.regolith.roles;
-        }
-      ];
-    }) config.flake.users;
+    }) users;
   };
 }

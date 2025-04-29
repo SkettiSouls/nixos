@@ -1,9 +1,7 @@
 { inputs, lib, pkgs, ... }:
 
 {
-  regolith = {
-    boot.systemd.enable = lib.mkDefault true;
-  };
+  regolith.boot.systemd.enable = lib.mkDefault true;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;

@@ -1,23 +1,12 @@
-{ config, lib, pkgs, ... }:
-let
-  inherit (lib)
-    mkEnableOption
-    mkIf
-    ;
+{ lib, pkgs, ... }:
 
-  cfg = config.regolith.roles.desktop;
-in
 {
-  options.regolith.roles.desktop.enable = mkEnableOption "Desktop role";
+  config = {
+    regolith.pipewire.enable = true;
+    security.polkit.enable = true;
 
-  config = mkIf cfg.enable {
-    regolith = {
-      pipewire.enable = true;
-    };
-
-    security = {
-      polkit.enable = true;
-    };
+    networking.networkmanager.enable = true;
+    systemd.services.NetworkManager-wait-online.enable = false;
 
     services = {
       xserver = {

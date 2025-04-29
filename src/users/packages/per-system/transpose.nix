@@ -10,7 +10,7 @@ let
     ;
 in
 mkTransposedPerSystemModule {
-  name = "wrappedPackages";
+  name = "wrappers";
   option = mkOption {
     type = types.lazyAttrsOf (types.lazyAttrsOf types.package);
     default = {};
@@ -20,5 +20,5 @@ mkTransposedPerSystemModule {
       `nix build .#<user>.<name>` will build `wrappedPackages.<user>.<package-name>`.
     '';
   };
-  file = ./module.nix;
+  file = ./transpose.nix;
 }

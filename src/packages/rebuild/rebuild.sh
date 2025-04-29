@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-### Nixos Rebuild Alias++ ###
+### Nixos Rebuild Script ###
 
 arg="test"
 desktop="${XDG_CURRENT_DESKTOP,,}"

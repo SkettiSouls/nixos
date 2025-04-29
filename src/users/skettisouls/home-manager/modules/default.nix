@@ -10,39 +10,7 @@ let
   cfg = config.basalt.defaultApps;
 in
 {
-  imports = [
-    ./discord
-    ./mangohud.nix
-    ./udiskie.nix
-    ./variables.nix
-
-    ### Audio ###
-    ./audio/bluetooth.nix
-    ./audio/mpv.nix
-
-    ### Browsers ###
-    ./browsers/brave.nix
-    ./browsers/firefox.nix
-    ./browsers/qutebrowser.nix
-
-    ### Desktops ###
-    ./desktops/portals.nix
-    ./desktops/river.nix
-
-    ### Fetches ###
-    ./fetch/trollos.nix
-
-    ### Launchers ###
-    ./launchers/rofi.nix
-    ./launchers/fuzzel.nix
-
-    ### Terminals ###
-    ./terminals/kitty.nix
-
-    ### Tools ###
-    ./tools/bash.nix
-    ./tools/gpg.nix
-  ];
+  imports = lib.getModules ./.;
 
   options.basalt.defaultApps = {
     launcher = mkVar;

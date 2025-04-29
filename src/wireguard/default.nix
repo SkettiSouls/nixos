@@ -1,12 +1,6 @@
 {
-  imports = [
-    ./luni-net
-  ];
-
-  flake = {
-    nixosModules = {
-      luni-net = import ./luni-net/nixos-module.nix;
-      peridot = import ./peridot;
-    };
+  # TODO: Fix luni-net
+  flake.networks = {
+    peridot = import ./peridot;
   };
 }

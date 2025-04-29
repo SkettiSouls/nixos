@@ -36,11 +36,9 @@ let
       # Port 27015 is used for steam server discovery
       (_: server: lib.optionals server.enable [ server.port (server.port + 1) 27015 ])
       steam-dedicated));
-
-  cfg = config.wireguard.peridot;
 in
 {
-  config.networking = mkIf cfg.enable {
+  config.networking = {
     hosts."172.16.0.1" = [ "fluorine.lan" ] ++ localDNS;
 
     firewall.interfaces = mkIf (config.networking.hostName == "fluorine") {

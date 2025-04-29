@@ -1,15 +1,10 @@
 { config, lib, ... }:
-let
-  inherit (config.flake.lib) combineModulesExcept;
-in
+
 {
   flake.nixosModules = {
-    systemd-boot = import ./modules/systemd-boot.nix;
-
+    global = import ./modules/global.nix;
     pipewire = import ./modules/pipewire.nix;
-    steam = import ./modules/steam.nix;
-
-    roles = config.flake.roles.default;
+    systemd-boot = import ./modules/systemd-boot.nix;
 
     # Stolen from lunarix
     # Pass config.flake down to nixos scope
@@ -20,7 +15,5 @@ in
         readOnly = true;
       };
     };
-
-    default.imports = combineModulesExcept [ "home-manager" ] config.flake.nixosModules;
   };
 }

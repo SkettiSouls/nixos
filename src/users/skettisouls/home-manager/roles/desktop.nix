@@ -1,16 +1,14 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, host, ... }:
 let
-  inherit (lib) mkIf;
-  inherit (config) roles;
-
-  isDesktop = roles.desktop.enable;
+  inherit (config.flake) roles machines;
+  isDesktop = lib.elem roles.desktop machines.${host}.roles;
 in
 {
-  config = mkIf isDesktop {
+  config = lib.mkIf isDesktop {
+    roles.desktop.enable = true;
+
     home = {
       packages = with pkgs; [
-        bin.eat
-        element-desktop
         keepassxc
       ];
 

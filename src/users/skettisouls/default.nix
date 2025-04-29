@@ -1,25 +1,26 @@
-{ getSystem, config, ... }:
+{ getSystem, inputs, ... }:
 let
-  system = "x86_64-linux";
-  flake' = getSystem system;
-  wrappers = flake'.wrappedPackages.skettisouls;
+  # pkgs = {
+  #   x86 = inputs.nixpkgs.legacyPackages.x86_64-linux;
+  #   arm = inputs.nixpkgs.legacyPackages.aarch64-linux;
+  # };
+
+  wrappers = {
+    x86 = (getSystem "x86_64-linux").wrappers.skettisouls;
+    # arm = (getSystem "aarch64-linux").wrappers.skettisouls;
+  };
 in
 {
-  flake.users.skettisouls = {
-    home-manager = {
-      enable = true;
-      modules = import ./home-manager;
-    };
+  config.flake.users = {
+    skettisouls = {
+      homes.argon = import ./home-manager/argon.nix;
+      wrapperModules = import ./wrapper-manager;
 
-    wrapper-manager = {
-      enable = true;
-      modules = ./wrapper-manager;
+      packages."x86_64-linux" = with wrappers.x86; [
+        eza
+        feishin
+        nushell
+      ];
     };
-
-    packages = with wrappers; [
-      eza
-      feishin
-      nushell
-    ];
   };
 }

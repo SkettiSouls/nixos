@@ -1,19 +1,19 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, host, ... }:
 let
-  inherit (lib) mkIf;
-  inherit (config) roles;
-
-  isGamingRig = roles.desktop.enable && roles.gaming.enable;
+  inherit (config.flake) roles machines;
+  isGamingRig = lib.elem roles.gaming machines.${host}.roles;
 in
 {
-  config = mkIf isGamingRig {
+  config = lib.mkIf isGamingRig {
+    roles.gaming.enable = true;
+
     home = {
       packages = with pkgs; [
         heroic
         lutris
         minetest
         prismlauncher
-        wineWowPackages.staging
+        unstable.wineWowPackages.staging
         winetricks
       ];
     };

@@ -1,14 +1,10 @@
-{ self, config, lib, pkgs, host, ... }:
+{ config, lib, pkgs, ... }:
 let
   inherit (lib) mkOption types;
-  inherit (self.lib) getAllModules;
   home = config.home.homeDirectory;
 in
 {
-  imports = (getAllModules ./roles) ++ [
-    ./modules
-    ./machines/${host}.nix
-  ];
+  imports = [ ./modules ./roles ];
 
   # Options for passing around headphones mac address, mostly used for `chp`
   options.basalt.headphones = mkOption {

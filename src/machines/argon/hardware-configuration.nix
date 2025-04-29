@@ -1,12 +1,6 @@
 { config, lib, pkgs, modulesPath, ... }:
 
 {
-  regolith.hardware = {
-    amdgpu.enable = true;
-    bluetooth.enable = true;
-  };
-
-  # hardware-configuration.nix {{{
   imports =
     [
       (modulesPath + "/installer/scan/not-detected.nix")
@@ -17,6 +11,7 @@
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
+  # TODO: Move into flake-scope
   fileSystems = {
     "/boot" = {
       device = "/dev/disk/by-id/ata-Samsung_SSD_870_EVO_1TB_S625NJ0R407709B-part1";
@@ -52,5 +47,4 @@
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
-  # }}}
 }

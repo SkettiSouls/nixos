@@ -2,14 +2,13 @@
   inputs = {
   # Base {{{
     flake-parts.url = "github:hercules-ci/flake-parts";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     home-manager = {
       url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
-    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     wrapper-manager = {
       url = "github:viperML/wrapper-manager";
@@ -17,48 +16,22 @@
     };
   # }}}
 
-  # Discord {{{
-    boris = { # Bot
-      url = "github:skettisouls/boris";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
-
-    midnight-discord = {
-      type = "git";
-      url = "https://github.com/refact0r/midnight-discord";
-      flake = false;
-    };
-
-    nixcord = {
-      url = "github:skettisouls/nixcord";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
-  # }}}
-
-  # Hyprland {{{
-    hyprland = {
-      type = "git";
-      url = "https://github.com/hyprwm/hyprland";
-      submodules = true;
-    };
-
-    hyprpicker = {
-      url = "github:hyprwm/hyprpicker";
-      inputs.nixpkgs.follows = "hyprland";
-    };
-  # }}}
-
-  # Dev {{{
+  # Tools {{{
     bin = {
       url = "github:skettisouls/bin";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-parts.follows = "flake-parts";
+      };
     };
 
     neovim = {
-      url = "github:skettisouls/neovim";
+      url = "git+https://codeberg.org/skettisouls/neovim";
       inputs = {
-        nixpkgs.follows = "nixpkgs-unstable";
         flake-parts.follows = "flake-parts";
+        nixpkgs.follows = "nixpkgs-unstable";
+        utils.follows = "utils";
+        wrapper-manager.follows = "wrapper-manager";
       };
     };
 
@@ -68,6 +41,50 @@
         nixpkgs.follows = "nixpkgs-unstable";
         flake-parts.follows = "flake-parts";
         wrapper-manager.follows = "wrapper-manager";
+      };
+    };
+
+    utils = {
+      url = "git+https://codeberg.org/skettisouls/nix-utils";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+  # }}}
+
+  # Hyprland {{{
+    hyprland = {
+      type = "git";
+      url = "https://github.com/hyprwm/hyprland";
+      submodules = true;
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
+    hyprpicker = {
+      url = "github:hyprwm/hyprpicker";
+      inputs.nixpkgs.follows = "hyprland";
+      inputs.hyprutils.follows = "hyprland";
+    };
+  # }}}
+
+  # Discord {{{
+    boris = { # Bot
+      url = "github:skettisouls/boris";
+      inputs = {
+        nixpkgs.follows = "nixpkgs-unstable";
+        flake-parts.follows = "flake-parts";
+      };
+    };
+
+    midnight-discord = {
+      type = "git";
+      url = "https://github.com/refact0r/midnight-discord";
+      flake = false;
+    };
+
+    nixcord = {
+      url = "git+https://codeberg.org/skettisouls/nixcord";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        home-manager.follows = "home-manager";
       };
     };
   # }}}
@@ -83,107 +100,36 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
   # }}}
-
-  # Wireguard {{{
-    asluni.url = "github:the-computer-club/automous-zones";
-    lynx.url = "github:the-computer-club/lynx";
-  # }}}
   };
 
-  outputs = inputs @ { self, nixpkgs, flake-parts, ... }:
-    flake-parts.lib.mkFlake { inherit inputs; }
-      ({ config, options, ... }:
-        let
-          inherit (nixpkgs) lib;
-          inherit (lib)
-            genAttrs
-            mapAttrs
-            nixosSystem
-            ;
+  outputs = inputs @ { nixpkgs, flake-parts, ... }: let
+    # Extend `inputs.utils`, overlay that onto `lib`.
+    utils = (import ./src/utils { inherit (nixpkgs) lib; inherit inputs; });
+    specialArgs = {
+      lib = nixpkgs.lib.extend (final: prev: utils);
+    };
+  in
+  flake-parts.lib.mkFlake { inherit inputs specialArgs; }
+  ({ lib, ... }: let
+    flakeRoot = ./.;
+    flakeModules = {
+      hardware = import ./src/hardware;
+      home-manager = import ./src/home-manager;
+      machines = import ./src/machines;
+      nixos = import ./src/nixos;
+      overlays = import ./src/overlays;
+      packages = import ./src/packages;
+      roles = import ./src/roles;
+      services = import ./src/services;
+      users = import ./src/users;
+      wireguard = import ./src/wireguard;
+    };
+  in {
+    imports = (builtins.attrValues) flakeModules ++ [];
 
-          flakeModules = {
-            hardware = import ./src/hardware;
-            home-manager = import ./src/home-manager;
-            libs = import ./src/libs;
-            machines = import ./src/machines;
-            nixos = import ./src/nixos;
-            overlays = import ./src/overlays;
-            packages = import ./src/packages;
-            river = import ./src/river;
-            roles = import ./src/roles;
-            services = import ./src/services;
-            users = import ./src/users;
-            wireguard = import ./src/wireguard;
-          };
-
-          flakeRoot = ./.;
-          specialArgs = { inherit inputs self flakeRoot; };
-        in
-        {
-          imports = (builtins.attrValues flakeModules) ++ [
-            inputs.lynx.flakeModules.builtins
-            inputs.lynx.flakeModules.flake-guard
-            inputs.asluni.flakeModules.asluni
-          ];
-
-          config = {
-            systems = [
-              "x86_64-linux"
-            ];
-
-            flake = let
-              hostList = builtins.attrNames config.flake.machines;
-            in {
-              # Debug
-              _config = config;
-              _options = options;
-
-              inherit flakeModules flakeRoot;
-
-              deploy.nodes = {
-                fluorine = {
-                  hostname = "192.168.1.17";
-                  profiles.system = {
-                    user = "root";
-                    sshUser = "root";
-                    sshOpts = [ "-T" ];
-                    path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos config.flake.nixosConfigurations.fluorine;
-                  };
-                };
-              };
-
-              nixosConfigurations = genAttrs hostList (host: let
-                enabledUsers = lib.filterAttrs (_: v: lib.elem host v.machines) config.flake.users;
-                checkForHM = lib.filterAttrs (_: v: v.home-manager.enable) enabledUsers;
-                hm-exists = if checkForHM != {} then true else false;
-              in nixosSystem {
-                specialArgs = specialArgs;
-                modules = with config.flake; [
-                  ./src/global.nix
-                  machines.${host}
-                  nixosModules.default
-                ] ++ lib.optionals hm-exists [
-                  nixosModules.home-manager
-                ];
-              });
-
-              # FIXME: broken
-              homeConfigurations = mapAttrs (user: hostList:
-                genAttrs hostList (host:
-                  inputs.home-manager.lib.homeManagerConfiguration {
-                    # TODO: Support other arch
-                    pkgs = nixpkgs.legacyPackages.x86_64-linux;
-                    extraSpecialArgs = specialArgs;
-                    modules = [
-                      config.flake.nixosModules.overlays
-                      # Use the home-manager config from nixos.
-                      config.flake.nixosConfigurations.${host}.config.home-manager.users.${user}
-                    ];
-                  }
-                )
-              ) config.homes;
-            };
-          };
-        });
-
+    config = {
+      flake = { inherit flakeModules flakeRoot lib; };
+      systems = [ "x86_64-linux" "aarch64-linux" ];
+    };
+  });
 }

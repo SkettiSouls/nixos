@@ -6,7 +6,7 @@
       # Home-manager and nixos overlays
       nixosModules.overlays = import ./nixpkgs.nix;
 
-      # Flake overlays
+      # Flake overlays (unsure of use-case)
       # overlays = {};
     };
 

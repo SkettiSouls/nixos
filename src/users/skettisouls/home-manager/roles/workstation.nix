@@ -1,12 +1,11 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, host, ... }:
 let
-  inherit (lib) mkIf;
-  inherit (config) roles;
-
-  isWorkstation = roles.workstation.enable;
+  inherit (config.flake) roles machines;
+  isWorkstation = lib.elem roles.workstation machines.${host}.roles;
 in
 {
-  config = mkIf isWorkstation {
+  config = lib.mkIf isWorkstation {
     # Unneeded atm lol
+    roles.workstation.enable = true;
   };
 }

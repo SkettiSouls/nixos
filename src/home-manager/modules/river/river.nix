@@ -19,12 +19,6 @@ let
   cfg = config.regolith.river;
 in
 {
-  imports = [
-    ./binds.nix
-    ./options.nix
-    ./rivertile.nix
-  ];
-
   config = mkIf cfg.enable {
     home.packages = [
       (mkIf (isPackage generator) generator)

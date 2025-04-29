@@ -1,27 +1,14 @@
-{ config, lib, pkgs, ... }:
-let
-  inherit (lib)
-    mkEnableOption
-    mkIf
-    ;
+{ pkgs, ... }:
 
-  cfg = config.regolith.hardware.amdgpu;
-in
 {
-  options.regolith.hardware.amdgpu = {
-    enable = mkEnableOption "AMDGPU";
-  };
-
-  config = mkIf cfg.enable {
+  config = {
     boot.initrd.kernelModules = [ "amdgpu" ];
 
-    hardware = {
-      graphics = {
-        enable = true;
-        enable32Bit = true;
-        extraPackages = [ pkgs.mesa pkgs.libva ];
-        extraPackages32 = [ pkgs.driversi686Linux.mesa ];
-      };
+    hardware.graphics = {
+      enable = true;
+      enable32Bit = true;
+      extraPackages = with pkgs; [ mesa libva ];
+      extraPackages32 = [ pkgs.driversi686Linux.mesa ];
     };
   };
 }

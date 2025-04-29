@@ -1,5 +1,8 @@
-{ pkgs, flakeRoot, ... }:
+{ flakeRoot, ... }:
+
 {
+  imports = [ ./default.nix ];
+
   basalt = {
     audio.bluetooth.enable = true;
 

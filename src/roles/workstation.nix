@@ -1,21 +1,9 @@
-{ config, lib, pkgs, ... }:
-let
-  inherit (lib)
-    mkDefault
-    mkEnableOption
-    mkIf
-    ;
+{ pkgs, ... }:
 
-  cfg = config.regolith.roles.workstation;
-in
 {
-  options.regolith.roles.workstation.enable = mkEnableOption "Workstation role";
-
-  config = mkIf cfg.enable {
-    wireguard = {
-      peridot.enable = mkDefault true;
-      luni-net.enable = mkDefault true;
-    };
+  config = {
+    networking.networkmanager.enable = true;
+    systemd.services.NetworkManager-wait-online.enable = false;
 
     services = {
       openssh.enable = true;
@@ -47,6 +35,7 @@ in
       zip
     ];
 
+    # TODO: Switch to Iosevka
     fonts.packages = with pkgs; [
       noto-fonts
       noto-fonts-cjk-sans
