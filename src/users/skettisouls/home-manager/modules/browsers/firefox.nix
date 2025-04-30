@@ -103,11 +103,11 @@ in
 
             "NixOS Wiki" = {
               urls = [{ template = "https://wiki.nixos.org/index.php?search={searchTerms}"; }];
-              iconUpdateURL = "https://wiki.nixos.org/favicon.png";
+              icon = "https://wiki.nixos.org/favicon.png";
               definedAliases = [ "@nw" ];
             };
 
-            "Bing".metaData.hidden = true;
+            "bing".metaData.hidden = true;
           };
         };
       };

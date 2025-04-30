@@ -23,7 +23,8 @@
       noto-fonts
       noto-fonts-cjk-sans
       noto-fonts-color-emoji
-      (nerdfonts.override { fonts = [ "SourceCodePro" "DejaVuSansMono" ]; })
+      nerd-fonts.sauce-code-pro
+      nerd-fonts.dejavu-sans-mono
     ];
   };
 }

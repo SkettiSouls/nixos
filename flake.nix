@@ -2,11 +2,11 @@
   inputs = {
   # Base {{{
     flake-parts.url = "github:hercules-ci/flake-parts";
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-24.11";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -55,7 +55,6 @@
       type = "git";
       url = "https://github.com/hyprwm/hyprland";
       submodules = true;
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
     hyprpicker = {

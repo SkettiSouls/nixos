@@ -26,7 +26,7 @@ in
     services.gpg-agent = {
       enable = true;
       enableBashIntegration = true;
-      pinentryPackage = pkgs.pinentry-qt;
+      pinentry.package = pkgs.pinentry-qt;
       verbose = true;
     };
   };
