@@ -2,6 +2,7 @@
 
 {
   flake.nixosModules = {
+    hyprland = import ./modules/hyprland.nix;
     global = import ./modules/global.nix;
     pipewire = import ./modules/pipewire.nix;
     systemd-boot = import ./modules/systemd-boot.nix;

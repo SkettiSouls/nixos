@@ -1,7 +1,9 @@
-{ pkgs, ... }:
-
+{ config, lib, pkgs, ... }:
+let
+  notHypr = !(config.basalt.desktops.hyprland.enable);
+in
 {
-  config.xdg.portal = {
+  config.xdg.portal = lib.mkIf notHypr {
     enable = true;
     extraPortals = with pkgs; [
       xdg-desktop-portal-gtk

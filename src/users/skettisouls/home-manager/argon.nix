@@ -12,7 +12,10 @@
       firefox.enable = true;
     };
 
-    desktops.river.enable = true;
+    desktops = {
+      river.enable = true;
+      hyprland.enable = true;
+    };
 
     defaultApps = {
       browser = "firefox";
