@@ -1,9 +1,11 @@
-{ config, lib, ... }:
+{ withArgs, ... }:
+{ inputs, config, lib, ... }:
 
 {
   flake.nixosModules = {
-    hyprland = import ./modules/hyprland.nix;
-    global = import ./modules/global.nix;
+    # We use the `inputs` AFTER `importApply` to let inputs vary by flake
+    global = withArgs ./modules/global.nix { inherit inputs; };
+    hyprland = withArgs ./modules/hyprland.nix {};
     pipewire = import ./modules/pipewire.nix;
     systemd-boot = import ./modules/systemd-boot.nix;
 

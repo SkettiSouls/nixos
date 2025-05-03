@@ -1,4 +1,5 @@
-{ inputs, lib, pkgs, ... }:
+{ inputs, ... }:
+{ lib, pkgs, ... }:
 
 {
   regolith.boot.systemd.enable = lib.mkDefault true;

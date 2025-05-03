@@ -1,26 +1,22 @@
-{ inputs, withSystem, ... }:
+flake@{ inputs, withArgs, ... }:
+{ inputs, config, ... }:
 
 {
   config = {
-    flake = {
-      # Home-manager and nixos overlays
-      nixosModules.overlays = import ./nixpkgs.nix;
-
-      # Flake overlays (unsure of use-case)
-      # overlays = {};
-    };
+    flake.nixosModules.overlays =
+      withArgs ./nixpkgs.nix { inherit config; };
 
     perSystem = { system, ... }: {
       _module.args.pkgs = (import inputs.nixpkgs {
         inherit system;
-        overlays = [
-          (final: prev: withSystem system ({ config, inputs', ... }: {
-            bin = inputs'.bin.packages;
-            self = config.packages;
-            unstable = inputs'.nixpkgs-unstable.legacyPackages;
-          }))
-        ];
         config.allowUnfree = true;
+        overlays = [
+          (final: prev: with flake.inputs; {
+            bin = bin.packages.${system};
+            self = config.packages;
+            unstable = nixpkgs-unstable.legacyPackages.${system};
+          })
+        ];
       });
     };
   };

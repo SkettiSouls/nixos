@@ -1,4 +1,5 @@
-{ inputs, self, config, lib, ... }:
+{ lib, ... }:
+{ inputs, self, config, ... }:
 let
   inherit (lib)
     mkOption
@@ -42,7 +43,7 @@ in
   imports = lib.getModules ./.;
 
   config.flake = let
-    inherit (config.flake) flakeRoot machines nixosModules users;
+    inherit (config.flake) machines nixosModules users;
     hostList = lib.attrNames machines;
   in {
     nixosConfigurations = lib.genAttrs hostList
@@ -52,7 +53,7 @@ in
           (map (user: hasAttr host users.${user}.homes) machines.${host}.users);
     in lib.nixosSystem {
       inherit (machines.${host}) system;
-      specialArgs = { inherit inputs self flakeRoot lib; };
+      specialArgs = { inherit inputs self; };
       modules =
         machines.${host}.modules
         ++ machines.${host}.hardware

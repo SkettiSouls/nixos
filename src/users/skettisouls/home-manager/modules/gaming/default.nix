@@ -1,0 +1,23 @@
+{ ... }:
+{ pkgs, ... }:
+
+{
+  config = {
+    # TODO: Figure out how to set the order options are generated in
+    programs.mangohud = {
+      enable = true;
+    };
+
+    # Workaround, see todo above
+    xdg.configFile."MangoHud/MangoHud.conf".source = ./MangoHud.conf;
+
+    home.packages = with pkgs; [
+      heroic
+      lutris
+      minetest
+      prismlauncher
+      unstable.wineWowPackages.staging
+      winetricks
+    ];
+  };
+}

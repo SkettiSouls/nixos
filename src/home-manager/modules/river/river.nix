@@ -1,4 +1,5 @@
-{ self, config, lib, pkgs, ... }:
+self@{ lib, ... }:
+{ config, lib, pkgs, ... }:
 let
   inherit (self.lib) exponent;
   inherit (lib)

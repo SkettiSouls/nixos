@@ -42,5 +42,5 @@ in
     });
   };
 
-  imports = lib.getModules ./.;
+  imports = lib.applyModules ./.;
 }

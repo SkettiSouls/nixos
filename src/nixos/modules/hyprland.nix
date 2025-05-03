@@ -1,4 +1,5 @@
-{ inputs, pkgs, config, lib, ... }:
+{ inputs, ... }:
+{ pkgs, config, lib, ... }:
 let
   inherit (pkgs.stdenv.hostPlatform) system;
   inherit (inputs.hyprland.packages.${system}) hyprland xdg-desktop-portal-hyprland;

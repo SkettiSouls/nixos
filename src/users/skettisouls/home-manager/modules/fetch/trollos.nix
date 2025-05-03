@@ -1,4 +1,5 @@
-{ config, lib, flakeRoot, ... }:
+{ flakeRoot, ... }:
+{ config, lib, ... }:
 let
   inherit (lib)
     mkEnableOption

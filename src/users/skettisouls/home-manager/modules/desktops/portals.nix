@@ -1,3 +1,4 @@
+{ ... }:
 { config, lib, pkgs, ... }:
 let
   notHypr = !(config.basalt.desktops.hyprland.enable);

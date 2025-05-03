@@ -101,33 +101,43 @@
   # }}}
   };
 
-  outputs = inputs @ { nixpkgs, flake-parts, ... }: let
-    # Extend `inputs.utils`, overlay that onto `lib`.
-    utils = (import ./src/utils { inherit (nixpkgs) lib; inherit inputs; });
-    specialArgs = {
-      lib = nixpkgs.lib.extend (final: prev: utils);
-    };
-  in
-  flake-parts.lib.mkFlake { inherit inputs specialArgs; }
-  ({ lib, ... }: let
+  outputs = inputs @ { flake-parts, ... }: let
+    inherit (flake-parts.lib) importApply;
     flakeRoot = ./.;
+
+    lib = import ./src/utils { inherit inputs; };
+    withArgs = file: args:
+      importApply file
+      ({
+        inherit inputs flakeRoot withArgs;
+        lib = lib.extend (final: prev: {
+          applyModules = src:
+            map
+            (file: withArgs file {})
+            (prev.getModules src);
+        });
+      } // args);
+  in
+  flake-parts.lib.mkFlake { inherit inputs; }
+  (let
     flakeModules = {
       hardware = import ./src/hardware;
-      home-manager = import ./src/home-manager;
-      machines = import ./src/machines;
-      nixos = import ./src/nixos;
-      overlays = import ./src/overlays;
+      home-manager = withArgs ./src/home-manager {};
+      lib = { config.flake = { inherit lib; }; };
+      machines = withArgs ./src/machines {};
+      nixos = withArgs ./src/nixos {};
+      overlays = withArgs ./src/overlays {};
       packages = import ./src/packages;
       roles = import ./src/roles;
       services = import ./src/services;
-      users = import ./src/users;
+      users = withArgs ./src/users {};
       wireguard = import ./src/wireguard;
     };
   in {
     imports = (builtins.attrValues) flakeModules ++ [];
 
     config = {
-      flake = { inherit flakeModules flakeRoot lib; };
+      flake = { inherit flakeModules flakeRoot; };
       systems = [ "x86_64-linux" "aarch64-linux" ];
     };
   });

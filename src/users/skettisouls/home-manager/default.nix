@@ -1,10 +1,11 @@
+{ withArgs, ... }:
 { config, lib, pkgs, ... }:
 let
   inherit (lib) mkOption types;
   home = config.home.homeDirectory;
 in
 {
-  imports = [ ./modules ./roles ];
+  imports = [ (withArgs ./modules {}) ];
 
   # Options for passing around headphones mac address, mostly used for `chp`
   options.basalt.headphones = mkOption {

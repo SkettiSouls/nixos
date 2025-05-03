@@ -1,10 +1,22 @@
-{ flakeRoot, ... }:
+{ flakeRoot, withArgs, ... }:
+{ pkgs, ... }:
 
 {
-  imports = [ ./default.nix ];
+  imports = [ (withArgs ./default.nix {}) ];
+
+  home.pointerCursor = {
+    name = "phinger-cursor-dark";
+    package = pkgs.phinger-cursors;
+    size = 24;
+    gtk.enable = true;
+  };
 
   basalt = {
     audio.bluetooth.enable = true;
+    discord.enable = true;
+    kitty.enable = true;
+    mpv.enable = true;
+    udiskie.enable = true;
 
     browsers = {
       brave.enable = true;
@@ -21,6 +33,7 @@
       browser = "firefox";
       launcher = "fuzzel";
     };
+
 
     launchers.fuzzel.enable = true;
 

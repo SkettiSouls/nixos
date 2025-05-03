@@ -1,4 +1,5 @@
-{ self, config, lib, pkgs, flakeRoot, ... }:
+self@{ flakeRoot, lib, ... }:
+{ config, lib, pkgs, ... }:
 let
   inherit (self.lib) exponent;
 
@@ -13,7 +14,6 @@ let
     basalt
     nixcord
     regolith
-    roles
     ;
 
   inherit (basalt) discord;
@@ -93,7 +93,7 @@ options = {
 
         defaultBrowser
         (mkIf discord.enable "${discordClient}")
-        (mkIf roles.gaming.enable "steam")
+        "steam"
         "feishin"
         "keepassxc"
         "wbg ${config.basalt.wallpapers.suncat}"
@@ -109,7 +109,7 @@ options = {
             # Fix missing borders
             ssd = true;
 
-            byTitle = mkIf roles.gaming.enable {
+            byTitle = {
               "*Steam" = {
                 float = false;
                 tags = 3;
@@ -155,7 +155,7 @@ options = {
             # Open Apps
             "${appMod} B" = "spawn ${defaultBrowser}";
             "${appMod} D" = mkIf discord.enable "spawn ${discordClient}";
-            "${appMod} S" = mkIf roles.gaming.enable "spawn steam";
+            "${appMod} S" = "spawn steam";
 
             # Music
             "${modKey} M" = "set-focused-tags ${mkTag 10}";

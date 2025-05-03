@@ -1,3 +1,4 @@
+{ withArgs, ... }:
 { getSystem, inputs, ... }:
 let
   # pkgs = {
@@ -13,7 +14,7 @@ in
 {
   config.flake.users = {
     skettisouls = {
-      homes.argon = import ./home-manager/argon.nix;
+      homes.argon = withArgs ./home-manager/argon.nix {};
       wrapperModules = import ./wrapper-manager;
 
       packages."x86_64-linux" = with wrappers.x86; [

@@ -1,4 +1,5 @@
-{ config, lib, ... }:
+{ lib, ... }:
+{ config, ... }:
 let
   inherit (lib) mkIf mkOption types;
 
@@ -10,7 +11,7 @@ let
   cfg = config.basalt.defaultApps;
 in
 {
-  imports = lib.getModules ./.;
+  imports = lib.applyModules ./.;
 
   options.basalt.defaultApps = {
     launcher = mkVar;

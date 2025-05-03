@@ -1,5 +1,5 @@
-{ lib, ... }:
+{ lib, ...  }:
 
 {
-  imports = lib.getModules ./.;
+  imports = lib.applyModules ./.;
 }
