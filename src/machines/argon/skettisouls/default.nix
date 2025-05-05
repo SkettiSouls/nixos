@@ -1,8 +1,8 @@
-{ flakeRoot, withArgs, ... }:
+{ flakeRoot, lib, ... }:
 { pkgs, ... }:
 
 {
-  imports = [ (withArgs ./default.nix {}) ];
+  imports = lib.applyModules ./.;
 
   home.pointerCursor = {
     name = "phinger-cursor-dark";
@@ -16,7 +16,6 @@
     discord.enable = true;
     kitty.enable = true;
     mpv.enable = true;
-    udiskie.enable = true;
 
     browsers = {
       brave.enable = true;
@@ -25,8 +24,15 @@
     };
 
     desktops = {
-      river.enable = true;
       hyprland.enable = true;
+
+      river = {
+        enable = true;
+        windowRules = {
+          steam.enable = true;
+          keepassxc.enable = true;
+        };
+      };
     };
 
     defaultApps = {

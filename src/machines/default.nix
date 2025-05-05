@@ -19,40 +19,70 @@ in
         networks = mkModulesOption;
 
         modules = mkOption {
-          type = with types; listOf deferredModule;
+          type = listOf deferredModule;
         };
 
         roles = mkOption {
-          type = with types; listOf unspecified;
+          type = listOf unspecified;
           default = [];
         };
 
         system = mkOption {
-          type = types.enum config.systems;
+          type = enum config.systems;
           default = "x86_64-linux";
         };
 
         users = mkOption {
-          type = with types; listOf str;
-          default = [];
+          type = attrsOf (submodule {
+            options = {
+              homeModule = mkOption {
+                type = deferredModule;
+                default = {};
+              };
+
+              groups = mkOption {
+                type = listOf str;
+                default = [ "networkmanager" "wheel" ];
+              };
+
+              packages = mkOption {
+                type = listOf package;
+                default = [];
+              };
+
+              shell = mkOption {
+                type = nullOr package;
+                default = null;
+              };
+            };
+          });
+          default = {};
         };
       };
     });
   };
 
-  imports = lib.getModules ./.;
+  imports = lib.applyModules ./.;
 
   config.flake = let
-    inherit (config.flake) machines nixosModules users;
+    inherit (config.flake) machines nixosModules;
     hostList = lib.attrNames machines;
   in {
     nixosConfigurations = lib.genAttrs hostList
     (host: let
-      hm = with builtins;
-        elem true
-          (map (user: hasAttr host users.${user}.homes) machines.${host}.users);
+      inherit (machines.${host}) users system;
+      hm.enable = with builtins;
+        if users != {}
+        then elem true
+          (attrValues
+          (mapAttrs (_: v:
+            if v.homeModule != {}
+            then true
+            else false)
+          users))
+        else false;
     in lib.nixosSystem {
-      inherit (machines.${host}) system;
+      inherit system;
       specialArgs = { inherit inputs self; };
       modules =
         machines.${host}.modules
@@ -62,24 +92,26 @@ in
         ++ lib.combineModulesExcept [ "home-manager" ] nixosModules
         ++ [
           { networking.hostName = host; }
-          (if hm then nixosModules.home-manager else {})
-
+        ]
+        ++ lib.optionals (users != {}) [{
+          users.users = lib.mapAttrs (user: attrs: {
+            isNormalUser = true;
+            extraGroups = attrs.groups;
+            packages = attrs.packages;
+            shell = lib.mkIf (attrs.shell != null) attrs.shell;
+          }) users;
+        }]
+        ++ lib.optionals hm.enable [
+          nixosModules.home-manager
           {
-            # Build users
-            config.users.users = lib.mapAttrs (user: attrs:
-              lib.mkIf (lib.elem user machines.${host}.users) {
-                isNormalUser = true;
-                extraGroups = attrs.groups;
-                packages = attrs.packages.${machines.${host}.system};
-                shell = lib.mkIf (attrs.shell != null) attrs.shell;
+            config.home-manager.users =
+              lib.mapAttrs (user: attrs: {
+                imports = [
+                  attrs.homeModule
+                  config.flake.users.${user}.homeModule
+                ];
               }) users;
           }
-
-          # mkIf causes build failure on fluorine (doesn't prevent evaluation)
-          (if hm then {
-            config.home-manager.users = lib.mkIf hm
-              (lib.mapAttrs (user: attrs: { imports = [ attrs.homes.${host} ]; }) users);
-          } else {})
         ];
     });
   };

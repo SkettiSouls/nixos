@@ -1,16 +1,29 @@
-{ withArgs, ... }:
-{ config, lib, pkgs, ... }:
+{ lib, ... }:
+{ config, pkgs, ... }:
 let
-  inherit (lib) mkOption types;
+  inherit (lib) mkIf mkOption types;
+  inherit (config.basalt) defaultApps;
   home = config.home.homeDirectory;
+
+  mkVar = mkOption {
+    type = types.str;
+    default = "";
+  };
 in
 {
-  imports = [ (withArgs ./modules {}) ];
+  imports = lib.applyModules ./.;
 
   # Options for passing around headphones mac address, mostly used for `chp`
-  options.basalt.headphones = mkOption {
-    type = types.attrs;
-    default = {};
+  options.basalt = {
+    headphones = mkOption {
+      type = types.attrs;
+      default = {};
+    };
+
+    defaultApps = {
+      launcher = mkVar;
+      browser = mkVar;
+    };
   };
 
   config = {
@@ -40,6 +53,7 @@ in
 
     xdg = {
       enable = true;
+      browser.default = mkIf (defaultApps.browser != "") defaultApps.browser;
 
       cacheHome = "${home}/.cache";
       configHome = "${home}/.config";

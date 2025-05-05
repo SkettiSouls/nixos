@@ -6,7 +6,7 @@
       inherit pkgs;
       specialArgs = { inherit self inputs; };
       modules = [
-        attrs.wrapperModules
+        attrs.wrapperModule
       ];
     }).config.build.packages
   ) config.flake.users;

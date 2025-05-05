@@ -1,14 +1,8 @@
 self@{ flakeRoot, lib, ... }:
 { config, lib, pkgs, ... }:
 let
+  inherit (lib) mkIf;
   inherit (self.lib) exponent;
-
-  inherit (lib)
-    mkEnableOption
-    mkIf
-    mkOption
-    types
-    ;
 
   inherit (config)
     basalt
@@ -56,38 +50,22 @@ let
   };
 in
 {
-options = {
-  basalt.desktops.river.enable = mkEnableOption "RiverWM Config";
-
-    regolith.river = {
-      variables = {
-        altMod = mkOption {
-          type = types.str;
-          default = "${modKey}+Alt";
-        };
-      };
-    };
-  };
-
-  config = {
+  config = mkIf cfg.enable {
     home.packages = with pkgs; [
       bin.chp
       bin.grime
       dunst
-      keepassxc
-      lswt
       polyphasia
       wbg
-      wl-clipboard
     ];
 
     regolith.river = mkIf cfg.enable {
       enable = true;
+      package = pkgs.unstable.river;
       installTerminal = false;
 
       startup.apps = [
         "dunst &"
-        "polkit &"
         "chp ${defaultHeadphones}"
         "polyphasia ${sleep.cores} --padding 2"
 
@@ -105,32 +83,6 @@ options = {
           feishin = { tags = 10; };
           firefox = { ssd = true; };
           Sonixd = { tags = 10; };
-          steam = {
-            # Fix missing borders
-            ssd = true;
-
-            byTitle = {
-              "*Steam" = {
-                float = false;
-                tags = 3;
-              };
-
-              "Launching..." = {
-                float = true;
-              };
-
-              "'Special Offers'" = {
-                float = true;
-                tags = 3;
-              };
-            };
-          };
-
-          # Spawn keepassxc on tag 11, but allow the "Unlock Database" popup to spawn on any tag.
-          "org.keepassxc.KeePassXC".byTitle = {
-            "'*[Locked] - KeePassXC'" = { tags = 11; };
-            "KeePassXC" = { tags = 11; };
-          };
         };
       };
 
@@ -175,12 +127,6 @@ options = {
           "${appMod} E"
           "${modKey} Space"
         ];
-
-        mouse = {
-          normal = [
-            "${modKey} BTN_MIDDLE"
-          ];
-        };
       };
     };
   };
