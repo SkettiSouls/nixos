@@ -4,11 +4,7 @@
   config = {
     networking.networkmanager.enable = true;
     systemd.services.NetworkManager-wait-online.enable = false;
-
-    services = {
-      openssh.enable = true;
-      udisks2.enable = true;
-    };
+    services.openssh.enable = true;
 
     programs = {
       # Mutually exclusive with nix-index, and depends on channels

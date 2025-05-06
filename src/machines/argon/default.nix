@@ -14,7 +14,7 @@ in
     wpkgs = wrappers.${system};
   in {
     inherit system;
-    hardware = with hardwareModules; [ gpu.amd bluetooth ];
+    hardware = with hardwareModules; [ bluetooth gpu.amd usb ];
     roles = with roles; [ desktop gaming workstation ];
     networks = with networks; [ peridot ];
 
