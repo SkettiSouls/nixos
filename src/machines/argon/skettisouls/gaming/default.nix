@@ -13,10 +13,7 @@
     ];
 
     # TODO: Figure out how to set the order options are generated in
-    programs.mangohud = {
-      enable = true;
-      enableSessionWide = true;
-    };
+    programs.mangohud.enable = true;
 
     # Workaround, see todo above
     xdg.configFile."MangoHud/MangoHud.conf".source = ./MangoHud.conf;
