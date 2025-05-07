@@ -8,6 +8,7 @@ let
     ;
 
   cfg = config.services.deemix-server;
+  deemix-server = pkgs.callPackage ./package.nix {};
 in
 {
   options.services.deemix-server = {
@@ -45,7 +46,7 @@ in
       after = [ "network.target" ];
       serviceConfig = {
         ExecStart = ''
-          ${pkgs.self.deemix-server}/bin/deemix-server --port ${toString cfg.port} --host ${toString cfg.listenAddress}
+          ${deemix-server}/bin/deemix-server --port ${toString cfg.port} --host ${toString cfg.listenAddress}
         '';
         PrivateTmp = false;
         Restart = "always";

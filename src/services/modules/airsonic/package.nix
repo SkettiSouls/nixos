@@ -9,5 +9,5 @@ airsonic.overrideAttrs (final: prev: {
     hash = "sha256-hNN9NFhqoqYzWgIU10OgUY6C19Zo6MwUKrsS4gIRIg8=";
   };
 
-  meta.homepage = "https://github.com/airsonic-advanced";
+  meta.homepage = "https://github.com/airsonic-advanced/airsonic-advanced";
 })

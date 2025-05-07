@@ -7,12 +7,12 @@ let
     roles
     wrappers
     ;
+
+  system = "x86_64-linux";
+  wpkgs = wrappers.${system};
 in
 {
-  flake.machines.argon = let
-    system = "x86_64-linux";
-    wpkgs = wrappers.${system};
-  in {
+  flake.machines.argon = {
     inherit system;
     hardware = with hardwareModules; [ bluetooth gpu.amd usb ];
     roles = with roles; [ desktop gaming workstation ];

@@ -4,6 +4,8 @@ let
   inherit (lib)
     mkEnableOption
     mkIf
+    mkOption
+    types
     ;
 
   cfg = config.basalt.browsers.qutebrowser;
@@ -11,6 +13,10 @@ in
 {
   options.basalt.browsers.qutebrowser = {
     enable = mkEnableOption "QuteBrowser user configuration";
+    package = mkOption {
+      type = types.package;
+      default = pkgs.qutebrowser;
+    };
   };
 
   config = mkIf cfg.enable {
@@ -20,7 +26,7 @@ in
 
     programs.qutebrowser = {
       enable = true;
-      package = pkgs.unstable.qutebrowser;
+      package = cfg.package;
       enableDefaultBindings = true;
       loadAutoconfig = true;
 

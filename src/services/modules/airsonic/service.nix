@@ -9,6 +9,7 @@ let
   inherit (lib) mkIf;
 
   port = toString airsonic.port;
+  airsonic-advanced = pkgs.callPackage ./package.nix {};
 in
 {
   services = {
@@ -38,7 +39,7 @@ in
         "-XX:MaxTenuringThreshold=1"
       ];
       maxMemory = 8192;
-      war = "${pkgs.self.airsonic-advanced}/webapps/airsonic.war";
+      war = "${airsonic-advanced}/webapps/airsonic.war";
       listenAddress = "0.0.0.0"; # Allow unproxied connections.
     };
 

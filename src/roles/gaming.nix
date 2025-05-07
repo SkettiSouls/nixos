@@ -10,7 +10,7 @@
     programs.steam = {
       enable = true;
       gamescopeSession.enable = true;
-      package = pkgs.unstable.steam.override {
+      package = pkgs.steam.override {
         extraEnv = {
           MANGOHUD = true;
           OBS_VKCAPTURE = true; # Used for obs vulkan capture plugin

@@ -4,6 +4,8 @@ let
   inherit (lib)
     mkEnableOption
     mkIf
+    mkOption
+    types
     ;
 
   mkExtensions = attrs: lib.mapAttrs' (name: id: {
@@ -19,12 +21,16 @@ in
 {
   options.basalt.browsers.firefox = {
     enable = mkEnableOption "Firefox";
+    package = mkOption {
+      type = types.package;
+      default = pkgs.qutebrowser;
+    };
   };
 
   config = mkIf cfg.enable {
     programs.firefox = {
       enable = true;
-      # nativeMessagingHosts = with pkgs; [ tridactyl-native ];
+      package = cfg.package;
 
       policies = {
         Cookies.Behavior = "reject-tracker-and-partition-foreign";

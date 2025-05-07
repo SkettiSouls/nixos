@@ -18,9 +18,20 @@
     mpv.enable = true;
 
     browsers = {
-      brave.enable = true;
-      qutebrowser.enable = true;
-      firefox.enable = true;
+      brave = {
+        enable = true;
+        package = pkgs.unstable.brave;
+      };
+
+      qutebrowser = {
+        enable = true;
+        package = pkgs.unstable.qutebrowser;
+      };
+
+      firefox = {
+        enable = true;
+        package = pkgs.unstable.firefox;
+      };
     };
 
     desktops = {

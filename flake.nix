@@ -126,10 +126,9 @@
       lib = { config.flake = { inherit lib; }; };
       machines = withArgs ./src/machines {};
       nixos = withArgs ./src/nixos {};
-      overlays = withArgs ./src/overlays {};
       packages = import ./src/packages;
       roles = import ./src/roles;
-      services = import ./src/services;
+      services = withArgs ./src/services {};
       users = withArgs ./src/users {};
       wireguard = import ./src/wireguard;
     };

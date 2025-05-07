@@ -62,7 +62,6 @@ in
 
     regolith.river = mkIf cfg.enable {
       enable = true;
-      package = mkDefault pkgs.unstable.river;
       installTerminal = mkDefault false;
 
       startup.apps = [

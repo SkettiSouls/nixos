@@ -7,6 +7,7 @@ let
     ;
 
   inherit (config.basalt) kitty;
+  inherit (config.flake.packages.${pkgs.system}) rebuild;
 
   cfg = config.basalt.bash;
 in
@@ -14,9 +15,7 @@ in
   options.basalt.bash.enable = mkEnableOption "bash";
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [
-      self.rebuild
-    ];
+    home.packages = [ rebuild ];
 
     programs.bash = {
       enable = true;

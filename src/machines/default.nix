@@ -1,4 +1,4 @@
-{ lib, ... }:
+flake@{ inputs, lib, ... }:
 { inputs, self, config, ... }:
 let
   inherit (lib)
@@ -92,6 +92,20 @@ in
         ++ lib.combineModulesExcept [ "home-manager" ] nixosModules
         ++ [
           { networking.hostName = host; }
+          {
+            nixpkgs.overlays = [
+              (final: prev: with flake.inputs; {
+                bin = bin.packages.${system};
+                polyphasia = polyphasia.packages.${system}.default;
+                regolith = config.flake.packages.${system};
+
+                unstable = import nixpkgs-unstable {
+                  inherit system;
+                  config.allowUnfree = true;
+                };
+              })
+            ];
+          }
         ]
         ++ lib.optionals (users != {}) [{
           users.users = lib.mapAttrs (user: attrs: {
