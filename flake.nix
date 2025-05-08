@@ -41,7 +41,13 @@
         nixpkgs.follows = "nixpkgs-unstable";
         flake-parts.follows = "flake-parts";
         wrapper-manager.follows = "wrapper-manager";
+        rust-overlay.follows = "rust-overlay";
       };
+    };
+
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     utils = {
@@ -70,6 +76,7 @@
       inputs = {
         nixpkgs.follows = "nixpkgs-unstable";
         flake-parts.follows = "flake-parts";
+        rust-overlay.follows = "rust-overlay";
       };
     };
 
@@ -129,6 +136,7 @@
       packages = import ./src/packages;
       roles = import ./src/roles;
       services = withArgs ./src/services {};
+      shells = withArgs ./src/shells {};
       users = withArgs ./src/users {};
       wireguard = import ./src/wireguard;
     };

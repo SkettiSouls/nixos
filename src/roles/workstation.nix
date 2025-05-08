@@ -4,6 +4,7 @@
   config = {
     networking.networkmanager.enable = true;
     systemd.services.NetworkManager-wait-online.enable = false;
+
     services.openssh.enable = true;
 
     programs = {
@@ -24,7 +25,6 @@
     environment.systemPackages = with pkgs; [
       btop
       comma
-      devenv
       fzf
       neovim
       unzip
