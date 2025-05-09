@@ -11,6 +11,12 @@
     gtk.enable = true;
   };
 
+  programs.bash.profileExtra = ''
+    if uwsm check may-start && uwsm select; then
+      exec uwsm start default
+    fi
+  '';
+
   basalt = {
     audio.bluetooth.enable = true;
     discord.enable = true;

@@ -11,11 +11,25 @@ let
   cfg = config.basalt.desktops.hyprland;
 
   bind = mod: key: action: lib.concatStringsSep ", " [ mod key action ];
-  bindApps = attrs: lib.attrValues (lib.mapAttrs (key: app: bind appMod key "exec, ${app}") attrs);
   bindWorkspaces = mod: action: map (i: bind mod (toString i) "${action}, ${toString i}") (lib.range 1 9);
+
+  bindExec = attrs: with builtins;
+  let
+    rawAttrs = lib.mapAttrsRecursive (k: v: k ++ ["exec, uwsm app -- ${v}"]) attrs;
+    concatAttrs = attrs:
+      lib.concatMapAttrs (k: v:
+        if isAttrs v
+        then concatAttrs v
+        else { "${head v}.${k}" = v; })
+      attrs;
+  in
+    map
+    (lib.concatStringsSep ", ")
+    (attrValues (concatAttrs rawAttrs));
 in
 {
   config.wayland.windowManager.hyprland = mkIf cfg.enable {
+    systemd.enable = false; # Conflicts with `withUWSM` option.
     settings = {
       monitor = "HDMI-A-1, 1920x1080@60, 0x0, 1";
       workspace = [
@@ -38,22 +52,30 @@ in
       };
 
       bind = [
-        "${mainMod}_ALT, E, exit"
+        ", Print, exec, grime copy area"
+        "${mainMod}_ALT, E, exec, uwsm stop"
         "${mainMod}, Q, killactive"
         "${mainMod}, F, fullscreen"
         "${mainMod}, S, togglefloating"
-        "${mainMod}, R, exec, fuzzel"
         "${mainMod}, RETURN, layoutmsg, swapwithmaster master"
         "${mainMod}, J, layoutmsg, cyclenext"
         "${mainMod}, K, layoutmsg, cycleprev"
-        "${mainMod}, B, exec, chp ${defaultHeadphones}"
-        "${mainMod}_ALT, B, exec, bluetoothctl disconnect ${defaultHeadphones}"
-        ", Print, exec, grime copy area"
-      ] ++
-      (bindApps {
-        RETURN = "kitty";
-        B = defaultBrowser;
-        D = "discordcanary";
+      ] ++ 
+      (bindExec {
+        ${mainMod} = {
+          B = "chp ${defaultHeadphones}";
+          R = "fuzzel --launch-prefix=\"uwsm app -- \"";
+        };
+
+        "${appMod}" = {
+          RETURN = "kitty";
+          B = defaultBrowser;
+          D = "discordcanary";
+        };
+
+        "${mainMod}_ALT" = {
+          B = "bluetoothctl disconnect ${defaultHeadphones}";
+        };
       }) ++
       bindWorkspaces mainMod "workspace" ++
       bindWorkspaces appMod "movetoworkspacesilent";
