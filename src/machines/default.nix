@@ -36,8 +36,8 @@ in
           type = attrsOf (submodule {
             options = {
               homeModule = mkOption {
-                type = deferredModule;
-                default = {};
+                type = nullOr deferredModule;
+                default = null;
               };
 
               groups = mkOption {
@@ -76,7 +76,7 @@ in
         then elem true
           (attrValues
           (mapAttrs (_: v:
-            if v.homeModule != {}
+            if v.homeModule != null
             then true
             else false)
           users))
