@@ -39,7 +39,7 @@ let
 in
 {
   config.networking = {
-    hosts."172.16.0.1" = [ "fluorine.lan" ] ++ localDNS;
+    hosts."192.168.10.1" = [ "fluorine.lan" ] ++ localDNS;
 
     firewall.interfaces = mkIf (config.networking.hostName == "fluorine") {
       eno1.allowedUDPPorts = [ peridot.listenPort ];
