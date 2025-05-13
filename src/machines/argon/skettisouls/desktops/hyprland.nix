@@ -88,6 +88,7 @@ in
           "${mainMod}, F, fullscreen"
           "${mainMod}, S, togglefloating"
           "${mainMod}, Tab, togglespecialworkspace"
+          "${appMod}, Tab, movetoworkspacesilent, special"
           "${mainMod}, RETURN, layoutmsg, swapwithmaster master"
           "${mainMod}, J, layoutmsg, cyclenext"
           "${mainMod}, K, layoutmsg, cycleprev"
