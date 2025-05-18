@@ -11,7 +11,10 @@
     nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
     package = pkgs.nix;
     registry = lib.mapAttrs (_: flake: { inherit flake; }) inputs;
-    settings.experimental-features = [ "nix-command" "flakes" ];
+    settings = {
+      download-buffer-size = 524288000;
+      experimental-features = [ "nix-command" "flakes" ];
+    };
 
     extraOptions = ''
       trusted-users = root skettisouls

@@ -25,6 +25,7 @@ in
         repeat_rate = 50;
         repeat_delay = 300;
         follow_mouse = 2;
+        kb_options = "ctrl:nocaps";
       };
 
       bindm = mkDefault [
