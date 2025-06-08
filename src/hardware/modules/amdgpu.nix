@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 {
   config = {
@@ -7,8 +7,9 @@
     hardware.graphics = {
       enable = true;
       enable32Bit = true;
-      extraPackages = with pkgs; [ mesa libva ];
-      extraPackages32 = [ pkgs.driversi686Linux.mesa ];
+      package = lib.mkDefault pkgs.mesa;
+      package32 = lib.mkDefault pkgs.driversi686Linux.mesa;
+      extraPackages = with pkgs; [ libva ];
     };
   };
 }
