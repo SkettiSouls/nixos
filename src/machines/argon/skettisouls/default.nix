@@ -4,11 +4,15 @@
 {
   imports = lib.applyModules ./.;
 
-  home.pointerCursor = {
-    name = "phinger-cursor-dark";
-    package = pkgs.phinger-cursors;
-    size = 24;
-    gtk.enable = true;
+  home = {
+    pointerCursor = {
+      name = "phinger-cursor-dark";
+      package = pkgs.phinger-cursors;
+      size = 24;
+      gtk.enable = true;
+    };
+
+    packages = with pkgs; [ pulsemixer easyeffects ];
   };
 
   programs.bash.profileExtra = ''
