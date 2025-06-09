@@ -24,11 +24,9 @@
 
     environment.systemPackages = with pkgs; [
       btop
-      comma
       fzf
       neovim
-      unzip
-      zip
+      git
     ];
 
     # TODO: Switch to Iosevka

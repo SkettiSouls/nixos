@@ -6,6 +6,7 @@ let
 
   system = "x86_64-linux";
   wpkgs = wrappers.${system};
+  pkgs = inputs.nixpkgs.legacyPackages.${system};
 in
 {
   flake.machines.fluorine = {
@@ -17,7 +18,9 @@ in
       packages = with wpkgs.skettisouls; [
         eza
         neovim
-      ];
+      ] ++ (with pkgs; [
+        lazygit
+      ]);
     };
 
     modules = [
