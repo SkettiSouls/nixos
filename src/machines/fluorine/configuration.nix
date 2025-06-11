@@ -16,6 +16,7 @@ in
     argon
   ];
 
+  boot.kernel.sysctl."net.ipv4.ip_forward" = 1;
   networking = {
     firewall.allowedTCPPorts = [ 80 ];
     interfaces.enp37s0.ipv4.addresses = [{

@@ -44,7 +44,7 @@ in
     firewall.interfaces = mkIf (config.networking.hostName == "fluorine") {
       eno1.allowedUDPPorts = [ peridot.listenPort ];
       peridot = {
-        allowedUDPPorts = steam.ports;
+        allowedUDPPorts = steam.ports ++ minecraft.ports;
         allowedTCPPorts = flatten [
           20
           80

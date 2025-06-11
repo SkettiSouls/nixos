@@ -24,7 +24,7 @@ in
     wireguard = {
       enable = true;
       interfaces.peridot = {
-        ips = peers.${cfg.peer}.allowedIPs;
+        ips = lib.mkDefault peers.${cfg.peer}.allowedIPs;
         listenPort = 51820;
         privateKeyFile = "/var/lib/wireguard/key";
         peers = peersList;

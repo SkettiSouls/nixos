@@ -26,7 +26,7 @@ in
       instances = {
         TerraFirmaGreg = defaultConfig // {
           # On hold (holy shit who chose redstone spawn conditions)
-          enable = false;
+          enable = true;
           jarFile = "minecraft_server.jar";
 
           serverConfig = {

@@ -1,6 +1,6 @@
 {
   fluorine = {
-    allowedIPs = [ "192.168.10.1/32" ];
+    allowedIPs = [ "192.168.10.0/24" ];
     publicKey = "FU6dCHJ5Z33MF1MX4IavAxrh2jgKpBhdRocWB+RcPgg=";
     endpoint = "192.168.1.17:51820";
     persistentKeepalive = 10;
@@ -32,7 +32,7 @@
   };
 
   oganesson = {
-    allowedIPs = [ "192.168.10.255" ];
+    allowedIPs = [ "192.168.10.254" ];
     publicKey = "G2Eoa27pxlD7B2Gy2gKxFTF53y3tmXZCr0monjwtOyg=";
     endpoint = "192.227.194.176:51820";
     persistentKeepalive = 10;
