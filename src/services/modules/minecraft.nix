@@ -8,7 +8,6 @@ let
     serverConfig = {
       allow-flight = true;
       difficulty = 3;
-      max-players = 3;
       online-mode = false; # Allow cracked clients
       player-idle-timeout = 15;
       snooper-enabled = false;
@@ -25,13 +24,13 @@ in
       eula = true;
       instances = {
         TerraFirmaGreg = defaultConfig // {
-          # On hold (holy shit who chose redstone spawn conditions)
           enable = true;
           jarFile = "minecraft_server.jar";
 
           serverConfig = {
             allow-nether = false;
             level-name = "Monkey Men";
+            level-type = "tfc\:overworld";
             motd = "[TerraFirmaGreg 1.20.1] Make rocks think";
             server-port = 25565;
             view-distance = 8;
@@ -52,12 +51,25 @@ in
         };
 
         steampunk = defaultConfig // {
-          enable = true;
+          # Nobody else wants to play :(
+          enable = false;
 
           serverConfig = {
             level-name = "Gearheads";
             level-type = "default";
             motd = "[SteamPunk] Get rotated loser";
+            server-port = 25567;
+          };
+        };
+
+        hardrock = defaultConfig // {
+          enable = true;
+          startScript = "java $JVMOPTS @libraries/net/minecraftforge/forge/1.18.2-40.2.21/unix_args.txt nogui";
+
+          serverConfig = {
+            level-name = "Euphamism";
+            level-type = "tfc\:tng";
+            motd = "[TerraFirmaCraft HardRock] She craft my rock till I'm hard";
             server-port = 25567;
           };
         };
