@@ -23,6 +23,7 @@ in
     programs.chromium = {
       enable = true;
       package = lib.mkDefault cfg.package;
+      commandLineArgs = [ "--enable-features=UseOzonePlatform --ozone-platform-hint=wayland" ];
       extensions = [
         { id = "hfjbmagddngcpeloejdejnfgbamkjaeg"; } # Vimium C
         { id = "oboonakemofpalcgghocfoadofidjkkk"; } # KeePassXC-Browser

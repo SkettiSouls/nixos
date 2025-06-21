@@ -4,10 +4,18 @@
   boot.kernelPackages = pkgs.unstable.linuxPackages_6_14;
   hardware.enableRedistributableFirmware = true;
 
-  regolith.hyprland = {
-    enable = true;
-    matchMesaVersion = true;
-    withUWSM = true;
+  regolith = {
+    hyprland = {
+      enable = true;
+      matchMesaVersion = true;
+      withUWSM = true;
+    };
+
+    niri = {
+      enable = true;
+      withUWSM = true;
+      xwayland.enable = true;
+    };
   };
 
   # TODO: Find a way to move this to hm
