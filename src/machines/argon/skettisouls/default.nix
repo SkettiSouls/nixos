@@ -66,7 +66,6 @@
       launcher = "fuzzel";
     };
 
-
     launchers.fuzzel.enable = true;
 
     neofetch.trollOS.enable = true;

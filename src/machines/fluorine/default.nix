@@ -28,9 +28,8 @@ in
       packages = with wpkgs.skettisouls; [
         eza
         neovim
-      ] ++ (with pkgs; [
         lazygit
-      ]);
+      ];
     };
 
     modules = [

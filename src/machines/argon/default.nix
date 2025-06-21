@@ -25,6 +25,7 @@ in
           eza
           feishin
           nushell
+          lazygit
         ];
       };
     };

@@ -1,24 +1,43 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 let
-  gitConfig.init = builtins.readFile ./gitconfig;
-  gitConfig.addGPG = gitConfig.init + ''
-    program = "${pkgs.gnupg}/bin/gpg2"
+  gitConfig = pkgs.writeText "gitconfig" ''
+    [commit]
+      gpgSign = true
+
+    [gpg]
+      format = "ssh"
+
+    [gpg "openpgp"]
+      program = "${pkgs.gnupg}/bin/gpg"
+
+    [pull]
+      rebase = false
+
+    [tag]
+      gpgSign = true
+
+    [user]
+      email = "skettisouls@gmail.com"
+      name = "SkettiSouls"
+      signingKey = "/home/skettisouls/.keys/ssh/git.key"
   '';
-  gitConfig.final = pkgs.writeText "gitconfig-final" gitConfig.addGPG;
 in
 {
   wrappers.git = {
-    basePackage = pkgs.gitFull;
+    basePackage = pkgs.git.overrideAttrs (prev: {
+      passthru = { inherit gitConfig; };
+    });
+
     extraPackages = [ pkgs.git-extras ];
 
-    programs.git.env = {
-      GIT_CONFIG_GLOBAL.value = gitConfig.final;
+    env = {
+      GIT_CONFIG_GLOBAL.value = "${gitConfig}";
     };
   };
 
   wrappers.lazygit = {
     basePackage = pkgs.lazygit;
-
+    pathAdd = [ config.wrappers.git.wrapped ];
     prependFlags = [ "--use-config-file" ./lazygit.yml ];
   };
 }

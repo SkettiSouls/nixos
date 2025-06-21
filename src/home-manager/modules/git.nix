@@ -8,14 +8,14 @@ in
 {
   config.programs = {
     git = {
-      enable = true;
+      enable = mkDefault true;
 
       signing.key = mkDefault "${config.home.homeDirectory}/.ssh/id_ed25519";
       signing.signByDefault = mkDefault true;
 
       extraConfig = {
         gpg.format = mkDefault "ssh";
-        pull.rebase = mkForce false;
+        pull.rebase = mkDefault false;
       };
     };
 

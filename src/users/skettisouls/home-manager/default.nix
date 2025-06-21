@@ -35,11 +35,17 @@ in
       };
     };
 
-    programs.git = {
-      userName = "SkettiSouls";
-      userEmail = "skettisouls@gmail.com";
+    programs = {
+      lazygit.enable = false;
+      git.enable = false;
 
-      signing.key = home + "/.keys/ssh/git.key";
+      # Still set user specific git config in case I want to us the hm module again
+      git = {
+        userName = "SkettiSouls";
+        userEmail = "skettisouls@gmail.com";
+
+        signing.key = home + "/.keys/ssh/git.key";
+      };
     };
 
     basalt = {

@@ -1,4 +1,5 @@
 git:
+  overrideGpg: true
   commit:
     autoWrapCommitMessage: false
   mainBranches:
