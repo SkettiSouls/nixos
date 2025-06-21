@@ -4,6 +4,6 @@
   wrappers.eza = {
     basePackage = pkgs.eza;
 
-    flags = [ "--icons=always" "--group-directories-first" ];
+    prependFlags = [ "--icons=always" "--group-directories-first" ];
   };
 }

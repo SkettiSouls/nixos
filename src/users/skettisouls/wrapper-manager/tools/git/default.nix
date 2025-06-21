@@ -11,7 +11,7 @@ in
     basePackage = pkgs.gitFull;
     extraPackages = [ pkgs.git-extras ];
 
-    env = {
+    programs.git.env = {
       GIT_CONFIG_GLOBAL.value = gitConfig.final;
     };
   };
@@ -19,6 +19,6 @@ in
   wrappers.lazygit = {
     basePackage = pkgs.lazygit;
 
-    flags = [ "--use-config-file" ./lazygit.yml ];
+    prependFlags = [ "--use-config-file" ./lazygit.yml ];
   };
 }

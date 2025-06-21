@@ -5,6 +5,6 @@
     basePackage = pkgs.unstable.qutebrowser;
     pathAdd = with pkgs; [ rofi gnupg ];
 
-    flags = [ "--config-py" ./config.py ];
+    programs.qutebrowser.prependFlags = [ "--config-py" ./config.py ];
   };
 }
