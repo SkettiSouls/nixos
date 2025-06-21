@@ -47,6 +47,11 @@
     desktops = {
       hyprland.enable = true;
 
+      niri = {
+        enable = true;
+        package = null;
+      };
+
       river = {
         enable = true;
         windowRules = {
