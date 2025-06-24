@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 {
-  boot.kernelPackages = pkgs.unstable.linuxPackages_6_14;
+  boot.kernelPackages = pkgs.linuxPackages_6_14;
   hardware.enableRedistributableFirmware = true;
 
   regolith = {

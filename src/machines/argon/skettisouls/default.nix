@@ -35,7 +35,7 @@
 
       qutebrowser = {
         enable = true;
-        package = pkgs.unstable.qutebrowser;
+        package = pkgs.qutebrowser;
       };
 
       firefox = {
