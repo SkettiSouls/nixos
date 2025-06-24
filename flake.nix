@@ -37,7 +37,6 @@
       inputs = {
         nixpkgs.follows = "nixpkgs-unstable";
         flake-parts.follows = "flake-parts";
-        wrapper-manager.follows = "wrapper-manager";
         rust-overlay.follows = "rust-overlay";
       };
     };

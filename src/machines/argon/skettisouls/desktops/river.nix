@@ -4,16 +4,11 @@ let
   inherit (lib) mkIf;
   inherit (self.lib) exponent;
 
-  inherit (config)
-    basalt
-    nixcord
-    regolith
-    ;
+  inherit (config.basalt) discord;
+  inherit (config.nixcord) vencord vesktop;
+  inherit (config.flake.wrappers.${pkgs.system}.skettisouls) polyphasia;
 
-  inherit (basalt) discord;
-  inherit (nixcord) vencord vesktop;
-
-  inherit (regolith.river.variables)
+  inherit (config.regolith.river.variables)
     altMod
     appMod
     modKey
@@ -28,26 +23,8 @@ let
   discordAppId = if vesktop.enable then "vesktop" else "discord";
 
   defaultBrowser = config.xdg.browser.default;
-  defaultHeadphones = basalt.headphones.default;
+  defaultHeadphones = config.basalt.headphones.default;
   cfg = config.basalt.desktops.river;
-
-  sleep = {
-    cores = with builtins;
-      toFile "polyphasia.json" (toJSON [
-        {
-          start = 0.0;
-          duration = 1.5;
-        }
-        {
-          start = 6.0;
-          duration = 1.0;
-        }
-        {
-          start = 11.5;
-          duration = 1.5;
-        }
-      ]);
-  };
 in
 {
   config = mkIf cfg.enable {
@@ -67,7 +44,7 @@ in
       startup.apps = [
         "dunst &"
         "chp ${defaultHeadphones}"
-        "polyphasia ${sleep.cores} --padding 2"
+        "polyphasia"
 
         defaultBrowser
         (mkIf discord.enable "${discordClient}")

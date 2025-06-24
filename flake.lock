@@ -712,17 +712,14 @@
         ],
         "rust-overlay": [
           "rust-overlay"
-        ],
-        "wrapper-manager": [
-          "wrapper-manager"
         ]
       },
       "locked": {
-        "lastModified": 1745927470,
-        "narHash": "sha256-wxYKOcqvQ5PnE+ggNes5EjVaJZpzOQpjA/8iZzC3KEg=",
+        "lastModified": 1750560971,
+        "narHash": "sha256-YvI5b08eEl3EYo0BHSrEEKZhj/pgmUa/zxHC5h4Cp54=",
         "ref": "refs/heads/master",
-        "rev": "b0eb713fd8ae711bcc5536808e9dc490bf1fdeea",
-        "revCount": 8,
+        "rev": "b47bf24c6c7c168ca510c1e50d218594fb0476e0",
+        "revCount": 29,
         "type": "git",
         "url": "https://codeberg.org/skettisouls/polyphasia"
       },
