@@ -3,5 +3,5 @@
 {
   imports =
     (lib.getModulesExcept [ "polyphasia" ] ./.)
-    ++ [(withArgs ./tools/polyphasia/default.nix {})];
+    ++ [(withArgs ./misc/polyphasia/default.nix {})];
 }
