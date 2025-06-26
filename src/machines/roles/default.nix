@@ -1,3 +1,5 @@
+{ ... }:
+
 {
   flake.roles = {
     desktop = ./desktop.nix;

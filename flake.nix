@@ -130,7 +130,6 @@
       machines = withArgs ./src/machines {};
       nixos = withArgs ./src/nixos {};
       packages = import ./src/packages;
-      roles = import ./src/roles;
       services = withArgs ./src/services {};
       shells = withArgs ./src/shells {};
       users = withArgs ./src/users {};

@@ -96,7 +96,6 @@ in
             nixpkgs.overlays = [
               (final: prev: with flake.inputs; {
                 bin = bin.packages.${system};
-                polyphasia = polyphasia.packages.${system}.default;
                 regolith = config.flake.packages.${system};
 
                 unstable = import nixpkgs-unstable {
