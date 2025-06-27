@@ -118,6 +118,11 @@
             map
             (file: withArgs file {})
             (prev.getModules src);
+
+          applyModulesExcept = src: xcpts:
+            map
+            (file: withArgs file {})
+            (prev.getModulesExcept xcpts src);
         });
       } // args);
   in

@@ -24,6 +24,6 @@ in
 
   config = mkIf cfg.enable {
     home.packages = mkIf (cfg.package != null) [ cfg.package ];
-    xdg.configFile."niri/config.kdl".source = ./niri-config.kdl;
+    xdg.configFile."niri/config.kdl".source = ./config.kdl;
   };
 }

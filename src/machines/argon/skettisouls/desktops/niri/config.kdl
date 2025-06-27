@@ -1,15 +1,15 @@
 input {
     keyboard {
         xkb {
-			layout "us"
-			options "ctrl:nocaps"
+	    layout "us"
+	    options "ctrl:nocaps"
         }
 
         // Enable numlock on startup
         numlock
 
-		repeat-delay 300
-		repeat-rate 50
+	repeat-delay 300
+	repeat-rate 50
     }
 
     mouse {
@@ -69,8 +69,8 @@ layout {
     struts {
         left 6
         right 6
-		top 6
-		bottom 6
+	top 6
+	bottom 6
     }
 }
 
@@ -80,7 +80,7 @@ cursor {
 
 gestures {
     hot-corners {
-		off
+	off
     }
 }
 
@@ -95,12 +95,40 @@ screenshot-path "~/Pictures/screenshots/%Y-%m-%d %H-%M-%S.png"
 
 prefer-no-csd
 
-// *X*: This config should be unneeded in the next version of niri
-spawn-at-startup "xwayland-satellite" ":12" // *X*
+workspace "browser"
+workspace "media"
+workspace "gaming"
 
-environment {
-    DISPLAY ":12" // *X*
-    ELECTRON_OZONE_PLATFORM_HINT "wayland"
+window-rule {
+    match at-startup=true app-id=r#"(?i)discord"#
+    match at-startup=true app-id=r#"(?i)vesktop"#
+    match at-startup=true app-id=r#"(?i)dorion"#
+    match at-startup=true title=r#"(?i)discord"# // Should cover all other discord clients
+
+    open-on-workspace "media"
+    open-maximized true
+    open-focused false
+}
+
+window-rule {
+    match at-startup=true app-id=r#"com\.github\.wwmm\.easyeffects"#
+    match at-startup=true title=r#"bluetuith"#
+    match at-startup=true title=r#"pulsemixer"#
+
+    open-on-workspace "media"
+    open-focused false
+}
+
+window-rule {
+    match at-startup=true app-id=r#"nyxt"#
+    match at-startup=true app-id=r#"brave"#
+    match at-startup=true app-id=r#"luakit"#
+    match at-startup=true app-id=r#"firefox"#
+    match at-startup=true app-id=r#"org\.qutebrowser\.qutebrowser"#
+
+    open-on-workspace "browser"
+    open-maximized true
+    open-focused false
 }
 
 // Work around WezTerm's initial configure bug
@@ -161,6 +189,18 @@ window-rule {
     clip-to-geometry true
 }
 
+// *X*: This config should be unneeded in the next version of niri
+spawn-at-startup "xwayland-satellite" ":12" // *X*
+spawn-at-startup "brave"
+spawn-at-startup "discordcanary"
+spawn-at-startup "kitty" "bluetuith"
+spawn-at-startup "kitty" "pulsemixer"
+spawn-at-startup "easyeffects"
+
+environment {
+    DISPLAY ":12" // *X*
+    ELECTRON_OZONE_PLATFORM_HINT "wayland"
+}
 
 binds {
     Mod+Shift+Return hotkey-overlay-title="Open a terminal: kitty" { spawn "kitty"; }

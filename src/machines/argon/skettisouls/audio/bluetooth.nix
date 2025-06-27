@@ -1,5 +1,5 @@
 { ... }:
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 let
   inherit (lib)
     mkEnableOption
@@ -20,6 +20,7 @@ in
     programs.bash.profileExtra = "chp ${headphones.default}"; # Connect headphones automatically on login/ ensure connection on rebuild.
 
     services.mpris-proxy.enable = true;
+    home.packages = with pkgs; [ bluetuith ];
 
     xdg.configFile = {
       "wireplumber/wireplumber.conf.d/51-disable-hsp-codec.conf".text = ''
