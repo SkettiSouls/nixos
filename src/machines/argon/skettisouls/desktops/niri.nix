@@ -116,6 +116,17 @@ in
       binds = with config.lib.niri.actions; let
         sh = spawn "bash" "-c";
 
+        muteOSD = "${pkgs.regolith.quickshell-mute-osd}/bin/quickshell-mute-osd";
+        toggleMic = pkgs.writeShellScript "mic-toggle.sh" ''
+          if "$(${muteOSD} --check)"; then
+            ${muteOSD} --die
+            wpctl set-mute @DEFAULT_AUDIO_SOURCE@ 0
+          else
+            ${muteOSD} &
+            wpctl set-mute @DEFAULT_AUDIO_SOURCE@ 1
+          fi
+        '';
+
         bindWorkspaces = mod: action:
           listToAttrs'
             (map
@@ -160,6 +171,11 @@ in
           "Mod+S".action       = set-dynamic-cast-monitor;
           "Mod+Shift+S".action = set-dynamic-cast-window;
           "Mod+Ctrl+S".action  = clear-dynamic-cast-target;
+
+          "Mod+MouseBack" = {
+            action.spawn = "${toggleMic}";
+            hotkey-overlay.title = "Mute/unmute microphone";
+          };
 
           "Mod+B" = {
             action = spawn "chp" defaultHeadphones;
