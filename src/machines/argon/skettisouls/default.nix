@@ -46,11 +46,7 @@
 
     desktops = {
       hyprland.enable = true;
-
-      niri = {
-        enable = true;
-        package = null;
-      };
+      niri.enable = true;
 
       river = {
         enable = true;

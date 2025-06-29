@@ -15,6 +15,7 @@
       enable = true;
       withUWSM = true;
       xwayland.enable = true;
+      useUnstable = true;
     };
   };
 

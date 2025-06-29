@@ -1,62 +1,48 @@
+{ inputs, ... }:
 { config, lib, pkgs, ... }:
 let
   inherit (lib)
     mkEnableOption
     mkIf
-    mkOption
-    types
     ;
 
   cfg = config.regolith.niri;
 in
 {
-  options.regolith.niri = {
-    enable = mkEnableOption "Niri";
-    withUWSM = mkEnableOption "Universal wayland session manager integration";
-    xwayland.enable = mkEnableOption "XWayland";
+  imports = [ inputs.niri.nixosModules.niri ];
 
-    package = mkOption {
-      type = types.package;
-      default = pkgs.niri;
-    };
+  options.regolith.niri = {
+    enable = mkEnableOption "niri";
+    withUWSM = mkEnableOption "universal wayland session manager integration";
+    xwayland.enable = mkEnableOption "XWayland";
+    useUnstable = mkEnableOption "the unstable packages for niri and xwayland-satellite";
   };
 
-  config = mkIf cfg.enable (
-    lib.mkMerge [
-      {
-        environment.systemPackages = [ cfg.package ];
+  config = mkIf cfg.enable {
+    nixpkgs.overlays = [ inputs.niri.overlays.niri ];
 
-        programs.dconf.enable = true;
-        security.polkit.enable = true;
-        services.graphical-desktop.enable = true;
+    environment.systemPackages =
+      lib.optionals cfg.xwayland.enable
+      (if cfg.useUnstable
+      then [ pkgs.xwayland-satellite-unstable ]
+      else [ pkgs.xwayland-satellite-stable ]);
 
-        xdg.portal = {
-          enable = true;
-          configPackages = [ cfg.package ];
-          extraPortals = [ pkgs.xdg-desktop-portal-gnome ];
+    programs = {
+      niri = {
+        enable = true;
+        package = mkIf cfg.useUnstable pkgs.niri-unstable;
+      };
+
+      uwsm = mkIf cfg.withUWSM {
+        enable = true;
+        waylandCompositors.niri = {
+          prettyName = "Niri";
+          comment = "Niri compositor managed by UWSM";
+          binPath = "/run/current-system/sw/bin/niri-session";
         };
-      }
+      };
 
-      (mkIf cfg.withUWSM {
-        programs.uwsm = {
-          enable = true;
-          waylandCompositors.niri = {
-            prettyName = "Niri";
-            comment = "Niri compositor managed by UWSM";
-            binPath = "/run/current-system/sw/bin/niri-session";
-          };
-        };
-      })
-
-      (mkIf (!cfg.withUWSM) {
-        systemd.packages = [ cfg.package ];
-        services.displayManager.sessionPackages = [ cfg.package ];
-      })
-
-      (mkIf cfg.xwayland.enable {
-        environment.systemPackages = [ pkgs.xwayland-satellite ];
-        programs.xwayland.enable = true;
-      })
-    ]
-  );
+      xwayland.enable = cfg.xwayland.enable;
+    };
+  };
 }

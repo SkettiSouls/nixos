@@ -52,7 +52,7 @@
     };
   # }}}
 
-  # Hyprland {{{
+  # Wayland {{{
     hyprland = {
       type = "git";
       url = "https://github.com/hyprwm/hyprland";
@@ -64,6 +64,8 @@
       inputs.nixpkgs.follows = "hyprland";
       inputs.hyprutils.follows = "hyprland";
     };
+
+    niri.url = "github:sodiboo/niri-flake";
   # }}}
 
   # Discord {{{
