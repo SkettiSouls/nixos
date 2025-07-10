@@ -21,6 +21,13 @@
     fi
   '';
 
+  services.wpaperd = {
+    enable = true;
+    settings = {
+      any.path = "${flakeRoot}/etc/images/wallpapers/urple.jpg";
+    };
+  };
+
   basalt = {
     audio.bluetooth.enable = true;
     discord.enable = true;
@@ -58,16 +65,12 @@
     };
 
     defaultApps = {
-      browser = "firefox";
+      browser = "brave";
       launcher = "fuzzel";
     };
 
     launchers.fuzzel.enable = true;
 
     neofetch.trollOS.enable = true;
-
-    wallpapers = {
-      suncat = "${flakeRoot}/etc/images/wallpapers/suncat.jpg";
-    };
   };
 }

@@ -1,4 +1,4 @@
-self@{ lib, ... }:
+self@{ lib, flakeRoot, ... }:
 { config, lib, pkgs, ... }:
 let
   inherit (lib) mkEnableOption mkIf;
@@ -21,7 +21,13 @@ in
   };
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [ wezterm ];
+    home.packages = with pkgs; [
+      bin.chp
+      dunst
+      wezterm
+      wl-clipboard
+    ];
+
     xdg.portal = {
       enable = true;
 
@@ -370,20 +376,19 @@ in
 
           matches = [{ is-window-cast-target = true; }];
         })
-        # Allow certain RuneLite windows to float
+        # Open RuneLite popups as floating windows
         {
           open-floating = true;
-          matches = [
-            { app-id = "RuneLite$"; title = "Warning"; } # Confirmation popups
-            { app-id = "RuneLite$"; title = "RuneLite Launcher"; } # Splash
-          ];
+          matches = [{ app-id = "^net-runelite"; }];
         }
-        # Unfuckulate RuneLite's ui by preventing it from trying to resize
+        # Open the RuneLite game window as a maximized tile
         # NOTE: Setting `Resize type` to `Keep window size` is REQUIRED to prevent the sidebar going offscreen
         {
           open-floating = false;
           open-maximized = true;
-          matches = [{ app-id = "RuneLite$"; }];
+
+          excludes = [{ title = "RuneLite Launcher"; }];
+          matches = [{ app-id = "RuneLite$"; title = "RuneLite"; }];
         }
       ]; # }}}
     };
