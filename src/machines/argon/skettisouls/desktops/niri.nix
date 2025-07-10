@@ -354,10 +354,13 @@ in
 
           matches = [{ is-window-cast-target = true; }];
         })
-        # Open RuneLite's splash window as floating
+        # Allow certain RuneLite windows to float
         {
           open-floating = true;
-          matches = [{ title = "RuneLite Launcher"; }];
+          matches = [
+            { app-id = "RuneLite$"; title = "Warning"; } # Confirmation popups
+            { app-id = "RuneLite$"; title = "RuneLite Launcher"; } # Splash
+          ];
         }
         # Unfuckulate RuneLite's ui by preventing it from trying to resize
         # NOTE: Setting `Resize type` to `Keep window size` is REQUIRED to prevent the sidebar going offscreen
