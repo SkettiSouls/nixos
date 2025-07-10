@@ -45,11 +45,11 @@
     };
 
     desktops = {
-      hyprland.enable = true;
+      hyprland.enable = false;
       niri.enable = true;
 
       river = {
-        enable = true;
+        enable = false;
         windowRules = {
           steam.enable = true;
           keepassxc.enable = true;
