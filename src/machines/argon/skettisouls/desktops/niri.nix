@@ -22,6 +22,7 @@ in
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [ wezterm ];
+
     programs.niri.settings = {
       cursor.size = 24;
       gestures.hot-corners.enable = false;
@@ -353,6 +354,18 @@ in
 
           matches = [{ is-window-cast-target = true; }];
         })
+        # Open RuneLite's splash window as floating
+        {
+          open-floating = true;
+          matches = [{ title = "RuneLite Launcher"; }];
+        }
+        # Unfuckulate RuneLite's ui by preventing it from trying to resize
+        # NOTE: Setting `Resize type` to `Keep window size` is REQUIRED to prevent the sidebar going offscreen
+        {
+          open-floating = false;
+          open-maximized = true;
+          matches = [{ app-id = "RuneLite$"; }];
+        }
       ]; # }}}
     };
   };
