@@ -28,7 +28,6 @@
         flake-parts.follows = "flake-parts";
         nixpkgs.follows = "nixpkgs-unstable";
         utils.follows = "utils";
-        wrapper-manager.follows = "wrapper-manager";
       };
     };
 

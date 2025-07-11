@@ -551,17 +551,14 @@
         "plugins": "plugins",
         "utils": [
           "utils"
-        ],
-        "wrapper-manager": [
-          "wrapper-manager"
         ]
       },
       "locked": {
-        "lastModified": 1747597156,
-        "narHash": "sha256-aoAI/mRJj6CASlimjm5F6lv6GAhEnkjT5a2sqLcuiaQ=",
+        "lastModified": 1752197695,
+        "narHash": "sha256-2g8ffB5yP3AHuVH4WkeM4kXik+lgEC8p6jWKg5nI+RI=",
         "ref": "refs/heads/master",
-        "rev": "28cccc6d47421c1e454d33df1161c4d67cae7793",
-        "revCount": 72,
+        "rev": "6bde16b3d339cc682e975fb91d90d24e1a18f826",
+        "revCount": 74,
         "type": "git",
         "url": "https://codeberg.org/skettisouls/neovim"
       },
