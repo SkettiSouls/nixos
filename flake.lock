@@ -698,6 +698,22 @@
         "type": "github"
       }
     },
+    "nixpkgs-openmw": {
+      "locked": {
+        "lastModified": 1751957769,
+        "narHash": "sha256-aHHhrleoPwb5pOVANt1R8ojYhRoqyL6wnu4flVrnzu4=",
+        "owner": "SigmaSquadron",
+        "repo": "nixpkgs",
+        "rev": "bc61567d64427bfdd6e5e38461708a6d7146fa99",
+        "type": "github"
+      },
+      "original": {
+        "owner": "SigmaSquadron",
+        "ref": "push-mysovyvvvsrm",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixpkgs-stable": {
       "locked": {
         "lastModified": 1750838302,
@@ -851,6 +867,7 @@
         "nix-mc": "nix-mc",
         "nixcord": "nixcord",
         "nixpkgs": "nixpkgs_3",
+        "nixpkgs-openmw": "nixpkgs-openmw",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "polyphasia": "polyphasia",
         "rust-overlay": "rust-overlay",

@@ -27,9 +27,10 @@ in
       };
     };
 
-    vencord = import ./plugins.nix // {
+    vencord = /* import ./plugins.nix // */ {
       enable = true;
       package = pkgs.unstable.discord-canary;
+      plugins = {};
       settings = {
         autoUpdate = true;
         notifyAboutUpdates = false;

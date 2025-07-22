@@ -21,6 +21,7 @@ in
 
       steam = {
         enable = true;
+        protontricks.enable = true;
         extraCompatPackages = with pkgs; [ unstable.proton-ge-bin steamtinkerlaunch ];
         package = mkDefault (pkgs.steam.override {
           extraEnv = {
