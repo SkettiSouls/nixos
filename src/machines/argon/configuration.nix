@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 {
-  boot.kernelPackages = pkgs.linuxPackages_6_14;
+  boot.kernelPackages = pkgs.chaotic.linuxPackages_cachyos;
   hardware.enableRedistributableFirmware = true;
 
   regolith = {
@@ -16,6 +16,17 @@
       withUWSM = true;
       xwayland.enable = true;
       useUnstable = true;
+    };
+
+    steam = {
+      package = pkgs.steam.override {
+        extraEnv = {
+          MANGOHUD = true;
+          OBS_VKCAPTURE = true; # Used for obs vulkan capture plugin
+        };
+      };
+
+      protonPackages = with pkgs; [ chaotic.proton-cachyos ];
     };
   };
 

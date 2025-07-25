@@ -1,13 +1,8 @@
-{ lib, pkgs, ... }:
-let
-  inherit (lib) mkDefault;
-in
+{ pkgs, ... }:
+
 {
   # TODO: More gaming changes
   config = {
-    # Enable Steam hardware (Steam Controller, HTC Vive, etc...)
-    hardware.steam-hardware.enable = true;
-
     environment.systemPackages = with pkgs; [
       heroic
       prismlauncher
@@ -15,21 +10,13 @@ in
       winetricks
     ];
 
-    programs = {
-      gamemode.enable = mkDefault true;
-      gamescope.enable = lib.mkOverride 999 true; # `mkDefault true` conflicts with `programs.steam.gamescopeSession = false`.
-
-      steam = {
-        enable = true;
-        protontricks.enable = true;
-        extraCompatPackages = with pkgs; [ unstable.proton-ge-bin steamtinkerlaunch ];
-        package = mkDefault (pkgs.steam.override {
-          extraEnv = {
-            MANGOHUD = true;
-            OBS_VKCAPTURE = true; # Used for obs vulkan capture plugin
-          };
-        });
-      };
+    regolith.steam = {
+      enable = true;
+      protontricks.enable = true;
+      protonPackages = with pkgs; [
+        steamtinkerlaunch
+        unstable.proton-ge-bin
+      ];
     };
   };
 }

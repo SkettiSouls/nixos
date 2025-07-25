@@ -8,6 +8,7 @@
     hyprland = withArgs ./modules/hyprland.nix {};
     niri = withArgs ./modules/niri.nix {};
     pipewire = import ./modules/pipewire.nix;
+    steam = import ./modules/steam.nix;
     systemd-boot = import ./modules/systemd-boot.nix;
 
     # Stolen from lunarix
