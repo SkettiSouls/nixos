@@ -1,5 +1,8 @@
 { pkgs, ... }:
-
+let
+  proton-ge-base = pkgs.unstable.proton-ge-bin;
+  proton-ge = proton-ge-base.override { steamDisplayName = proton-ge-base.version; };
+in
 {
   # TODO: More gaming changes
   config = {
@@ -14,8 +17,8 @@
       enable = true;
       protontricks.enable = true;
       protonPackages = with pkgs; [
+        proton-ge
         steamtinkerlaunch
-        unstable.proton-ge-bin
       ];
     };
   };
