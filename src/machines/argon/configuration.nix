@@ -6,7 +6,7 @@
 
   regolith = {
     hyprland = {
-      enable = true;
+      enable = false;
       matchMesaVersion = true;
       withUWSM = true;
     };

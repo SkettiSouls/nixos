@@ -7,8 +7,8 @@
     hardware.graphics = {
       enable = true;
       enable32Bit = true;
-      package = lib.mkDefault pkgs.mesa;
-      package32 = lib.mkDefault pkgs.driversi686Linux.mesa;
+      package = pkgs.mesa;
+      package32 = pkgs.driversi686Linux.mesa;
       extraPackages = with pkgs; [ libva ];
     };
   };

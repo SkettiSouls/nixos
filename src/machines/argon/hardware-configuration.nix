@@ -21,7 +21,7 @@
 
     "/" = {
       device = "/dev/disk/by-id/ata-Samsung_SSD_870_EVO_1TB_S625NJ0R407709B-part2";
-      fsType = "btrfs";
+      fsType = "ext4";
     };
 
     "/home/skettisouls/Games" = {

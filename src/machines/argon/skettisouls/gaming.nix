@@ -5,7 +5,8 @@
   config = {
     home.packages = with pkgs; [
       bolt-launcher
-      inputs.nixpkgs-openmw.legacyPackages.${pkgs.system}.openmw
+      # Fails to build
+      # inputs.nixpkgs-openmw.legacyPackages.${pkgs.system}.openmw
     ];
   };
 }

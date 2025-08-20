@@ -8,7 +8,7 @@
 
   argon = {
     allowedIPs = [ "192.168.10.2/32" ];
-    publicKey = "bk06qmrZbETsEsMMLkk2JcvKFzMCT10tcUs590YdEGE=";
+    publicKey = "tJo5Pl9j/UhOtrj+3IWz/lj8+XBvlnqmBOY2oeTeB3s=";
   };
 
   xenon = {

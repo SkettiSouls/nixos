@@ -935,11 +935,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1750560971,
-        "narHash": "sha256-YvI5b08eEl3EYo0BHSrEEKZhj/pgmUa/zxHC5h4Cp54=",
+        "lastModified": 1750600932,
+        "narHash": "sha256-n5LqfaJpl/4wnbr3vhY4H0eG5blHUXKhRdbDSkFuTU8=",
         "ref": "refs/heads/master",
-        "rev": "b47bf24c6c7c168ca510c1e50d218594fb0476e0",
-        "revCount": 29,
+        "rev": "1db88e402db78961e85e4150936ca34806ce9968",
+        "revCount": 30,
         "type": "git",
         "url": "https://codeberg.org/skettisouls/polyphasia"
       },
