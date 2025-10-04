@@ -2,11 +2,10 @@
   inputs = {
   # Base {{{
     flake-parts.url = "github:hercules-ci/flake-parts";
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     # Bleeding
-    nixpkgs-openmw.url = "github:SigmaSquadron/nixpkgs/push-mysovyvvvsrm";
     nyxpkgs.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
 
     home-manager = {
