@@ -4,8 +4,6 @@ let
   inherit (lib) mkIf;
   inherit (self.lib) exponent;
 
-  inherit (config.basalt) discord;
-  inherit (config.nixcord) vencord vesktop;
   inherit (config.flake.wrappers.${pkgs.system}.skettisouls) polyphasia;
 
   inherit (config.regolith.river.variables)
@@ -17,10 +15,6 @@ let
     ;
 
   mkTag = tag: toString (exponent 2 (tag - 1));
-
-  # Discord's canary branch has a different binary name than package name, and uses "discord" as the app-id
-  discordClient = if lib.getName vencord.finalPackage == "discord-canary" then "discordcanary" else lib.getName vencord.finalPackage;
-  discordAppId = if vesktop.enable then "vesktop" else "discord";
 
   defaultBrowser = config.xdg.browser.default;
   defaultHeadphones = config.basalt.headphones.default;
@@ -47,7 +41,8 @@ in
         "polyphasia"
 
         defaultBrowser
-        (mkIf discord.enable "${discordClient}")
+
+        "discord"
         "steam"
         "feishin"
         "keepassxc"
@@ -56,7 +51,7 @@ in
 
       rules = {
         byId = {
-          ${discordAppId} = mkIf discord.enable { tags = 2; };
+          discord = { tags = 2; };
           feishin = { tags = 10; };
           firefox = { ssd = true; };
           Sonixd = { tags = 10; };
@@ -83,7 +78,7 @@ in
 
             # Open Apps
             "${appMod} B" = "spawn ${defaultBrowser}";
-            "${appMod} D" = mkIf discord.enable "spawn ${discordClient}";
+            "${appMod} D" = "spawn discord";
             "${appMod} S" = "spawn steam";
 
             # Music

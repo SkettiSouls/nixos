@@ -3,14 +3,8 @@ self@{ lib, flakeRoot, ... }:
 let
   inherit (lib) mkEnableOption mkIf;
   inherit (self.lib) listToAttrs';
-  inherit (config.nixcord) vencord;
 
-  # Discord's canary branch has a different binary name than package name
-  discordClient =
-    if lib.getName vencord.finalPackage == "discord-canary"
-    then "discordcanary"
-    else lib.getName vencord.finalPackage;
-
+  discordClient = "discord";
   defaultBrowser = config.xdg.browser.default;
   defaultHeadphones = config.basalt.headphones.default;
   cfg = config.basalt.desktops.niri;

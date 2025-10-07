@@ -6,8 +6,6 @@ let
     types
     ;
 
-  inherit (config.nixcord) vesktop;
-
   desktopEntries = {
     brave = "brave.desktop";
     qutebrowser = "org.qutebrowser.qutebrowser.desktop";
@@ -49,12 +47,7 @@ in
   config.xdg = {
     mimeApps = {
       enable = true;
-      defaultApplications = lib.mkMerge [
-        (mkIf (cfg.default != null) browserMimelist)
-        {
-          "x-scheme-handler/discord" = mkIf vesktop.enable ["Vesktop.desktop"];
-        }
-      ];
+      defaultApplications = mkIf (cfg.default != null) browserMimelist;
     };
   };
 }

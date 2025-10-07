@@ -105,7 +105,7 @@ in
           "${appMod}" = {
             RETURN = "kitty";
             B = defaultBrowser;
-            D = "discordcanary";
+            D = "discord";
           };
 
           "${altMod}" = {

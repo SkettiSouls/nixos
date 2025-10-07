@@ -12,7 +12,11 @@
       gtk.enable = true;
     };
 
-    packages = with pkgs; [ pulsemixer easyeffects ];
+    packages = with pkgs; [
+      easyeffects
+      pulsemixer
+      unstable.discord
+    ];
   };
 
   programs.bash.profileExtra = ''
@@ -30,7 +34,6 @@
 
   basalt = {
     audio.bluetooth.enable = true;
-    discord.enable = true;
     kitty.enable = true;
     mpv.enable = true;
 

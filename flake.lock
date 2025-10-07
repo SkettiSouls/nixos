@@ -581,22 +581,6 @@
         "type": "github"
       }
     },
-    "midnight-discord": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1754008899,
-        "narHash": "sha256-we2wY5n2zvlpeuq2o2JVyj39+pDLj6Iv/Bm81OtuvDU=",
-        "ref": "refs/heads/master",
-        "rev": "9287e825c03f15379d26dfb00039c19d5c4de210",
-        "revCount": 773,
-        "type": "git",
-        "url": "https://github.com/refact0r/midnight-discord"
-      },
-      "original": {
-        "type": "git",
-        "url": "https://github.com/refact0r/midnight-discord"
-      }
-    },
     "neovim": {
       "inputs": {
         "flake-parts": [
@@ -722,29 +706,6 @@
         "owner": "skettisouls",
         "repo": "nix-mc",
         "type": "github"
-      }
-    },
-    "nixcord": {
-      "inputs": {
-        "home-manager": [
-          "home-manager"
-        ],
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1726220761,
-        "narHash": "sha256-RzG+MAzfj88YckgoOW17+BDNiA0haijznZv3cvCMbrE=",
-        "ref": "refs/heads/master",
-        "rev": "0dba8a40582235e88e03e04e597b590124abad30",
-        "revCount": 10,
-        "type": "git",
-        "url": "https://codeberg.org/skettisouls/nixcord"
-      },
-      "original": {
-        "type": "git",
-        "url": "https://codeberg.org/skettisouls/nixcord"
       }
     },
     "nixpkgs": {
@@ -964,11 +925,9 @@
         "home-manager": "home-manager",
         "hyprland": "hyprland",
         "hyprpicker": "hyprpicker",
-        "midnight-discord": "midnight-discord",
         "neovim": "neovim",
         "niri": "niri",
         "nix-mc": "nix-mc",
-        "nixcord": "nixcord",
         "nixpkgs": "nixpkgs_3",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "nyxpkgs": "nyxpkgs",

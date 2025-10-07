@@ -79,20 +79,6 @@
         rust-overlay.follows = "rust-overlay";
       };
     };
-
-    midnight-discord = {
-      type = "git";
-      url = "https://github.com/refact0r/midnight-discord";
-      flake = false;
-    };
-
-    nixcord = {
-      url = "git+https://codeberg.org/skettisouls/nixcord";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        home-manager.follows = "home-manager";
-      };
-    };
   # }}}
 
   # Server {{{
