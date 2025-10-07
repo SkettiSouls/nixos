@@ -23,10 +23,11 @@
     };
 
     environment.systemPackages = with pkgs; [
-      btop
+      bottom
       fzf
-      neovim
       git
+      neovim
+      ouch
     ];
 
     # TODO: Switch to Iosevka

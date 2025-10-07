@@ -29,7 +29,7 @@ in
 
     vencord = /* import ./plugins.nix // */ {
       enable = true;
-      package = pkgs.unstable.discord-canary;
+      package = pkgs.unstable.discord;
       plugins = {};
       settings = {
         autoUpdate = true;
