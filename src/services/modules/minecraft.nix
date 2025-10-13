@@ -15,6 +15,8 @@ let
       view-distance = 10;
     };
   };
+
+  startForge = mc: forge: "java $JVMOPTS @libraries/net/minecraftforge/forge/${mc}-${forge}/unix_args.txt nogui";
 in
 {
   imports = [ inputs.nix-mc.nixosModules.nix-mc ];
@@ -24,7 +26,8 @@ in
       eula = true;
       instances = {
         TerraFirmaGreg = defaultConfig // {
-          enable = true;
+          # Angry
+          enable = false;
           jarFile = "minecraft_server.jar";
 
           serverConfig = {
@@ -40,7 +43,7 @@ in
         atm9sky = defaultConfig // {
           # Finished
           enable = false;
-          startScript = "java $JVMOPTS @libraries/net/minecraftforge/forge/1.20.1-47.2.20/unix_args.txt nogui";
+          startScript = startForge "1.20.1" "47.2.20";
 
           serverConfig = {
             level-name = "Baby Men";
@@ -64,13 +67,27 @@ in
 
         hardrock = defaultConfig // {
           enable = true;
-          startScript = "java $JVMOPTS @libraries/net/minecraftforge/forge/1.18.2-40.2.21/unix_args.txt nogui";
+          startScript = startForge "1.18.2" "40.2.21";
 
           serverConfig = {
             level-name = "Euphamism";
             level-type = "tfc\:tng";
             motd = "[TerraFirmaCraft HardRock] She craft my rock till I'm hard";
             server-port = 25567;
+          };
+        };
+
+        cabin = defaultConfig // {
+          enable = true;
+          jvmMaxAllocation = "24G";
+          jarFile = "minecraft_server.jar";
+
+          serverConfig = {
+            allow-flight = true;
+            level-name = "wah";
+            level-type = "minecraft\:normal";
+            motd = "[CABIN] Space? More like gayce am I right???";
+            server-port = 25565;
           };
         };
       };
