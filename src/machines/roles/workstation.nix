@@ -27,7 +27,7 @@
       fzf
       git
       neovim
-      ouch
+      (ouch.override { enableUnfree = true; })
     ];
 
     # TODO: Switch to Iosevka

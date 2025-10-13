@@ -74,7 +74,7 @@ in
       };
 
       layout = {
-        gaps = 10;
+        gaps = 8;
         focus-ring.enable = false;
         center-focused-column = "never";
         default-column-width.proportion = 0.5;
@@ -103,10 +103,10 @@ in
         };
 
         struts = {
-          left = 6;
-          right = 6;
-          top = 6;
-          bottom = 6;
+          left = 4;
+          right = 4;
+          top = 4;
+          bottom = 4;
         };
       };
 
@@ -383,6 +383,22 @@ in
 
           excludes = [{ title = "RuneLite Launcher"; }];
           matches = [{ app-id = "RuneLite$"; title = "RuneLite"; }];
+        }
+        # Fix steam notification window position and focus
+        {
+          open-floating = true;
+          open-focused = false;
+
+          border.enable = false;
+          shadow.enable = false;
+
+          default-floating-position = {
+            x = 12;
+            y = 12;
+            relative-to = "bottom-right";
+          };
+
+          matches = [{ app-id="steam"; title="^notificationtoasts_\\d+_desktop$"; }];
         }
       ]; # }}}
     };
