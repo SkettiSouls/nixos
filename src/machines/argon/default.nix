@@ -10,7 +10,6 @@ let
 
   system = "x86_64-linux";
   wpkgs = wrappers.${system};
-  chaotic = inputs.nyxpkgs.nixosModules;
 in
 {
   flake.machines.argon = {
@@ -32,7 +31,6 @@ in
     };
 
     modules = [
-      chaotic.nyx-cache
       ./configuration.nix
       ./hardware-configuration.nix
     ];

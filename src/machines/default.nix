@@ -97,7 +97,6 @@ in
               (final: prev: with flake.inputs; {
                 bin = bin.packages.${system};
                 regolith = config.flake.packages.${system};
-                chaotic = flake.inputs.nyxpkgs.legacyPackages.${system};
 
                 unstable = import nixpkgs-unstable {
                   inherit system;

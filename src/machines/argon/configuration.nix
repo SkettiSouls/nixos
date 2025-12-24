@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 {
-  boot.kernelPackages = pkgs.chaotic.linuxPackages_cachyos;
+  boot.kernelPackages = pkgs.linuxPackages_6_16;
   hardware.enableRedistributableFirmware = true;
 
   regolith = {
@@ -26,7 +26,7 @@
         };
       };
 
-      protonPackages = with pkgs; [ chaotic.proton-cachyos ];
+      protonPackages = with pkgs; [];
     };
   };
 
