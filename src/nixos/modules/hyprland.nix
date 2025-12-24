@@ -1,8 +1,7 @@
-{ inputs, ... }:
+{ ... }:
 { pkgs, config, lib, ... }:
 let
   inherit (pkgs.stdenv.hostPlatform) system;
-  inherit (inputs.hyprland.packages.${system}) hyprland xdg-desktop-portal-hyprland;
 
   inherit (lib)
     mkEnableOption
@@ -12,12 +11,10 @@ let
     ;
 
   cfg = config.regolith.hyprland;
-  hypr-pkgs = inputs.hyprland.inputs.nixpkgs.legacyPackages.${system};
 in
 {
   options.regolith.hyprland = {
     enable = mkEnableOption "Hyprland requirements";
-    matchMesaVersion = mkEnableOption "Use mesa from hyprland flake's nixpkgs";
     withUWSM = mkEnableOption "Universal wayland session manager";
 
     cachix.enable = mkOption {
@@ -25,9 +22,27 @@ in
       default = true;
       description = "Whether to enable building from the Hyprland Cachix";
     };
+
+
+    externalFlake = {
+      enable = mkEnableOption "Use an external flake for hyprland packages";
+      matchMesaVersion = mkEnableOption "Use mesa from hyprland flake's nixpkgs";
+
+      input = mkOption {
+        type = types.attrs;
+        description = "Flake input containing hyprland packages";
+      };
+    };
   };
 
-  config = mkIf cfg.enable {
+  config = mkIf cfg.enable (let 
+    hypr-pkgs =
+      if cfg.externalFlake.enable
+      then cfg.externalFlake.input.inputs.nixpkgs.legacyPackages.${system}
+      else pkgs;
+
+    inherit (hypr-pkgs) hyprland xdg-desktop-portal-hyprland;
+  in {
     services.seatd.enable = true;
 
     nix.settings = mkIf cfg.cachix.enable {
@@ -35,7 +50,7 @@ in
       trusted-public-keys = [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
     };
 
-    hardware.graphics = mkIf cfg.matchMesaVersion (lib.mkForce {
+    hardware.graphics = mkIf cfg.externalFlake.matchMesaVersion (lib.mkForce {
       package = hypr-pkgs.mesa;
       package32 = hypr-pkgs.pkgsi686Linux.mesa;
     });
@@ -52,5 +67,5 @@ in
         withUWSM = cfg.withUWSM;
       };
     };
-  };
+  });
 }

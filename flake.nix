@@ -51,24 +51,12 @@
     };
   # }}}
 
-  # Wayland {{{
-    hyprland = {
-      type = "git";
-      url = "https://github.com/hyprwm/hyprland";
-      submodules = true;
-    };
-
-    hyprpicker = {
-      url = "github:hyprwm/hyprpicker";
-      inputs.nixpkgs.follows = "hyprland";
-      inputs.hyprutils.follows = "hyprland";
-    };
-
+  # {{{ Environment
     niri.url = "github:sodiboo/niri-flake";
   # }}}
 
-  # Discord {{{
-    boris = { # Bot
+  # Server {{{
+    boris = { # Discord Bot
       url = "github:skettisouls/boris";
       inputs = {
         nixpkgs.follows = "nixpkgs-unstable";
@@ -76,9 +64,7 @@
         rust-overlay.follows = "rust-overlay";
       };
     };
-  # }}}
 
-  # Server {{{
     deploy-rs = {
       url = "github:serokell/deploy-rs";
       inputs.nixpkgs.follows = "nixpkgs";
