@@ -44,12 +44,13 @@ in
     firewall.interfaces = mkIf (config.networking.hostName == "fluorine") {
       eno1.allowedUDPPorts = [ peridot.listenPort ];
       peridot = {
-        allowedUDPPorts = steam.ports ++ minecraft.ports;
+        allowedUDPPorts = steam.ports ++ minecraft.ports ++ [ 42420 ];
         allowedTCPPorts = flatten [
           20
           80
           443
           27020 # Ark Rcon
+          42420 # Vintage Story
           deemix-server.port
           git.port
           gonic.port
