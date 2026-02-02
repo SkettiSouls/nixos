@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, options, lib, pkgs, ... }:
 let
   inherit (lib)
     mkDefault
@@ -17,17 +17,12 @@ let
   };
 in
 {
-  options.regolith.steam = {
+  options.regolith.steam = options.programs.steam // {
     enable = mkEnableOption "Steam";
     hardware.enable = mkEnabledOption "Steam hardware (Steam Controller, HTC Vice, etc)";
     gamemode.enable = mkEnabledOption "GameMode to optimise system performance on demand";
     gamescopeSession.enable = mkEnableOption "GameScope desktop";
     protontricks.enable = mkEnableOption "protontricks";
-
-    package = mkOption {
-      type = types.package;
-      default = pkgs.steam;
-    };
 
     # ?TODO?: Assert if non proton package
     protonPackages = mkOption {
