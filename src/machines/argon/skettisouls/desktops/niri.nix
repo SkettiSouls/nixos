@@ -39,6 +39,8 @@ in
       };
     };
 
+    # Niri-flake is in a bad state at the moment. Will probably make config wrappers.
+    /* {{{
     programs.niri.settings = {
       cursor.size = 24;
       gestures.hot-corners.enable = false;
@@ -402,5 +404,6 @@ in
         }
       ]; # }}}
     };
+    }}} */
   };
 }

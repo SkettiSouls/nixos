@@ -9,28 +9,22 @@ let
   cfg = config.regolith.niri;
 in
 {
-  imports = [ inputs.niri.nixosModules.niri ];
-
   options.regolith.niri = {
     enable = mkEnableOption "niri";
+    package = lib.mkPackageOption pkgs "niri" {};
     withUWSM = mkEnableOption "universal wayland session manager integration";
     xwayland.enable = mkEnableOption "XWayland";
-    useUnstable = mkEnableOption "the unstable packages for niri and xwayland-satellite";
   };
 
   config = mkIf cfg.enable {
-    nixpkgs.overlays = [ inputs.niri.overlays.niri ];
-
     environment.systemPackages =
       lib.optionals cfg.xwayland.enable
-      (if cfg.useUnstable
-      then [ pkgs.xwayland-satellite-unstable ]
-      else [ pkgs.xwayland-satellite-stable ]);
+      [ pkgs.xwayland-satellite ];
 
     programs = {
       niri = {
         enable = true;
-        package = mkIf cfg.useUnstable pkgs.niri-unstable;
+        package = cfg.package;
       };
 
       uwsm = mkIf cfg.withUWSM {

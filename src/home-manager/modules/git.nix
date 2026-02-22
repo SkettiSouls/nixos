@@ -13,7 +13,7 @@ in
       signing.key = mkDefault "${config.home.homeDirectory}/.ssh/id_ed25519";
       signing.signByDefault = mkDefault true;
 
-      extraConfig = {
+      settings = {
         gpg.format = mkDefault "ssh";
         pull.rebase = mkDefault false;
       };

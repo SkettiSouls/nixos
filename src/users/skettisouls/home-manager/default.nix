@@ -41,10 +41,11 @@ in
 
       # Still set user specific git config in case I want to us the hm module again
       git = {
-        userName = "SkettiSouls";
-        userEmail = "skettisouls@gmail.com";
-
         signing.key = home + "/.keys/ssh/git.key";
+        settings = {
+          userName = "SkettiSouls";
+          userEmail = "skettisouls@gmail.com";
+        };
       };
     };
 
@@ -82,7 +83,7 @@ in
         publicShare = null;
 
         extraConfig = {
-          XDG_SCREENSHOTS_DIR = "${pictures}/screenshots";
+          SCREENSHOTS = "${pictures}/screenshots";
         };
       };
     };

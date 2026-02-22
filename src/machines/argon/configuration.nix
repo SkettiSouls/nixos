@@ -1,8 +1,10 @@
 { pkgs, ... }:
 
 {
-  boot.kernelPackages = pkgs.linuxPackages_6_16;
+  boot.kernelPackages = pkgs.linuxPackages_6_18;
   hardware.enableRedistributableFirmware = true;
+
+  nixpkgs.config.permittedInsecurePackages = [ "nexusmods-app-0.21.1" ];
 
   regolith = {
     hyprland = {
@@ -14,7 +16,6 @@
       enable = true;
       withUWSM = true;
       xwayland.enable = true;
-      useUnstable = true;
     };
 
     steam = {

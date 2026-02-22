@@ -20,7 +20,7 @@ in
   };
 
   config = mkIf cfg.enable {
-    programs.chromium = {
+    programs.brave = {
       enable = true;
       package = lib.mkDefault cfg.package;
       commandLineArgs = [ "--enable-features=UseOzonePlatform --ozone-platform-hint=wayland" ];

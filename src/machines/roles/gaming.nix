@@ -9,7 +9,7 @@ in
     environment.systemPackages = with pkgs; [
       heroic
       prismlauncher
-      unstable.wineWowPackages.staging
+      unstable.wineWow64Packages.staging
       winetricks
     ];
 
