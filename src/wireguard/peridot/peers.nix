@@ -13,7 +13,8 @@
 
   xenon = {
     allowedIPs = [ "192.168.10.3/32" ];
-    publicKey = "DmcneJyadpfz6GHp1Zc+JUeuSUJHvVLrjLshc1hVBk0=";
+    publicKey = "EdvMF3Os65mXq7ubtOo/XBYoJFsd+Yhga4StlrfG4z8=";
+
   };
 
   killerking = {
