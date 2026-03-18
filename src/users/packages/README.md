@@ -24,6 +24,6 @@ The package set for [wrapper-manager](https://github.com/viperML/wrapper-manager
   { self, pkgs, ... }:
 
   {
-    somePackageOption = self.wrappers.${pkgs.system}.<user>.<package>;
+    somePackageOption = self.wrappers.${pkgs.stdenv.hostPlatform.system}.<user>.<package>;
   }
   ```

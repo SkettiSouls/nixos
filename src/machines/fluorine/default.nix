@@ -1,12 +1,12 @@
 { inputs, ... }:
 { config, ... }:
 let
-  inherit (config.flake) networks roles wrappers;
-  inherit (inputs.neovim.packages.${system}) neovim;
-
   system = "x86_64-linux";
+  inherit (config.flake) networks roles wrappers;
+
   wpkgs = wrappers.${system};
-  pkgs = inputs.nixpkgs.legacyPackages.${system};
+  npkgs = inputs.neovim.packages.${system};
+  pkgs  = inputs.nixpkgs.legacyPackages.${system};
   iptables = "${pkgs.iptables}/bin/iptables";
 in
 {
@@ -27,8 +27,8 @@ in
     users.skettisouls = {
       packages = with wpkgs.skettisouls; [
         eza
-        neovim
         lazygit
+        npkgs.neovim
       ];
     };
 

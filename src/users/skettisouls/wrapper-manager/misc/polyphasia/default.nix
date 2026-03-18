@@ -1,7 +1,8 @@
 { inputs, ... }:
 { pkgs, ... }:
 let
-  plpPkgs = inputs.polyphasia.packages.${pkgs.system};
+  inherit (pkgs.stdenv.hostPlatform) system;
+  plpPkgs = inputs.polyphasia.packages.${system};
 
   sleep = {
     script = "${./sleep.lua}";

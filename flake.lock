@@ -150,16 +150,17 @@
           "nixpkgs-unstable"
         ],
         "plugins": "plugins",
-        "utils": [
-          "utils"
-        ]
+        "plugins-direnv": "plugins-direnv",
+        "plugins-lze": "plugins-lze",
+        "plugins-lzextras": "plugins-lzextras",
+        "wrappers": "wrappers"
       },
       "locked": {
-        "lastModified": 1770049137,
-        "narHash": "sha256-0O5yvjLR71K2v+rBpiz8wlAOFxO/ZbzYchND4KM9zDI=",
+        "lastModified": 1773863391,
+        "narHash": "sha256-kP8BQAYtm365yYfm2MTgfiOOfBAHVOVguwl0xp/4tzU=",
         "ref": "refs/heads/master",
-        "rev": "9f7e48507f0561152e7f7bc349384630d91bd41e",
-        "revCount": 80,
+        "rev": "d082dd53795e0178b9cb2b432a20d6114ecfc7dd",
+        "revCount": 98,
         "type": "git",
         "url": "https://codeberg.org/skettisouls/neovim"
       },
@@ -283,17 +284,65 @@
         ]
       },
       "locked": {
-        "lastModified": 1759565544,
-        "narHash": "sha256-r7f6pEoby3Z8FBSu3eyKmK+ph1rV2M3GTLpsJg/6TsQ=",
+        "lastModified": 1773555341,
+        "narHash": "sha256-OUKKqndk4TKTaXKkymtb9OpdL4dpWdNJkZAW5SuqkIE=",
         "ref": "refs/heads/master",
-        "rev": "d8e5afb7ea8baf2983b094ee7973ff2ffcfcd6c3",
-        "revCount": 15,
+        "rev": "ed48f4750b481fe83cce4dbcd4ea2136af6eac35",
+        "revCount": 17,
         "type": "git",
         "url": "https://codeberg.org/skettisouls/neovim-plugins"
       },
       "original": {
         "type": "git",
         "url": "https://codeberg.org/skettisouls/neovim-plugins"
+      }
+    },
+    "plugins-direnv": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1759863545,
+        "narHash": "sha256-p2im4nUV0n9HQsjCA9oGJvTADfKGlCEr/RYWGlUszuU=",
+        "owner": "actionshrimp",
+        "repo": "direnv.nvim",
+        "rev": "0d2edd378dbdf2c653869772d761ad914219ba9d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "actionshrimp",
+        "repo": "direnv.nvim",
+        "type": "github"
+      }
+    },
+    "plugins-lze": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1772337062,
+        "narHash": "sha256-joi1087b2iDmwOHv7/0YCrDPucbu0osbS8WQmDYoyE4=",
+        "owner": "BirdeeHub",
+        "repo": "lze",
+        "rev": "f50a84a5d84f6b16e254091e755f5a9e839a9924",
+        "type": "github"
+      },
+      "original": {
+        "owner": "BirdeeHub",
+        "repo": "lze",
+        "type": "github"
+      }
+    },
+    "plugins-lzextras": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1772336997,
+        "narHash": "sha256-BsoZTfXpISPeTnTQWtnZkDXzvo9ocILB5IO2vU8IvAM=",
+        "owner": "BirdeeHub",
+        "repo": "lzextras",
+        "rev": "abdda956a2947d0617133a018992d035fc5781da",
+        "type": "github"
+      },
+      "original": {
+        "owner": "BirdeeHub",
+        "repo": "lzextras",
+        "type": "github"
       }
     },
     "polyphasia": {
@@ -368,11 +417,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1770606655,
-        "narHash": "sha256-rpJf+kxvLWv32ivcgu8d+JeJooog3boJCT8J3joJvvM=",
+        "lastModified": 1773803479,
+        "narHash": "sha256-GD6i1F2vrSxbsmbS92+8+x3DbHOJ+yrS78Pm4xigW4M=",
         "owner": "oxalica",
         "repo": "rust-overlay",
-        "rev": "11a396520bf911e4ed01e78e11633d3fc63b350e",
+        "rev": "f17186f52e82ec5cf40920b58eac63b78692ac7c",
         "type": "github"
       },
       "original": {
@@ -446,6 +495,27 @@
       "original": {
         "owner": "viperML",
         "repo": "wrapper-manager",
+        "type": "github"
+      }
+    },
+    "wrappers": {
+      "inputs": {
+        "nixpkgs": [
+          "neovim",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1772774291,
+        "narHash": "sha256-2/ILO2+tAe0Pbb+wVp2Qiw7PTIs9afsc/MaAJI/ymC0=",
+        "owner": "BirdeeHub",
+        "repo": "nix-wrapper-modules",
+        "rev": "733053067a3a8baf96a7ba05e970b038105fd567",
+        "type": "github"
+      },
+      "original": {
+        "owner": "BirdeeHub",
+        "repo": "nix-wrapper-modules",
         "type": "github"
       }
     }

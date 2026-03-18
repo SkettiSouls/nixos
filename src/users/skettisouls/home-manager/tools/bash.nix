@@ -1,4 +1,4 @@
-{ ... }:
+{ inputs, ... }:
 { config, lib, pkgs, ... }:
 let
   inherit (lib)
@@ -7,7 +7,9 @@ let
     ;
 
   inherit (config.basalt) kitty;
-  inherit (config.flake.packages.${pkgs.system}) rebuild;
+  inherit (pkgs.stdenv.hostPlatform) system;
+  inherit (config.flake.packages.${system}) rebuild;
+  inherit (inputs.neovim.packages.${system}) neovim-impure;
 
   cfg = config.basalt.bash;
 in
@@ -24,7 +26,8 @@ in
       historyControl = [ "ignoredups" ];
 
       shellAliases = {
-        ":q" = " exit";
+        ":q" = "exit";
+        v = "${neovim-impure}/bin/nvim";
         icat = mkIf kitty.enable "kitten icat";
 
         l = "eza -alh";
@@ -32,11 +35,6 @@ in
         la = "eza -a";
         lt = "eza -T";
       };
-
-      # TODO: Make window swallowing override (`spit`).
-      # bashrcExtra = ''function spit {
-      #   PROMPT_COMMAND="echo -ne \"\033]0;$1 \077""
-      # }\n'';
     };
   };
 }

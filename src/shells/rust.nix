@@ -12,7 +12,6 @@
       LIBCLANG_PATH = "${pkgs.libclang.lib}/lib";
 
       packages = [
-        inputs.neovim.packages.${system}.neovim
         (rpkgs.rust-bin.stable.latest.default.override {
           extensions = [ "rust-src" ];
         })

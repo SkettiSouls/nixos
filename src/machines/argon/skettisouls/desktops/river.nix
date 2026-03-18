@@ -4,7 +4,8 @@ let
   inherit (lib) mkIf;
   inherit (self.lib) exponent;
 
-  inherit (config.flake.wrappers.${pkgs.system}.skettisouls) polyphasia;
+  inherit (pkgs.stdenv.hostPlatform) system;
+  inherit (config.flake.wrappers.${system}.skettisouls) polyphasia;
 
   inherit (config.regolith.river.variables)
     altMod

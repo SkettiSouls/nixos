@@ -1,6 +1,7 @@
 { inputs, withArgs, ... }:
 { config, ... }:
 let
+  system = "x86_64-linux";
   inherit (config.flake)
     hardwareModules
     networks
@@ -8,8 +9,8 @@ let
     wrappers
     ;
 
-  system = "x86_64-linux";
   wpkgs = wrappers.${system};
+  npkgs = inputs.neovim.packages.${system};
 in
 {
   flake.machines.argon = {
@@ -26,6 +27,7 @@ in
           feishin
           nushell
           lazygit
+          npkgs.neovim
         ];
       };
     };

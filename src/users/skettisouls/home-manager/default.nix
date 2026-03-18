@@ -1,9 +1,8 @@
-{ lib, inputs, ... }:
-{ config, pkgs, ... }:
+{ lib, ... }:
+{ config, ... }:
 let
   inherit (lib) mkIf mkOption types;
   inherit (config.basalt) defaultApps;
-  inherit (inputs.neovim.packages.${pkgs.system}) neovim;
   home = config.home.homeDirectory;
 
   mkVar = mkOption {
@@ -29,7 +28,6 @@ in
 
   config = {
     home = {
-      packages = [ neovim ];
       sessionVariables = {
         EDITOR = "nvim";
       };
