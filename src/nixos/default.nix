@@ -3,6 +3,7 @@
 
 {
   flake.nixosModules = {
+    controllers = withArgs ./modules/controllers.nix {};
     # We use the `inputs` AFTER `importApply` to let inputs vary by flake
     global = withArgs ./modules/global.nix { inherit inputs; };
     hyprland = withArgs ./modules/hyprland.nix {};

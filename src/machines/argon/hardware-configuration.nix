@@ -26,7 +26,7 @@
 
     "/home/skettisouls/Games" = {
       # 3.6T Storage Partition
-      device = "/dev/disk/by-uuid/956d71dc-6837-45bf-b827-c484dee23e90";
+      device = "/dev/disk/by-uuid/96b30084-3a59-4de9-9940-3393e9e4b437";
       fsType = "btrfs";
     };
   };
