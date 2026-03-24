@@ -1,10 +1,14 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 
 {
   boot.kernelPackages = pkgs.linuxPackages_6_18;
   hardware.enableRedistributableFirmware = true;
 
   nixpkgs.config.permittedInsecurePackages = [ "nexusmods-app-0.21.1" ];
+  hardware.graphics = {
+    package = lib.mkForce pkgs.unstable.mesa;
+    package32 = lib.mkForce pkgs.unstable.driversi686Linux.mesa;
+  };
 
   regolith = {
     hyprland = {
