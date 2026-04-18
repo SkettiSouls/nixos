@@ -26,15 +26,16 @@
 
     "/home/skettisouls/Games" = {
       # 3.6T Storage Partition
-      device = "/dev/disk/by-uuid/96b30084-3a59-4de9-9940-3393e9e4b437";
-      fsType = "btrfs";
+      device = "/dev/disk/by-id/ata-CT4000BX500SSD1_2517E9BA04F7-part1";
+      fsType = "ext4";
+      neededForBoot = false;
     };
   };
 
   swapDevices = [
     {
       # 48G Swap Partition
-      device = "/dev/disk/by-uuid/a7a24807-1f25-4d1e-a70d-b518d24a1e3f";
+      device = "/dev/disk/by-id/ata-CT4000BX500SSD1_2517E9BA04F7-part2";
     }
   ];
 
