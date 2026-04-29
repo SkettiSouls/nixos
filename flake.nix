@@ -2,15 +2,14 @@
   inputs = {
   # Base {{{
     flake-parts.url = "github:hercules-ci/flake-parts";
+    import-tree.url = "github:vic/import-tree";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    home-manager = {
-      url = "github:nix-community/home-manager";
+    wrapper-modules = {
+      url = "github:BirdeeHub/nix-wrapper-modules";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    wrapper-manager.url = "github:viperML/wrapper-manager";
   # }}}
 
   # Tools {{{
@@ -30,15 +29,6 @@
       };
     };
 
-    polyphasia = {
-      url = "git+https://codeberg.org/skettisouls/polyphasia";
-      inputs = {
-        nixpkgs.follows = "nixpkgs-unstable";
-        flake-parts.follows = "flake-parts";
-        rust-overlay.follows = "rust-overlay";
-      };
-    };
-
     rust-overlay = {
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -48,10 +38,6 @@
       url = "git+https://codeberg.org/skettisouls/nix-utils";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-  # }}}
-
-  # {{{ Environment
-    niri.url = "github:niri-wm/niri";
   # }}}
 
   # Server {{{
@@ -64,11 +50,6 @@
       };
     };
 
-    deploy-rs = {
-      url = "github:serokell/deploy-rs";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     nix-mc = {
       url = "github:skettisouls/nix-mc";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -76,48 +57,25 @@
   # }}}
   };
 
-  outputs = inputs @ { flake-parts, ... }: let
-    inherit (flake-parts.lib) importApply;
-    flakeRoot = ./.;
+  outputs = inputs @ { flake-parts, nixpkgs, import-tree, ... }: let
+    inherit (nixpkgs) lib;
 
-    lib = import ./src/utils { inherit inputs; };
-    withArgs = file: args:
-      importApply file
-      ({
-        inherit inputs flakeRoot withArgs;
-        lib = lib.extend (final: prev: {
-          applyModules = src:
-            map
-            (file: withArgs file {})
-            (prev.getModules src);
-
-          applyModulesExcept = src: xcpts:
-            map
-            (file: withArgs file {})
-            (prev.getModulesExcept xcpts src);
-        });
-      } // args);
+    tree = (lib.pipe import-tree [
+      (i: i.filterNot (lib.hasInfix "/packages/"))
+      (i: i.filterNot (lib.hasSuffix "flake.nix"))
+      (i: i ./.)
+    ]).imports;
   in
-  flake-parts.lib.mkFlake { inherit inputs; }
-  (let
-    flakeModules = {
-      hardware = import ./src/hardware;
-      home-manager = withArgs ./src/home-manager {};
-      lib = { config.flake = { inherit lib; }; };
-      machines = withArgs ./src/machines {};
-      nixos = withArgs ./src/nixos {};
-      packages = import ./src/packages;
-      services = withArgs ./src/services {};
-      shells = withArgs ./src/shells {};
-      users = withArgs ./src/users {};
-      wireguard = import ./src/wireguard;
-    };
-  in {
-    imports = (builtins.attrValues) flakeModules ++ [];
+  flake-parts.lib.mkFlake { inherit inputs; } ({ config, ... }: {
+    imports = tree ++ [ ./packages ];
 
     config = {
-      flake = { inherit flakeModules flakeRoot; };
       systems = [ "x86_64-linux" "aarch64-linux" ];
+
+      flake = {
+        _config = config;
+        root = ./.;
+      };
     };
   });
 }
