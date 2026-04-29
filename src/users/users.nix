@@ -1,4 +1,4 @@
-{ inputs, lib, ... }:
+{ inputs, config, lib, ... }:
 let
   inherit (lib) mkOption types;
 
@@ -41,9 +41,15 @@ in
   config.perSystem = { pkgs, ... }: {
     _module.args = let
       wlib = inputs.wrapper-modules.lib;
-    in {
-      inherit wlib;
       wrap = path: (wlib.evalModule path).config.wrap { inherit pkgs; };
-    };
+
+      import-tree = inputs.import-tree.withLib lib;
+      mkWrappers = path: config.flake.lib.listToAttrs'
+        (map
+        (file:
+          let wrapper = wrap file;
+          in { "${wrapper.pname}" = wrapper; })
+        (import-tree.leafs path));
+    in { inherit wlib wrap mkWrappers; };
   };
 }
