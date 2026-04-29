@@ -1,0 +1,48 @@
+{ wlib, pkgs, ... }:
+let
+  configFile = pkgs.writeText "MangoHud.conf" ''
+    ### PERFORMANCE ###
+    fps_limit=0
+    # vsync=1
+
+    ### ELEMENTS ###
+    cpu_stats
+    cpu_temp
+    gpu_stats
+    gpu_temp
+    ram
+    vram
+    fps
+    engine_short_names # Required to get engine names in horizontal
+    frame_timing
+    # engine_version
+    # vulkan_driver
+    display_server
+    wine
+
+    # time
+    # time_no_label
+    # time_format=%r # %r for 12 hour, %T for 24 hour
+
+    ### WINDOW ###
+    legacy_layout=0
+    horizontal
+    hud_no_margin
+    horizontal_stretch
+    background_alpha=0.3
+
+    ### KEYBINDS ###
+    toggle_hud=Shift_R+F12
+  '';
+in
+{
+  imports = [ wlib.modules.default ];
+
+  config = {
+    package = pkgs.mangohud;
+    env = {
+      # TODO: use env to define settings
+      MANGOHUD_CONFIGFILE = "${configFile}";
+    };
+  };
+}

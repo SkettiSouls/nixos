@@ -1,15 +1,14 @@
-{ self, ... }:
-
+# TODO: rewrite services
 {
-  imports = with self.serviceModules; [
-    ark
-    caddy
-    deemix
-    discord-bots
-    forgejo
-    gonic
-    minecraft
-    postgres
-    valheim
-  ];
+  # imports = with self.serviceModules; [
+  #   ark
+  #   caddy
+  #   deemix
+  #   discord-bots
+  #   forgejo
+  #   gonic
+  #   minecraft
+  #   postgres
+  #   valheim
+  # ];
 }

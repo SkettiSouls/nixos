@@ -121,23 +121,18 @@
         "type": "github"
       }
     },
-    "home-manager": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
+    "import-tree": {
       "locked": {
-        "lastModified": 1771422582,
-        "narHash": "sha256-xK5kl3OBZaF1VwziVMX+SZ2LT9Fbu5o8vRDt78uR7no=",
-        "owner": "nix-community",
-        "repo": "home-manager",
-        "rev": "b3ccd4bb262f4e6d3248b46cede92b90c4a42094",
+        "lastModified": 1773693634,
+        "narHash": "sha256-BtZ2dtkBdSUnFPPFc+n0kcMbgaTxzFNPv2iaO326Ffg=",
+        "owner": "vic",
+        "repo": "import-tree",
+        "rev": "c41e7d58045f9057880b0d85e1152d6a4430dbf1",
         "type": "github"
       },
       "original": {
-        "owner": "nix-community",
-        "repo": "home-manager",
+        "owner": "vic",
+        "repo": "import-tree",
         "type": "github"
       }
     },
@@ -345,48 +340,21 @@
         "type": "github"
       }
     },
-    "polyphasia": {
-      "inputs": {
-        "flake-parts": [
-          "flake-parts"
-        ],
-        "nixpkgs": [
-          "nixpkgs-unstable"
-        ],
-        "rust-overlay": [
-          "rust-overlay"
-        ]
-      },
-      "locked": {
-        "lastModified": 1750600932,
-        "narHash": "sha256-n5LqfaJpl/4wnbr3vhY4H0eG5blHUXKhRdbDSkFuTU8=",
-        "ref": "refs/heads/master",
-        "rev": "1db88e402db78961e85e4150936ca34806ce9968",
-        "revCount": 30,
-        "type": "git",
-        "url": "https://codeberg.org/skettisouls/polyphasia"
-      },
-      "original": {
-        "type": "git",
-        "url": "https://codeberg.org/skettisouls/polyphasia"
-      }
-    },
     "root": {
       "inputs": {
         "bin": "bin",
         "boris": "boris",
         "deploy-rs": "deploy-rs",
         "flake-parts": "flake-parts",
-        "home-manager": "home-manager",
+        "import-tree": "import-tree",
         "neovim": "neovim",
         "niri": "niri",
         "nix-mc": "nix-mc",
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-unstable": "nixpkgs-unstable",
-        "polyphasia": "polyphasia",
         "rust-overlay": "rust-overlay_2",
         "utils": "utils_2",
-        "wrapper-manager": "wrapper-manager"
+        "wrapper-modules": "wrapper-modules"
       }
     },
     "rust-overlay": {
@@ -483,18 +451,23 @@
         "url": "https://codeberg.org/skettisouls/nix-utils"
       }
     },
-    "wrapper-manager": {
+    "wrapper-modules": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
       "locked": {
-        "lastModified": 1757156862,
-        "narHash": "sha256-OGXsTE5jWhGiFfK6OwMvjksrYSobsIFUSUzKsexCDxY=",
-        "owner": "viperML",
-        "repo": "wrapper-manager",
-        "rev": "801dd9c876fcada046af45543e8c7e0bbccf20ea",
+        "lastModified": 1776464146,
+        "narHash": "sha256-XwLFfJDz71vIF7BAhnbLhrzQjmDC2uXdo7N0oHUrYzA=",
+        "owner": "BirdeeHub",
+        "repo": "nix-wrapper-modules",
+        "rev": "75febede14a0845f4ef429da692a0698bf433600",
         "type": "github"
       },
       "original": {
-        "owner": "viperML",
-        "repo": "wrapper-manager",
+        "owner": "BirdeeHub",
+        "repo": "nix-wrapper-modules",
         "type": "github"
       }
     },

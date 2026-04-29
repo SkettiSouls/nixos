@@ -2,15 +2,14 @@
   inputs = {
   # Base {{{
     flake-parts.url = "github:hercules-ci/flake-parts";
+    import-tree.url = "github:vic/import-tree";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    home-manager = {
-      url = "github:nix-community/home-manager";
+    wrapper-modules = {
+      url = "github:BirdeeHub/nix-wrapper-modules";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    wrapper-manager.url = "github:viperML/wrapper-manager";
   # }}}
 
   # Tools {{{
@@ -27,15 +26,6 @@
       inputs = {
         flake-parts.follows = "flake-parts";
         nixpkgs.follows = "nixpkgs-unstable";
-      };
-    };
-
-    polyphasia = {
-      url = "git+https://codeberg.org/skettisouls/polyphasia";
-      inputs = {
-        nixpkgs.follows = "nixpkgs-unstable";
-        flake-parts.follows = "flake-parts";
-        rust-overlay.follows = "rust-overlay";
       };
     };
 
@@ -76,48 +66,27 @@
   # }}}
   };
 
-  outputs = inputs @ { flake-parts, ... }: let
-    inherit (flake-parts.lib) importApply;
+  outputs = inputs @ { flake-parts, nixpkgs, import-tree, ... }: let
+    inherit (nixpkgs) lib;
+
     flakeRoot = ./.;
-
-    lib = import ./src/utils { inherit inputs; };
-    withArgs = file: args:
-      importApply file
-      ({
-        inherit inputs flakeRoot withArgs;
-        lib = lib.extend (final: prev: {
-          applyModules = src:
-            map
-            (file: withArgs file {})
-            (prev.getModules src);
-
-          applyModulesExcept = src: xcpts:
-            map
-            (file: withArgs file {})
-            (prev.getModulesExcept xcpts src);
-        });
-      } // args);
+    tree = (lib.pipe import-tree [
+      (i: i.filterNot (lib.hasInfix "/packages/"))
+      (i: i.filterNot (lib.hasInfix "/wrappers/"))
+      (i: i ./src)
+    ]).imports;
   in
-  flake-parts.lib.mkFlake { inherit inputs; }
-  (let
-    flakeModules = {
-      hardware = import ./src/hardware;
-      home-manager = withArgs ./src/home-manager {};
-      lib = { config.flake = { inherit lib; }; };
-      machines = withArgs ./src/machines {};
-      nixos = withArgs ./src/nixos {};
-      packages = import ./src/packages;
-      services = withArgs ./src/services {};
-      shells = withArgs ./src/shells {};
-      users = withArgs ./src/users {};
-      wireguard = import ./src/wireguard;
-    };
-  in {
-    imports = (builtins.attrValues) flakeModules ++ [];
+  flake-parts.lib.mkFlake { inherit inputs; } ({ config, ... }: {
+    imports = tree ++ [ ./src/packages ];
 
     config = {
-      flake = { inherit flakeModules flakeRoot; };
       systems = [ "x86_64-linux" "aarch64-linux" ];
+
+      flake = {
+        inherit flakeRoot tree;
+        _config = config;
+        flakeModules = [];
+      };
     };
   });
 }
