@@ -14,6 +14,7 @@
             options.touchpadAsMouse = tpamOption;
           };
         };
+
         dualsense = {
           default = {};
           description = "Options for the DualSense Gamepad (PlayStation 5 Controller)";
@@ -21,8 +22,8 @@
             options.touchpadAsMouse = tpamOption;
           };
         };
-
       };
+
       config = {
         services.udev.packages = lib.optionals (!allTouchpadsAllowed) [
           (pkgs.writeTextFile {

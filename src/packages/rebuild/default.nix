@@ -1,5 +1,4 @@
 { stdenvNoCC }:
-
 stdenvNoCC.mkDerivation {
   pname = "rebuild";
   version = "1.0";

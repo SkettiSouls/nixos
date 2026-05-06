@@ -1,3 +1,4 @@
+# ?TODO?: Rethink/rewrite?
 {
   flake.modules.hardware.usb =
     { config, lib, pkgs, ... }:
@@ -10,8 +11,7 @@
 
       cfg = config.regolith.udiskie;
       mkEnabledOption = desc: lib.mkEnableOption desc // { default = true; };
-    in
-    {
+    in {
       options.regolith.udiskie = {
         enable = mkEnabledOption "Udiskie";
         automount = mkEnabledOption "Automatically mount devices with udiskie";

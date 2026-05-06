@@ -34,46 +34,6 @@
 
   basalt = {
     audio.bluetooth.enable = true;
-    kitty.enable = true;
     mpv.enable = true;
-
-    browsers = {
-      brave = {
-        enable = true;
-        package = pkgs.unstable.brave;
-      };
-
-      qutebrowser = {
-        enable = true;
-        package = pkgs.qutebrowser;
-      };
-
-      firefox = {
-        enable = true;
-        package = pkgs.unstable.firefox;
-      };
-    };
-
-    desktops = {
-      hyprland.enable = false;
-      niri.enable = true;
-
-      river = {
-        enable = false;
-        windowRules = {
-          steam.enable = true;
-          keepassxc.enable = true;
-        };
-      };
-    };
-
-    defaultApps = {
-      browser = "brave";
-      launcher = "fuzzel";
-    };
-
-    launchers.fuzzel.enable = true;
-
-    neofetch.trollOS.enable = true;
   };
 }

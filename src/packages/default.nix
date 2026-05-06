@@ -1,5 +1,4 @@
 { inputs, config, ... }:
-
 {
   imports = [ ./quickshell ];
 
@@ -16,10 +15,7 @@
     });
 
     packages = {
-      creek = pkgs.unstable.callPackage ./creek {};
       rebuild = pkgs.callPackage ./rebuild {};
-      waterfox = pkgs.callPackage ./waterfox.nix {};
-      xdg-desktop-portal-luminous = pkgs.callPackage ./luminous.nix {};
     };
   };
 }

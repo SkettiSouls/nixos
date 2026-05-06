@@ -1,7 +1,10 @@
+args@{ config, ... }:
 {
   flake.modules.nixos.niri =
     { config, lib, pkgs, ... }:
     {
+      imports = [ args.config.flake.modules.nixos.display ];
+
       options.programs.niri.withUWSM =
         lib.mkEnableOption "universal wayland session manager integration";
 

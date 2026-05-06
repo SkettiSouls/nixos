@@ -1,5 +1,4 @@
 { inputs, ... }:
-
 {
   perSystem = { pkgs, system, ... }: let
     rpkgs = import inputs.nixpkgs {

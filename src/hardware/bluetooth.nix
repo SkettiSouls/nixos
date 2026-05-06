@@ -1,6 +1,7 @@
 # TODO: Expand
 {
   flake.modules.hardware.bluetooth =
+    { ... }:
     {
       config = {
         hardware.bluetooth = {

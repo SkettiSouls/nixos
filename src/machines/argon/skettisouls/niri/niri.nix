@@ -1,14 +1,20 @@
 { inputs, config, lib, withSystem, ... }:
 let
   inherit (inputs.wrapper-modules.lib) evalModule;
-  inherit (config.flake.machines.argon) system;
+  inherit (config.flake.machines.argon) system users;
+  inherit (users.skettisouls) wrappers;
 
   # `_: {}` -> nothing
   wrapper = evalModule (
-    { wlib, pkgs, ... }:
+    { wlib, ... }:
     {
       imports = [ wlib.wrapperModules.niri ];
       config = {
+        extraPackages = [
+          wrappers.fuzzel
+          wrappers.kitty
+        ];
+
         v2-settings = true;
         settings = {
           prefer-no-csd = _: {};
