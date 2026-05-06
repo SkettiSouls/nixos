@@ -1,4 +1,4 @@
-{ inputs, config, lib, ... }:
+{ inputs, lib, ... }:
 let
   inherit (lib) mkOption types;
 
@@ -20,7 +20,7 @@ let
       };
 
       wrappers = mkOption {
-        type = attrsOf package;
+        type = lazyAttrsOf package;
         default = {};
       };
     };
@@ -29,7 +29,7 @@ in
 {
   options.flake.users = mkOption {
     default = {};
-    type = with types; lazyAttrsOf (attrsWith {
+    type = with types; attrsOf (attrsWith {
       elemType = userSubmodule;
       lazy = true;
       placeholder = "system";
@@ -42,14 +42,6 @@ in
     _module.args = let
       wlib = inputs.wrapper-modules.lib;
       wrap = path: (wlib.evalModule path).config.wrap { inherit pkgs; };
-
-      import-tree = inputs.import-tree.withLib lib;
-      mkWrappers = path: config.flake.lib.listToAttrs'
-        (map
-        (file:
-          let wrapper = wrap file;
-          in { "${wrapper.pname}" = wrapper; })
-        (import-tree.leafs path));
-    in { inherit wlib wrap mkWrappers; };
+    in { inherit wlib wrap; };
   };
 }

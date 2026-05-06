@@ -1,11 +1,13 @@
-{ wlib, pkgs, ... }:
-
+{ config, ... }:
 {
-  imports = [ wlib.modules.default ];
-
-  # TODO?: Figure out how to include config with electron apps
-  config = {
-    package = pkgs.feishin;
-    extraPackages = [ pkgs.mpv ];
-  };
+  flake.users.skettisouls = config.flake.lib.perSystem
+  ({ wlib, pkgs, ... }:
+  {
+    wrappers.feishin = wlib.wrapPackage {
+      inherit pkgs;
+      # TODO?: Figure out how to include config with electron apps
+      package = pkgs.feishin;
+      extraPackages = [ pkgs.mpv ];
+    };
+  });
 }

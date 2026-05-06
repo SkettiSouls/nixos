@@ -1,16 +1,19 @@
-{ wlib, pkgs, ... }:
-let
-  gitWrapped = (wlib.evalModule ./git.nix).config.wrap { inherit pkgs; };
-in
+{ config, ... }:
 {
-  imports = [ wlib.modules.default ];
+  flake.users.skettisouls = config.flake.lib.perSystem
+  ({ system, wlib, pkgs, ... }:
+  {
+    wrappers.lazygit = wlib.wrapPackage {
+      inherit pkgs;
 
-  config = {
-    package = pkgs.lazygit;
-    extraPackages = [ gitWrapped ];
+      package = pkgs.lazygit;
+      extraPackages = [
+        config.flake.users.skettisouls."${system}".wrappers.git
+      ];
 
-    flags = {
-      "--use-config-file" = ./lazygit.yml;
+      flags = {
+        "--use-config-file" = ./lazygit.yml;
+      };
     };
-  };
+  });
 }

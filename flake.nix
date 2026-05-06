@@ -54,11 +54,6 @@
       };
     };
 
-    deploy-rs = {
-      url = "github:serokell/deploy-rs";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     nix-mc = {
       url = "github:skettisouls/nix-mc";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -72,7 +67,6 @@
     flakeRoot = ./.;
     tree = (lib.pipe import-tree [
       (i: i.filterNot (lib.hasInfix "/packages/"))
-      (i: i.filterNot (lib.hasInfix "/wrappers/"))
       (i: i ./src)
     ]).imports;
   in

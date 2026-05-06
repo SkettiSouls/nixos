@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ inputs, config, ... }:
 
 {
   imports = [ ./quickshell ];
@@ -8,8 +8,9 @@
       inherit system;
       config.allowUnfree = true;
       overlays = [
-        (final: prev: with inputs'; {
-          unstable = nixpkgs-unstable.legacyPackages;
+        (final: prev: {
+          regolith = config.flake.packages.${system};
+          unstable = inputs'.nixpkgs-unstable.legacyPackages;
         })
       ];
     });

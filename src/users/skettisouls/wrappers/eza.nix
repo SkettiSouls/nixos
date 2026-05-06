@@ -1,13 +1,15 @@
-{ wlib, pkgs, ... }:
-
+{ config, ... }:
 {
-  imports = [ wlib.modules.default ];
-
-  config = {
-    package = pkgs.eza;
-    flags = {
-      "--icons" = "always";
-      "--group-directories-first" = true;
+  flake.users.skettisouls = config.flake.lib.perSystem
+  ({ wlib, pkgs, ... }:
+  {
+    wrappers.eza = wlib.wrapPackage {
+      inherit pkgs;
+      package = pkgs.eza;
+      flags = {
+        "--icons" = "always";
+        "--group-directories-first" = true;
+      };
     };
-  };
+  });
 }
