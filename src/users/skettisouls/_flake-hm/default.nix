@@ -4,12 +4,6 @@ let
 in
 {
   config = {
-    home = {
-      sessionVariables = {
-        EDITOR = "nvim";
-      };
-    };
-
     xdg = {
       enable = true;
 
