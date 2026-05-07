@@ -61,6 +61,14 @@ let
             "3-Gaming" = _: {};
             "4-Audio" = _: {};
           };
+
+          spawn-at-startup = [
+            [ "bash" "-c" ". <(niri completions bash)" ]
+            "brave"
+            "discord"
+            [ "kitty" "--app-id" "pulsemixer" "pulsemixer" ]
+            "easyeffects"
+          ];
         };
       };
     });
