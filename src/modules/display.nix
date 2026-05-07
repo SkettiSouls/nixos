@@ -16,6 +16,7 @@
         uwsm.enable =  lib.mkDefault true;
       };
 
+      # TODO: Move to skettisouls.bundles.desktop when that exists
       environment.systemPackages = [ pkgs.keepassxc ];
 
       fonts.packages = with pkgs; [

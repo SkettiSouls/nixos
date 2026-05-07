@@ -1,10 +1,18 @@
 # Niri Keybind Config
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 let
   inherit (config.flake.lib) listToAttrs';
 
-  # TODO: command to toggle mute
-  toggleMic = "";
+  muteOSD = "${pkgs.regolith.quickshell-mute-osd}/bin/quickshell-mute-osd";
+  toggleMic = pkgs.writeShellScript "mic-toggle.sh" ''
+    if "$(${muteOSD} --check)"; then
+      ${muteOSD} --die
+      wpctl set-mute @DEFAULT_AUDIO_SOURCE@ 0
+    else
+      ${muteOSD} &
+      wpctl set-mute @DEFAULT_AUDIO_SOURCE@ 1
+    fi
+  '';
 
   bindWorkspaces = mod: action:
     listToAttrs'

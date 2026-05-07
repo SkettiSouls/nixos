@@ -6,8 +6,6 @@ in
 {
   flake.machines.argon.users.skettisouls = {
     packages =  with pkgs; [
-      wrappers.feishin
-      wrappers.kitty
       wrappers.niri
 
       # Gaming

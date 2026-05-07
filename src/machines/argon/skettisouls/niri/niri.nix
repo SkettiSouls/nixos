@@ -1,3 +1,4 @@
+# TODO: wpaperd, uwsm
 { inputs, config, lib, withSystem, ... }:
 let
   inherit (inputs.wrapper-modules.lib) evalModule;
@@ -6,13 +7,19 @@ let
 
   # `_: {}` -> nothing
   wrapper = evalModule (
-    { wlib, ... }:
+    { wlib, pkgs, ... }:
     {
       imports = [ wlib.wrapperModules.niri ];
       config = {
-        extraPackages = [
+        extraPackages = with pkgs; [
           wrappers.fuzzel
           wrappers.kitty
+          wrappers.feishin
+
+          unstable.brave
+          unstable.discord
+          easyeffects
+          pulsemixer
         ];
 
         v2-settings = true;
@@ -22,7 +29,7 @@ let
           hotkey-overlay.hide-not-bound = _: {};
           screenshot-path = "~/Pictures/niri-screenshots/%Y-%m-%d %H-M-%S.png";
 
-          binds = import ./_binds.nix { inherit config lib; };
+          binds = import ./_binds.nix { inherit config lib pkgs; };
           layout = import ./_layout.nix;
           window-rules = import ./_window-rules.nix;
 
