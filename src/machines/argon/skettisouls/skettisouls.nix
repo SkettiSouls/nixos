@@ -8,6 +8,8 @@ in
     packages =  with pkgs; [
       wrappers.niri
 
+      unstable.discord
+
       # Gaming
       bolt-launcher
       datefudge

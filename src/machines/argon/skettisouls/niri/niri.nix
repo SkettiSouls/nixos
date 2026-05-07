@@ -11,13 +11,13 @@ let
     {
       imports = [ wlib.wrapperModules.niri ];
       config = {
+        # FIXME: Unfree packages prevents rebuild? `pkgs` should be from `perSystem`...
         extraPackages = with pkgs; [
           wrappers.fuzzel
           wrappers.kitty
           wrappers.feishin
 
           unstable.brave
-          unstable.discord
           easyeffects
           pulsemixer
         ];

@@ -15,8 +15,12 @@ let
       };
 
       shell = mkOption {
-        type = nullOr package;
+        type = nullOr (either package str);
         default = null;
+        description = ''
+          Login shell to use. Defaults to bash if `null`.
+          Can be set as a string with the following format: `${shellPkg}/bin/<shell>`.
+        '';
       };
 
       wrappers = mkOption {

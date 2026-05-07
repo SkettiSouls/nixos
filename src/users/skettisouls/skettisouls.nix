@@ -7,7 +7,7 @@
       #       e.g. Niri wrapper forces `programs.niri.enable`
       inherit (config.flake.users.skettisouls.${system}) wrappers;
     in {
-      # shell = wrappers.nushell;
+      shell = "${wrappers.bash}/bin/bash";
       groups = [ "networkmanager" "wheel" ];
 
       packages = with wrappers; [

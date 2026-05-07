@@ -15,7 +15,7 @@
           };
         };
 
-        dualsense = {
+        dualsense = lib.mkOption {
           default = {};
           description = "Options for the DualSense Gamepad (PlayStation 5 Controller)";
           type = lib.types.submodule {
