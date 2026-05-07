@@ -2,14 +2,21 @@
 {
   imports = [ ./quickshell ];
 
-  perSystem = { pkgs, system, inputs', ... }: {
+  perSystem = { pkgs, system, ... }: {
     _module.args.pkgs = (import inputs.nixpkgs {
       inherit system;
-      config.allowUnfree = true;
+      config = {
+        allowUnfree = true;
+        permittedInsecurePackages = [ "nexusmods-app-0.21.1" ];
+      };
+
       overlays = [
         (final: prev: {
           regolith = config.flake.packages.${system};
-          unstable = inputs'.nixpkgs-unstable.legacyPackages;
+          unstable = import inputs.nixpkgs-unstable {
+            inherit system;
+            config.allowUnfree = true;
+          };
         })
       ];
     });

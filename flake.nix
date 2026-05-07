@@ -78,9 +78,8 @@
       systems = [ "x86_64-linux" "aarch64-linux" ];
 
       flake = {
-        inherit flakeRoot tree;
+        inherit flakeRoot;
         _config = config;
-        flakeModules = [];
       };
     };
   });

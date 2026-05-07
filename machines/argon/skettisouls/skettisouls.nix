@@ -1,14 +1,12 @@
-{ config, ... }:
+{ config, withSystem, ... }:
 let
-  inherit (config.flake.nixosConfigurations.argon) pkgs;
-  inherit (config.flake.machines.argon.users.skettisouls) wrappers;
+  inherit (config.flake.machines.argon) users system;
+  inherit (users.skettisouls) wrappers;
 in
 {
-  flake.machines.argon.users.skettisouls = {
-    packages =  with pkgs; [
+  flake.machines.argon.users.skettisouls = withSystem system ({ pkgs, ... }: {
+    packages = with pkgs; [
       wrappers.niri
-
-      unstable.discord
 
       # Gaming
       bolt-launcher
@@ -16,5 +14,5 @@ in
       unstable.vintagestory
       nexusmods-app
     ];
-  };
+  });
 }

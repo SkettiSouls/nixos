@@ -5,22 +5,26 @@ let
   inherit (config.flake.machines.argon) system users;
   inherit (users.skettisouls) wrappers;
 
+  # Share packages so that portable installs get deps and in-flake
+  # installs get don't have to restart niri for dep config updates.
+  packages = withSystem system ({ pkgs, ... }: with pkgs; [
+    wrappers.fuzzel
+    wrappers.kitty
+    wrappers.feishin
+
+    unstable.brave
+    unstable.discord
+    easyeffects
+    pulsemixer
+  ]);
+
   # `_: {}` -> nothing
   wrapper = evalModule (
     { wlib, pkgs, ... }:
     {
       imports = [ wlib.wrapperModules.niri ];
       config = {
-        # FIXME: Unfree packages prevents rebuild? `pkgs` should be from `perSystem`...
-        extraPackages = with pkgs; [
-          wrappers.fuzzel
-          wrappers.kitty
-          wrappers.feishin
-
-          unstable.brave
-          easyeffects
-          pulsemixer
-        ];
+        extraPackages = packages;
 
         v2-settings = true;
         settings = {
@@ -82,5 +86,8 @@ let
 
   niri = withSystem system ({ pkgs, ... }: wrapper.config.wrap { inherit pkgs; });
 in {
-  flake.machines.argon.users.skettisouls.wrappers = { inherit niri; };
+  flake.machines.argon.users.skettisouls = {
+    inherit packages;
+    wrappers = { inherit niri; };
+  };
 }
