@@ -67,11 +67,12 @@
     flakeRoot = ./.;
     tree = (lib.pipe import-tree [
       (i: i.filterNot (lib.hasInfix "/packages/"))
-      (i: i ./src)
+      (i: i.filterNot (lib.hasSuffix "flake.nix"))
+      (i: i ./.)
     ]).imports;
   in
   flake-parts.lib.mkFlake { inherit inputs; } ({ config, ... }: {
-    imports = tree ++ [ ./src/packages ];
+    imports = tree ++ [ ./packages ];
 
     config = {
       systems = [ "x86_64-linux" "aarch64-linux" ];
