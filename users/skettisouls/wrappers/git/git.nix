@@ -17,7 +17,7 @@
             user = {
               name = "SkettiSouls";
               email = "skettisouls@gmail.com";
-              # TODO: replace with age/sops secret
+              # TODO 5: replace with age/sops secret
               signingKey = "/home/skettisouls/.keys/ssh/git.key"; 
             };
           };

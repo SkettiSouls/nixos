@@ -45,7 +45,7 @@ in {
   flake.modules.networks.peridot =
     { config, lib, ... }:
     let
-      # TODO: Flake level network handling
+      # TODO 7: Flake level network handling
       inherit (args.config.flake.nixosConfigurations.fluorine.config.services)
         caddy
         nginx
@@ -68,7 +68,7 @@ in {
           interfaces.peridot = {
             ips = lib.mkDefault peers.${config.wireguard.peridot.peer}.allowedIPs;
             listenPort = 51820;
-            # TODO: Replace with secrets
+            # TODO 5: Replace with secrets
             privateKeyFile = "/var/lib/wireguard/key";
             peers = lib.attrValues
               (lib.mapAttrs (peer: config: config // { name = peer; }) peers);

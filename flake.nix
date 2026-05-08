@@ -40,10 +40,6 @@
     };
   # }}}
 
-  # {{{ Environment
-    niri.url = "github:niri-wm/niri";
-  # }}}
-
   # Server {{{
     boris = { # Discord Bot
       url = "github:skettisouls/boris";

@@ -3,7 +3,7 @@ let
   inherit (inputs.nixpkgs) lib;
 
   utils = lib.recursiveUpdate {
-    # TODO: assert if not module
+    # TODO 1: assert if not module
     perSystem = module:
       lib.genAttrs
       config.systems
@@ -14,7 +14,4 @@ let
       (lib.attrNames users)
       (user: users.${user}.${system});
   } inputs.utils.lib;
-in
-{
-  flake.lib = utils;
-}
+in { flake.lib = utils; }

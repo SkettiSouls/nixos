@@ -8,7 +8,6 @@ let
   cfg = config.wireguard.luni-net;
 in
 {
-  # TODO: integrate peridot
   options.wireguard.luni-net.enable = mkEnableOption "Lunarix's network";
 
   config = mkIf cfg.enable {

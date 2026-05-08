@@ -1,4 +1,4 @@
-# TODO: Make not shit
+# TODO 1: Make not shit
 config.load_autoconfig()
 c.auto_save.session = True
 

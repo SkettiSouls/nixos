@@ -5,7 +5,7 @@
     {
       wrappers.qutebrowser = wlib.wrapPackage {
         inherit pkgs;
-        # TODO: Figure out how to include greasemonkey scripts
+        # TODO 2: Figure out how to include greasemonkey scripts
         package = pkgs.unstable.qutebrowser;
         extraPackages = [ pkgs.rofi pkgs.gnupg ];
 

@@ -67,7 +67,7 @@ in lib.mkMerge [
       props.hotkey-overlay-title = "Disconnect headset: Momentum 4";
     };
 
-    # TODO: get default browser
+    # TODO 1: get default browser
     "Mod+Shift+B".spawn = "brave";
     "Mod+Shift+D".spawn = "discord";
   }
@@ -93,7 +93,8 @@ in lib.mkMerge [
     "Mod+Ctrl+E"       = "quit";
     "Ctrl+Alt+Delete"  = "quit";
     "Mod+Q"            = "close-window";
-    "Mod+Shift+P"      = "power-off-monitors"; # TODO: Toggle on/off
+     # TODO 3: Toggle on/off
+    "Mod+Shift+P"      = "power-off-monitors";
 
     # Screencasting
     "Mod+S"            = "set-dynamic-cast-monitor";

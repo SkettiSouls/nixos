@@ -42,7 +42,7 @@
         inherit pkgs;
         package = pkgs.mangohud;
         env = {
-          # TODO: use env to define settings
+          # TODO 2: use env to define settings
           MANGOHUD_CONFIGFILE = "${configFile}";
         };
       };

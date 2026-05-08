@@ -68,7 +68,7 @@ in
         };
       };
 
-      /* TODO: User Chrome [
+      /* TODO 0: User Chrome [
         Remove window buttons ( X, Maximize, Minimize )
         Remove page buttons (back, forward, refresh)
         Take a stab at theming

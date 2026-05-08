@@ -38,7 +38,7 @@ in
       "(?i)dorion"
     ] ++ [{ at-startup = true; title = "(?i)discord"; }]; # Catch-all
   }
-  # TODO: Spawn rules for games on workspace 3
+  # TODO 6: Spawn rules for games on workspace 3
   # Open audio software on workspace 4 at startup
   {
     open-on-workspace = "4-Audio";

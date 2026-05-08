@@ -5,7 +5,7 @@ let
 
   system = "x86_64-linux";
 
-  # TODO: Handle keys better
+  # TODO 4: Handle keys better
   keys = {
     argon = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILU3q+/0jJLkAtvCk3hJ+QAXCvza7SZ9a0V6FZq6IJne";
   };

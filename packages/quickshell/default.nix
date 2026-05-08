@@ -1,7 +1,7 @@
 {
   perSystem = { pkgs, ... }: let
     inherit (pkgs) lib;
-    # TODO: Test if this works with multifile configs
+    # TODO 0: Test if this works with multifile configs
     wrapQuickshell = name: path: pkgs.writeShellScriptBin "quickshell-${name}" ''
       is_running() {
         [ -n "$(${pkgs.unstable.quickshell}/bin/quickshell list -p ${path} | grep Process)" ]

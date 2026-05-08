@@ -1,4 +1,4 @@
-# TODO: wpaperd, uwsm
+# TODO 6: set wallpaper
 { inputs, config, lib, withSystem, ... }:
 let
   inherit (inputs.wrapper-modules.lib) evalModule;
