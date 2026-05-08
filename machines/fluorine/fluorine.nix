@@ -1,7 +1,7 @@
 { config, ... }:
 let
   inherit (config.flake.lib) mkUsers;
-  inherit (config.flake.modules) bundles;
+  inherit (config.flake.modules) bundles networks;
 
   system = "x86_64-linux";
 
@@ -13,6 +13,8 @@ in
 {
   flake.machines.fluorine = {
     inherit system;
+    networks = with networks; [ peridot ];
+
     users = mkUsers system {
       inherit (config.flake.users) skettisouls;
     };

@@ -35,7 +35,6 @@ in
     modules =
       machines.${host}.modules
       ++ machines.${host}.hardware
-      # TODO: rework networks
       ++ machines.${host}.networks
       ++ lib.optionals (users != {}) [{
         users.users = lib.mapAttrs (_: ucfg: {
