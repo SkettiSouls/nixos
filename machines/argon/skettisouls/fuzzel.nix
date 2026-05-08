@@ -1,14 +1,14 @@
-{ inputs, config, withSystem, ... }:
+{ config, withSystem, ... }:
 let
-  inherit (inputs.wrapper-modules.lib) evalModule;
   inherit (config.flake.machines.argon) system users;
-
-  wrapper = evalModule (
-    { wlib, ... }:
-    {
+in {
+  flake.machines.argon.users.skettisouls.wrappers.fuzzel = withSystem system
+    ({ wlib, pkgs, ... }:
+    wlib.wrapPackage {
       imports = [ wlib.wrapperModules.fuzzel ];
-      config.settings = {
-        main = {
+      config = {
+        inherit pkgs;
+        settings.main = {
           terminal = "${users.skettisouls.wrappers.kitty}/bin/kitty";
           layer = "overlay";
           show-actions = true;
@@ -20,8 +20,4 @@ let
         };
       };
     });
-
-  fuzzel = withSystem system ({ pkgs, ... }: wrapper.config.wrap { inherit pkgs; });
-in {
-  flake.machines.argon.users.skettisouls.wrappers = { inherit fuzzel; };
 }

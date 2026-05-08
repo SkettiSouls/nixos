@@ -3,7 +3,12 @@
     { lib, pkgs, ... }:
     {
       security.polkit.enable = true;
-      xdg.portal.enable = lib.mkDefault true;
+
+      xdg.portal = {
+        enable = lib.mkDefault true;
+        extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+        config.common.default = "gtk";
+      };
 
       services = {
         graphical-desktop.enable = true;
@@ -16,8 +21,7 @@
         uwsm.enable =  lib.mkDefault true;
       };
 
-      # TODO 3: Move to skettisouls.bundles.desktop when that exists
-      environment.systemPackages = [ pkgs.keepassxc ];
+      environment.systemPackages = [ pkgs.wl-clipboard ];
 
       fonts.packages = with pkgs; [
         noto-fonts-cjk-sans

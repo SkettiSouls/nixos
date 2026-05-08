@@ -1,7 +1,7 @@
 { config, ... }:
 let
   inherit (config.flake.lib) mkUsers;
-  inherit (config.flake.modules) bundles hardware networks nixos;
+  inherit (config.flake.modules) bundles hardware networks;
 
   system = "x86_64-linux";
 in {
@@ -18,16 +18,14 @@ in {
       bundles.desktop
       bundles.workstation
 
-      nixos.niri
-
       ({ pkgs, ... }:
       {
         boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_18;
         hardware.enableRedistributableFirmware = true;
 
         environment.systemPackages = with pkgs; [ bottom ouch ];
+        xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gnome ];
 
-        programs.niri.withUWSM = true;
         services.flatpak.enable = true;
 
         system.stateVersion = "24.11";

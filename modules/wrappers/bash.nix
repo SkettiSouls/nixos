@@ -2,6 +2,7 @@
   flake.modules.wrappers.bash =
     { config, wlib, lib, pkgs, ... }:
     {
+      _file = ./bash.nix;
       imports = [ wlib.modules.default ];
 
       options = {

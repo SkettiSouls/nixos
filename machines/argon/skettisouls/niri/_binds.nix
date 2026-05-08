@@ -58,7 +58,7 @@ in lib.mkMerge [
     };
 
     "Mod+B" = _: {
-      content.spawn = [ "chp" "80:C3:BA:3F:EB:B9" ];
+      content.spawn-sh = [ "bluetoothctl connect 80:C3:BA:3F:EB:B9" ];
       props.hotkey-overlay-title = "Connect headset: Momentum 4";
     };
 
