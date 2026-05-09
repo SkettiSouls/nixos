@@ -1,3 +1,0 @@
-{
-  services.caddy.enable = true;
-}

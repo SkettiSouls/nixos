@@ -1,7 +1,7 @@
 { config, ... }:
 let
   inherit (config.flake.lib) mkUsers;
-  inherit (config.flake.modules) bundles networks;
+  inherit (config.flake.modules) bundles networks nixos services;
 
   system = "x86_64-linux";
 
@@ -19,8 +19,19 @@ in
       inherit (config.flake.users) skettisouls;
     };
 
+    services = with services; [
+      caddy
+      deemix
+      discord-bots
+      forgejo
+      gonic
+      minecraft
+      postgres
+    ];
+
     modules = [
       bundles.workstation
+      nixos.steam-dedicated
 
       {
         boot.kernel.sysctl."net.ipv4.ip_forward" = 1;

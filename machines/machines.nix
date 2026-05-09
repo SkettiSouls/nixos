@@ -18,6 +18,7 @@ in
         hardware = mkModulesOption;
         modules = mkModulesOption;
         networks = mkModulesOption;
+        services = mkModulesOption;
         system = mkOption { type = enum config.systems; };
         users = mkOption {
           default = {};
@@ -36,6 +37,7 @@ in
       machines.${host}.modules
       ++ machines.${host}.hardware
       ++ machines.${host}.networks
+      ++ machines.${host}.services
       ++ lib.optionals (users != {}) [{
         users.users = lib.mapAttrs (_: ucfg: {
           isNormalUser = true;
