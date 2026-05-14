@@ -60,7 +60,6 @@
   outputs = inputs @ { flake-parts, nixpkgs, import-tree, ... }: let
     inherit (nixpkgs) lib;
 
-    flakeRoot = ./.;
     tree = (lib.pipe import-tree [
       (i: i.filterNot (lib.hasInfix "/packages/"))
       (i: i.filterNot (lib.hasSuffix "flake.nix"))
@@ -74,8 +73,8 @@
       systems = [ "x86_64-linux" "aarch64-linux" ];
 
       flake = {
-        inherit flakeRoot;
         _config = config;
+        root = ./.;
       };
     };
   });

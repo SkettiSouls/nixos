@@ -21,7 +21,7 @@
 
       config = {
         package = lib.mkDefault pkgs.bashInteractive;
-        flags."--rcfile" = config.constructFiles.bashrc.path;
+        flags."--rcfile" = config.bashrc.path;
 
         constructFiles.bashrc = {
           relPath = "${config.binName}rc";
