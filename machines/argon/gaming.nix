@@ -19,19 +19,29 @@
           package32 = lib.mkForce pkgs.unstable.driversi686Linux.mesa;
         };
 
-        programs.steam = {
-          extraCompatPackages = with pkgs; [ steamtinkerlaunch ];
-
-          proton-ge = {
+        programs = {
+          appimage = {
             enable = true;
-            package = pkgs.unstable.proton-ge-bin;
+            package = pkgs.appimage-run.override {
+              extraPkgs = pkgs: [ pkgs.icu ];
+            };
           };
 
-          package = pkgs.steam.override {
-            extraEnv = {
-              MANGOHUD = true;
-              # Used for obs vulkan capture plugin
-              OBS_VKCAPTURE = true;
+          steam = {
+            extraCompatPackages = with pkgs; [ steamtinkerlaunch ];
+
+            proton-ge = {
+              enable = true;
+              package = pkgs.unstable.proton-ge-bin;
+            };
+
+            package = pkgs.steam.override {
+              extraEnv = {
+                # TODO 7: Make steam user mangohud wrapper
+                MANGOHUD = true;
+                # Used for obs vulkan capture plugin
+                OBS_VKCAPTURE = true;
+              };
             };
           };
         };

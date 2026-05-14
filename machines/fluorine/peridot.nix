@@ -47,6 +47,7 @@
             80
             443
             27020 # Ark RCON
+            42420 # vintagestory
             deemix-server.port
             git.port
             gonic.port
