@@ -5,13 +5,27 @@
     {
       imports = [ config.flake.modules.nixos.steam ];
       config = {
+        boot.initrd.kernelModules = [ "ntsync" "hid-universal-pidff" ];
         nixpkgs.config.permittedInsecurePackages = [ "nexusmods-app-0.21.1" ];
 
         environment.systemPackages = with pkgs; [
+          boxflat
           heroic
           prismlauncher
           unstable.wineWow64Packages.staging
           winetricks
+        ];
+
+        services.udev.packages = [
+          pkgs.boxflat
+          # Attempt to fix games not finding my wheel
+          (pkgs.writeTextFile {
+            name = "90-moza-fix.rules";
+            destination = "/etc/udev/rules.d/90-moza-fix.rules";
+            text = ''
+              KERNEL=="hidraw*", ATTRS{idVendor}=="346e", ATTRS{idProduct}=="0004", MODE="0666"
+            '';
+          })
         ];
 
         hardware.graphics = {
