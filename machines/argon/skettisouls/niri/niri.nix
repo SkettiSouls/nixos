@@ -41,7 +41,7 @@ let
     config = {
       inherit pkgs;
       v2-settings = true;
-      extraPackages = packages ++ [ wpaperd ];
+      runtimePkgs = packages ++ [ wpaperd ];
 
       settings = {
         prefer-no-csd = _: {};

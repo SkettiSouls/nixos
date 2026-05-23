@@ -7,7 +7,7 @@
         inherit pkgs;
         # TODO 2: Figure out how to include config with electron apps
         package = pkgs.feishin;
-        extraPackages = [ pkgs.mpv ];
+        runtimePkgs = [ pkgs.mpv ];
       };
     });
 }

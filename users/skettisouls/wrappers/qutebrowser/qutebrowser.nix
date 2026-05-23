@@ -7,7 +7,7 @@
         inherit pkgs;
         # TODO 2: Figure out how to include greasemonkey scripts
         package = pkgs.unstable.qutebrowser;
-        extraPackages = [ pkgs.rofi pkgs.gnupg ];
+        runtimePkgs = [ pkgs.rofi pkgs.gnupg ];
 
         flags."--config-py" = ./config.py;
       };

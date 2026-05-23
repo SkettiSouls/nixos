@@ -110,14 +110,16 @@
         "plugins-direnv": "plugins-direnv",
         "plugins-lze": "plugins-lze",
         "plugins-lzextras": "plugins-lzextras",
-        "wrappers": "wrappers"
+        "wrappers": [
+          "wrapper-modules"
+        ]
       },
       "locked": {
-        "lastModified": 1777181752,
-        "narHash": "sha256-z8EFCtZWKBdPmXRknKoeTw89sbHfUC8PhgzqetwIdp4=",
+        "lastModified": 1779520288,
+        "narHash": "sha256-Sd2Atxw2H12AUSMqRWaHNujY96A/yCCHUaJgy3s19NI=",
         "ref": "refs/heads/master",
-        "rev": "7e29168314f8e04a38628b871830080f7abc2f8a",
-        "revCount": 101,
+        "rev": "cd65d758e6de85a9a96b18c7bdaf49697ceeae17",
+        "revCount": 102,
         "type": "git",
         "url": "https://codeberg.org/skettisouls/neovim"
       },
@@ -149,11 +151,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1777268161,
-        "narHash": "sha256-bxrdOn8SCOv8tN4JbTF/TXq7kjo9ag4M+C8yzzIRYbE=",
+        "lastModified": 1779357205,
+        "narHash": "sha256-cCO8aTqss5x9Ky8GWkpY0Hy5fyTZEbtifSUV8QjSzic=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "1c3fe55ad329cbcb28471bb30f05c9827f724c76",
+        "rev": "f83fc3c307e74bc5fd5adb7eb6b8b13ffd2a36e1",
         "type": "github"
       },
       "original": {
@@ -180,11 +182,11 @@
     },
     "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1777268161,
-        "narHash": "sha256-bxrdOn8SCOv8tN4JbTF/TXq7kjo9ag4M+C8yzzIRYbE=",
+        "lastModified": 1779357205,
+        "narHash": "sha256-cCO8aTqss5x9Ky8GWkpY0Hy5fyTZEbtifSUV8QjSzic=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "1c3fe55ad329cbcb28471bb30f05c9827f724c76",
+        "rev": "f83fc3c307e74bc5fd5adb7eb6b8b13ffd2a36e1",
         "type": "github"
       },
       "original": {
@@ -238,11 +240,11 @@
     "plugins-lze": {
       "flake": false,
       "locked": {
-        "lastModified": 1772337062,
-        "narHash": "sha256-joi1087b2iDmwOHv7/0YCrDPucbu0osbS8WQmDYoyE4=",
+        "lastModified": 1779072938,
+        "narHash": "sha256-u51pEVISr/jthElqorjttpfK/V3/iDQmter5Upnt0XU=",
         "owner": "BirdeeHub",
         "repo": "lze",
-        "rev": "f50a84a5d84f6b16e254091e755f5a9e839a9924",
+        "rev": "1779386ec281b6c7fe7a5d3d501656ec345e9e37",
         "type": "github"
       },
       "original": {
@@ -254,11 +256,11 @@
     "plugins-lzextras": {
       "flake": false,
       "locked": {
-        "lastModified": 1772336997,
-        "narHash": "sha256-BsoZTfXpISPeTnTQWtnZkDXzvo9ocILB5IO2vU8IvAM=",
+        "lastModified": 1779149362,
+        "narHash": "sha256-neZA450ZP5nqaqp/uhQIEVVYBnYkvo0cBcC93F3D+Co=",
         "owner": "BirdeeHub",
         "repo": "lzextras",
-        "rev": "abdda956a2947d0617133a018992d035fc5781da",
+        "rev": "138a1a08a8585520f3425a0e03390a534a376fdd",
         "type": "github"
       },
       "original": {
@@ -329,32 +331,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1777991014,
-        "narHash": "sha256-0DS24OW9d9iz+w0LCz6KpS2IpE2z2gHxeBdMZg9xpDY=",
+        "lastModified": 1779512817,
+        "narHash": "sha256-Y2S3mvEezyKL/A4XUkgVbhuvob9YKfnG25NuJDl8fuQ=",
         "owner": "BirdeeHub",
         "repo": "nix-wrapper-modules",
-        "rev": "dc5184095ad488e937ec308b52c9c0b218959d8b",
-        "type": "github"
-      },
-      "original": {
-        "owner": "BirdeeHub",
-        "repo": "nix-wrapper-modules",
-        "type": "github"
-      }
-    },
-    "wrappers": {
-      "inputs": {
-        "nixpkgs": [
-          "neovim",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1772774291,
-        "narHash": "sha256-2/ILO2+tAe0Pbb+wVp2Qiw7PTIs9afsc/MaAJI/ymC0=",
-        "owner": "BirdeeHub",
-        "repo": "nix-wrapper-modules",
-        "rev": "733053067a3a8baf96a7ba05e970b038105fd567",
+        "rev": "8c90cbe3aaae094370b08f270682fc352fcbcb91",
         "type": "github"
       },
       "original": {

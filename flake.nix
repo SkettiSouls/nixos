@@ -26,6 +26,7 @@
       inputs = {
         flake-parts.follows = "flake-parts";
         nixpkgs.follows = "nixpkgs-unstable";
+        wrappers.follows = "wrapper-modules";
       };
     };
 

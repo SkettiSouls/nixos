@@ -7,6 +7,8 @@ in
   flake.machines.argon.users.skettisouls = withSystem system ({ pkgs, ... }: {
     packages = with pkgs; [
       wrappers.niri
+      regolith.rebuild
+
       keepassxc
 
       # Gaming

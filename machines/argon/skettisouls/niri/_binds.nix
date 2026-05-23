@@ -63,7 +63,7 @@ in lib.mkMerge [
     };
 
     "Mod+Alt+B" = _: {
-      content.spawn-sh = "bluetootctl disconnect 80:C3:BA:3F:EB:B9";
+      content.spawn-sh = "bluetoothctl disconnect 80:C3:BA:3F:EB:B9";
       props.hotkey-overlay-title = "Disconnect headset: Momentum 4";
     };
 

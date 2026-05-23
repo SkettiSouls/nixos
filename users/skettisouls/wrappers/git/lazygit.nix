@@ -7,7 +7,7 @@
         inherit pkgs;
 
         package = pkgs.lazygit;
-        extraPackages = [
+        runtimePkgs = [
           config.flake.users.skettisouls."${system}".wrappers.git
         ];
 
