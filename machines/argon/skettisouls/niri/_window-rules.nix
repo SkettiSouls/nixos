@@ -16,6 +16,7 @@ in
   }
   # Open browsers on workspace 1 at startup
   {
+    open-focused = true;
     open-maximized = true;
     open-on-workspace = "1-Browser";
 
@@ -38,7 +39,14 @@ in
       "(?i)dorion"
     ] ++ [{ at-startup = true; title = "(?i)discord"; }]; # Catch-all
   }
-  # TODO 6: Spawn rules for games on workspace 3
+  {
+    open-on-workspace = "3-Gaming";
+
+    # Will match on proton games (appid is `steam_app_<ID>`),
+    # but not native games (appid is set by the game itself).
+    matches = [{ app-id = "^steam"; }];
+    excludes = [{ app-id = "steam"; title = "^notificationtoasts_\\d+_desktop$"; }];
+  }
   # Open audio software on workspace 4 at startup
   {
     open-on-workspace = "4-Audio";
@@ -85,13 +93,21 @@ in
     matches = [{ app-id = "^net-runelite"; }];
   }
   # Open the RuneLite game window as a maximized tile
-  # NOTE: Setting `Resize type` to `Keep window size` is REQUIRED to prevent the sidebar going offscreen
+  # NOTE: Setting `Resize type` to `Keep window size`
+  # is REQUIRED to prevent the sidebar going offscreen
   {
     open-floating = false;
     open-maximized = true;
 
     excludes = [{ title = "RuneLite Launcher"; }];
     matches = [{ app-id = "RuneLite$"; title = "RuneLite"; }];
+  }
+  # Open Steam maximized
+  {
+    open-floating = false;
+    open-maximized = true;
+
+    matches = [{ app-id = "steam"; title = "Steam"; }];
   }
   # Fix steam notification window position and focus
   {
@@ -109,6 +125,26 @@ in
       };
     };
 
-    matches = [{ app-id="steam"; title="^notificationtoasts_\\d+_desktop$"; }];
+    matches = [{ app-id = "steam"; title = "^notificationtoasts_\\d+_desktop$"; }];
+  }
+  # Fix positioning and focus of keepassxc popup
+  {
+    open-floating = true;
+    open-focused = true;
+
+    # No way to make this work as of 26.04
+    # See https://github.com/niri-wm/niri/issues/3420#issuecomment-3901330765
+    default-floating-position = _: {
+      props = {
+        x = 1920 / 2;
+        y = 1080 / 2;
+        relative-to = "left";
+      };
+    };
+
+    matches = [{
+      app-id = "^org\.keepassxc\.KeePassXC$";
+      title = "Unlock Database - KeePassXC";
+    }];
   }
 ]

@@ -96,8 +96,10 @@ let
 
         spawn-at-startup = [
           [ "bash" "-c" ". <(niri completions bash)" ]
+          "keepassxc"
           "brave"
           "discord"
+          "steam"
           [ "kitty" "--app-id" "pulsemixer" "pulsemixer" ]
           "easyeffects"
         ];
@@ -116,7 +118,6 @@ in {
             default=gnome;gtk;
             org.freedesktop.impl.portal.Access=gtk;
             org.freedesktop.impl.portal.Notification=gtk;
-            org.freedesktop.impl.portal.Secret=gnome-keyring;
             org.freedesktop.impl.portal.FileChooser=gtk;
             org.freedesktop.impl.portal.ScreenCast=gnome;
           '';
