@@ -4,7 +4,8 @@ let
   inherit (users.skettisouls) wrappers;
 
   inherit (withSystem system (a: a)) pkgs;
-  inherit (inputs.wrapper-modules.lib) wrapPackage;
+  inherit (inputs.wrapper-modules.lib) wrapPackage wrapperModules;
+
 
   # Share packages so that portable installs get deps and in-flake
   # installs get don't have to restart niri for dep config updates.
@@ -37,11 +38,15 @@ let
 
   # `_: {}` -> nothing
   niri = wrapPackage {
-    imports = [ config.flake.modules.wrappers.niri ];
+    imports = [ wrapperModules.niri ];
+
     config = {
       inherit pkgs;
       v2-settings = true;
-      runtimePkgs = packages ++ [ wpaperd ];
+      runtimePkgs = with pkgs; packages ++ [
+        wpaperd
+        xwayland-satellite
+      ];
 
       settings = {
         prefer-no-csd = _: {};
@@ -103,21 +108,35 @@ in {
   flake.machines.argon.users.skettisouls = {
     inherit packages;
     wrappers = {
-      niri = niri.wrap ({ config, ... }: {
+      niri = niri.wrap {
+        constructFiles.portalConfig = {
+          relPath = "share/xdg-desktop-portal/niri-portals.conf";
+          content = ''
+            [preferred]
+            default=gnome;gtk;
+            org.freedesktop.impl.portal.Access=gtk;
+            org.freedesktop.impl.portal.Notification=gtk;
+            org.freedesktop.impl.portal.Secret=gnome-keyring;
+            org.freedesktop.impl.portal.FileChooser=gtk;
+            org.freedesktop.impl.portal.ScreenCast=gnome;
+          '';
+        };
+
         buildCommand.systemd = {
           after = [ "symlinkScript" ];
           data = ''
-            dir=${placeholder config.outputName}/share/systemd/user
-            cp ${wpaperd.outPath}/share/systemd/user/*.service "$dir"/niri-wpaperd.service
+            services="$out"/share/systemd/user
 
-            chmod +w "$dir"/niri.service
-            cat >> "$dir"/niri.service<<EOF
+            cp ${wpaperd.outPath}/share/systemd/user/*.service "$services"/niri-wpaperd.service
+
+            chmod +w "$services"/niri.service
+            cat >> "$services"/niri.service<<EOF
             [Unit]
             Wants=niri-wpaperd.service
             EOF
           '';
         };
-      });
+      };
     };
   };
 }

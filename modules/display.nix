@@ -5,6 +5,7 @@
       security.polkit.enable = true;
 
       xdg.portal = {
+        config.common = {}; # Disable warning
         enable = lib.mkDefault true;
         extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
       };
