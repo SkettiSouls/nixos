@@ -1,4 +1,4 @@
-{ config, withSystem, ... }:
+{ config, withSystem, lib, ... }:
 let
   inherit (config.flake.machines.argon) users system;
   inherit (withSystem system (a: a)) pkgs;
@@ -18,5 +18,7 @@ in
       unstable.vintagestory
       nexusmods-app
     ];
+
+    shell = lib.mkForce "${wrappers.bash}/bin/bash";
   };
 }
