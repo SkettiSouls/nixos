@@ -115,11 +115,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1779520288,
-        "narHash": "sha256-Sd2Atxw2H12AUSMqRWaHNujY96A/yCCHUaJgy3s19NI=",
+        "lastModified": 1784569845,
+        "narHash": "sha256-PER4U7N24ObyfubRZyIYxXuKlYLNcubz1sRDpJAnx7M=",
         "ref": "refs/heads/master",
-        "rev": "cd65d758e6de85a9a96b18c7bdaf49697ceeae17",
-        "revCount": 102,
+        "rev": "9cf54c98a39c5edf3fce18775a0928ec4dd3308f",
+        "revCount": 104,
         "type": "git",
         "url": "https://codeberg.org/skettisouls/neovim"
       },
@@ -331,11 +331,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1779512817,
-        "narHash": "sha256-Y2S3mvEezyKL/A4XUkgVbhuvob9YKfnG25NuJDl8fuQ=",
+        "lastModified": 1782135443,
+        "narHash": "sha256-vAmbArdCyjqpVW+37aCy/PMBOLIqukUXLQuEKLwUhA4=",
         "owner": "BirdeeHub",
         "repo": "nix-wrapper-modules",
-        "rev": "8c90cbe3aaae094370b08f270682fc352fcbcb91",
+        "rev": "6e7f66fa2cdf4d63162580b438f7fcf87c28a46f",
         "type": "github"
       },
       "original": {

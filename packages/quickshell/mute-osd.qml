@@ -38,7 +38,7 @@ ShellRoot {
 
 			Image {
 				id: content
-				source: "https://raw.githubusercontent.com/SkettiSouls/nixos/refs/heads/master/etc/images/icons/mute.png"
+				source: "https://raw.githubusercontent.com/SkettiSouls/nixos/refs/heads/master/assets/mute-icon.png"
 			}
 		}
 	}

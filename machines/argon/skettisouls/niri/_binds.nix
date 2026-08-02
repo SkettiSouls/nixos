@@ -53,7 +53,7 @@ in lib.mkMerge [
     };
 
     "Mod+MouseBack" = _: {
-      content.spawn = "${toggleMic}";
+      content.spawn-sh = "${toggleMic}";
       props.hotkey-overlay-title = "Mute/unmute microphone";
     };
 
