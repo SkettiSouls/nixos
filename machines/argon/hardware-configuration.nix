@@ -13,32 +13,35 @@
       boot.kernelModules = [ "kvm-amd" ];
       boot.extraModulePackages = [ ];
 
+      # TODO 0: Disko?
       fileSystems = {
+        "/" = {
+          device = "/dev/disk/by-label/NIXOS-ROOT";
+          fsType = "ext4";
+        };
+
         "/boot" = {
-          device = "/dev/disk/by-id/ata-Samsung_SSD_870_EVO_1TB_S625NJ0R407709B-part1";
+          device = "/dev/disk/by-label/NIXOS-BOOT";
           fsType = "vfat";
           options = [ "fmask=0077" "dmask=0077" ];
         };
 
-        "/" = {
-          device = "/dev/disk/by-id/ata-Samsung_SSD_870_EVO_1TB_S625NJ0R407709B-part2";
-          fsType = "ext4";
+        "/home/skettisouls" = {
+          # Home Partition
+          device = "/dev/disk/by-label/HOME";
+          fsType = "btrfs";
         };
 
         "/home/skettisouls/Games" = {
           # 3.6T Storage Partition
-          device = "/dev/disk/by-id/ata-CT4000BX500SSD1_2517E9BA04F7-part1";
+          device = "/dev/disk/by-label/GAMES";
           fsType = "ext4";
           neededForBoot = false;
         };
       };
 
-      swapDevices = [
-        {
-          # 48G Swap Partition
-          device = "/dev/disk/by-id/ata-CT4000BX500SSD1_2517E9BA04F7-part2";
-        }
-      ];
+      # 48G on Games drive
+      swapDevices = [{ device = "/dev/disk/by-label/SWAP"; }];
 
       # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
       # (the default) this is the recommended approach. When using systemd-networkd it's
