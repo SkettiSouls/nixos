@@ -22,7 +22,7 @@
             enable = true;
             protontricks.enable = lib.mkDefault true;
             extraCompatPackages = lib.optionals cfg.proton-ge.enable [
-              (cfg.proton-ge.package.override {
+              (cfg.proton-ge.package.overrideAttrs {
                 steamDisplayName = cfg.proton-ge.package.version;
               })
             ];
