@@ -41,6 +41,11 @@
     };
   # }}}
 
+  # Singleton {{{
+    # xwayland-satellite 0.8.0
+    xs-pin.url = "github:nixos/nixpkgs/a5cbcfe954791221bfffe2307f7d1a1bf61a871e";
+  # }}}
+
   # Server {{{
     boris = { # Discord Bot
       url = "github:skettisouls/boris";

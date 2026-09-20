@@ -36,6 +36,10 @@ let
     };
   };
 
+  # FIXME: Pinned to v0.8.0 due to steam context menu regression
+  #        revert when Supreeeme/xwayland-satellite#156 is fixed.
+  xwayland-satellite = inputs.xs-pin.legacyPackages.${system}.xwayland-satellite;
+
   # `_: {}` -> nothing
   niri = wrapPackage {
     imports = [ wrapperModules.niri ];
@@ -43,7 +47,7 @@ let
     config = {
       inherit pkgs;
       v2-settings = true;
-      runtimePkgs = with pkgs; packages ++ [
+      runtimePkgs = packages ++ [
         wpaperd
         xwayland-satellite
       ];
