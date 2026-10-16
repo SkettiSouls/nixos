@@ -68,7 +68,7 @@
             };
 
             hardrock = defaultConfig // {
-              enable = true;
+              enable = false;
               startScript = startForge "1.18.2" "40.2.21";
 
               serverConfig = {
@@ -80,8 +80,8 @@
             };
 
             cabin = defaultConfig // {
-              enable = true;
-              jvmMaxAllocation = "24G";
+              enable = false;
+              jvmMaxAllocation = "16G";
               jarFile = "minecraft_server.jar";
 
               serverConfig = {
@@ -90,6 +90,20 @@
                 level-type = "minecraft\:normal";
                 motd = "[CABIN] Space? More like gayce am I right???";
                 server-port = 25565;
+              };
+            };
+
+            gtnh = defaultConfig // {
+              enable = true;
+              jvmMaxAllocation = "16G";
+              startScript = "java -Xms6G -Xmx6G -Dfml.readTimeout=180 -Duser.language=en @java9args.txt -jar lwjgl3ify-forgePatches.jar nogui";
+
+              serverConfig = {
+                allow-flight = true;
+                level-name = "guh";
+                level-type="rwg";
+                motd = "[GTNH] I'm greggin' my shit, I got tech on my shit";
+                server-port = 25570;
               };
             };
           };
